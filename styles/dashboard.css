@@ -1,0 +1,53 @@
+/* Grundstil */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100vh;
+    background-color: var(--background-color); /* Använd CSS-variabel */
+}
+
+/* Meny */
+.menu {
+    background-color: var(--secondary-color); /* Använd CSS-variabel */
+    color: white;
+    padding: 20px;
+    width: 250px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.menu h2 {
+    margin-top: 0;
+}
+
+.menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+.menu li {
+    margin: 10px 0;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.menu a:hover {
+    text-decoration: underline;
+}
+
+/* Innehåll */
+.content {
+    flex: 1;
+    padding: 20px;
+    background-color: var(--background-color); /* Använd CSS-variabel */
+}
+
+.content h1 {
+    margin-top: 0;
+    color: var(--text-color); /* Använd CSS-variabel */
+}

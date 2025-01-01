@@ -1,0 +1,4 @@
+[
+  { "value1": 1, "value2": 2, "value3": 3, "result": "Exempelvärde A" },
+  { "value1": 4, "value2": 5, "value3": 6, "result": "Exempelvärde B" }
+]
