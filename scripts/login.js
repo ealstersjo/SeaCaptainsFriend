@@ -1,3 +1,5 @@
+window.location.href = "dashboard.html";
+
 document
   .getElementById("login-form")
   .addEventListener("submit", function (event) {

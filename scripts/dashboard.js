@@ -41,7 +41,7 @@ hanteraResa.addEventListener("click", function () {
 berakningar.addEventListener("click", function () {
   updateContent(
     "Beräkningar",
-    "Här kan du göra olika beräkningar relaterade till dina resor."
+    "Här kan du göra olika beräzzwkningar relaterade till dina resor."
   );
   highlightSelectedMenu(berakningar);
 });
