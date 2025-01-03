@@ -156,6 +156,32 @@ form div:last-child {
     justify-content: space-between;
 }
 
+.voyage-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.voyage-item {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+.voyage-item strong {
+    color: #333;
+    font-weight: bold;
+}
+
+.voyage-item p {
+    margin: 0;
+    color: #555;
+}
+
+
 /* Responsiv design */
 @media (max-width: 480px) {
     .content {

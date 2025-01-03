@@ -38,23 +38,42 @@ document.addEventListener("DOMContentLoaded", () => {
     if (currentVoyage) {
       const voyageData = JSON.parse(currentVoyage);
       contentArea.innerHTML = `
-        <h1>Current Voyage</h1>
-        <table>
-          <tr>
-            <th>Vessel</th>
-            <td>${voyageData.vessel}</td>
-            <th>Date</th>
-            <td>${voyageData.date}</td>
-            <th>PNI #</th>
-            <td>${voyageData.pniNumber}</td>
-          </tr>
-        </table>
-      `;
+            <h1>Current Voyage</h1>
+            <div class="voyage-info">
+                <div class="voyage-item">
+                    <strong>Vessel:</strong> ${voyageData.vessel || "N/A"}
+                </div>
+                <div class="voyage-item">
+                    <strong>Date:</strong> ${voyageData.date || "N/A"}
+                </div>
+                <div class="voyage-item">
+                    <strong>Est. Arrival Date:</strong> ${
+                      voyageData.arrivalDate || "N/A"
+                    }
+                </div>
+                <div class="voyage-item">
+                    <strong>PNI #:</strong> ${voyageData.pniNumber || "N/A"}
+                </div>
+                <div class="voyage-item">
+                    <strong>Port of Loading:</strong> ${
+                      voyageData.portOfLoading || "N/A"
+                    }
+                </div>
+                <div class="voyage-item">
+                    <strong>Port of Discharge:</strong> ${
+                      voyageData.portOfDischarge || "N/A"
+                    }
+                </div>
+                <div class="voyage-item">
+                    <strong>Cargo:</strong> ${voyageData.cargo || "N/A"}
+                </div>
+            </div>
+        `;
     } else {
       contentArea.innerHTML = `
-        <h1>Current Voyage</h1>
-        <p>No current voyage available.</p>
-      `;
+            <h1>Current Voyage</h1>
+            <p>No current voyage available.</p>
+        `;
     }
   };
 
@@ -96,14 +115,14 @@ document.addEventListener("DOMContentLoaded", () => {
         <div>
           <label for="vessel">Vessel:</label>
               <select id="vessel" name="vessel" required>
-       <option value="vessel1" selected>Fure Vite</option>
-        <option value="vessel2">Fartyg 2</option>
-        <option value="vessel3">Fartyg 3</option>          </select>
+       <option value="Fure Vite" selected>Fure Vite</option>
+        <option value="Fartyg 2">Fartyg 2</option>
+        <option value="Fartyg 3">Fartyg 3</option>          </select>
         </div>
         <div>
           <label for="date">Start date:</label>
           <input type="date" id="date" name="date" value="${
-            currentVoyage.date || ""
+            currentVoyage.date || new Date().toISOString().split("T")[0]
           }" required />
         </div>
         <div>
@@ -153,6 +172,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Hämta värden från formuläret
       const vessel = document.getElementById("vessel").value;
       const date = document.getElementById("date").value;
+      const arrivalDate = document.getElementById("arrivalDate").value;
       const pniNumber = document.getElementById("pniNumber").value;
       const portOfLoading = document.getElementById("portOfLoading").value;
       const portOfDischarge = document.getElementById("portOfDischarge").value;
@@ -162,6 +182,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const currentVoyage = {
         vessel,
         date,
+        arrivalDate,
         pniNumber,
         portOfLoading,
         portOfDischarge,
