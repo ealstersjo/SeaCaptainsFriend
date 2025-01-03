@@ -13,7 +13,7 @@ document
       // Spara inloggningsstatus i localStorage
       localStorage.setItem("loggedIn", "true");
       // Redirecta till dashboard.html
-      window.location.href = "dashboard.html";
+      window.location.href = "./pages/dashboard.html";
     } else {
       // Visa felmeddelande
       document.getElementById("error-message").textContent =

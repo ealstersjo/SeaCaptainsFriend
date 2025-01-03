@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const currentVoyageLink = document.getElementById("currentvoyage");
   const statementOfFactLink = document.getElementById("statementoffact");
   const handelVoyageLink = document.getElementById("handlevoyage");
+  const handelCalculations = document.getElementById("handlecalculations");
 
   // Hämta referens till innehållsområdet
   const contentArea = document.querySelector(".content");
@@ -30,6 +31,51 @@ document.addEventListener("DOMContentLoaded", () => {
       .catch((error) => {
         console.error("Error loading ships:", error);
       });
+  };
+
+  const readFile = () => {
+    const fileInput = document.createElement("input");
+    fileInput.type = "file";
+    fileInput.accept = ".pdf";
+
+    fileInput.addEventListener("change", (event) => {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const fileReader = new FileReader();
+      fileReader.onload = (e) => {
+        const pdfParser = new pdf2json();
+
+        pdfParser.on("pdfParser_dataReady", (pdfData) => {
+          console.log("Extracted PDF Content as JSON:", pdfData);
+        });
+
+        pdfParser.on("pdfParser_dataError", (err) => {
+          console.error("Error reading PDF:", err.parserError);
+        });
+
+        // Ladda PDF-data i parsern
+        pdfParser.parseBuffer(new Uint8Array(e.target.result));
+      };
+
+      fileReader.readAsArrayBuffer(file);
+    });
+
+    fileInput.click();
+  };
+
+  const loadCalculations = () => {
+    contentArea.innerHTML = `
+    <div>
+    <h1>Read file</h1>
+              <button type="load" id="loadfile">Load file</button>
+
+    </div>`;
+
+    const loading = document.getElementById("loadfile");
+    loading.addEventListener("click", () => {
+      readFile();
+    });
   };
 
   // Funktion för att ladda aktuell resa
@@ -194,9 +240,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Bekräfta för användaren
       alert("Current voyage has been saved!");
-
-      // Ladda om sidan för att uppdatera innehållet
-      loadCurrentVoyage();
     });
 
     // Hantera borttagning av currentVoyage
@@ -219,6 +262,7 @@ document.addEventListener("DOMContentLoaded", () => {
   currentVoyageLink.addEventListener("click", loadCurrentVoyage);
   statementOfFactLink.addEventListener("click", loadStatementOfFact);
   handelVoyageLink.addEventListener("click", loadHandleVoyage);
+  handelCalculations.addEventListener("click", loadCalculations);
 
   // Ladda standardinnehåll (Current Voyage)
   loadCurrentVoyage();

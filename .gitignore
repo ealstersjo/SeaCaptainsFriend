@@ -1,0 +1,30 @@
+# Node.js
+node_modules/
+
+# Debug
+.vscode/
+.idea/
+
+# Loggfiler
+*.log
+
+# OS-specifika filer
+.DS_Store   # macOS
+Thumbs.db   # Windows
+
+# Bygg- eller distributionsmappar
+/dist/
+/build/
+
+# Miljökonfigurationsfiler
+.env
+.env.local
+.env.*.local
+
+# NPM paket
+package-lock.json
+
+# PDF-filer (om du inte vill ha dem i git)
+*.pdf
+
+bs-config.json
