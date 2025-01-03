@@ -13,6 +13,25 @@ document.addEventListener("DOMContentLoaded", () => {
   // Hämta referens till innehållsområdet
   const contentArea = document.querySelector(".content");
 
+  // Hämta skeppsnamn
+  const loadShipsDropdown = () => {
+    fetch("../data.ships.json")
+      .then((response) => response.json())
+      .then((ships) => {
+        console.log(ships); // Logga data för att säkerställa att den finns
+        const vesselSelect = document.getElementById("vessel");
+        ships.forEach((ship) => {
+          const option = document.createElement("option");
+          option.value = ship.name;
+          option.textContent = ship.name;
+          vesselSelect.appendChild(option);
+        });
+      })
+      .catch((error) => {
+        console.error("Error loading ships:", error);
+      });
+  };
+
   // Funktion för att ladda aktuell resa
   const loadCurrentVoyage = () => {
     const currentVoyage = localStorage.getItem("currentVoyage");
@@ -67,6 +86,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const loadHandleVoyage = () => {
     const contentArea = document.querySelector(".content");
+    const currentVoyage =
+      JSON.parse(localStorage.getItem("currentVoyage")) || {};
 
     // Visa formuläret för att hantera resan
     contentArea.innerHTML = `
@@ -74,33 +95,48 @@ document.addEventListener("DOMContentLoaded", () => {
       <form id="voyageForm">
         <div>
           <label for="vessel">Vessel:</label>
-          <input type="text" id="vessel" name="vessel" required />
+              <select id="vessel" name="vessel" required>
+            <!-- Options will be loaded here -->
+          </select>
         </div>
         <div>
           <label for="date">Date:</label>
-          <input type="date" id="date" name="date" required />
+          <input type="date" id="date" name="date" value="${
+            currentVoyage.date || ""
+          }" required />
         </div>
         <div>
           <label for="pniNumber">PNI #:</label>
-          <input type="text" id="pniNumber" name="pniNumber" required />
+          <input type="text" id="pniNumber" name="pniNumber" value="${
+            currentVoyage.pniNumber || ""
+          }" required />
         </div>
         <div>
           <label for="portOfLoading">Port of Loading:</label>
-          <input type="text" id="portOfLoading" name="portOfLoading" />
+          <input type="text" id="portOfLoading" name="portOfLoading" value="${
+            currentVoyage.portOfLoading || ""
+          }" />
         </div>
         <div>
           <label for="portOfDischarge">Port of Discharge:</label>
-          <input type="text" id="portOfDischarge" name="portOfDischarge" />
+          <input type="text" id="portOfDischarge" name="portOfDischarge" value="${
+            currentVoyage.portOfDischarge || ""
+          }" />
         </div>
         <div>
           <label for="cargo">Cargo:</label>
-          <textarea id="cargo" name="cargo"></textarea>
+          <textarea id="cargo" name="cargo">${
+            currentVoyage.cargo || ""
+          }</textarea>
         </div>
         <div>
           <button type="submit">Save Voyage</button>
+          <button type="button" id="deleteVoyageButton">Delete Current Voyage</button>
         </div>
       </form>
     `;
+
+    loadShipsDropdown();
 
     // Hantera formulärens inlämning
     const voyageForm = document.getElementById("voyageForm");
@@ -133,6 +169,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Ladda om sidan för att uppdatera innehållet
       loadCurrentVoyage();
+    });
+
+    // Hantera borttagning av currentVoyage
+    const deleteVoyageButton = document.getElementById("deleteVoyageButton");
+    deleteVoyageButton.addEventListener("click", () => {
+      if (confirm("Are you sure you want to delete the current voyage?")) {
+        // Ta bort currentVoyage från localStorage
+        localStorage.removeItem("currentVoyage");
+
+        // Bekräfta för användaren
+        alert("Current voyage has been deleted!");
+
+        // Uppdatera sidan för att visa att ingen resa är aktiv
+        loadCurrentVoyage();
+      }
     });
   };
 

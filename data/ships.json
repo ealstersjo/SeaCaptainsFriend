@@ -1,0 +1,53 @@
+[
+  {
+    "id": "1",
+    "name": "Fure Vite",
+    "portOfOrigin": "Gothenburg",
+    "tanks": [
+      {
+        "id": "T1",
+        "capacity": 5000,
+        "currentLevel": 2500
+      },
+      {
+        "id": "T2",
+        "capacity": 4000,
+        "currentLevel": 3000
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "name": "Ocean Pearl",
+    "portOfOrigin": "Gothenburg",
+    "tanks": [
+      {
+        "id": "T1",
+        "capacity": 6000,
+        "currentLevel": 4000
+      },
+      {
+        "id": "T2",
+        "capacity": 5000,
+        "currentLevel": 5000
+      },
+      {
+        "id": "T3",
+        "capacity": 3000,
+        "currentLevel": 1500
+      }
+    ]
+  },
+  {
+    "id": "3",
+    "name": "Fure Oscar",
+    "portOfOrigin": "Oslo",
+    "tanks": [
+      {
+        "id": "T1",
+        "capacity": 7000,
+        "currentLevel": 7000
+      }
+    ]
+  }
+]
