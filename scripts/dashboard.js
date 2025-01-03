@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Hämta skeppsnamn
   const loadShipsDropdown = () => {
-    fetch("../data.ships.json")
+    fetch("../data/ships.json")
       .then((response) => response.json())
       .then((ships) => {
         console.log(ships); // Logga data för att säkerställa att den finns
