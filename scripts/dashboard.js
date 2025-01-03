@@ -96,11 +96,12 @@ document.addEventListener("DOMContentLoaded", () => {
         <div>
           <label for="vessel">Vessel:</label>
               <select id="vessel" name="vessel" required>
-            <!-- Options will be loaded here -->
-          </select>
+       <option value="vessel1" selected>Fure Vite</option>
+        <option value="vessel2">Fartyg 2</option>
+        <option value="vessel3">Fartyg 3</option>          </select>
         </div>
         <div>
-          <label for="date">Date:</label>
+          <label for="date">Start date:</label>
           <input type="date" id="date" name="date" value="${
             currentVoyage.date || ""
           }" required />
@@ -122,6 +123,12 @@ document.addEventListener("DOMContentLoaded", () => {
           <input type="text" id="portOfDischarge" name="portOfDischarge" value="${
             currentVoyage.portOfDischarge || ""
           }" />
+        </div>
+        <div>
+          <label for="date">Estimated date of arrival:</label>
+          <input type="date" id="arrivalDate" name="arrivalDate" value="${
+            currentVoyage.arrivalDate || ""
+          }" required />
         </div>
         <div>
           <label for="cargo">Cargo:</label>
