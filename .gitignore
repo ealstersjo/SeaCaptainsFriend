@@ -27,4 +27,4 @@ package-lock.json
 # PDF-filer (om du inte vill ha dem i git)
 *.pdf
 
-bs-config.json
+vite.config.js

@@ -1,5 +1,6 @@
-window.location.href = "./pages/dashboard.html";
-
+if (window.location.pathname !== "/pages/dashboard.html") {
+  window.location.href = "./pages/dashboard.html";
+}
 document
   .getElementById("login-form")
   .addEventListener("submit", function (event) {
