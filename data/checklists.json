@@ -1,0 +1,46 @@
+[
+  {
+    "title": "Loading Cargo",
+    "items": [
+      "Dock the ship (without crashing, please)",
+      "Battle pirates - remember, no looting unless they started it",
+      "Send the crew to buy burgers, preferably with extra cheese",
+      "Make sure the cargo doesn't spontaneously combust... again",
+      "Double-check that all crates are labeled 'fragile' for maximum drama",
+      "Ensure the ship isn't secretly carrying treasure maps – we don't need another mutiny"
+    ]
+  },
+  {
+    "title": "Weekly Tasks",
+    "items": [
+      "Read through this week's report – pretend you're actually interested",
+      "Plan next week's meetings – preferably at the most inconvenient times",
+      "Update the project status – bonus points for making it sound like we’ve done something",
+      "Check that all life vests are accounted for (pirates are unpredictable)",
+      "Sharpen your pencil (it’s the little things that count)",
+      "Pretend to understand the latest regulations – nod convincingly"
+    ]
+  },
+  {
+    "title": "Monthly Tasks",
+    "items": [
+      "Review financial report – try not to cry when you see the numbers",
+      "Conduct employee reviews – don’t get too personal, we’re all just here for the paycheck",
+      "Plan next month's goals – or just copy last month's goals and hope no one notices",
+      "Inspect the ship's hull for holes – and if you find one, just pretend it was always there",
+      "Update inventory – remember, one more 'mysteriously missing' crate will raise suspicions",
+      "Make sure the coffee machine works – no one functions on an empty cup"
+    ]
+  },
+  {
+    "title": "General Ship Maintenance",
+    "items": [
+      "Check lifeboats – you never know when a sudden trip to a deserted island might occur",
+      "Inspect the radar – maybe this time we'll actually find land before it’s too late",
+      "Clean the deck – if you see a seagull, give it a stern look to maintain authority",
+      "Ensure the anchor is actually functional – not just 'there for decoration'",
+      "Make sure the captain doesn't get lost during his afternoon nap",
+      "Check the toilet paper supply – essential for morale and hygiene"
+    ]
+  }
+]
