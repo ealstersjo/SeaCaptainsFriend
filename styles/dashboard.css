@@ -142,6 +142,82 @@ select:focus {
     border-color: #4CAF50;
 }
 
+/* Rubrik - stil */
+.ullage-header {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  /* Sektion med header-information */
+  .ullageHeader {
+    font-size: 1em;
+    color: #555;
+    padding: 10px;
+    margin: 20px 0;
+    background-color: #f9f9f9;
+    border-left: 4px solid #4CAF50; /* Tydlig avgränsning */
+    border-radius: 5px; /* Rundade hörn */
+
+  }
+  
+  .ullageHeader strong {
+    color: #000; /* Färg på rubriker */
+  }
+  
+  /* Sektion med trim-information */
+  .trimValues {
+    font-size: 1em;
+    color: #555;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #f1f1f1;
+    border-left: 4px solid #2196F3; /* Tydlig avgränsning */
+    border-radius: 5px; /* Rundade hörn */
+
+  }
+  
+  .trimValues strong {
+    color: #000; /* Färg på rubriker */
+  }
+  
+  /* Lägg till en liten distans mellan olika block */
+  .ullageHeader, .trimValues {
+    margin-bottom: 15px;
+  }
+  
+  /* Gör så att br-linjerna är mindre aggressiva */
+  .ullageHeader br, .trimValues br {
+    line-height: 1.5;
+  }
+/* Sektion för produktinformation */
+.productInfo {
+    font-size: 1em;
+    color: #555;
+    padding: 15px;
+    margin: 15px 0;
+    background-color: #f7f7f7;
+    border-left: 4px solid #FF9800; /* Tydlig avgränsning med orange kant */
+    border-radius: 5px; /* Rundade hörn */
+  }
+  
+  .productInfo strong {
+    color: #000; /* Färg på rubriker */
+  }
+  
+  /* Gör så att br-linjerna får lite mellanrum */
+  .productInfo br {
+    line-height: 1.5;
+  }
+  
+  /* Om du vill ha en liten distans mellan blocken */
+  .productInfo {
+    margin-bottom: 20px;
+  }
+    
+
 input[type="text"],
 input[type="date"],
 textarea {

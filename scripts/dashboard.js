@@ -54,5 +54,6 @@ document.addEventListener("DOMContentLoaded", () => {
   handleChecklists.addEventListener("click", loadChecklists);
 
   // Ladda standardinnehåll (Current Voyage)
-  loadCurrentVoyage();
+  //loadCurrentVoyage();
+  loadCalculations();
 });

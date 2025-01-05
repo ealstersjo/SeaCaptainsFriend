@@ -1,0 +1,1 @@
+Quantities before load  TOV:  F.W.:  GOV:  GSV@15C:  GSV@60F:  Weight in air:  Weight in vac:  0.000  0.000  0.000  0.000  0.000  0.000  0.000  (m3)  (m3)  (m3)  (m3)  (Bbls)  (Mt)  (Mt)
