@@ -21,13 +21,13 @@ export const printUllageTable = (data) => {
   container.innerHTML +=
     "<div class='trimValues'><strong>Draft fore: </strong>" +
     data.headers.headers.DraftFore +
-    ", <strong>Draft aft: </strong>" +
+    " (m), <strong>Draft aft: </strong>" +
     data.headers.headers.DraftAft +
-    ", <strong>Trim: </strong>" +
+    " (m), <strong>Trim: </strong>" +
     data.headers.headers.Trim +
-    ", <strong>Heel: </strong>" +
+    " (m), <strong>Heel: </strong>" +
     data.headers.headers.Heel +
-    "</div>";
+    " (deg)</div>";
 
   container.innerHTML +=
     "<div class='productInfo'><strong>Product: </strong>" +
@@ -50,12 +50,12 @@ export const printUllageTable = (data) => {
   tableHTML += "<tr>";
   tableHTML += "<th rowspan='2'>Tank</th>";
   tableHTML += "<th colspan='4'>Total</th>";
-  tableHTML += "<th rowspan='2'>FWVolume</th>";
-  tableHTML += "<th rowspan='2'>GOV</th>";
-  tableHTML += "<th rowspan='2'>Temp</th>";
+  tableHTML += "<th rowspan='2'>FWVolume(m3)</th>";
+  tableHTML += "<th rowspan='2'>GOV(m3)</th>";
+  tableHTML += "<th rowspan='2'>Temp(C)</th>";
   tableHTML += "<th rowspan='2'>VCF</th>";
-  tableHTML += "<th rowspan='2'>GSVA@5C</th>";
-  tableHTML += "<th rowspan='2'>GSV@60F</th>";
+  tableHTML += "<th rowspan='2'>GSVA@5C(m3)</th>";
+  tableHTML += "<th rowspan='2'>GSV@60F(Bbls)</th>";
   tableHTML += "<th colspan='2'>Weight</th>";
 
   tableHTML += "</tr>";
@@ -63,11 +63,11 @@ export const printUllageTable = (data) => {
   // Andra raden i rubriken
   tableHTML += "<tr>";
   tableHTML += "<th rowspan='2'>GaugeSystem</th>";
-  tableHTML += "<th>Obs</th>";
-  tableHTML += "<th>Corr</th>";
-  tableHTML += "<th rowspan='2'>Vol</th>";
-  tableHTML += "<th rowspan='2'>In Air</th>";
-  tableHTML += "<th rowspan='2'>In Vac</th>";
+  tableHTML += "<th>Obs(m)</th>";
+  tableHTML += "<th>Corr(m)</th>";
+  tableHTML += "<th rowspan='2'>Vol(m3)</th>";
+  tableHTML += "<th rowspan='2'>In Air(Mt)</th>";
+  tableHTML += "<th rowspan='2'>In Vac(Mt)</th>";
   tableHTML += "</tr>";
 
   tableHTML += "</thead>";
@@ -103,7 +103,75 @@ export const printUllageTable = (data) => {
   // Lägg till tabellen i container
   container.innerHTML += tableHTML;
 
-  container.innerHTML += "<pre>" + JSON.stringify(data, null, 2) + "</pre>";
+  container.innerHTML +=
+    "<div class='quantBefore'><h4>Quantities before load</h4>" +
+    "</br><strong>TOV: </strong>" +
+    data.headers.quantities.quantBefore.TOV +
+    " (m3)</br><strong>F.W: </strong>" +
+    data.headers.quantities.quantBefore.F_W +
+    "</br><strong>GOV: </strong>" +
+    data.headers.quantities.quantBefore.GOV +
+    " (m3)</br><strong>GSV@15C: </strong>" +
+    data.headers.quantities.quantBefore.GSVAt15C +
+    " (m3)</br><strong>GSV@60F: </strong>" +
+    data.headers.quantities.quantBefore.GSVAt60F +
+    " (Bbls)</br><strong>Weight in air: </strong>" +
+    data.headers.quantities.quantBefore.WeightInAir +
+    " (Mt)</br><strong>Weight in vac: </strong>" +
+    data.headers.quantities.quantBefore.WeightInVac +
+    " (Mt)</div>";
 
-  console.log(data);
+  container.innerHTML +=
+    "<div class='quantAfter'><h4>Quantities after load</h4>" +
+    "</br><strong>TOV: </strong>" +
+    data.headers.quantities.quantAfter.TOV +
+    " (m3)</br><strong>F.W: </strong>" +
+    data.headers.quantities.quantAfter.F_W +
+    "</br><strong>GOV: </strong>" +
+    data.headers.quantities.quantAfter.GOV +
+    " (m3)</br><strong>GSV@15C: </strong>" +
+    data.headers.quantities.quantAfter.GSVAt15C +
+    " (m3)</br><strong>GSV@60F: </strong>" +
+    data.headers.quantities.quantAfter.GSVAt60F +
+    " (Bbls)</br><strong>Weight in air: </strong>" +
+    data.headers.quantities.quantAfter.WeightInAir +
+    " (Mt)</br><strong>Weight in vac: </strong>" +
+    data.headers.quantities.quantAfter.WeightInVac +
+    " (Mt)</div>";
+
+  container.innerHTML +=
+    "<div class='quantLoaded'><h4>Loaded quantities</h4>" +
+    "</br><strong>TOV: </strong>" +
+    data.headers.quantities.quantLoaded.TOV +
+    " (m3)</br><strong>F.W: </strong>" +
+    data.headers.quantities.quantLoaded.F_W +
+    "</br><strong>GOV: </strong>" +
+    data.headers.quantities.quantLoaded.GOV +
+    " (m3)</br><strong>GSV@15C: </strong>" +
+    data.headers.quantities.quantLoaded.GSVAt15C +
+    " (m3)</br><strong>GSV@60F: </strong>" +
+    data.headers.quantities.quantLoaded.GSVAt60F +
+    " (Bbls)</br><strong>Weight in air: </strong>" +
+    data.headers.quantities.quantLoaded.WeightInAir +
+    " (Mt)</br><strong>Weight in vac: </strong>" +
+    data.headers.quantities.quantLoaded.WeightInVac +
+    " (Mt)</div>";
+
+  container.innerHTML +=
+    "<div class='billOfLading'><h4>Bill of Lading</h4>" +
+    "</br><strong>WtVac: </strong>" +
+    data.headers.billOfLading.WtVac +
+    " (Mt)</br><strong>Diff. Ship Fig: </strong>" +
+    data.headers.billOfLading.DiffShipFig +
+    " (%)</br><h5>Values VEF applied:</h5><strong>VEF: </strong>" +
+    data.headers.billOfLading.VEF +
+    "</br><strong>GSV@15C: </strong>" +
+    data.headers.billOfLading.GSVAt15C +
+    " (m3)</br><strong>GSV@60F: </strong>" +
+    data.headers.billOfLading.GSVAt60F +
+    " (Bbls)</br><strong>Weight in air: </strong>" +
+    data.headers.billOfLading.WeightInAir +
+    " (Mt)</br><strong>Weight in vac: </strong>" +
+    data.headers.billOfLading.WeightInVac +
+    " (Mt)</div>";
 };

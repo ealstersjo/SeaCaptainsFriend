@@ -216,6 +216,102 @@ select:focus {
   .productInfo {
     margin-bottom: 20px;
   }
+
+.quantBefore {
+    font-size: 1em;
+    color: #555;
+    padding: 15px;
+    margin: 15px 0;
+    background-color: #f7f7f7;
+    border-left: 4px solid #002aff; /* Tydlig avgränsning med orange kant */
+    border-radius: 5px; /* Rundade hörn */
+  }
+  
+  .quantBefore strong {
+    color: #000; /* Färg på rubriker */
+  }
+  
+  /* Gör så att br-linjerna får lite mellanrum */
+  .quantBefore br {
+    line-height: 1.5;
+  }
+  
+  /* Om du vill ha en liten distans mellan blocken */
+  .quantBefore {
+    margin-bottom: 20px;
+  }
+
+  .quantAfter {
+    font-size: 1em;
+    color: #555;
+    padding: 15px;
+    margin: 15px 0;
+    background-color: #f7f7f7;
+    border-left: 4px solid #8ca71e; /* Tydlig avgränsning med orange kant */
+    border-radius: 5px; /* Rundade hörn */
+  }
+  
+  .quantAfter strong {
+    color: #000; /* Färg på rubriker */
+  }
+  
+  /* Gör så att br-linjerna får lite mellanrum */
+  .quantAfter br {
+    line-height: 1.5;
+  }
+  
+  /* Om du vill ha en liten distans mellan blocken */
+  .quantAfter {
+    margin-bottom: 20px;
+  }
+
+  .quantLoaded {
+    font-size: 1em;
+    color: #555;
+    padding: 15px;
+    margin: 15px 0;
+    background-color: #f7f7f7;
+    border-left: 4px solid #04c700; /* Tydlig avgränsning med orange kant */
+    border-radius: 5px; /* Rundade hörn */
+  }
+  
+  .quantLoaded strong {
+    color: #000; /* Färg på rubriker */
+  }
+  
+  /* Gör så att br-linjerna får lite mellanrum */
+  .quantLoaded br {
+    line-height: 1.5;
+  }
+  
+  /* Om du vill ha en liten distans mellan blocken */
+  .quantLoaded {
+    margin-bottom: 20px;
+  }
+
+  .billOfLading {
+    font-size: 1em;
+    color: #555;
+    padding: 15px;
+    margin: 15px 0;
+    background-color: #f7f7f7;
+    border-left: 4px solid #c70000; /* Tydlig avgränsning med orange kant */
+    border-radius: 5px; /* Rundade hörn */
+  }
+  
+  .billOfLading strong {
+    color: #000; /* Färg på rubriker */
+  }
+  
+  /* Gör så att br-linjerna får lite mellanrum */
+  .billOfLading br {
+    line-height: 1.5;
+  }
+  
+  /* Om du vill ha en liten distans mellan blocken */
+  .billOfLading {
+    margin-bottom: 20px;
+  }
     /* Styling för tabellen */
 .tank-data-table {
     width: 100%;
