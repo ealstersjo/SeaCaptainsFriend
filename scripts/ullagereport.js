@@ -179,68 +179,70 @@ const extractTankData = (text) => {
     /(C\d+[ps]|Oil in Pipes|Total)/g,
     "\n$1"
   );
-  const lines = formattedText.trim().split("\n");
+  const lines = formattedText
+    .split("\n")
+    .filter((line) => line !== "" && line.trim().length > 0); // Filtrera bort rader som är tomma eller bara innehåller mellanslag
   const tanks = [];
   lines.forEach((line) => {
     const values = line.split(/\s+/); // Delar upp efter mellanrum
+    if (values[0] !== '"') {
+      if (values[0] === "Oil" && values[1] === "in" && values[2] === "Pipes") {
+        // Hantera raden "Oil in Pipes" specifikt
+        const oilInPipesTank = {
+          name: "Oil in Pipes",
+          GaugeSystem: null, // Radar
+          Obs: null,
+          Corr: null,
+          Vol: parseFloat(values[3]),
+          FWVolume: null,
+          GOV: parseFloat(values[4]),
+          Temp: parseFloat(values[5]),
+          VCF: parseFloat(values[6]),
+          GSVAt15C: parseFloat(values[7]),
+          GSVAt60F: parseFloat(values[8]),
+          WeightInAir: parseFloat(values[9]),
+          WeightInVac: parseFloat(values[10]),
+        };
+        tanks.push(oilInPipesTank);
+      } else if (values[0] === "Total") {
+        const total = {
+          name: values[0],
+          GaugeSystem: null, // Radar
+          Obs: null,
+          Corr: null,
+          Vol: parseFloat(values[1]),
+          FWVolume: parseFloat(values[2]),
+          GOV: parseFloat(values[3]),
+          Temp: parseFloat(values[4]),
+          VCF: null,
+          GSVAt15C: parseFloat(values[5]),
+          GSVAt60F: parseFloat(values[6]),
+          WeightInAir: parseFloat(values[7]),
+          WeightInVac: parseFloat(values[8]),
+        };
+        tanks.push(total);
+      } else {
+        // Skapa ett objekt för varje rad (för C1p, C2p, etc.)
+        const tank = {
+          name: values[0], // Första kolumnen är tankens namn (C1p, C1s, etc.)
+          GaugeSystem: values[1], // Andra kolumnen är typen (Radar)
+          Obs: parseFloat(values[2]),
+          Corr: parseFloat(values[3]),
+          Vol: parseFloat(values[4]),
+          FWVolume: null,
+          GOV: parseFloat(values[5]),
+          Temp: parseFloat(values[6]),
+          VCF: parseFloat(values[7]),
+          GSVAt15C: parseFloat(values[8]),
+          GSVAt60F: parseFloat(values[9]),
+          WeightInAir: parseFloat(values[10]),
+          WeightInVac: parseFloat(values[11]),
+        };
 
-    if (values[0] === "Oil" && values[1] === "in" && values[2] === "Pipes") {
-      // Hantera raden "Oil in Pipes" specifikt
-      const oilInPipesTank = {
-        name: "Oil in Pipes",
-        GaugeSystem: null, // Radar
-        Obs: null,
-        Corr: null,
-        Vol: parseFloat(values[3]),
-        FWVolume: null,
-        GOV: parseFloat(values[4]),
-        Temp: parseFloat(values[5]),
-        VCF: parseFloat(values[6]),
-        GSVAt15C: parseFloat(values[7]),
-        GSVAt60F: parseFloat(values[8]),
-        WeightInAir: parseFloat(values[9]),
-        WeightInVac: parseFloat(values[10]),
-      };
-      tanks.push(oilInPipesTank);
-    } else if (values[0] === "Total") {
-      const total = {
-        name: values[0],
-        GaugeSystem: null, // Radar
-        Obs: null,
-        Corr: null,
-        Vol: parseFloat(values[1]),
-        FWVolume: parseFloat(values[2]),
-        GOV: parseFloat(values[3]),
-        Temp: parseFloat(values[4]),
-        VCF: null,
-        GSVAt15C: parseFloat(values[5]),
-        GSVAt60F: parseFloat(values[6]),
-        WeightInAir: parseFloat(values[7]),
-        WeightInVac: parseFloat(values[8]),
-      };
-      tanks.push(total);
-    } else {
-      // Skapa ett objekt för varje rad (för C1p, C2p, etc.)
-      const tank = {
-        name: values[0], // Första kolumnen är tankens namn (C1p, C1s, etc.)
-        GaugeSystem: values[1], // Andra kolumnen är typen (Radar)
-        Obs: parseFloat(values[2]),
-        Corr: parseFloat(values[3]),
-        Vol: parseFloat(values[4]),
-        FWVolume: null,
-        GOV: parseFloat(values[5]),
-        Temp: parseFloat(values[6]),
-        VCF: parseFloat(values[7]),
-        GSVAt15C: parseFloat(values[8]),
-        GSVAt60F: parseFloat(values[9]),
-        WeightInAir: parseFloat(values[10]),
-        WeightInVac: parseFloat(values[11]),
-      };
-
-      tanks.push(tank);
+        tanks.push(tank);
+      }
     }
   });
-
   return tanks;
 };
 

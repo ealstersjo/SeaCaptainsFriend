@@ -216,7 +216,43 @@ select:focus {
   .productInfo {
     margin-bottom: 20px;
   }
-    
+    /* Styling för tabellen */
+.tank-data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .tank-data-table th, .tank-data-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .tank-data-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+  
+  .tank-data-table td {
+    background-color: #fff;
+  }
+  
+  .tank-data-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .tank-data-table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  /* Styling för tomma värden i tabellen */
+  .tank-data-table td:empty {
+    background-color: #e0e0e0;
+  }
 
 input[type="text"],
 input[type="date"],
