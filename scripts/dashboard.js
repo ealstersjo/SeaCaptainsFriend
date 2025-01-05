@@ -1,8 +1,8 @@
-// Kontrollera om användaren är inloggad
+/* // Kontrollera om användaren är inloggad
 if (localStorage.getItem("loggedIn") !== "true") {
   // Redirecta tillbaka till inloggningssidan om användaren inte är inloggad
   window.location.href = "index.html";
-}
+} */
 
 document.addEventListener("DOMContentLoaded", () => {
   // Hämta referenser till menylänkarna
