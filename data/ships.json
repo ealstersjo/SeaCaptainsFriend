@@ -5,14 +5,14 @@
     "portOfOrigin": "Gothenburg",
     "tanks": [
       {
-        "id": "T1",
-        "capacity": 5000,
-        "currentLevel": 2500
+        "name": "C1p",
+        "capacity": 623.009,
+        "info": "Water tank"
       },
       {
-        "id": "T2",
-        "capacity": 4000,
-        "currentLevel": 3000
+        "name": "C1s",
+        "capacity": 620.335,
+        "info": "Water tank"
       }
     ]
   },
@@ -22,19 +22,19 @@
     "portOfOrigin": "Gothenburg",
     "tanks": [
       {
-        "id": "T1",
-        "capacity": 6000,
-        "currentLevel": 4000
+        "name": "C2p",
+        "capacity": 1786.018,
+        "info": "Fuel tank"
       },
       {
-        "id": "T2",
-        "capacity": 5000,
-        "currentLevel": 5000
+        "name": "C2s",
+        "capacity": 1804.52,
+        "info": "Fuel tank"
       },
       {
-        "id": "T3",
-        "capacity": 3000,
-        "currentLevel": 1500
+        "name": "C3p",
+        "capacity": 1674.563,
+        "info": "Only biofuel"
       }
     ]
   },
@@ -44,9 +44,9 @@
     "portOfOrigin": "Oslo",
     "tanks": [
       {
-        "id": "T1",
-        "capacity": 7000,
-        "currentLevel": 7000
+        "name": "C3s",
+        "capacity": 1670.321,
+        "info": "Water tank"
       }
     ]
   }

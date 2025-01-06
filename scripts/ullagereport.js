@@ -243,6 +243,7 @@ const extractTankData = (text) => {
       }
     }
   });
+  console.log(tanks);
   return tanks;
 };
 
