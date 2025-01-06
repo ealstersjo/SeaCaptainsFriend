@@ -1,12 +1,11 @@
-import {
-  handleStabilityReport,
-  printStabilityTable,
-} from "./stabilityReport.js";
 import { currentVoyagePage } from "./currentVoyage.js";
 import { checklists } from "./checklists.js";
 import { statementOfFact } from "./statementoffact.js";
 import { handleVoyage } from "./handleVoyage.js";
+import { fileupload } from "./fileupload.js";
 import { calculations } from "./calculations.js";
+import { voyageshistory } from "./voyageshistory.js";
+
 /* // Kontrollera om användaren är inloggad
 if (localStorage.getItem("loggedIn") !== "true") {
   // Redirecta tillbaka till inloggningssidan om användaren inte är inloggad
@@ -17,15 +16,24 @@ document.addEventListener("DOMContentLoaded", () => {
   // Hämta referenser till menylänkarna
   const currentVoyageLink = document.getElementById("currentvoyage");
   const statementOfFactLink = document.getElementById("statementoffact");
-  const handelVoyageLink = document.getElementById("handlevoyage");
-  const handelCalculations = document.getElementById("handlecalculations");
+  const handleVoyageLink = document.getElementById("handlevoyage");
+  const handleCalculations = document.getElementById("handlecalculations");
+  const handleFileUpload = document.getElementById("fileupload");
   const handleChecklists = document.getElementById("checklists");
+  const handleVoyagesHistory = document.getElementById("voyageshistory");
 
   // Hämta referens till innehållsområdet
   const contentArea = document.querySelector(".content");
 
+  const loadVoyagesHistory = async () => {
+    voyageshistory(contentArea);
+  };
   const loadCalculations = async () => {
     calculations(contentArea);
+  };
+
+  const loadFileUpload = async () => {
+    fileupload(contentArea);
   };
 
   const loadChecklists = () => {
@@ -49,9 +57,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // När användaren klickar på respektive menyalternativ
   currentVoyageLink.addEventListener("click", loadCurrentVoyage);
   statementOfFactLink.addEventListener("click", loadStatementOfFact);
-  handelVoyageLink.addEventListener("click", loadHandleVoyage);
-  handelCalculations.addEventListener("click", loadCalculations);
+  handleVoyageLink.addEventListener("click", loadHandleVoyage);
+  handleCalculations.addEventListener("click", loadCalculations);
   handleChecklists.addEventListener("click", loadChecklists);
+  handleFileUpload.addEventListener("click", loadFileUpload);
+  handleVoyagesHistory.addEventListener("click", loadVoyagesHistory);
 
   // Ladda standardinnehåll (Current Voyage)
   //loadCurrentVoyage();

@@ -1,20 +1,208 @@
 [
   {
     "id": "1",
-    "name": "Fure Vite",
+    "name": "Fure Viten",
     "portOfOrigin": "Gothenburg",
-    "tanks": [
-      {
-        "name": "C1p",
-        "capacity": 623.009,
-        "info": "Water tank"
+    "shipType": "Oil & Chemical Tanker",
+    "callSign": "SBOV",
+    "flag": "Sweden",
+    "portOfRegistry": "Donsö",
+    "imoNo": "9898204",
+    "officialNo": "9898204",
+    "mmsiNo": "265025000",
+    "tonnage": {
+      "international": {
+        "gross": 12763.0,
+        "net": 5838.0
       },
-      {
-        "name": "C1s",
-        "capacity": 620.335,
-        "info": "Water tank"
+      "suezCanal": {
+        "gross": 12823.84,
+        "net": 10927.33
+      },
+      "reducedTonnage": 10524.0,
+      "sbt": 2239.0
+    },
+    "dimensions": {
+      "lengthOverall": 149.9,
+      "lengthBetweenPerpendiculars": 145.68,
+      "breadthExtreme": 22.93,
+      "breadthMoulded": 22.8,
+      "depth": 12.1,
+      "heightOverKeel": 40.29
+    },
+    "loadLine": {
+      "tropical": {
+        "draft": 9.553,
+        "freeboard": 2.557,
+        "dwt": 18596.0,
+        "displacement": 25081.0,
+        "fwa": 0.2,
+        "tpc": 30.58
+      },
+      "summer": {
+        "draft": 9.36,
+        "freeboard": 2.752,
+        "dwt": 17999.0,
+        "displacement": 24700.0
+      },
+      "winter": {
+        "draft": 9.163,
+        "freeboard": 2.947,
+        "dwt": 17404.0,
+        "displacement": 23889.0
+      },
+      "lightShip": {
+        "draft": 2.831,
+        "freeboard": 9.269,
+        "dwt": 0.0,
+        "displacement": 6485.0
+      },
+      "normalBallast": {
+        "draft": 5.9,
+        "freeboard": 6.2,
+        "dwt": 5492.0,
+        "displacement": 11976.0
       }
-    ]
+    },
+    "tanks": {
+      "cargoTanks": [
+        {
+          "name": "1P",
+          "capacity": 667.85,
+          "heightToReference": 11595
+        },
+        {
+          "name": "1S",
+          "capacity": 663.03,
+          "heightToReference": 11627,
+          "info": "Designated as slop tank"
+        },
+        {
+          "name": "2P",
+          "capacity": 1910.29,
+          "heightToReference": 11552
+        },
+        {
+          "name": "2S",
+          "capacity": 1917.63,
+          "heightToReference": 11535
+        },
+        {
+          "name": "3P",
+          "capacity": 1761.47,
+          "heightToReference": 11576
+        },
+        {
+          "name": "3S",
+          "capacity": 1756.57,
+          "heightToReference": 11571
+        },
+        {
+          "name": "4P",
+          "capacity": 2092.09,
+          "heightToReference": 11542
+        },
+        {
+          "name": "4S",
+          "capacity": 2099.4,
+          "heightToReference": 11533
+        },
+        {
+          "name": "5P",
+          "capacity": 2099.57,
+          "heightToReference": 11561
+        },
+        {
+          "name": "5S",
+          "capacity": 2094.02,
+          "heightToReference": 11542
+        },
+        {
+          "name": "6P",
+          "capacity": 1592.06,
+          "heightToReference": 11539
+        },
+        {
+          "name": "6S",
+          "capacity": 1591.14,
+          "heightToReference": 11536
+        }
+      ],
+      "drainTanks": [
+        {
+          "name": "Port",
+          "capacity": 63.331,
+          "heightToReference": 3684
+        },
+        {
+          "name": "Starboard",
+          "capacity": 62.667,
+          "heightToReference": 3688
+        }
+      ],
+      "ballastTanks": [
+        {
+          "name": "Fore Peak",
+          "capacity": 462.82
+        },
+        {
+          "name": "1 Port",
+          "capacity": 338.05
+        },
+        {
+          "name": "1 Starboard",
+          "capacity": 329.3
+        },
+        {
+          "name": "2 Port",
+          "capacity": 629.45
+        },
+        {
+          "name": "2 Starboard",
+          "capacity": 630.42
+        },
+        {
+          "name": "3 Port",
+          "capacity": 553.63
+        },
+        {
+          "name": "3 Starboard",
+          "capacity": 552.66
+        },
+        {
+          "name": "4 Port",
+          "capacity": 405.55
+        },
+        {
+          "name": "4 Port Healing Tank",
+          "capacity": 255.85
+        },
+        {
+          "name": "4 Starboard",
+          "capacity": 406.52
+        },
+        {
+          "name": "4 Starboard Healing Tank",
+          "capacity": 255.85
+        },
+        {
+          "name": "5 Port",
+          "capacity": 660.45
+        },
+        {
+          "name": "5 Starboard",
+          "capacity": 659.48
+        },
+        {
+          "name": "6 Port",
+          "capacity": 663.45
+        },
+        {
+          "name": "6 Starboard",
+          "capacity": 690.44
+        }
+      ]
+    }
   },
   {
     "id": "2",
