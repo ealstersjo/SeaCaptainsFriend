@@ -29,27 +29,61 @@ export const handleVoyage = (contentArea) => {
             }" required />
           </div>
           <div>
+            <label for="voyageNumber">Voyage number:</label>
+            <input type="text" id="voyageNumber" name="voyageNumber" required />
+          </div>
+          <div>
             <label for="pniNumber">PNI #:</label>
             <input type="text" id="pniNumber" name="pniNumber" required />
           </div>
           <div>
             <label for="portOfLoading">Port of Loading:</label>
-            <input type="text" id="portOfLoading" name="portOfLoading" />
+            <input type="text" id="portOfLoading" name="portOfLoading" required/>
           </div>
           <div>
             <label for="portOfDischarge">Port of Discharge:</label>
-            <input type="text" id="portOfDischarge" name="portOfDischarge" />
+            <input type="text" id="portOfDischarge" name="portOfDischarge" required />
           </div>
           <div>
             <label for="arrivalDate">Estimated date of arrival:</label>
-            <input type="date" id="arrivalDate" name="arrivalDate" required />
+            <input type="date" id="arrivalDate" name="arrivalDate" />
           </div>
           <div>
-            <label for="cargo">Cargo:</label>
-            <textarea id="cargo" name="cargo"></textarea>
+            <h3>Cargo</h3>
+            <label for="type">Cargo:</label>
+            <input type="text" id="type" name="type" required/>
           </div>
           <div>
-            <button type="submit">Save Voyage</button>
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" />
+          </div>
+          <div>
+            <label for="unit">Unit:</label>
+            <input type="text" id="unit" name="unit" />
+          </div>
+          <div>
+            <label for="cargo">Hazard class:</label>
+            <textarea id="hazard" name="hazard" ></textarea>
+          </div>
+          <div>
+          <h3>Crew</h3>
+            <label for="master">Master:</label>
+            <input type="text" id="master" name="master" required/>
+          </div>
+          <div>
+            <label for="chiefOfficer">Chief Officer:</label>
+            <input type="text" id="chiefOfficer" name="chiefOfficer" required/>
+          </div>
+          <div>
+            <label for="secondOfficer1">Second Officer:</label>
+            <input type="text" id="secondOfficer1" name="secondOfficer1" />
+          </div>
+          <div>
+            <label for="secondOfficer2">Second Officer:</label>
+            <input type="text" id="secondOfficer2" name="secondOfficer2" />
+          </div>
+          <div>
+            <button type="submit">Commence Voyage</button>
           </div>
         </form>
       `;
@@ -65,11 +99,20 @@ export const handleVoyage = (contentArea) => {
         const vessel = document.getElementById("vessel").value;
         const date = document.getElementById("date").value;
         const arrivalDate = document.getElementById("arrivalDate").value;
-        const pniNumber = document.getElementById("pniNumber").value;
+        const pniNumber = document.getElementById("voyageNumber").value;
+        const voyageNumber = document.getElementById("pniNumber").value;
+
         const portOfLoading = document.getElementById("portOfLoading").value;
         const portOfDischarge =
           document.getElementById("portOfDischarge").value;
-        const cargo = document.getElementById("cargo").value;
+        const type = document.getElementById("type").value;
+        const unit = document.getElementById("unit").value;
+        const quantity = document.getElementById("quantity").value;
+        const hazard = document.getElementById("hazard").value;
+        const master = document.getElementById("master").value;
+        const chiefOfficer = document.getElementById("chiefOfficer").value;
+        const secondOfficer1 = document.getElementById("secondOfficer1").value;
+        const secondOfficer2 = document.getElementById("secondOfficer2").value;
 
         // Skapa ett objekt för resan
         const currentVoyage = {
@@ -77,9 +120,21 @@ export const handleVoyage = (contentArea) => {
           date,
           arrivalDate,
           pniNumber,
+          voyageNumber,
           portOfLoading,
           portOfDischarge,
-          cargo,
+          cargo: {
+            type,
+            quantity,
+            unit,
+            hazard,
+          },
+          crew: {
+            master,
+            chiefOfficer,
+            secondOfficer1,
+            secondOfficer2,
+          },
         };
 
         // Spara resan i localStorage

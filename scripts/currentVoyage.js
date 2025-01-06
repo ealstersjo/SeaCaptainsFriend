@@ -22,6 +22,13 @@ export const currentVoyagePage = async (contentArea) => {
         <strong>Vessel:</strong> ${voyageData.vessel || "N/A"}
       </div>
       <div class="voyage-item">
+        <strong>Voyage:</strong> ${voyageData.voyageNumber || "N/A"}
+      </div>
+     
+    </div>
+    <div class="row">
+      
+      <div class="voyage-item">
         <strong>PNI #:</strong> ${voyageData.pniNumber || "N/A"}
       </div>
      
