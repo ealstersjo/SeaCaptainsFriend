@@ -496,6 +496,77 @@ form div:last-child {
     font-weight: bold;
   }
   
+  /* Döljer standard-checkboxen */
+.custom-checkbox input[type="checkbox"] {
+    display: none;
+  }
+  
+  /* Stilen för etiketten */
+  .custom-checkbox {
+    display: flex;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  /* Stilen för själva checkmark-boxen */
+  .custom-checkbox .checkmark {
+    width: 24px;
+    height: 24px;
+    background-color: #f0f0f0;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+  
+  /* När checkboxen är markerad */
+  .custom-checkbox input[type="checkbox"]:checked + .checkmark {
+    background-color: #4caf50;
+    border-color: #4caf50;
+  }
+  
+  /* Skapar en "check"-ikon */
+  .custom-checkbox .checkmark::after {
+    content: "";
+    position: absolute;
+    width: 8px;
+    height: 14px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    top: 4px;
+    left: 8px;
+    opacity: 0;
+    transform: rotate(45deg) scale(0);
+    transition: all 0.3s ease;
+  }
+  
+  /* Visar "check"-ikonen när markerad */
+  .custom-checkbox input[type="checkbox"]:checked + .checkmark::after {
+    opacity: 1;
+    transform: rotate(45deg) scale(1);
+  }
+
+  
+  .tank-checkbox-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Två kolumner */
+    grid-auto-rows: auto; /* Dynamisk höjd för varje rad */
+    gap: 10px; /* Avstånd mellan rader och kolumner */
+  }
+
+  .tank-checkbox {
+    display: flex;
+    align-items: center;
+  }
+
+  .tank-checkbox input {
+    margin-right: 8px; /* Avstånd mellan checkbox och text */
+  }
 
 
 /* Responsiv design */
