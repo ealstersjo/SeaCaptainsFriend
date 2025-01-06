@@ -380,10 +380,17 @@ button[type="submit"] {
     color: white;
 }
 
-button[type="button"] {
+button[type="commence"] {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+button[type="deleteButton"] {
     background-color: #f44336;
     color: white;
 }
+
+
 
 button:hover {
     opacity: 0.9;

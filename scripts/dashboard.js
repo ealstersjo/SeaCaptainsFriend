@@ -55,5 +55,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Ladda standardinnehåll (Current Voyage)
   //loadCurrentVoyage();
-  loadCurrentVoyage();
+  loadHandleVoyage();
 });
