@@ -7,6 +7,8 @@ let loadingLogData = {
   berth: "Kaj 521",
   manifolds: "",
   connectionSize: "",
+  avgRate: 0,
+  lastAvgRate: 0,
 };
 
 let logEntries = []; // Array för att lagra loggdata
@@ -124,6 +126,7 @@ const createLogRow = (entry = {}, index = null) => {
       }
       entry.rate = rate;
       entry.isEditable = false;
+      updateAvgRates();
       renderLogTable(); // Uppdatera tabellen
     } else {
       // Växla till redigerbart läge
@@ -176,55 +179,93 @@ const renderLogTable = () => {
   });
 };
 
+const updateAvgRates = () => {
+  if (logEntries.length > 0) {
+    // Beräkna avgRate
+    const totalRate = logEntries.reduce((sum, entry) => {
+      const rate = parseInt(entry.rate) || 0;
+      return sum + rate;
+    }, 0);
+    loadingLogData.avgRate = parseInt(totalRate / logEntries.length);
+
+    // Hämta lastAvgRate
+    loadingLogData.lastAvgRate =
+      parseInt(logEntries[logEntries.length - 1].rate) || 0;
+  } else {
+    // Inga logEntries, nollställ värden
+    loadingLogData.avgRate = 0;
+    loadingLogData.lastAvgRate = 0;
+  }
+  console.log(loadingLogData.avgRate);
+  // Uppdatera grundläggande data i UI
+  renderBasicData();
+};
+
+const renderBasicData = () => {
+  const table = document.querySelector(".loading-log-basic-info-table");
+  table.innerHTML = `
+      <tr>
+        <td><strong>Voy:</strong></td>
+        <td>${loadingLogData.voy}</td>
+        <td><strong>Cargo(es):</strong></td>
+        <td>${loadingLogData.cargo}</td>
+      </tr>
+      <tr>
+        <td><strong>Date:</strong></td>
+        <td>${loadingLogData.date}</td>
+        <td><strong>Port:</strong></td>
+        <td>${loadingLogData.port}</td>
+      </tr>
+      <tr>
+        <td><strong>Berth:</strong></td>
+        <td>${loadingLogData.berth}</td>
+        
+      </tr>
+      <tr>
+      <td><strong>Avg. Rate (cbm/h):</strong></td>
+        <td>${loadingLogData.avgRate}</td>
+        <td><strong>Last Avg. Rate (cbm/h):</strong></td>
+        <td>${loadingLogData.lastAvgRate}</td>
+      </tr>
+    `;
+};
+
 // Funktion för att generera loading log-sidan
 export const loadingLog = (contentArea) => {
   contentArea.innerHTML = `
       <h1 class="loading-log-title">Loading Log</h1>
       <div class="loading-log-container">
         <!-- Grundläggande data -->
-        <table class="loading-log-table">
-          <tr>
-            <td><strong>Voy:</strong></td>
-            <td>${loadingLogData.voy}</td>
-            <td><strong>Cargo(es):</strong></td>
-            <td>${loadingLogData.cargo}</td>
-          </tr>
-          <tr>
-            <td><strong>Date:</strong></td>
-            <td>${loadingLogData.date}</td>
-            <td><strong>Port:</strong></td>
-            <td>${loadingLogData.port}</td>
-          </tr>
-          <tr>
-            <td><strong>Berth:</strong></td>
-            <td>${loadingLogData.berth}</td>
-          </tr>
-        </table>
+<table class="loading-log-basic-info-table">
+  
+</table>
+
   
         <!-- Formulär för manifolds och connection size -->
-        <form id="loadingLogForm">
-          <div class="loading-log-form-row">
-            <label for="manifolds" class="loading-log-label">Manifold(s) No:</label>
-            <input 
-              type="text" 
-              id="manifolds" 
-              class="loading-log-input" 
-              value="${loadingLogData.manifolds}" 
-              placeholder="Enter manifold(s) no." 
-            />
-          </div>
-          <div class="loading-log-form-row">
-            <label for="connectionSize" class="loading-log-label">Connection size:</label>
-            <input 
-              type="text" 
-              id="connectionSize" 
-              class="loading-log-input" 
-              value="${loadingLogData.connectionSize}" 
-              placeholder="Enter connection size" 
-            />
-          </div>
-          <button type="submit" class="loading-log-button">Save Loading Log</button>
-        </form>
+<form id="loadingLogForm" class="loading-log-form">
+  <div class="loading-log-form-row">
+    <label for="manifolds" class="loading-log-label">Manifold(s) No:</label>
+    <input 
+      type="text" 
+      id="manifolds" 
+      class="loading-log-input" 
+      value="${loadingLogData.manifolds}" 
+      placeholder="Enter manifold(s) no." 
+    />
+  </div>
+  <div class="loading-log-form-row">
+    <label for="connectionSize" class="loading-log-label">Connection size:</label>
+    <input 
+      type="text" 
+      id="connectionSize" 
+      class="loading-log-input" 
+      value="${loadingLogData.connectionSize}" 
+      placeholder="Enter connection size" 
+    />
+  </div>
+  <button type="submit" class="loading-log-button">Save</button>
+</form>
+
   
         <!-- Loggdata-tabellen -->
 <h2 class="loading-log-entries-title">Log Entries</h2>
@@ -236,8 +277,9 @@ export const loadingLog = (contentArea) => {
       <th class="loading-log-header">Rate cbm/h</th>
       <th class="loading-log-header">Tanks No.</th>
       <th class="loading-log-header">Manif Press.</th>
-      <th class="loading-log-header">BM</th>
       <th class="loading-log-header">SF</th>
+      <th class="loading-log-header">BM</th>
+      
       <th class="loading-log-header">Remarks</th>
       <th class="loading-log-header">Action</th>
     </tr>
@@ -248,7 +290,7 @@ export const loadingLog = (contentArea) => {
 
       </div>
     `;
-
+  renderBasicData();
   // Event listener för formuläret
   document.getElementById("loadingLogForm").addEventListener("submit", (e) => {
     e.preventDefault();
@@ -273,6 +315,7 @@ export const loadingLog = (contentArea) => {
       }),
     }); // Lägg till tom loggrad
     renderLogTable();
+    // Uppdatera rates
   });
 
   // Rendera loggtabellen
