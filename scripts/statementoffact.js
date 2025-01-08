@@ -54,7 +54,7 @@ export const statementOfFact = (contentArea) => {
               <td>${activity.time}</td>
               <td>${activity.remarks}</td>
               <td>
-                <button class="editBtn">Edit</button>
+                <button class="editBtn">Delete</button>
               </td>
             </tr>
           `

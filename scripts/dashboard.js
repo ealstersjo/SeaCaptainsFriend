@@ -5,6 +5,7 @@ import { handleVoyage } from "./handleVoyage.js";
 import { fileupload } from "./fileupload.js";
 import { calculations } from "./calculations.js";
 import { voyageshistory } from "./voyageshistory.js";
+import { account } from "./account.js";
 
 /* // Kontrollera om användaren är inloggad
 if (localStorage.getItem("loggedIn") !== "true") {
@@ -21,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const handleFileUpload = document.getElementById("fileupload");
   const handleChecklists = document.getElementById("checklists");
   const handleVoyagesHistory = document.getElementById("voyageshistory");
+  const handleAccount = document.getElementById("accountMenu");
 
   // Hämta referens till innehållsområdet
   const contentArea = document.querySelector(".content");
@@ -54,6 +56,10 @@ document.addEventListener("DOMContentLoaded", () => {
     handleVoyage(contentArea);
   };
 
+  const loadAccount = () => {
+    account(contentArea);
+  };
+
   // När användaren klickar på respektive menyalternativ
   currentVoyageLink.addEventListener("click", loadCurrentVoyage);
   statementOfFactLink.addEventListener("click", loadStatementOfFact);
@@ -62,8 +68,8 @@ document.addEventListener("DOMContentLoaded", () => {
   handleChecklists.addEventListener("click", loadChecklists);
   handleFileUpload.addEventListener("click", loadFileUpload);
   handleVoyagesHistory.addEventListener("click", loadVoyagesHistory);
-
+  handleAccount.addEventListener("click", loadAccount);
   // Ladda standardinnehåll (Current Voyage)
   //loadCurrentVoyage();
-  loadStatementOfFact();
+  loadAccount();
 });

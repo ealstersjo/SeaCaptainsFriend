@@ -30,6 +30,7 @@ body {
 
 }
 
+
 .menu h2 {
     margin-top: 0;
 }
@@ -350,6 +351,73 @@ select:focus {
     background-color: #e0e0e0;
   }
 
+  /* Account-specific styles */
+.account-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.account-title {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.account-subtitle {
+  margin-bottom: 10px;
+  color: #555;
+}
+
+.account-form-row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.account-label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.account-input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.account-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.account-button:hover {
+  background-color: #0056b3;
+}
+
+.account-logout-button {
+  margin-top: 20px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.account-logout-button:hover {
+  background-color: #b02a37;
+}
+
+
 input[type="text"],
 input[type="date"],
 input[type="number"],
@@ -628,6 +696,9 @@ form div:last-child {
   .form-item textarea {
     min-height: 80px;
   }
+
+
+
   
   button {
     background-color: #4CAF50;
