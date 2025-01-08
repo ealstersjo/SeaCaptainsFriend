@@ -57,7 +57,7 @@ body {
 /* Innehåll */
 .content {
     flex-grow: 1; /* Låt content växa för att ta upp det återstående utrymmet */
-    max-width: 900px;
+    max-width: 90%;
     min-width: 500px;
     margin: 20px;
     padding: 20px;
@@ -729,6 +729,173 @@ form div:last-child {
   #activityTable th {
     background-color: #f4f4f4;
   }  
+
+  .loading-log-form-row {
+    margin-bottom: 15px;
+  }
+  
+  .loading-log-label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .loading-log-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .loading-log-button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .loading-log-button:hover {
+    background-color: #45a049;
+  }
+/* Rubrik för loggen */
+.loading-log-entries-title {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: #4a4a4a;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Tabellstil */
+.loading-log-entries-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Huvud för tabellen */
+.loading-log-header {
+  background-color: var(--secondary-color);
+  color: #fff;
+  text-align: left;
+  padding: 0.75rem;
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+
+/* Celler i kroppen */
+.loading-log-body td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  font-size: 0.9rem;
+}
+
+/* Rader med alternativ färg */
+.loading-log-body tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Inputfält i cellerna */
+.log-input {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* Knappar */
+.loading-log-add-button,
+.log-button {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  color: #fff;
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 1rem;
+}
+.log-delete-button {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  color: #fff;
+  background-color: red;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 1rem;
+}
+
+.loading-log-add-button:hover,
+.log-button:hover {
+  background-color: var(--secondary-color);
+}
+
+/* När tabellen inte har några data */
+.loading-log-body td:empty::after {
+  content: "-";
+  color: #ccc;
+}
+
+/* Specifika breddinställningar för varje kolumn */
+.loading-log-entries-table th:nth-child(1), .loading-log-entries-table td:nth-child(1) {
+  width: 7%; /* Första kolumnen - Local time */
+}
+
+.loading-log-entries-table th:nth-child(2), .loading-log-entries-table td:nth-child(2) {
+  width: 10%; /* Andra kolumnen - O.B.Q. cbm */
+}
+
+.loading-log-entries-table th:nth-child(3), .loading-log-entries-table td:nth-child(3) {
+  width: 10%; /* Tredje kolumnen - Rate cbm/h */
+}
+
+.loading-log-entries-table th:nth-child(4), .loading-log-entries-table td:nth-child(4) {
+  width: 25%; /* Fjärde kolumnen - Tanks No. */
+}
+
+.loading-log-entries-table th:nth-child(5), .loading-log-entries-table td:nth-child(5) {
+  width: 10%; /* Femte kolumnen - Manif Press. */
+}
+
+.loading-log-entries-table th:nth-child(6), .loading-log-entries-table td:nth-child(6) {
+  width: 8%; /* Sjätte kolumnen - BM */
+}
+
+.loading-log-entries-table th:nth-child(7), .loading-log-entries-table td:nth-child(7) {
+  width: 8%; /* Sjunde kolumnen - SF */
+}
+
+.loading-log-entries-table th:nth-child(8), .loading-log-entries-table td:nth-child(8) {
+  width: 20%; /* Åttonde kolumnen - Remarks */
+}
+
+.loading-log-entries-table th:nth-child(9), .loading-log-entries-table td:nth-child(9) {
+  width: 20%; /* Nionde kolumnen - Action */
+}
+
+/* Minsta bredd för alla kolumner */
+.loading-log-entries-table th, .loading-log-entries-table td {
+  min-width: 50px;
+}
+
+
+  
+  
 
 
 /* Responsiv design */
