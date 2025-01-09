@@ -908,7 +908,7 @@ margin-top: 15px;
 
 /* Specifika breddinställningar för varje kolumn */
 .loading-log-entries-table th:nth-child(1), .loading-log-entries-table td:nth-child(1) {
-  width: 7%; /* Första kolumnen - Local time */
+  width: 15%; /* Första kolumnen - Local time */
 }
 
 .loading-log-entries-table th:nth-child(2), .loading-log-entries-table td:nth-child(2) {

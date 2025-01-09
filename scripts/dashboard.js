@@ -7,6 +7,7 @@ import { calculations } from "./calculations.js";
 import { voyageshistory } from "./voyageshistory.js";
 import { account } from "./account.js";
 import { loadingLog } from "./loadinglog.js";
+import { dischargeLog } from "./dischargelog.js";
 
 /* // Kontrollera om användaren är inloggad
 if (localStorage.getItem("loggedIn") !== "true") {
@@ -25,6 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const handleVoyagesHistory = document.getElementById("voyageshistory");
   const handleAccount = document.getElementById("accountMenu");
   const handleLoadingLog = document.getElementById("loadingLog");
+  const handleDischargeLog = document.getElementById("dischargeLog");
 
   // Hämta referens till innehållsområdet
   const contentArea = document.querySelector(".content");
@@ -65,6 +67,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const loadLoadingLog = () => {
     loadingLog(contentArea);
   };
+  const loadDischargeLog = () => {
+    dischargeLog(contentArea);
+  };
 
   // När användaren klickar på respektive menyalternativ
   currentVoyageLink.addEventListener("click", loadCurrentVoyage);
@@ -76,6 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
   handleVoyagesHistory.addEventListener("click", loadVoyagesHistory);
   handleAccount.addEventListener("click", loadAccount);
   handleLoadingLog.addEventListener("click", loadLoadingLog);
+  handleDischargeLog.addEventListener("click", loadDischargeLog);
 
   loadLoadingLog();
 });

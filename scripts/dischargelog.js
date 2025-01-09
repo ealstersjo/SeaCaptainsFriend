@@ -3,32 +3,23 @@ let loadingLogData = {
   voy: "FVI2025002",
   cargo: "Reformate",
   date: "2025-01-08",
-  port: "Gothenburg",
-  berth: "Kaj 521",
+  port: "Rotterdam",
+  berth: "Redlight District",
   manifolds: "",
   connectionSize: "",
   avgRate: 0,
   lastAvgRate: 0,
-  etcAvg: "Not started",
-  etcCurrent: "Not started",
-  toLoad: 15000,
 };
 
 let logEntries = []; // Array för att lagra loggdata
 
 // Funktion för att skapa en loggrad
 const createLogRow = (entry = {}, index = null) => {
-  const now = new Date();
-
   const {
-    time = `${now.toLocaleDateString("sv-SE", {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-    })} ${now.toLocaleTimeString([], {
+    time = new Date().toLocaleTimeString([], {
       hour: "2-digit",
       minute: "2-digit",
-    })}`, // Förifyll med aktuell tid
+    }), // Förifyll med aktuell tid
     obq = "",
     rate = "",
 
@@ -184,7 +175,6 @@ const renderLogTable = () => {
   tableBody.innerHTML = ""; // Rensa tabellen
   logEntries.forEach((entry, index) => {
     const row = createLogRow(entry, index);
-
     tableBody.appendChild(row);
   });
 };
@@ -193,158 +183,113 @@ const updateAvgRates = () => {
   if (logEntries.length > 0) {
     // Beräkna avgRate
     const totalRate = logEntries.reduce((sum, entry) => {
-      const rate = parseFloat(entry.rate) || 0;
+      const rate = parseInt(entry.rate) || 0;
       return sum + rate;
     }, 0);
     loadingLogData.avgRate = parseInt(totalRate / logEntries.length);
 
     // Hämta lastAvgRate
     loadingLogData.lastAvgRate =
-      parseFloat(logEntries[logEntries.length - 1].rate) || 0;
-
-    // Beräkna ETC avg
-    const firstTime = new Date(Date.parse(logEntries[0].time));
-    if (loadingLogData.avgRate > 0) {
-      const avgDurationHours = loadingLogData.toLoad / loadingLogData.avgRate;
-      const etcAvgTime = new Date(
-        firstTime.getTime() + avgDurationHours * 3600000
-      );
-      loadingLogData.etcAvg = etcAvgTime.toLocaleString("sv-SE", {
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-        hour: "2-digit",
-        minute: "2-digit",
-      });
-    } else {
-      loadingLogData.etcAvg = "-";
-    }
-
-    // Beräkna ETC current
-    const lastTime = new Date(
-      Date.parse(logEntries[logEntries.length - 1].time)
-    );
-
-    if (loadingLogData.lastAvgRate > 0) {
-      const currentDurationHours =
-        loadingLogData.toLoad / loadingLogData.lastAvgRate;
-      const etcCurrentTime = new Date(
-        lastTime.getTime() + currentDurationHours * 3600000
-      );
-      loadingLogData.etcCurrent = etcCurrentTime.toLocaleString("sv-SE", {
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-        hour: "2-digit",
-        minute: "2-digit",
-      });
-    } else {
-      loadingLogData.etcCurrent = "-";
-    }
+      parseInt(logEntries[logEntries.length - 1].rate) || 0;
   } else {
-    // Nollställ värden om inga logEntries
+    // Inga logEntries, nollställ värden
     loadingLogData.avgRate = 0;
     loadingLogData.lastAvgRate = 0;
-    loadingLogData.etcAvg = "-";
-    loadingLogData.etcCurrent = "-";
   }
-  renderBasicData(); // Uppdatera grundläggande data i UI
+  console.log(loadingLogData.avgRate);
+  // Uppdatera grundläggande data i UI
+  renderBasicData();
 };
 
 const renderBasicData = () => {
   const table = document.querySelector(".loading-log-basic-info-table");
   table.innerHTML = `
-      <tr>
-        <td><strong>Voy:</strong></td>
-        <td>${loadingLogData.voy}</td>
-        <td><strong>Cargo(es):</strong></td>
-        <td>${loadingLogData.cargo}</td>
-      </tr>
-      <tr>
-        <td><strong>Date:</strong></td>
-        <td>${loadingLogData.date}</td>
-        <td><strong>Port:</strong></td>
-        <td>${loadingLogData.port}</td>
-      </tr>
-      <tr>
-        <td><strong>Berth:</strong></td>
-        <td>${loadingLogData.berth}</td>
-      </tr>
-      <tr>
+        <tr>
+          <td><strong>Voy:</strong></td>
+          <td>${loadingLogData.voy}</td>
+          <td><strong>Cargo(es):</strong></td>
+          <td>${loadingLogData.cargo}</td>
+        </tr>
+        <tr>
+          <td><strong>Date:</strong></td>
+          <td>${loadingLogData.date}</td>
+          <td><strong>Port:</strong></td>
+          <td>${loadingLogData.port}</td>
+        </tr>
+        <tr>
+          <td><strong>Berth:</strong></td>
+          <td>${loadingLogData.berth}</td>
+          
+        </tr>
+        <tr>
         <td><strong>Avg. Rate (cbm/h):</strong></td>
-        <td>${loadingLogData.avgRate}</td>
-        <td><strong>Last Avg. Rate (cbm/h):</strong></td>
-        <td>${loadingLogData.lastAvgRate}</td>
-      </tr>
-      <tr>
-        <td><strong>ETC avg:</strong></td>
-        <td>${loadingLogData.etcAvg}</td>
-        <td><strong>ETC current:</strong></td>
-        <td>${loadingLogData.etcCurrent}</td>
-      </tr>
-    `;
+          <td>${loadingLogData.avgRate}</td>
+          <td><strong>Last Avg. Rate (cbm/h):</strong></td>
+          <td>${loadingLogData.lastAvgRate}</td>
+        </tr>
+      `;
 };
 
 // Funktion för att generera loading log-sidan
-export const loadingLog = (contentArea) => {
+export const dischargeLog = (contentArea) => {
   contentArea.innerHTML = `
-      <h1 class="loading-log-title">Loading Log</h1>
-      <div class="loading-log-container">
-        <!-- Grundläggande data -->
-<table class="loading-log-basic-info-table">
+        <h1 class="loading-log-title">Discharge Log</h1>
+        <div class="loading-log-container">
+          <!-- Grundläggande data -->
+  <table class="loading-log-basic-info-table">
+    
+  </table>
   
-</table>
-
+    
+          <!-- Formulär för manifolds och connection size -->
+  <form id="loadingLogForm" class="loading-log-form">
+    <div class="loading-log-form-row">
+      <label for="manifolds" class="loading-log-label">Manifold(s) No:</label>
+      <input 
+        type="text" 
+        id="manifolds" 
+        class="loading-log-input" 
+        value="${loadingLogData.manifolds}" 
+        placeholder="Enter manifold(s) no." 
+      />
+    </div>
+    <div class="loading-log-form-row">
+      <label for="connectionSize" class="loading-log-label">Connection size:</label>
+      <input 
+        type="text" 
+        id="connectionSize" 
+        class="loading-log-input" 
+        value="${loadingLogData.connectionSize}" 
+        placeholder="Enter connection size" 
+      />
+    </div>
+    <button type="submit" class="loading-log-button">Save</button>
+  </form>
   
-        <!-- Formulär för manifolds och connection size -->
-<form id="loadingLogForm" class="loading-log-form">
-  <div class="loading-log-form-row">
-    <label for="manifolds" class="loading-log-label">Manifold(s) No:</label>
-    <input 
-      type="text" 
-      id="manifolds" 
-      class="loading-log-input" 
-      value="${loadingLogData.manifolds}" 
-      placeholder="Enter manifold(s) no." 
-    />
-  </div>
-  <div class="loading-log-form-row">
-    <label for="connectionSize" class="loading-log-label">Connection size:</label>
-    <input 
-      type="text" 
-      id="connectionSize" 
-      class="loading-log-input" 
-      value="${loadingLogData.connectionSize}" 
-      placeholder="Enter connection size" 
-    />
-  </div>
-  <button type="submit" class="loading-log-button">Save</button>
-</form>
-
+    
+          <!-- Loggdata-tabellen -->
+  <h2 class="loading-log-entries-title">Log Entries</h2>
+  <table class="loading-log-entries-table">
+    <thead>
+      <tr>
+        <th class="loading-log-header">Local time</th>
+        <th class="loading-log-header">O.B.Q. cbm</th>
+        <th class="loading-log-header">Rate cbm/h</th>
+        <th class="loading-log-header">Tanks No.</th>
+        <th class="loading-log-header">Manif Press.</th>
+        <th class="loading-log-header">SF</th>
+        <th class="loading-log-header">BM</th>
+        
+        <th class="loading-log-header">Remarks</th>
+        <th class="loading-log-header">Action</th>
+      </tr>
+    </thead>
+    <tbody id="logTableBody" class="loading-log-body"></tbody>
+  </table>
+  <button id="addEventButton" class="loading-log-add-button">Add event</button>
   
-        <!-- Loggdata-tabellen -->
-<h2 class="loading-log-entries-title">Log Entries</h2>
-<table class="loading-log-entries-table">
-  <thead>
-    <tr>
-      <th class="loading-log-header">Local time</th>
-      <th class="loading-log-header">O.B.Q. cbm</th>
-      <th class="loading-log-header">Rate cbm/h</th>
-      <th class="loading-log-header">Tanks No.</th>
-      <th class="loading-log-header">Manif Press.</th>
-      <th class="loading-log-header">SF</th>
-      <th class="loading-log-header">BM</th>
-      
-      <th class="loading-log-header">Remarks</th>
-      <th class="loading-log-header">Action</th>
-    </tr>
-  </thead>
-  <tbody id="logTableBody" class="loading-log-body"></tbody>
-</table>
-<button id="addEventButton" class="loading-log-add-button">Add event</button>
-
-      </div>
-    `;
+        </div>
+      `;
   renderBasicData();
   // Event listener för formuläret
   document.getElementById("loadingLogForm").addEventListener("submit", (e) => {
@@ -362,17 +307,12 @@ export const loadingLog = (contentArea) => {
 
   // Event listener för att lägga till en ny loggrad
   document.getElementById("addEventButton").addEventListener("click", () => {
-    const now = new Date();
     logEntries.push({
       isEditable: true,
-      time: `${now.toLocaleDateString("sv-SE", {
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-      })} ${now.toLocaleTimeString([], {
+      time: new Date().toLocaleTimeString([], {
         hour: "2-digit",
         minute: "2-digit",
-      })}`,
+      }),
     }); // Lägg till tom loggrad
     renderLogTable();
     // Uppdatera rates
