@@ -208,34 +208,238 @@
     "id": "2",
     "name": "Ocean Pearl",
     "portOfOrigin": "Gothenburg",
-    "tanks": [
-      {
-        "name": "C2p",
-        "capacity": 1786.018,
-        "info": "Fuel tank"
+    "shipType": "Oil & Chemical Tanker",
+    "callSign": "SBOP",
+    "flag": "Sweden",
+    "portOfRegistry": "Donsö",
+    "imoNo": "9898205",
+    "officialNo": "9898205",
+    "mmsiNo": "265025001",
+    "tonnage": {
+      "international": {
+        "gross": 12000.0,
+        "net": 6000.0
       },
-      {
-        "name": "C2s",
-        "capacity": 1804.52,
-        "info": "Fuel tank"
+      "suezCanal": {
+        "gross": 12200.0,
+        "net": 10000.0
       },
-      {
-        "name": "C3p",
-        "capacity": 1674.563,
-        "info": "Only biofuel"
+      "reducedTonnage": 11000.0,
+      "sbt": 2500.0
+    },
+    "dimensions": {
+      "lengthOverall": 140.0,
+      "lengthBetweenPerpendiculars": 136.0,
+      "breadthExtreme": 22.0,
+      "breadthMoulded": 21.5,
+      "depth": 12.0,
+      "heightOverKeel": 39.0
+    },
+    "loadLine": {
+      "tropical": {
+        "draft": 9.0,
+        "freeboard": 2.5,
+        "dwt": 16000.0,
+        "displacement": 23000.0,
+        "fwa": 0.3,
+        "tpc": 29.0
+      },
+      "summer": {
+        "draft": 8.8,
+        "freeboard": 2.7,
+        "dwt": 15500.0,
+        "displacement": 22500.0
+      },
+      "winter": {
+        "draft": 8.6,
+        "freeboard": 2.9,
+        "dwt": 15000.0,
+        "displacement": 22000.0
+      },
+      "lightShip": {
+        "draft": 2.7,
+        "freeboard": 9.0,
+        "dwt": 0.0,
+        "displacement": 6500.0
+      },
+      "normalBallast": {
+        "draft": 5.8,
+        "freeboard": 6.0,
+        "dwt": 5300.0,
+        "displacement": 12000.0
       }
-    ]
+    },
+    "tanks": {
+      "cargoTanks": [
+        {
+          "name": "C2p",
+          "capacity": 1786.018,
+          "heightToReference": 11590
+        },
+        {
+          "name": "C2s",
+          "capacity": 1804.52,
+          "heightToReference": 11620
+        },
+        {
+          "name": "C3p",
+          "capacity": 1674.563,
+          "heightToReference": 11550
+        }
+      ],
+      "drainTanks": [
+        {
+          "name": "Port",
+          "capacity": 64.0,
+          "heightToReference": 3690
+        },
+        {
+          "name": "Starboard",
+          "capacity": 63.5,
+          "heightToReference": 3695
+        }
+      ],
+      "ballastTanks": [
+        {
+          "name": "Fore Peak",
+          "capacity": 460.0
+        },
+        {
+          "name": "1 Port",
+          "capacity": 340.0
+        },
+        {
+          "name": "1 Starboard",
+          "capacity": 330.0
+        },
+        {
+          "name": "2 Port",
+          "capacity": 630.0
+        },
+        {
+          "name": "2 Starboard",
+          "capacity": 635.0
+        }
+      ]
+    }
   },
   {
     "id": "3",
     "name": "Fure Oscar",
     "portOfOrigin": "Oslo",
-    "tanks": [
-      {
-        "name": "C3s",
-        "capacity": 1670.321,
-        "info": "Water tank"
+    "shipType": "Oil & Chemical Tanker",
+    "callSign": "SBOC",
+    "flag": "Sweden",
+    "portOfRegistry": "Donsö",
+    "imoNo": "9898206",
+    "officialNo": "9898206",
+    "mmsiNo": "265025002",
+    "tonnage": {
+      "international": {
+        "gross": 12500.0,
+        "net": 6200.0
+      },
+      "suezCanal": {
+        "gross": 12600.0,
+        "net": 10100.0
+      },
+      "reducedTonnage": 11500.0,
+      "sbt": 2400.0
+    },
+    "dimensions": {
+      "lengthOverall": 145.0,
+      "lengthBetweenPerpendiculars": 141.0,
+      "breadthExtreme": 22.5,
+      "breadthMoulded": 22.0,
+      "depth": 12.5,
+      "heightOverKeel": 38.5
+    },
+    "loadLine": {
+      "tropical": {
+        "draft": 9.2,
+        "freeboard": 2.4,
+        "dwt": 17000.0,
+        "displacement": 24000.0,
+        "fwa": 0.4,
+        "tpc": 30.0
+      },
+      "summer": {
+        "draft": 8.9,
+        "freeboard": 2.6,
+        "dwt": 16500.0,
+        "displacement": 23500.0
+      },
+      "winter": {
+        "draft": 8.7,
+        "freeboard": 2.8,
+        "dwt": 16000.0,
+        "displacement": 23000.0
+      },
+      "lightShip": {
+        "draft": 2.8,
+        "freeboard": 9.2,
+        "dwt": 0.0,
+        "displacement": 6700.0
+      },
+      "normalBallast": {
+        "draft": 5.9,
+        "freeboard": 5.9,
+        "dwt": 5400.0,
+        "displacement": 12100.0
       }
-    ]
+    },
+    "tanks": {
+      "cargoTanks": [
+        {
+          "name": "C1p",
+          "capacity": 1750.0,
+          "heightToReference": 11610
+        },
+        {
+          "name": "C1s",
+          "capacity": 1765.0,
+          "heightToReference": 11640
+        },
+        {
+          "name": "C2p",
+          "capacity": 1650.0,
+          "heightToReference": 11580
+        }
+      ],
+      "drainTanks": [
+        {
+          "name": "Port",
+          "capacity": 60.0,
+          "heightToReference": 3700
+        },
+        {
+          "name": "Starboard",
+          "capacity": 60.0,
+          "heightToReference": 3705
+        }
+      ],
+      "ballastTanks": [
+        {
+          "name": "Fore Peak",
+          "capacity": 470.0
+        },
+        {
+          "name": "1 Port",
+          "capacity": 330.0
+        },
+        {
+          "name": "1 Starboard",
+          "capacity": 320.0
+        },
+        {
+          "name": "2 Port",
+          "capacity": 620.0
+        },
+        {
+          "name": "2 Starboard",
+          "capacity": 625.0
+        }
+      ]
+    }
   }
 ]

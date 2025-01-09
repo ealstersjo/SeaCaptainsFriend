@@ -1,0 +1,21 @@
+.voyage-info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 50px;
+  }
+  
+  .row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  .voyage-item {
+    width: 45%;
+    margin-bottom: 10px;
+  }
+  
+  .voyage-item p {
+    margin: 5px 0;
+  }

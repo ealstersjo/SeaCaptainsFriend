@@ -949,7 +949,80 @@ margin-top: 15px;
 }
 
 
-  
+  /* Grundläggande stilar för sidan */
+.ship-info {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+.ship-title {
+  color: #333;
+  font-size: 2em;
+  margin-bottom: 15px;
+}
+
+.ship-row {
+  display: flex;
+  margin-bottom: 10px;
+  justify-content: space-between;
+}
+
+.ship-item {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  margin-right: 10px;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+}
+
+.ship-item:last-child {
+  margin-right: 0;
+}
+
+.load-line-title {
+  margin-top: 20px;
+  font-size: 1.5em;
+  color: #2c3e50;
+}
+
+.load-line-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.load-line-table th, .load-line-table td {
+  padding: 8px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+.load-line-table th {
+  background-color: #34495e;
+  color: white;
+}
+
+.ship-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.navigation-button {
+  padding: 10px 20px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.1em;
+}
+
+.navigation-button:hover {
+  background-color: #2980b9;
+}
+
   
 
 

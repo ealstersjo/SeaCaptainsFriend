@@ -1,0 +1,142 @@
+
+.sof-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .sof-item {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .sof-item h3 {
+    margin: 0;
+    font-size: 1.2em;
+    color: #333;
+  }
+  
+  .sof-item p {
+    margin: 10px 0 0;
+    color: #555;
+  }
+
+
+  #activityForm {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+  
+  .form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .form-item {
+    flex: 1;
+    min-width: 200px;
+    margin-bottom: 10px;
+  }
+  
+  .form-item label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .form-item input,
+  .form-item textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
+  .form-item textarea {
+    min-height: 80px;
+  }
+
+
+  
+  #activityTable {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  #activityTable th, #activityTable td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  #activityTable th {
+    background-color: #f4f4f4;
+  }  
+
+  /* Tabellstil för aktivitet */
+.activity-log-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Huvud för tabellen */
+.activity-log-header {
+  background-color: var(--secondary-color);
+  color: #fff;
+  text-align: left;
+  padding: 0.75rem;
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+
+/* Celler i kroppen */
+.activity-log-body td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  font-size: 0.9rem;
+}
+
+/* Rader med alternativ färg */
+.activity-log-body tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Stil för knappen */
+.activity-log-table .editBtn {
+  background-color: #e74c3c;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.activity-log-table .editBtn:hover {
+  background-color: #c0392b;
+}
+
+  /* Celler i kroppen */
+  .activity-log-body td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 0.9rem;
+  }
+  
+  /* Rader med alternativ färg */
+  .activity-log-body tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+

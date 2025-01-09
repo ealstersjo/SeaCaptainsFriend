@@ -1,0 +1,209 @@
+/* Rubrik - stil */
+.ullage-header {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  /* Sektion med header-information */
+  .ullageHeader {
+    font-size: 1em;
+    color: #555;
+    padding: 10px;
+    margin: 20px 0;
+    background-color: #f9f9f9;
+    border-left: 4px solid #4CAF50; /* Tydlig avgränsning */
+    border-radius: 5px; /* Rundade hörn */
+
+  }
+  
+  .ullageHeader strong {
+    color: #000; /* Färg på rubriker */
+  }
+  
+  /* Sektion med trim-information */
+  .trimValues {
+    font-size: 1em;
+    color: #555;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #f1f1f1;
+    border-left: 4px solid #2196F3; /* Tydlig avgränsning */
+    border-radius: 5px; /* Rundade hörn */
+
+  }
+  
+  .trimValues strong {
+    color: #000; /* Färg på rubriker */
+  }
+  
+  /* Lägg till en liten distans mellan olika block */
+  .ullageHeader, .trimValues {
+    margin-bottom: 15px;
+  }
+  
+  /* Gör så att br-linjerna är mindre aggressiva */
+  .ullageHeader br, .trimValues br {
+    line-height: 1.5;
+  }
+/* Sektion för produktinformation */
+.productInfo {
+    font-size: 1em;
+    color: #555;
+    padding: 15px;
+    margin: 15px 0;
+    background-color: #f7f7f7;
+    border-left: 4px solid #FF9800; /* Tydlig avgränsning med orange kant */
+    border-radius: 5px; /* Rundade hörn */
+  }
+  
+  .productInfo strong {
+    color: #000; /* Färg på rubriker */
+  }
+  
+  /* Gör så att br-linjerna får lite mellanrum */
+  .productInfo br {
+    line-height: 1.5;
+  }
+  
+  /* Om du vill ha en liten distans mellan blocken */
+  .productInfo {
+    margin-bottom: 20px;
+  }
+
+.quantBefore {
+    font-size: 1em;
+    color: #555;
+    padding: 15px;
+    margin: 15px 0;
+    background-color: #f7f7f7;
+    border-left: 4px solid #002aff; /* Tydlig avgränsning med orange kant */
+    border-radius: 5px; /* Rundade hörn */
+  }
+  
+  .quantBefore strong {
+    color: #000; /* Färg på rubriker */
+  }
+  
+  /* Gör så att br-linjerna får lite mellanrum */
+  .quantBefore br {
+    line-height: 1.5;
+  }
+  
+  /* Om du vill ha en liten distans mellan blocken */
+  .quantBefore {
+    margin-bottom: 20px;
+  }
+
+  .quantAfter {
+    font-size: 1em;
+    color: #555;
+    padding: 15px;
+    margin: 15px 0;
+    background-color: #f7f7f7;
+    border-left: 4px solid #8ca71e; /* Tydlig avgränsning med orange kant */
+    border-radius: 5px; /* Rundade hörn */
+  }
+  
+  .quantAfter strong {
+    color: #000; /* Färg på rubriker */
+  }
+  
+  /* Gör så att br-linjerna får lite mellanrum */
+  .quantAfter br {
+    line-height: 1.5;
+  }
+  
+  /* Om du vill ha en liten distans mellan blocken */
+  .quantAfter {
+    margin-bottom: 20px;
+  }
+
+  .quantLoaded {
+    font-size: 1em;
+    color: #555;
+    padding: 15px;
+    margin: 15px 0;
+    background-color: #f7f7f7;
+    border-left: 4px solid #04c700; /* Tydlig avgränsning med orange kant */
+    border-radius: 5px; /* Rundade hörn */
+  }
+  
+  .quantLoaded strong {
+    color: #000; /* Färg på rubriker */
+  }
+  
+  /* Gör så att br-linjerna får lite mellanrum */
+  .quantLoaded br {
+    line-height: 1.5;
+  }
+  
+  /* Om du vill ha en liten distans mellan blocken */
+  .quantLoaded {
+    margin-bottom: 20px;
+  }
+
+  .billOfLading {
+    font-size: 1em;
+    color: #555;
+    padding: 15px;
+    margin: 15px 0;
+    background-color: #f7f7f7;
+    border-left: 4px solid #c70000; /* Tydlig avgränsning med orange kant */
+    border-radius: 5px; /* Rundade hörn */
+  }
+  
+  .billOfLading strong {
+    color: #000; /* Färg på rubriker */
+  }
+  
+  /* Gör så att br-linjerna får lite mellanrum */
+  .billOfLading br {
+    line-height: 1.5;
+  }
+  
+  /* Om du vill ha en liten distans mellan blocken */
+  .billOfLading {
+    margin-bottom: 20px;
+  }
+
+
+    /* Styling för tabellen */
+.tank-data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 20px;
+}
+
+.tank-data-table th, .tank-data-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.tank-data-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.tank-data-table td {
+  background-color: #fff;
+}
+
+.tank-data-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.tank-data-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Styling för tomma värden i tabellen */
+.tank-data-table td:empty {
+  background-color: #e0e0e0;
+}

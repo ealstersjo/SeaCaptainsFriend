@@ -1,0 +1,32 @@
+
+.checklist-header {
+    background-color: var(--secondary-color);
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    font-size: 15px;
+  }
+  
+  .checklist-header:hover {
+    background-color: var(--highlight-color);
+  }
+  
+  .checklist-content {
+    padding: 0 25px;
+    display: none;
+    overflow: hidden;
+    background-color: var(--highlight-color);
+    border-radius: 10px;
+  }
+  
+  .checklist-content li {
+    padding: 8px 0;
+  }
+
+  .print-button {
+    background-color: var(--primary-color);
+  }

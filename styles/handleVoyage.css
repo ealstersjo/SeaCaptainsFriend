@@ -1,0 +1,84 @@
+.tank-checkbox-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Två kolumner */
+    grid-auto-rows: auto; /* Dynamisk höjd för varje rad */
+    gap: 10px; /* Avstånd mellan rader och kolumner */
+  }
+
+  .tank-checkbox {
+    display: flex;
+    align-items: center;
+  }
+
+  .tank-checkbox input {
+    margin-right: 8px; /* Avstånd mellan checkbox och text */
+  }
+
+  input[type="text"],
+input[type="date"],
+input[type="number"],
+
+textarea {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Knappar */
+button {
+    padding: 10px 15px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button[type="submit"] {
+    background-color: #4caf50;
+    color: white;
+}
+
+button[type="commence"] {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+button[type="button"] {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+button[type="deleteButton"] {
+    background-color: #f44336;
+    color: white;
+}
+
+
+
+button:hover {
+    opacity: 0.9;
+}
+
+/* Stil för dropdown */
+select {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+/* Stil för när dropdownen är fokuserad */
+select:focus {
+    outline: none;
+    border-color: #4CAF50;
+}

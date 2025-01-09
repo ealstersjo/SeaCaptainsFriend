@@ -1,81 +1,76 @@
 export const checklists = (contentArea) => {
-  // Hämta checklists.json med fetch
-  fetch("../data/checklists.json")
-    .then((response) => {
-      // Kontrollera att filen finns och att det inte är ett fel
-      if (!response.ok) {
-        throw new Error("Filen kunde inte hämtas");
-      }
-      return response.json();
-    })
-    .then((checklists) => {
-      // Rensa befintligt innehåll i checklist-container
-      contentArea.innerHTML = "";
+  const checklistsData = localStorage.getItem("checklistsFromServer");
 
-      // Lägg till rubrik för checklistor
-      const title = document.createElement("h1");
-      title.textContent = "Checklists";
-      contentArea.appendChild(title);
+  if (checklistsData) {
+    // Om data finns, parsa den
+    const checklists = JSON.parse(checklistsData);
 
-      // Skapa en checklista för varje objekt i 'checklists'
-      checklists.forEach((checklist) => {
-        // Skapa en wrapper för varje checklista
-        const checklistDiv = document.createElement("div");
-        checklistDiv.classList.add("checklist");
+    // Rensa befintligt innehåll i checklist-container
+    contentArea.innerHTML = "";
 
-        // Skapa en rubrik för checklistan
-        const header = document.createElement("button");
-        header.textContent = checklist.title;
-        header.classList.add("checklist-header");
-        header.onclick = () => {
-          // Toggle expansionen av checklistans innehåll
-          const content = checklistDiv.querySelector(".checklist-content");
-          const printButton = checklistDiv.querySelector(".print-button");
+    // Lägg till rubrik för checklistor
+    const title = document.createElement("h1");
+    title.textContent = "Checklists";
+    contentArea.appendChild(title);
 
-          // Byt visibilitet av innehåll
-          const isContentVisible = content.style.display === "block";
-          content.style.display = isContentVisible ? "none" : "block";
+    // Skapa en checklista för varje objekt i 'checklists'
+    checklists.forEach((checklist) => {
+      // Skapa en wrapper för varje checklista
+      const checklistDiv = document.createElement("div");
+      checklistDiv.classList.add("checklist");
 
-          // Gör skriv ut-knappen synlig eller osynlig beroende på om innehållet är expanderat
-          printButton.style.display = isContentVisible
-            ? "none"
-            : "inline-block";
-        };
+      // Skapa en rubrik för checklistan
+      const header = document.createElement("button");
+      header.textContent = checklist.title;
+      header.classList.add("checklist-header");
+      header.onclick = () => {
+        // Toggle expansionen av checklistans innehåll
+        const content = checklistDiv.querySelector(".checklist-content");
+        const printButton = checklistDiv.querySelector(".print-button");
 
-        checklistDiv.appendChild(header);
+        // Byt visibilitet av innehåll
+        const isContentVisible = content.style.display === "block";
+        content.style.display = isContentVisible ? "none" : "block";
 
-        // Skapa checklistans innehåll (utan checkboxar)
-        const content = document.createElement("ul");
-        content.classList.add("checklist-content");
-        content.style.display = "none"; // Håll innehållet dolt initialt
+        // Gör skriv ut-knappen synlig eller osynlig beroende på om innehållet är expanderat
+        printButton.style.display = isContentVisible ? "none" : "inline-block";
+      };
 
-        // Skapa skriv ut-knappen för varje checklista, initialt dold
-        const printButton = document.createElement("button");
-        printButton.textContent = "Print as PDF";
-        printButton.classList.add("print-button");
-        printButton.style.display = "none"; // Döljer knappen från början
+      checklistDiv.appendChild(header);
 
-        // Länk till den specifika PDF-filen för varje checklista
-        printButton.onclick = () => {
-          const pdfUrl = `../pdfs/${checklist.title}.pdf`; // Antag att varje PDF är namngiven efter checklistans titel
-          window.open(pdfUrl, "_blank"); // Öppnar PDF:en i en ny flik
-        };
+      // Skapa checklistans innehåll (utan checkboxar)
+      const content = document.createElement("ul");
+      content.classList.add("checklist-content");
+      content.style.display = "none"; // Håll innehållet dolt initialt
 
-        checklistDiv.appendChild(printButton);
+      // Skapa skriv ut-knappen för varje checklista, initialt dold
+      const printButton = document.createElement("button");
+      printButton.textContent = "Print as PDF";
+      printButton.classList.add("print-button");
+      printButton.style.display = "none"; // Döljer knappen från början
 
-        checklist.items.forEach((item) => {
-          const listItem = document.createElement("li");
-          listItem.textContent = item;
-          content.appendChild(listItem);
-        });
+      // Länk till den specifika PDF-filen för varje checklista
+      printButton.onclick = () => {
+        const pdfUrl = `../pdfs/${checklist.title}.pdf`; // Antag att varje PDF är namngiven efter checklistans titel
+        window.open(pdfUrl, "_blank"); // Öppnar PDF:en i en ny flik
+      };
 
-        checklistDiv.appendChild(content);
+      checklistDiv.appendChild(printButton);
 
-        // Lägg till checklistan i container
-        contentArea.appendChild(checklistDiv);
+      checklist.items.forEach((item) => {
+        const listItem = document.createElement("li");
+        listItem.textContent = item;
+        content.appendChild(listItem);
       });
-    })
-    .catch((error) => {
-      console.error("Fel vid hämtning av checklists.json:", error);
+
+      checklistDiv.appendChild(content);
+
+      // Lägg till checklistan i container
+      contentArea.appendChild(checklistDiv);
     });
+  } else {
+    console.error("Ingen checklista finns i localStorage.");
+    // Du kan lägga till en fallback om det inte finns någon data
+    contentArea.innerHTML = "<p>Inga checklistor finns tillgängliga.</p>";
+  }
 };

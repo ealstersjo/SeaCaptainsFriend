@@ -32,36 +32,37 @@ export const statementOfFact = (contentArea) => {
           <p>${sof.customerNumber}</p>
         </div>
       </div>
-      <!-- Activity Table -->
-      <h2>Activity Log</h2>
-      <table id="activityTable">
-        <thead>
-          <tr>
-            <th>Activity</th>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Remarks</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${activities
-            .map(
-              (activity) => `
-            <tr>
-              <td>${activity.activity}</td>
-              <td>${activity.date}</td>
-              <td>${activity.time}</td>
-              <td>${activity.remarks}</td>
-              <td>
-                <button class="editBtn">Delete</button>
-              </td>
-            </tr>
-          `
-            )
-            .join("")}
-        </tbody>
-      </table>
+      <!-- Activity Log Table -->
+<h2>Activity Log</h2>
+<table class="activity-log-table">
+  <thead>
+    <tr>
+      <th class="activity-log-header">Activity</th>
+      <th class="activity-log-header">Date</th>
+      <th class="activity-log-header">Time</th>
+      <th class="activity-log-header">Remarks</th>
+      <th class="activity-log-header">Actions</th>
+    </tr>
+  </thead>
+  <tbody class="activity-log-body">
+    ${activities
+      .map(
+        (activity) => `
+      <tr>
+        <td>${activity.activity}</td>
+        <td>${activity.date}</td>
+        <td>${activity.time}</td>
+        <td>${activity.remarks}</td>
+        <td>
+          <button class="editBtn">Delete</button>
+        </td>
+      </tr>
+    `
+      )
+      .join("")}
+  </tbody>
+</table>
+
 
       <!-- Activity Form -->
 <h2>Add Activity</h2>
