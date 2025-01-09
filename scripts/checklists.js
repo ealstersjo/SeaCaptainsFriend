@@ -11,13 +11,14 @@ export const checklists = (contentArea) => {
     // Lägg till rubrik för checklistor
     const title = document.createElement("h1");
     title.textContent = "Checklists";
+    title.classList.add("checklist-title"); // Lägg till stilklass för rubriken
     contentArea.appendChild(title);
 
     // Skapa en checklista för varje objekt i 'checklists'
     checklists.forEach((checklist) => {
       // Skapa en wrapper för varje checklista
       const checklistDiv = document.createElement("div");
-      checklistDiv.classList.add("checklist");
+      checklistDiv.classList.add("checklist-card"); // Unik klassnamn för checklistkort
 
       // Skapa en rubrik för checklistan
       const header = document.createElement("button");
@@ -51,8 +52,8 @@ export const checklists = (contentArea) => {
 
       // Länk till den specifika PDF-filen för varje checklista
       printButton.onclick = () => {
-        const pdfUrl = `../pdfs/${checklist.title}.pdf`; // Antag att varje PDF är namngiven efter checklistans titel
-        window.open(pdfUrl, "_blank"); // Öppnar PDF:en i en ny flik
+        const pdfUrl = `#`; // Antag att varje PDF är namngiven efter checklistans titel
+        //window.open(pdfUrl, "_blank"); // Öppnar PDF:en i en ny flik
       };
 
       checklistDiv.appendChild(printButton);

@@ -6,32 +6,36 @@ export const statementOfFact = (contentArea) => {
     contentArea.innerHTML = `
       <h1>Statement of Fact</h1>
       
-      <div class="sof-container">
-        <div class="sof-item">
-          <h3>Vessel</h3>
-          <p>${sof.vessel}</p>
-        </div>
-        <div class="sof-item">
-          <h3>Date</h3>
-          <p>${sof.date}</p>
-        </div>
-        <div class="sof-item">
-          <h3>PNI</h3>
-          <p>${sof.pni}</p>
-        </div>
-        <div class="sof-item">
-          <h3>Load Port</h3>
-          <p>${sof.loadport}</p>
-        </div>
-        <div class="sof-item">
-          <h3>Terminal</h3>
-          <p>${sof.terminal}</p>
-        </div>
-        <div class="sof-item">
-          <h3>Customer Number</h3>
-          <p>${sof.customerNumber}</p>
-        </div>
-      </div>
+      <div class="sof-info-container">
+  <table class="sof-info-table">
+    <tr>
+      <td class="sof-info-label">Vessel</td>
+      <td>${sof.vessel}</td>
+      <td class="sof-info-label">Date</td>
+      <td>${sof.date}</td>
+    </tr>
+    <tr>
+    <td class="sof-info-label">Terminal</td>
+      <td>${sof.terminal}</td>
+      <td class="sof-info-label">PNI</td>
+      <td>${sof.pni}</td>
+      
+    </tr>
+    <tr>
+      <td class="sof-info-label">Load Port</td>
+      <td>${sof.loadport}</td>
+      <td class="sof-info-label">Customer Number</td>
+      <td>${sof.customerNumber}</td>
+    </tr>
+    <tr>
+      
+    </tr>
+    <tr>
+      
+    </tr>
+  </table>
+</div>
+
       <!-- Activity Log Table -->
 <h2>Activity Log</h2>
 <table class="activity-log-table">

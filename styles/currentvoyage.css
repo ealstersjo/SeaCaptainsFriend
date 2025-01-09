@@ -1,21 +1,83 @@
-.voyage-info {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    margin-top: 50px;
-  }
-  
-  .row {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
-  
-  .voyage-item {
-    width: 45%;
-    margin-bottom: 10px;
-  }
-  
-  .voyage-item p {
-    margin: 5px 0;
-  }
+/* Rubrik - stil */
+.voyage-header {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.voyage-span {
+  display: flex; /* Gör så att barnen (voyage-section och voyage-item) ligger på rad */
+  flex-wrap: wrap; /* Gör att elementen kan bryta rad om de inte får plats */
+  gap: 20px; /* Skapar mellanrum mellan sektionerna */
+}
+
+.voyage-section, .voyage-item {
+  width: 45%; /* Justera bredden för varje sektion så att de får plats på samma rad */
+  box-sizing: border-box; /* Se till att padding och border inte påverkar bredden */
+}
+
+/* Sektion med header-information */
+.voyage-section {
+  font-size: 1em;
+  color: #555;
+  padding: 10px;
+  margin: 20px 0;
+  background-color: var(--light-grey);
+  border-left: 4px solid var(--green-color); /* Tydlig avgränsning */
+  border-radius: 5px; /* Rundade hörn */
+}
+
+/* Sektion för produktinformation */
+.voyage-item {
+  font-size: 1em;
+  color: #555;
+  padding: 15px;
+  margin: 15px 0;
+  background-color: var(--light-blue);
+  border-left: 4px solid var(--secondary-color); 
+  border-radius: 5px; /* Rundade hörn */
+}
+
+.voyage-crew {
+  font-size: 1em;
+  color: #555;
+  padding: 15px;
+  margin: 15px 0;
+  background-color: #f7f7f7;
+  border-left: 4px solid var(--primary-color); 
+  border-radius: 5px; /* Rundade hörn */
+  width: 90%;
+}
+
+/* Key-Value par */
+.key-value-pair {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 5px 0;
+}
+
+.key {
+  font-weight: bold;
+  color: #333;
+  width: 20%; /* Anpassa bredden så att de får bra avstånd */
+}
+
+.value {
+  color: #555;
+  text-align: left;
+  width: 80%; /* Gör värdet bredare om så behövs */
+}
+
+
+/* Anpassa avstånd och storlek */
+.voyage-section, .voyage-item {
+  margin-bottom: 20px;
+}
+
+/* Om du vill ha en liten distans mellan blocken */
+.voyage-item br {
+  line-height: 1.5;
+}
