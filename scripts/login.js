@@ -39,7 +39,7 @@ if (navigator.onLine) {
 }
 
 if (window.location.pathname !== "/pages/dashboard.html") {
-  //window.location.href = "./pages/dashboard.html";
+  window.location.href = "./pages/dashboard.html";
 }
 document
   .getElementById("clearStorageBtn")
