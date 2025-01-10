@@ -1,3 +1,57 @@
+const printChecklist = (checklist) => {
+  const printWindow = window.open("../pages/printChecklist.html", "_blank");
+
+  console.log(checklist);
+
+  // Vänta tills utskriftsmallen är laddad
+  printWindow.onload = () => {
+    // Hitta elementet i utskriftsmallen där vi ska fylla i data
+    const headerSection = printWindow.document.querySelector(".header");
+    const contentSection = printWindow.document.querySelector(".content");
+    const footer = printWindow.document.querySelector(".footer");
+
+    // Fyll i header-datan
+    headerSection.innerHTML = `
+      <h1>${checklist.title}</h1>
+      <p>Checklist with comments and checks</p>
+    `;
+
+    // Skapa en tabell för checklist-items
+    const itemsHTML = checklist.items
+      .map(
+        (item, index) => `
+          <tr>
+            <td>${index + 1}</td>
+            <td>${item}</td>
+            <td></td>
+          </tr>
+        `
+      )
+      .join("");
+
+    contentSection.innerHTML = `
+      <table class="checklist-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Item</th>
+            <th>Comments/Check</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${itemsHTML}
+        </tbody>
+      </table>
+    `;
+
+    // Lägg till datum i footern
+    footer.innerHTML = `Generated on: ${new Date().toLocaleString()}`;
+
+    // När sidan är laddad, kalla på utskriftsdialogen
+    printWindow.print();
+  };
+};
+
 export const checklists = (contentArea) => {
   const checklistsData = localStorage.getItem("checklistsFromServer");
 
@@ -50,10 +104,10 @@ export const checklists = (contentArea) => {
       printButton.classList.add("print-button");
       printButton.style.display = "none"; // Döljer knappen från början
 
-      // Länk till den specifika PDF-filen för varje checklista
+      // Lägg till renderChecklist-anropet på print-knappen
       printButton.onclick = () => {
-        const pdfUrl = `#`; // Antag att varje PDF är namngiven efter checklistans titel
-        //window.open(pdfUrl, "_blank"); // Öppnar PDF:en i en ny flik
+        console.log(checklist);
+        printChecklist(checklist);
       };
 
       checklistDiv.appendChild(printButton);
