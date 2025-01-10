@@ -9,6 +9,9 @@ body {
     align-items: center;
     height: 100vh;
 }
+.clearButton{
+    background-color: blueviolet;
+}
 
 .logo-container {
     margin-bottom: 1px; /* Avstånd mellan logotyp och formulär */

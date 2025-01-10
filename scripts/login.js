@@ -2,7 +2,7 @@
 if (navigator.onLine) {
   // Hämta checklists.json från /data
   console.log("ONLINE");
-  fetch("/data/checklists.json")
+  fetch("./data/checklists.json")
     .then((response) => {
       if (!response.ok) {
         throw new Error("Misslyckades med att hämta checklists.json");
@@ -19,7 +19,7 @@ if (navigator.onLine) {
     });
 
   // Hämta ships.json från /data
-  fetch("/data/ships.json")
+  fetch("./data/ships.json")
     .then((response) => {
       if (!response.ok) {
         throw new Error("Misslyckades med att hämta ships.json");
