@@ -1,6 +1,7 @@
 // Kontrollera om enheten är online
 if (navigator.onLine) {
   // Hämta checklists.json från /data
+  console.log("ONLINE");
   fetch("../data/checklists.json")
     .then((response) => {
       if (!response.ok) {
@@ -38,7 +39,7 @@ if (navigator.onLine) {
 }
 
 if (window.location.pathname !== "/pages/dashboard.html") {
-  window.location.href = "./pages/dashboard.html";
+  //window.location.href = "./pages/dashboard.html";
 }
 document
   .getElementById("login-form")
