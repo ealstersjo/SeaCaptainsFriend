@@ -1,12 +1,13 @@
 // Testdata (kommer senare att hämtas från localStorage)
 let loadingLogData = {
+  ship: "M/T Fure Viten",
   voy: "FVI2025002",
   cargo: "Reformate",
-  date: "2025-01-08",
+  date: "2025-01-10",
   port: "Gothenburg",
   berth: "Kaj 521",
-  manifolds: "",
-  connectionSize: "",
+  manifolds: "4",
+  connectionSize: "1x8 + VPR",
   avgRate: 0,
   lastAvgRate: 0,
   etcAvg: "Not started",
@@ -14,7 +15,273 @@ let loadingLogData = {
   toLoad: 15000,
 };
 
-let logEntries = []; // Array för att lagra loggdata
+const tempLoadingLog = [
+  {
+    bm: "86",
+    isEditable: false,
+    manifPress: "0",
+    obq: "0",
+    rate: "0",
+    remarks: "Start Loading",
+    sf: "60",
+    tanksNo: "4P",
+    time: "2025-01-10 00:30",
+  },
+  {
+    bm: "84",
+    isEditable: false,
+    manifPress: "0",
+    obq: "210",
+    rate: "210",
+    remarks: "",
+    sf: "60",
+    tanksNo: "3, P/S",
+    time: "2025-01-10 01:00",
+  },
+  {
+    bm: "76",
+    isEditable: false,
+    manifPress: "0",
+    obq: "1,239",
+    rate: "1,029",
+    remarks: "",
+    sf: "54",
+    tanksNo: "2,4,6 P/S",
+    time: "2025-01-10 02:00",
+  },
+  {
+    bm: "67",
+    isEditable: false,
+    manifPress: "0",
+    obq: "2,265",
+    rate: "1,026",
+    remarks: "",
+    sf: "47",
+    tanksNo: "2,4,6 P/S",
+    time: "2025-01-10 03:00",
+  },
+  {
+    bm: "58",
+    isEditable: false,
+    manifPress: "0",
+    obq: "3,322",
+    rate: "1,057",
+    remarks: "",
+    sf: "43",
+    tanksNo: "2,4,6 P/S",
+    time: "2025-01-10 04:00",
+  },
+  {
+    bm: "53",
+    isEditable: false,
+    manifPress: "0",
+    obq: "4,367",
+    rate: "1,045",
+    remarks: "",
+    sf: "39",
+    tanksNo: "2,4,6 P/S",
+    time: "2025-01-10 05:00",
+  },
+  {
+    bm: "47",
+    isEditable: false,
+    manifPress: "0",
+    obq: "5,417",
+    rate: "1,050",
+    remarks: "",
+    sf: "35",
+    tanksNo: "2,4,6 P/S",
+    time: "2025-01-10 06:00",
+  },
+  {
+    bm: "48",
+    isEditable: false,
+    manifPress: "0",
+    obq: "6,408",
+    rate: "991",
+    remarks: "",
+    sf: "37",
+    tanksNo: "2,4,6 P/S",
+    time: "2025-01-10 07:00",
+  },
+  {
+    bm: "49",
+    isEditable: false,
+    manifPress: "0",
+    obq: "7,472",
+    rate: "1,064",
+    remarks: "",
+    sf: "37",
+    tanksNo: "1,3,5 P/S",
+    time: "2025-01-10 08:00",
+  },
+  {
+    bm: "46",
+    isEditable: false,
+    manifPress: "0",
+    obq: "8,502",
+    rate: "1,030",
+    remarks: "",
+    sf: "33",
+    tanksNo: "1,3,5 P/S",
+    time: "2025-01-10 09:00",
+  },
+  {
+    bm: "46",
+    isEditable: false,
+    manifPress: "0",
+    obq: "8,953",
+    rate: "451",
+    remarks: "Shore stop",
+    sf: "33",
+    tanksNo: "1,3,5 P/S",
+    time: "2025-01-10 09:30",
+  },
+  {
+    bm: "46",
+    isEditable: false,
+    manifPress: "0",
+    obq: "8,953",
+    rate: "0",
+    remarks: "Resume loading",
+    sf: "33",
+    tanksNo: "1,3,5 P/S",
+    time: "2025-01-10 09:40",
+  },
+  {
+    bm: "46",
+    isEditable: false,
+    manifPress: "0",
+    obq: "9,119",
+    rate: "166",
+    remarks: "",
+    sf: "33",
+    tanksNo: "1,3,5 P/S",
+    time: "2025-01-10 10:00",
+  },
+  {
+    bm: "44",
+    isEditable: false,
+    manifPress: "0",
+    obq: "10,151",
+    rate: "1,032",
+    remarks: "",
+    sf: "30",
+    tanksNo: "1,3,5 P/S",
+    time: "2025-01-10 11:00",
+  },
+  {
+    bm: "41",
+    isEditable: false,
+    manifPress: "0",
+    obq: "11,230",
+    rate: "1,079",
+    remarks: "",
+    sf: "28",
+    tanksNo: "1,3,5 P/S",
+    time: "2025-01-10 12:00",
+  },
+  {
+    bm: "40",
+    isEditable: false,
+    manifPress: "0",
+    obq: "12,249",
+    rate: "1,019",
+    remarks: "",
+    sf: "26",
+    tanksNo: "1,3,5 P/S",
+    time: "2025-01-10 13:00",
+  },
+  {
+    bm: "42",
+    isEditable: false,
+    manifPress: "0",
+    obq: "13,294",
+    rate: "1,045",
+    remarks: "",
+    sf: "30",
+    tanksNo: "1,3,5 P/S",
+    time: "2025-01-10 14:00",
+  },
+  {
+    bm: "32",
+    isEditable: false,
+    manifPress: "0",
+    obq: "14,339",
+    rate: "1,045",
+    remarks: "",
+    sf: "26",
+    tanksNo: "4,5,6 P/S",
+    time: "2025-01-10 15:00",
+  },
+  {
+    bm: "26",
+    isEditable: false,
+    manifPress: "0",
+    obq: "15,386",
+    rate: "1,047",
+    remarks: "",
+    sf: "23",
+    tanksNo: "2,4,5 P/S",
+    time: "2025-01-10 16:00",
+  },
+  {
+    bm: "26",
+    isEditable: false,
+    manifPress: "0",
+    obq: "16,434",
+    rate: "1,048",
+    remarks: "",
+    sf: "-17",
+    tanksNo: "2,4,6 P/S",
+    time: "2025-01-10 17:00",
+  },
+  {
+    bm: "24",
+    isEditable: false,
+    manifPress: "0",
+    obq: "17,527",
+    rate: "1,093",
+    remarks: "",
+    sf: "16",
+    tanksNo: "2,4,6 P/S",
+    time: "2025-01-10 18:00",
+  },
+  {
+    bm: "22",
+    isEditable: false,
+    manifPress: "0",
+    obq: "18,150",
+    rate: "623",
+    remarks: "Shore stop",
+    sf: "-11",
+    tanksNo: "2,4,6 P/S",
+    time: "2025-01-10 18:40",
+  },
+  {
+    bm: "21",
+    isEditable: false,
+    manifPress: "0",
+    obq: "18,150",
+    rate: "0",
+    remarks: "Resume loading",
+    sf: "-11",
+    tanksNo: "2,4,6 P/S",
+    time: "2025-01-10 18:55",
+  },
+  {
+    bm: "21",
+    isEditable: false,
+    manifPress: "0",
+    obq: "18,210",
+    rate: "60",
+    remarks: "Avg Rate: 988cbm/h",
+    sf: "-10",
+    tanksNo: "2,4,6 P/S",
+    time: "2025-01-10 19:00",
+  },
+];
+let logEntries = tempLoadingLog; // Array för att lagra loggdata
 
 // Funktion för att skapa en loggrad
 const createLogRow = (entry = {}, index = null) => {
@@ -189,6 +456,67 @@ const renderLogTable = () => {
   });
 };
 
+// Funktion för att öppna och skriva ut loggdata
+const printLog = () => {
+  const printWindow = window.open("../pages/printLoading.html", "_blank");
+
+  // Vänta tills utskriftsmallen är laddad
+  printWindow.onload = () => {
+    // Hitta elementet i utskriftsmallen där vi ska fylla i data
+    const headerSection = printWindow.document.querySelector(".header");
+    const tableSection = printWindow.document.querySelector(".table-container");
+    const footer = printWindow.document.querySelector(".footer");
+
+    // Fyll i header-datan (loadingLogData)
+    headerSection.innerHTML = `
+  <img src="../assets/furetank.png" alt="Logo" class="header-logo" />
+  <div class="header-title">
+    <h1>${loadingLogData.ship}</h1>
+    <h1>Loading Log</h1>
+  </div>
+  <div class="header-content1">
+    <div><strong>Voyage:</strong> ${loadingLogData.voy}</div>
+    <div><strong>Cargo(es):</strong> ${loadingLogData.cargo}</div>
+    </div>
+    <div class="header-content2">
+    <div><strong>Date:</strong> ${loadingLogData.date}</div>
+    <div><strong>Port:</strong> ${loadingLogData.port}</div>
+    <div><strong>Berth:</strong> ${loadingLogData.berth}</div>
+    </div>
+    <div class="header-content3">
+    <div><strong>Manifold(s) No:</strong> ${loadingLogData.manifolds}</div>
+    <div><strong>Connection Size:</strong> ${loadingLogData.connectionSize}</div>
+  </div>
+    `;
+
+    // Skapa tabellrader från logEntries
+    const tableRows = logEntries
+      .map(
+        (entry) => `
+      <tr>
+        <td>${entry.time.split(" ")[1]}</td>
+        <td>${entry.obq}</td>
+        <td>${entry.rate}</td>
+        <td>${entry.tanksNo}</td>
+        <td>${entry.manifPress}</td>
+        <td>${entry.sf}</td>
+        <td>${entry.bm}</td>        
+        <td class="remarks-cell">${entry.remarks || ""}</td>
+       
+      </tr>
+    `
+      )
+      .join("");
+
+    // Fyll i tabellen med loggdata
+    tableSection.querySelector("tbody").innerHTML = tableRows;
+    footer.append(`Generated on: ${new Date().toLocaleString()}`);
+
+    // När sidan är laddad, kalla på utskriftsdialogen
+    printWindow.print();
+  };
+};
+
 const updateAvgRates = () => {
   if (logEntries.length > 0) {
     // Beräkna avgRate
@@ -288,8 +616,10 @@ const renderBasicData = () => {
 // Funktion för att generera loading log-sidan
 export const loadingLog = (contentArea) => {
   contentArea.innerHTML = `
+    <div class="loading-log-header-container">
       <h1 class="loading-log-title">Loading Log</h1>
-      <div class="loading-log-container">
+      <button id="printLogButton" class="loading-log-button">Print Log</button>
+    </div>      <div class="loading-log-container">
         <!-- Grundläggande data -->
 <table class="loading-log-basic-info-table">
   
@@ -377,6 +707,7 @@ export const loadingLog = (contentArea) => {
     renderLogTable();
     // Uppdatera rates
   });
+  document.getElementById("printLogButton").addEventListener("click", printLog);
 
   // Rendera loggtabellen
   renderLogTable();

@@ -126,6 +126,27 @@
     background-color: #f2f2f2;
   }
 
+/* Container för rubrik och knapp */
+.loading-log-header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* Justera utseendet på knappen */
+.loading-log-button {
+  padding: 10px 20px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.loading-log-button:hover {
+  background-color: var(--secondary-color);
+}
 
 
 /* Inputfält i cellerna */

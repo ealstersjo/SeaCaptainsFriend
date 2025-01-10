@@ -1,0 +1,151 @@
+ /* Grundläggande utskriftsstil */
+ @page {
+    size: A4;
+    margin: 20mm;
+  }
+
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+  }
+
+  .container {
+    max-width: 100%;
+    padding: 10px;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .header-logo {
+    max-width: 150px; /* Justera storlek på loggan */
+    margin-bottom: 10px;
+  }
+  .header-title {
+    display: grid;
+    grid-template-columns:  repeat(1, 1fr);
+    gap: 10px; /* Mellanrum mellan rader och kolumner */
+    justify-content: start; /* Centrerar innehållet horisontellt */
+    max-width: 600px; /* Sätter maxbredd för att hålla layouten kompakt */
+    margin: 0 auto; /* Centrerar layouten på sidan */
+  }
+  .header-title h1{
+    margin-top: -20px;
+  }
+  .header-content1 {
+    display: grid;
+    grid-template-columns:  repeat(2, 1fr);
+    gap: 10px; /* Mellanrum mellan rader och kolumner */
+    justify-content: start; /* Centrerar innehållet horisontellt */
+    max-width: 600px; /* Sätter maxbredd för att hålla layouten kompakt */
+    margin: 0 auto; /* Centrerar layouten på sidan */
+  }
+  .header-content2 {
+    display: grid;
+    grid-template-columns:  repeat(3, 1fr);/* Två kolumner med jämn bredd */
+    gap: 10px; /* Mellanrum mellan rader och kolumner */
+    justify-content: left; /* Centrerar innehållet horisontellt */
+    max-width: 600px; /* Sätter maxbredd för att hålla layouten kompakt */
+    margin: 0 auto; /* Centrerar layouten på sidan */
+    margin-top: 10px;
+
+  }
+  .header-content3 {
+    display: grid;
+    grid-template-columns:  repeat(2, 1fr);/* Två kolumner med jämn bredd */
+    gap: 10px; /* Mellanrum mellan rader och kolumner */
+    justify-content: left; /* Centrerar innehållet horisontellt */
+    max-width: 600px; /* Sätter maxbredd för att hålla layouten kompakt */
+    margin: 0 auto; /* Centrerar layouten på sidan */
+    margin-top: 10px;
+
+  }
+  
+  .header-content div {
+    font-size: 1.1em;
+  }
+  
+
+  .table-container {
+    margin-top: 20px;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  table {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+  }
+
+  th, td {
+    border: 1px solid #ccc;
+    padding: 5px;
+    text-align: left;
+  }
+
+  th {
+    background-color: #f2f2f2;
+  }
+
+  .remarks-cell {
+    max-width: 250px; /* För att begränsa storleken på "remarks"-kolumnen */
+    word-wrap: break-word;
+  }
+
+  .footer {
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  .signature-section-horizontal {
+    display: flex;
+    justify-content: space-between; /* Fördela utrymme jämnt mellan linjerna */
+    align-items: center;
+    margin-top: 60px; /* Avstånd från footern */
+    margin-bottom: 60px;
+    padding: 0 10%; /* Lämnar lite utrymme från sidorna */
+  }
+  
+  .signature-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 45%; /* Fördelar lika mycket utrymme åt varje signaturrad */
+  }
+  
+  .signature-item .line {
+    border-bottom: 1px solid #000;
+    width: 100%; /* Gör linjen lika bred som behållaren */
+    margin-bottom: 5px; /* Mellanrum mellan linje och etikett */
+  }
+  
+  .signature-item span {
+    font-size: 1em;
+    font-weight: bold;
+    margin-top: 5px;
+  }
+    
+
+  @media print {
+    /* Dölj standardhuvudet som skrivs ut */
+    @page {
+        margin-left: 1cm;
+        margin-right: 1cm;
+        margin-top: 0.8cm;
+        margin-bottom: 0.8cm;
+    }
+  
+  
+  
+  
+    /* Dölj titel och datum från utskrift */
+    header, footer {
+      display: none;
+    }
+  }

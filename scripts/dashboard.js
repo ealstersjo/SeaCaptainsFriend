@@ -89,5 +89,5 @@ document.addEventListener("DOMContentLoaded", () => {
   handleDischargeLog.addEventListener("click", loadDischargeLog);
   handleShowShip.addEventListener("click", loadShipInfo);
 
-  loadCurrentVoyage();
+  loadLoadingLog();
 });

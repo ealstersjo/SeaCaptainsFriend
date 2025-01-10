@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loading Log Print</title>
+  <link rel="stylesheet" href="../styles/printLoading.css">
+
+</head>
+<body>
+
+  <div class="container">
+    <div class="header">
+        <img src="../assets/furetank.png" alt="Logo" class="header-logo" />
+        <div class="header-content">
+          <div><strong>Voyage:</strong> ${loadingLogData.voy}</div>
+          <div><strong>Cargo:</strong> ${loadingLogData.cargo}</div>
+          <div><strong>Date:</strong> ${loadingLogData.date}</div>
+          <div><strong>Port:</strong> ${loadingLogData.port}</div>
+          <div><strong>Berth:</strong> ${loadingLogData.berth}</div>
+          <div><strong>Manifolds:</strong> ${loadingLogData.manifolds}</div>
+          <div><strong>Connection Size:</strong> ${loadingLogData.connectionSize}</div>
+          <div><strong>To Load:</strong> ${loadingLogData.toLoad} cbm</div>
+        </div>
+      </div>
+
+    <!-- Table Section -->
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Local time</th>
+            <th>O.B.Q. (cbm)</th>
+            <th>Rate (cbm/h)</th>
+            <th>Tanks No.</th>
+            <th>Manif. Press.</th>
+            <th>SF</th>
+            <th>BM</th>
+            <th>Remarks</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Dynamically create rows from tempLoadingLog data -->
+            <tr>
+              <td>${log.bm}</td>
+              <td>${log.manifPress}</td>
+              <td>${log.obq}</td>
+              <td>${log.rate}</td>
+              <td class="remarks-cell">${log.remarks || 'N/A'}</td>
+              <td>${log.sf}</td>
+              <td>${log.tanksNo}</td>
+              <td>${log.time}</td>
+            </tr>
+          
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Footer Section (if needed) -->
+    <div class="footer">
+      
+    </div>
+    <div class="signature-section-horizontal">
+        <div class="signature-item">
+          <div class="line"></div>
+          <span>Chief Officer:</span>
+        </div>
+        <div class="signature-item">
+          <div class="line"></div>
+          <span>Surveyor / Load Master:</span>
+        </div>
+      </div>
+      
+
+</body>
+</html>
