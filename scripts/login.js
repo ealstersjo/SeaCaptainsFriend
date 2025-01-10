@@ -42,6 +42,19 @@ if (window.location.pathname !== "/pages/dashboard.html") {
   //window.location.href = "./pages/dashboard.html";
 }
 document
+  .getElementById("clearStorageBtn")
+  .addEventListener("click", function () {
+    // Rensa hela localStorage
+    localStorage.clear();
+    console.log("LocalStorage rensat");
+
+    // Valfritt: Ge användaren ett meddelande eller uppdatera sidan
+    alert("LocalStorage har rensats!");
+    // Om du vill redirecta till en annan sida efter rensning, kan du göra det här:
+    // window.location.href = "./index.html";
+  });
+
+document
   .getElementById("login-form")
   .addEventListener("submit", function (event) {
     event.preventDefault();
