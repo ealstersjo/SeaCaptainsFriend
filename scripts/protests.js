@@ -28,6 +28,35 @@ export const protests = (contentArea) => {
         { label: "Loading commenced", type: "datetime-local" },
       ],
     },
+    {
+      title: "Awaiting documents",
+      id: "lop-awaiting-doc",
+      fields: [
+        {
+          label: "To",
+          type: "text",
+          placeholder: "Enter receiver of protest",
+        },
+        {
+          label: "Port",
+          type: "text",
+          placeholder: "Enter port",
+        },
+        {
+          label: "Voy",
+          type: "text",
+          placeholder: "Enter voyage number",
+        },
+        { label: "Date", type: "date" },
+        { label: "C/P Date", type: "date" },
+        { label: "Hose/Arms disconnected", type: "datetime-local" },
+        { label: "Documents onboard", type: "datetime-local" },
+        {
+          label: "Loading commencedDocuments duly signed",
+          type: "datetime-local",
+        },
+      ],
+    },
   ];
 
   // Visa en lista över alla dokument

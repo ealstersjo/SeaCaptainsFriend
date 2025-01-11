@@ -1,159 +1,130 @@
 export const statementOfFact = (contentArea) => {
   const sof = JSON.parse(localStorage.getItem("SoF"));
-  const activities = JSON.parse(localStorage.getItem("activities")) || []; // Hämtar aktiviteter om de finns
+  console.log(sof);
+  const activities = JSON.parse(localStorage.getItem("activities")) || [];
 
   if (sof) {
     contentArea.innerHTML = `
       <h1>Statement of Fact</h1>
       
       <div class="sof-info-container">
-  <table class="sof-info-table">
-    <tr>
-      <td class="sof-info-label">Vessel</td>
-      <td>${sof.vessel}</td>
-      <td class="sof-info-label">Date</td>
-      <td>${sof.date}</td>
-    </tr>
-    <tr>
-    <td class="sof-info-label">Terminal</td>
-      <td>${sof.terminal}</td>
-      <td class="sof-info-label">PNI</td>
-      <td>${sof.pni}</td>
-      
-    </tr>
-    <tr>
-      <td class="sof-info-label">Load Port</td>
-      <td>${sof.loadport}</td>
-      <td class="sof-info-label">Customer Number</td>
-      <td>${sof.customerNumber}</td>
-    </tr>
-    <tr>
-      
-    </tr>
-    <tr>
-      
-    </tr>
-  </table>
-</div>
+        <table class="sof-info-table">
+          <tr>
+            <td class="sof-info-label">Vessel</td>
+            <td>${sof.vessel}</td>
+            <td class="sof-info-label">Date</td>
+            <td>${sof.date}</td>
+          </tr>
+          <tr>
+            <td class="sof-info-label">Terminal</td>
+            <td>${sof.terminal}</td>
+            <td class="sof-info-label">PNI</td>
+            <td>${sof.pni}</td>
+          </tr>
+          <tr>
+            <td class="sof-info-label">Load Port</td>
+            <td>${sof.loadport}</td>
+            <td class="sof-info-label">Customer Number</td>
+            <td>${sof.customerNumber}</td>
+          </tr>
+        </table>
+      </div>
 
-      <!-- Activity Log Table -->
-<h2>Activity Log</h2>
-<table class="activity-log-table">
-  <thead>
-    <tr>
-      <th class="activity-log-header">Activity</th>
-      <th class="activity-log-header">Date</th>
-      <th class="activity-log-header">Time</th>
-      <th class="activity-log-header">Remarks</th>
-      <th class="activity-log-header">Actions</th>
-    </tr>
-  </thead>
-  <tbody class="activity-log-body">
-    ${activities
-      .map(
-        (activity) => `
-      <tr>
-        <td>${activity.activity}</td>
-        <td>${activity.date}</td>
-        <td>${activity.time}</td>
-        <td>${activity.remarks}</td>
-        <td>
-          <button class="editBtn">Delete</button>
-        </td>
-      </tr>
-    `
-      )
-      .join("")}
-  </tbody>
-</table>
+      <!-- Fixed Activities (Examples) -->
+      <table class="activity-log-table">
+        <thead>
+          <tr>
+            <th class="activity-log-header">Activity</th>
+            <th class="activity-log-header">Date</th>
+            <th class="activity-log-header">Time</th>
+            <th class="activity-log-header">Remarks</th>
+            <th class="activity-log-header">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="activity-log-body">
+  <tr>
+    <td>Free Pratique</td>
+    <td><input type="date" class="editable" data-index="free-pratique" /></td>
+    <td><input type="time" class="editable" data-index="free-pratique" /></td>
+    <td><textarea class="editable" data-index="free-pratique"></textarea></td>
+    <td><button class="saveBtn" data-index="free-pratique">Save</button><button class="editBtn" data-index="free-pratique" style="display:none;">Edit</button></td>
+  </tr>
+  <tr>
+    <td>Pilot onboard</td>
+    <td><input type="date" class="editable" data-index="pilot-onboard" /></td>
+    <td><input type="time" class="editable" data-index="pilot-onboard" /></td>
+    <td><textarea class="editable" data-index="pilot-onboard"></textarea></td>
+    <td><button class="saveBtn" data-index="pilot-onboard">Save</button><button class="editBtn" data-index="pilot-onboard" style="display:none;">Edit</button></td>
+  </tr>
+  <tr>
+    <td>Anchored</td>
+    <td><input type="date" class="editable" data-index="anchored" /></td>
+    <td><input type="time" class="editable" data-index="anchored" /></td>
+    <td><textarea class="editable" data-index="anchored"></textarea></td>
+    <td><button class="saveBtn" data-index="anchored">Save</button><button class="editBtn" data-index="anchored" style="display:none;">Edit</button></td>
+  </tr>
+  <tr>
+    <td>Anchor aweigh</td>
+    <td><input type="date" class="editable" data-index="anchor-aweigh" /></td>
+    <td><input type="time" class="editable" data-index="anchor-aweigh" /></td>
+    <td><textarea class="editable" data-index="anchor-aweigh"></textarea></td>
+    <td><button class="saveBtn" data-index="anchor-aweigh">Save</button><button class="editBtn" data-index="anchor-aweigh" style="display:none;">Edit</button></td>
+  </tr>
+</tbody>
 
-
-      <!-- Activity Form -->
-<h2>Add Activity</h2>
-<form id="activityForm">
-  <div class="form-row">
-    <div class="form-item">
-      <label for="activity">Activity:</label>
-      <input type="text" id="activity" required />
-    </div>
-
-    <div class="form-item">
-      <label for="date">Date:</label>
-      <input type="date" id="date" required />
-    </div>
-
-    <div class="form-item">
-      <label for="time">Time:</label>
-      <input type="time" id="time" required />
-    </div>
-
-    <div class="form-item">
-      <label for="remarks">Remarks:</label>
-      <textarea id="remarks" required></textarea>
-    </div>
-  </div>
-  <button type="submit" id="saveActivityButton">Save Activity</button>
-</form>
-
-
-      
+      </table>
 
       <button id="deleteVoyageButton" type="deleteButton">Delete SoF</button>
     `;
 
-    window.addEventListener("DOMContentLoaded", () => {
-      // Get the current date and time
-      const today = new Date();
+    // Event listeners for Save/Edit
+    const saveButtons = document.querySelectorAll(".saveBtn");
+    saveButtons.forEach((button) => {
+      button.addEventListener("click", (event) => {
+        const index = event.target.getAttribute("data-index");
+        const row = event.target.closest("tr");
 
-      // Format the date as YYYY-MM-DD for the input[type="date"]
-      const formattedDate = today.toISOString().split("T")[0];
+        // Disable inputs after Save
+        row.querySelectorAll(".editable").forEach((input) => {
+          input.disabled = true;
+        });
 
-      // Format the time as HH:MM for the input[type="time"]
-      const formattedTime = today.toTimeString().split(" ")[0].substring(0, 5);
+        const key = row
+          .querySelector("td:nth-child(2) input")
+          .getAttribute("data-index"); // Andra kolumnen (date input)
 
-      // Set the default values for the form inputs
-      document.getElementById("date").value = formattedDate;
-      document.getElementById("time").value = formattedTime;
+        // Hämta värden från input- och textarea-fälten i kolumner 2, 3 och 4
+        const date = row.querySelector("td:nth-child(2) input").value; // Andra kolumnen (date input)
+        const time = row.querySelector("td:nth-child(3) input").value; // Tredje kolumnen (time input)
+        const remarks = row.querySelector("td:nth-child(4) textarea").value; // Fjärde kolumnen (textarea)
+
+        sof[key] = { date: date, time: time, remarks: remarks };
+        //alert(`${key}{date: ${date}, time: ${time}, remarks: ${remarks}}`);
+        // Switch to Edit mode after Save
+        localStorage.setItem("SoF", JSON.stringify(sof));
+
+        console.log(sof);
+        event.target.style.display = "none";
+        const editButton = row.querySelector(".editBtn");
+        editButton.style.display = "inline-block";
+      });
     });
 
-    // Event listener for adding activity
-    const activityForm = document.getElementById("activityForm");
-    activityForm.addEventListener("submit", (event) => {
-      event.preventDefault();
-
-      const activity = document.getElementById("activity").value;
-      const date = document.getElementById("date").value;
-      const time = document.getElementById("time").value;
-      const remarks = document.getElementById("remarks").value;
-
-      const newActivity = { activity, date, time, remarks };
-      activities.push(newActivity);
-
-      // Save to localStorage
-      localStorage.setItem("activities", JSON.stringify(activities));
-
-      // Reload activities table
-      statementOfFact(contentArea);
-    });
-
-    // Edit button functionality
     const editButtons = document.querySelectorAll(".editBtn");
-    editButtons.forEach((button, index) => {
-      button.addEventListener("click", () => {
-        const activity = activities[index];
+    editButtons.forEach((button) => {
+      button.addEventListener("click", (event) => {
+        const index = event.target.getAttribute("data-index");
+        const row = event.target.closest("tr");
 
-        // Populate the form with the activity's data
-        document.getElementById("activity").value = activity.activity;
-        document.getElementById("date").value = activity.date;
-        document.getElementById("time").value = activity.time;
-        document.getElementById("remarks").value = activity.remarks;
+        // Enable inputs for editing
+        row.querySelectorAll(".editable").forEach((input) => {
+          input.disabled = false;
+        });
 
-        // Remove the activity from the list
-        activities.splice(index, 1);
-        localStorage.setItem("activities", JSON.stringify(activities));
-
-        // Reload the content and show the updated list
-        statementOfFact(contentArea);
+        // Switch to Save mode
+        event.target.style.display = "none";
+        const saveButton = row.querySelector(".saveBtn");
+        saveButton.style.display = "inline-block";
       });
     });
 

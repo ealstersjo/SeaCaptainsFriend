@@ -76,6 +76,34 @@ body {
     font-weight: bold;
     margin-top: 5px;
   }
+  .signature-please {
+    display: flex;
+    align-items: center;
+    text-align: start;
+    margin-top: 30px;
+    width: 80%; /* Fördelar lika mycket utrymme åt varje signaturrad */
+  }
+  .signature-please span {
+    font-size: 1em;
+    font-style: italic;
+    margin-top: 5px;
+  }
+
+  .signature-regard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: -30px;
+    width: 45%; /* Fördelar lika mycket utrymme åt varje signaturrad */
+  }
+  
+  
+  .signature-regard span {
+    font-size: 1em;
+    font-style: italic;
+    margin-top: 5px;
+  }
 
   @media print {
     /* Dölj standardhuvudet som skrivs ut */
