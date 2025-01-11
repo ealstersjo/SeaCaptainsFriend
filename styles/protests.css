@@ -1,0 +1,63 @@
+.document-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .document-list li {
+    margin-bottom: 10px;
+  }
+  
+  .document-button {
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .document-button:hover {
+    background-color: var(--secondary-color);
+  }
+  
+  .document-form .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .document-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .document-form input,
+  .document-form textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .document-form .submit-button,
+  .document-form .back-button {
+    padding: 10px 20px;
+    margin-right: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .document-form .back-button {
+    background-color: #6c757d;
+  }
+  
+  .document-form .submit-button:hover {
+    background-color: #218838;
+  }
+  
+  .document-form .back-button:hover {
+    background-color: #5a6268;
+  }
+  

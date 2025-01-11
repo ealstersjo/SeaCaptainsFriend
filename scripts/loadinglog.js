@@ -464,15 +464,19 @@ const printLog = () => {
   printWindow.onload = () => {
     // Hitta elementet i utskriftsmallen där vi ska fylla i data
     const headerSection = printWindow.document.querySelector(".header");
+
     const tableSection = printWindow.document.querySelector(".table-container");
     const footer = printWindow.document.querySelector(".footer");
 
     // Fyll i header-datan (loadingLogData)
     headerSection.innerHTML = `
+    <div class="header-info">
   <img src="../assets/furetank.png" alt="Logo" class="header-logo" />
   <div class="header-title">
+    
     <h1>${loadingLogData.ship}</h1>
     <h1>Loading Log</h1>
+  </div>
   </div>
   <div class="header-content1">
     <div><strong>Voyage:</strong> ${loadingLogData.voy}</div>

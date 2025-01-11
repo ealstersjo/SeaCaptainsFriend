@@ -1,21 +1,8 @@
- /* Grundläggande utskriftsstil */
- @page {
-    size: A4;
-    margin: 20mm;
-  }
-
-  body {
+body {
     font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    line-height: 1.5;
+    padding: 20px;
+    text-align: center;
   }
-
-  .container {
-    max-width: 100%;
-    padding: 10px;
-  }
-
   .header {
     text-align: center;
     margin-bottom: 20px;
@@ -41,71 +28,25 @@
   .header-title h1{
     margin-top: -20px;
   }
-  .header-content1 {
-    display: grid;
-    grid-template-columns:  repeat(2, 1fr);
-    gap: 10px; /* Mellanrum mellan rader och kolumner */
-    justify-content: start; /* Centrerar innehållet horisontellt */
-    max-width: 600px; /* Sätter maxbredd för att hålla layouten kompakt */
-    margin: 0 auto; /* Centrerar layouten på sidan */
+  .header-title h5{
+    margin-top: -20px;
   }
-  .header-content2 {
-    display: grid;
-    grid-template-columns:  repeat(3, 1fr);/* Två kolumner med jämn bredd */
-    gap: 10px; /* Mellanrum mellan rader och kolumner */
-    justify-content: left; /* Centrerar innehållet horisontellt */
-    max-width: 600px; /* Sätter maxbredd för att hålla layouten kompakt */
-    margin: 0 auto; /* Centrerar layouten på sidan */
-    margin-top: 10px;
-
-  }
-  .header-content3 {
-    display: grid;
-    grid-template-columns:  repeat(2, 1fr);/* Två kolumner med jämn bredd */
-    gap: 10px; /* Mellanrum mellan rader och kolumner */
-    justify-content: left; /* Centrerar innehållet horisontellt */
-    max-width: 600px; /* Sätter maxbredd för att hålla layouten kompakt */
-    margin: 0 auto; /* Centrerar layouten på sidan */
-    margin-top: 10px;
-
-  }
-  
-  .header-content div {
-    font-size: 1.1em;
-  }
-  
-
-  .table-container {
-    margin-top: 20px;
-    border-collapse: collapse;
-    width: 100%;
-  }
-
   table {
     width: 100%;
-    border: 1px solid #ccc;
     border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  td {
+    padding: 8px;
+    vertical-align: top;
+  }
+  .label {
+    font-weight: bold;
+  }
+  .spacer {
+    width: 50px; /* Justerar mellanrummet mellan kolumner */
   }
 
-  th, td {
-    border: 1px solid #ccc;
-    padding: 5px;
-    text-align: left;
-  }
-
-  th {
-    background-color: #f2f2f2;
-  }
-
-  .remarks-cell {
-    max-width: 250px; /* För att begränsa storleken på "remarks"-kolumnen */
-    word-wrap: break-word;
-  }
-
-  .footer {
-    text-align: center;
-    margin-top: 40px;
-  }
 
   .signature-section-horizontal {
     display: flex;
@@ -135,7 +76,6 @@
     font-weight: bold;
     margin-top: 5px;
   }
-    
 
   @media print {
     /* Dölj standardhuvudet som skrivs ut */
