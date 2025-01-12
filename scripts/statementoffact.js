@@ -196,8 +196,8 @@ export const statementOfFact = (contentArea) => {
     <td><input type="time" class="editable" data-index="completed-load" /></td>
     <td><input type="number" step="0.01" class="editable" data-index="completed-load" placeholder="Ship fig.:"/></td>
     <td>
-        <button class="saveBtn" data-index="completed">Save</button>
-        <button class="editBtn" data-index="completed" style="display:none;">Edit</button>
+        <button class="saveBtn" data-index="completed-load">Save</button>
+        <button class="editBtn" data-index="completed-load" style="display:none;">Edit</button>
     </td>
 </tr>
 
@@ -213,11 +213,11 @@ export const statementOfFact = (contentArea) => {
 </tr>
 <tr>
     <td>Calculations Done</td>
-    <td><input type="date" class="editable" data-index="calculations-done" /></td>
-    <td><input type="time" class="editable" data-index="calculations-done" /></td>
-    <td><textarea class="editable" data-index="calculations-done"></textarea></td>
+    <td><input type="date" class="editable" data-index="calculations-done" disabled /></td>
+    <td><input type="time" class="editable" data-index="calculations-done" disabled /></td>
+    <td><textarea class="editable" data-index="calculations-done" disabled></textarea></td>
     <td>
-        <button class="saveBtn" data-index="calculations-done">Save</button>
+        <button class="saveBtn" data-index="calculations-done" style="display:none;">Save</button>
         <button class="editBtn" data-index="calculations-done" style="display:none;">Edit</button>
     </td>
 </tr>
@@ -335,6 +335,88 @@ export const statementOfFact = (contentArea) => {
 
       <button id="deleteVoyageButton" type="deleteButton">Delete SoF</button>
     `;
+    const calculateVolumeDifference = () => {
+      // Hämta sparade data från SoF (om de finns)
+      const sofData = JSON.parse(localStorage.getItem("SoF")) || {};
+
+      // Kontrollera om värden finns sparade i SoF-data
+      const completedLoadValue =
+        sofData["completed-load"] && sofData["completed-load"].remarks
+          ? parseFloat(sofData["completed-load"].remarks)
+          : parseFloat(
+              document.querySelector(
+                'input[data-index="completed-load"][type="number"]'
+              ).value
+            );
+
+      const ullageSamplingValue =
+        sofData["ullage-sampling"] && sofData["ullage-sampling"].remarks
+          ? parseFloat(sofData["ullage-sampling"].remarks)
+          : parseFloat(
+              document.querySelector(
+                'input[data-index="ullage-sampling"][type="number"]'
+              ).value
+            );
+
+      // Kontrollera att båda värdena är giltiga
+      if (!isNaN(completedLoadValue) && !isNaN(ullageSamplingValue)) {
+        const difference = completedLoadValue - ullageSamplingValue;
+        let percentage;
+
+        if (difference > 0) {
+          percentage = completedLoadValue / ullageSamplingValue;
+        } else if (difference < 0) {
+          percentage = ullageSamplingValue / completedLoadValue;
+        } else {
+          percentage = 0;
+        }
+
+        // Fyll i värden i "Calculations Done"
+        const calculationsDate = document.querySelector(
+          'input[data-index="calculations-done"][type="date"]'
+        );
+        const calculationsTime = document.querySelector(
+          'input[data-index="calculations-done"][type="time"]'
+        );
+        const calculationsRemarks = document.querySelector(
+          'textarea[data-index="calculations-done"]'
+        );
+
+        // Sätt dagens datum och tid för "Calculations Done"
+        const now = new Date();
+        const currentDate = now.toISOString().split("T")[0];
+        const currentTime = now.toTimeString().split(" ")[0].slice(0, 5);
+
+        calculationsDate.value = currentDate;
+        calculationsTime.value = currentTime;
+        calculationsRemarks.value = `Difference: ${difference.toFixed(
+          2
+        )}mt = ${percentage.toFixed(2)}%`;
+
+        // Uppdatera SoF-objektet
+        sof["calculations-done"] = {
+          date: currentDate,
+          time: currentTime,
+          remarks: `Difference: ${difference.toFixed(
+            2
+          )}mt = ${percentage.toFixed(2)}%`,
+        };
+        localStorage.setItem("SoF", JSON.stringify(sof));
+      } else {
+        /*  alert(
+          "Both 'Completed Load' and 'Ullage/Sampling' must have valid numeric values."
+        ); */
+      }
+    };
+
+    // Lägg till event listeners på nummerfält för completed-load och ullage-sampling
+    ["completed-load", "ullage-sampling"].forEach((index) => {
+      document
+        .querySelectorAll(`input[data-index="${index}"]`)
+        .forEach((input) => {
+          input.addEventListener("input", calculateVolumeDifference);
+        });
+    });
 
     // Event listeners for Save/Edit
     const saveButtons = document.querySelectorAll(".saveBtn");
@@ -369,13 +451,13 @@ export const statementOfFact = (contentArea) => {
           const go = row.querySelector('input[data-type="go"]').value;
 
           // Bygg remarks-strängen
-          remarks = lng && go ? `F = ${lng}mt A = ${go}mt` : "";
+          remarks = lng && go ? `LNG = ${lng}mt GO = ${go}mt` : "";
         } else if (key === "changed-pilot") {
           const lng = row.querySelector('input[data-type="lng"]').value;
           const go = row.querySelector('input[data-type="go"]').value;
 
           // Bygg remarks-strängen
-          remarks = lng && go ? `F = ${lng}mt A = ${go}mt` : "";
+          remarks = lng && go ? `LNG = ${lng}mt GO = ${go}mt` : "";
         } else if (key === "pilot-disembarked") {
           // Hämta värden från Fwd och Aft Draft-fälten
           const fwdDraft = row.querySelector('input[data-type="fwd"]').value;
@@ -384,6 +466,18 @@ export const statementOfFact = (contentArea) => {
           // Bygg remarks-strängen
           remarks =
             fwdDraft && aftDraft ? `F = ${fwdDraft}m A = ${aftDraft}m` : "";
+        } else if (key === "completed-load") {
+          // Hämta värden från Fwd och Aft Draft-fälten
+          const shipLoad = row.querySelector("td:nth-child(4) input").value;
+
+          // Bygg remarks-strängen
+          remarks = shipLoad ? `${shipLoad}` : "";
+        } else if (key === "ullage-sampling") {
+          // Hämta värden från Fwd och Aft Draft-fälten
+          const blValue = row.querySelector("td:nth-child(4) input").value;
+
+          // Bygg remarks-strängen
+          remarks = blValue ? `${blValue}` : "";
         } else {
           remarks = row.querySelector("td:nth-child(4) textarea").value; // Fjärde kolumnen (textarea)
         }
@@ -409,6 +503,15 @@ export const statementOfFact = (contentArea) => {
         row.querySelectorAll(".editable").forEach((input) => {
           input.disabled = false;
         });
+        // Hantera fall där det finns två inputfält i en specifik kolumn
+        const draftInputs = row.querySelectorAll(
+          'td:nth-child(4) input[type="number"]'
+        );
+        if (draftInputs.length === 2) {
+          draftInputs.forEach((input) => {
+            input.disabled = true; // Lås varje inputfält
+          });
+        }
 
         // Switch to Save mode
         event.target.style.display = "none";
@@ -445,7 +548,7 @@ export const statementOfFact = (contentArea) => {
   const initializeActivities = () => {
     // Hämta SoF-objektet från localStorage
     const sofData = JSON.parse(localStorage.getItem("SoF")) || {};
-
+    console.log(sofData);
     // Gå igenom varje rad i tabellen
     document.querySelectorAll(".activity-log-body tr").forEach((row) => {
       // Hämta data-index från valfri input i raden
@@ -468,12 +571,91 @@ export const statementOfFact = (contentArea) => {
 
         if (dateInput && date) dateInput.value = date;
         if (timeInput && time) timeInput.value = time;
-        if (remarksInput && remarks) remarksInput.value = remarks;
+        if (dataIndex === "first-line-ashore") {
+          // För "First Line Ashore" dela upp remarks i två inputfält
+          const draftInputs = row.querySelectorAll(
+            'td:nth-child(4) input[type="number"]'
+          );
+          if (draftInputs.length === 2 && remarks) {
+            const [fwd, aft] =
+              remarks.match(/F\s*=\s*([\d.]+).*A\s*=\s*([\d.]+)/)?.slice(1) ||
+              [];
+            if (fwd) draftInputs[0].value = fwd;
+            if (aft) draftInputs[1].value = aft;
+          }
+        } else if (dataIndex === "all-fast") {
+          // För "First Line Ashore" dela upp remarks i två inputfält
+          const draftInputs = row.querySelectorAll(
+            'td:nth-child(4) input[type="number"]'
+          );
+          if (draftInputs.length === 2 && remarks) {
+            const [lng, go] =
+              remarks
+                .match(/LNG\s*=\s*([\d.]+).*GO\s*=\s*([\d.]+)/)
+                ?.slice(1) || [];
+
+            if (lng) draftInputs[0].value = lng;
+            if (go) draftInputs[1].value = go;
+          }
+        } else if (dataIndex === "changed-pilot") {
+          // För "First Line Ashore" dela upp remarks i två inputfält
+          const draftInputs = row.querySelectorAll(
+            'td:nth-child(4) input[type="number"]'
+          );
+          if (draftInputs.length === 2 && remarks) {
+            const [lng, go] =
+              remarks
+                .match(/LNG\s*=\s*([\d.]+).*GO\s*=\s*([\d.]+)/)
+                ?.slice(1) || [];
+
+            if (lng) draftInputs[0].value = lng;
+            if (go) draftInputs[1].value = go;
+          }
+        } else if (dataIndex === "pilot-disembarked") {
+          // För "First Line Ashore" dela upp remarks i två inputfält
+          const draftInputs = row.querySelectorAll(
+            'td:nth-child(4) input[type="number"]'
+          );
+          if (draftInputs.length === 2 && remarks) {
+            const [fwd, aft] =
+              remarks.match(/F\s*=\s*([\d.]+).*A\s*=\s*([\d.]+)/)?.slice(1) ||
+              [];
+            if (fwd) draftInputs[0].value = fwd;
+            if (aft) draftInputs[1].value = aft;
+          }
+        } else if (
+          dataIndex === "completed-load" ||
+          dataIndex === "ullage-sampling"
+        ) {
+          // För fält med ett enda nummerfält
+          const numberInput = row.querySelector(
+            'td:nth-child(4) input[type="number"]'
+          );
+          if (numberInput && remarks) {
+            const value = parseFloat(remarks.match(/[\d.]+/)?.[0]);
+            if (!isNaN(value)) numberInput.value = value;
+          }
+        } else {
+          // Standardhantering för textarea
+          const remarksInput = row.querySelector("td:nth-child(4) textarea");
+          if (remarksInput && remarks) {
+            remarksInput.value = remarks;
+          }
+        }
         // Lås alla inputfält
         row.querySelectorAll(".editable").forEach((input) => {
           input.disabled = true;
         });
 
+        // Hantera fall där det finns två inputfält i en specifik kolumn
+        const draftInputs = row.querySelectorAll(
+          'td:nth-child(4) input[type="number"]'
+        );
+        if (draftInputs.length === 2) {
+          draftInputs.forEach((input) => {
+            input.disabled = true; // Lås varje inputfält
+          });
+        }
         // Visa Edit-knappen och dölj Save-knappen
         const saveButton = row.querySelector(".saveBtn");
         const editButton = row.querySelector(".editBtn");
