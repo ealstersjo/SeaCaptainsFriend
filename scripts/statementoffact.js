@@ -6,11 +6,11 @@ const tempSoF = {
   terminal: "Röda Sten",
   customerNumber: "23hej23",
   documentsCreated: true,
+  master: "Markus Niklasson",
 };
 
 export const statementOfFact = (contentArea) => {
   let sof = JSON.parse(localStorage.getItem("SoF"));
-  console.log(JSON.stringify(sof));
   const activities = JSON.parse(localStorage.getItem("activities")) || [];
 
   //Temporär data under testfasen
@@ -134,24 +134,32 @@ export const statementOfFact = (contentArea) => {
     <td>
         <div>
             <label>Fwd Draft: (m)</label>
-            <input type="number" step="0.1" class="draft-input" data-type="fwd" data-index="first-line-ashore" placeholder="(m)" />
+            <input type="number" step="0.01" class="draft-input" data-type="fwd" data-index="first-line-ashore" placeholder="(m)" />
             <label>Aft Draft: (m)</label>
-            <input type="number" step="0.1" class="draft-input" data-type="aft" data-index="first-line-ashore" placeholder="(m)" />
+            <input type="number" step="0.01" class="draft-input" data-type="aft" data-index="first-line-ashore" placeholder="(m)" />
         </div>
-    </td>    <td><button class="saveBtn" data-index="first-line-ashore">Save</button><button class="editBtn" data-index="first-line-ashore" style="display:none;">Edit</button></td>
+    </td>    
+    <td><button class="saveBtn" data-index="first-line-ashore">Save</button><button class="editBtn" data-index="first-line-ashore" style="display:none;">Edit</button></td>
 </tr>
 <tr>
     <td>All Fast</td>
     <td><input type="date" class="editable" data-index="all-fast" /></td>
     <td><input type="time" class="editable" data-index="all-fast" /></td>
-    <td><textarea class="editable" data-index="all-fast"></textarea></td>
+    <td>
+        <div>
+            <label>LNG: (mt)</label>
+            <input type="number" step="0.1" class="draft-input" data-type="lng" data-index="all-fast" placeholder="(mt)" />
+            <label>GO: (mt)</label>
+            <input type="number" step="0.1" class="draft-input" data-type="go" data-index="all-fast" placeholder="(tm)" />
+        </div>
+    </td>
     <td><button class="saveBtn" data-index="all-fast">Save</button><button class="editBtn" data-index="all-fast" style="display:none;">Edit</button></td>
 </tr>
 <tr>
     <td>NOR Received</td>
     <td><input type="date" class="editable" data-index="nor-received" /></td>
     <td><input type="time" class="editable" data-index="nor-received" /></td>
-    <td><textarea class="editable" data-index="nor-received"></textarea></td>
+    <td><textarea class="editable" data-index="nor-received"  placeholder="Reason for delay:"></textarea></td>
     <td><button class="saveBtn" data-index="nor-received">Save</button><button class="editBtn" data-index="nor-received" style="display:none;">Edit</button></td>
 </tr>
 <tr>
@@ -165,7 +173,7 @@ export const statementOfFact = (contentArea) => {
     <td>Key Meeting Done</td>
     <td><input type="date" class="editable" data-index="key-meeting-done" /></td>
     <td><input type="time" class="editable" data-index="key-meeting-done" /></td>
-    <td><textarea class="editable" data-index="key-meeting-done"></textarea></td>
+    <td><textarea class="editable" data-index="key-meeting-done" placeholder="Number & size(s):"></textarea></td>
     <td><button class="saveBtn" data-index="key-meeting-done">Save</button><button class="editBtn" data-index="key-meeting-done" style="display:none;">Edit</button></td>
 </tr>
 <tr>
@@ -175,10 +183,155 @@ export const statementOfFact = (contentArea) => {
     <td><textarea class="editable" data-index="connected"></textarea></td>
     <td><button class="saveBtn" data-index="connected">Save</button><button class="editBtn" data-index="connected" style="display:none;">Edit</button></td>
 </tr>
+<tr>
+    <td>Commenced Load</td>
+    <td><input type="date" class="editable" data-index="commenced-load" /></td>
+    <td><input type="time" class="editable" data-index="commenced-load" /></td>
+    <td><textarea class="editable" data-index="commenced-load"></textarea></td>
+    <td><button class="saveBtn" data-index="commenced-load">Save</button><button class="editBtn" data-index="commenced-load" style="display:none;">Edit</button></td>
+</tr>
+<tr>
+    <td>Completed Load</td>
+    <td><input type="date" class="editable" data-index="completed-load" /></td>
+    <td><input type="time" class="editable" data-index="completed-load" /></td>
+    <td><input type="number" step="0.01" class="editable" data-index="completed-load" placeholder="Ship fig.:"/></td>
+    <td>
+        <button class="saveBtn" data-index="completed">Save</button>
+        <button class="editBtn" data-index="completed" style="display:none;">Edit</button>
+    </td>
+</tr>
+
+<tr>
+    <td>Ullage / Sampling</td>
+    <td><input type="date" class="editable" data-index="ullage-sampling" /></td>
+    <td><input type="time" class="editable" data-index="ullage-sampling" /></td>
+    <td><input type="number" step="0.01" class="editable" data-index="ullage-sampling" placeholder="B/L fig:"/></td>
+    <td>
+        <button class="saveBtn" data-index="ullage-sampling">Save</button>
+        <button class="editBtn" data-index="ullage-sampling" style="display:none;">Edit</button>
+    </td>
+</tr>
+<tr>
+    <td>Calculations Done</td>
+    <td><input type="date" class="editable" data-index="calculations-done" /></td>
+    <td><input type="time" class="editable" data-index="calculations-done" /></td>
+    <td><textarea class="editable" data-index="calculations-done"></textarea></td>
+    <td>
+        <button class="saveBtn" data-index="calculations-done">Save</button>
+        <button class="editBtn" data-index="calculations-done" style="display:none;">Edit</button>
+    </td>
+</tr>
+<tr>
+    <td>Disconnected</td>
+    <td><input type="date" class="editable" data-index="disconnected" /></td>
+    <td><input type="time" class="editable" data-index="disconnected" /></td>
+    <td><textarea class="editable" data-index="disconnected" placeholder="Reason for delay:"></textarea></td>
+    <td>
+        <button class="saveBtn" data-index="disconnected">Save</button>
+        <button class="editBtn" data-index="disconnected" style="display:none;">Edit</button>
+    </td>
+</tr>
+<tr>
+    <td>Documents Onboard</td>
+    <td><input type="date" class="editable" data-index="documents-onboard" /></td>
+    <td><input type="time" class="editable" data-index="documents-onboard" /></td>
+    <td><textarea class="editable" data-index="documents-onboard"></textarea></td>
+    <td>
+        <button class="saveBtn" data-index="documents-onboard">Save</button>
+        <button class="editBtn" data-index="documents-onboard" style="display:none;">Edit</button>
+    </td>
+</tr>
+<tr>
+    <td>Documents Signed</td>
+    <td><input type="date" class="editable" data-index="documents-signed" /></td>
+    <td><input type="time" class="editable" data-index="documents-signed" /></td>
+    <td><textarea class="editable" data-index="documents-signed" placeholder="Reason for delay:"></textarea></td>
+    <td>
+        <button class="saveBtn" data-index="documents-signed">Save</button>
+        <button class="editBtn" data-index="documents-signed" style="display:none;">Edit</button>
+    </td>
+</tr>
+<tr>
+    <td>Pilot Onboard</td>
+    <td><input type="date" class="editable" data-index="pilot-onboard" /></td>
+    <td><input type="time" class="editable" data-index="pilot-onboard" /></td>
+    <td><textarea class="editable" data-index="pilot-onboard"></textarea></td>
+    <td>
+        <button class="saveBtn" data-index="pilot-onboard">Save</button>
+        <button class="editBtn" data-index="pilot-onboard" style="display:none;">Edit</button>
+    </td>
+</tr>
+<tr>
+    <td>Departure</td>
+    <td><input type="date" class="editable" data-index="departure" /></td>
+    <td><input type="time" class="editable" data-index="departure" /></td>
+    <td><textarea class="editable" data-index="departure"></textarea></td>
+    <td>
+        <button class="saveBtn" data-index="departure">Save</button>
+        <button class="editBtn" data-index="departure" style="display:none;">Edit</button>
+    </td>
+</tr>
+<tr>
+    <td>Changed Pilot</td>
+    <td><input type="date" class="editable" data-index="changed-pilot" /></td>
+    <td><input type="time" class="editable" data-index="changed-pilot" /></td>
+    <td>
+        <div>
+            <label>LNG: (mt)</label>
+            <input type="number" step="0.1" class="draft-input" data-type="lng" data-index="changed-pilot" placeholder="(mt)" />
+            <label>GO: (mt)</label>
+            <input type="number" step="0.1" class="draft-input" data-type="go" data-index="changed-pilot" placeholder="(tm)" />
+        </div>
+    </td>
+    <td>
+        <button class="saveBtn" data-index="changed-pilot">Save</button>
+        <button class="editBtn" data-index="changed-pilot" style="display:none;">Edit</button>
+    </td>
+</tr>
+<tr>
+    <td>Pilot Disembarked</td>
+    <td><input type="date" class="editable" data-index="pilot-disembarked" /></td>
+    <td><input type="time" class="editable" data-index="pilot-disembarked" /></td>
+<td>
+        <div>
+            <label>Fwd Draft: (m)</label>
+            <input type="number" step="0.01" class="draft-input" data-type="fwd" data-index="pilot-disembarked" placeholder="(m)" />
+            <label>Aft Draft: (m)</label>
+            <input type="number" step="0.01" class="draft-input" data-type="aft" data-index="pilot-disembarked" placeholder="(m)" />
+        </div>
+    </td>
+    <td>
+        <button class="saveBtn" data-index="pilot-disembarked">Save</button>
+        <button class="editBtn" data-index="pilot-disembarked" style="display:none;">Edit</button>
+    </td>
+</tr>
+<tr>
+    <td>S.O.S.P</td>
+    <td><input type="date" class="editable" data-index="sosp" /></td>
+    <td><input type="time" class="editable" data-index="sosp" /></td>
+    <td><textarea class="editable" data-index="sosp"></textarea></td>
+    <td>
+        <button class="saveBtn" data-index="sosp">Save</button>
+        <button class="editBtn" data-index="sosp" style="display:none;">Edit</button>
+    </td>
+</tr>
+<tr>
+    <td colspan="4">
+        <label for="remarks">Remarks:</label>
+        <textarea id="remarks" class="editable" data-index="sof-remarks" rows="4" style="width: 100%;"></textarea>
+    </td>
+    <td>
+        <button class="saveBtn" data-index="pilot-disembarked">Save</button>
+        <button class="editBtn" data-index="pilot-disembarked" style="display:none;">Edit</button>
+    </td>
+</tr>
+
+      <button id="printSoF" type="button">Print SoF</button>
 
 </tbody>
 
       </table>
+
 
       <button id="deleteVoyageButton" type="deleteButton">Delete SoF</button>
     `;
@@ -204,13 +357,31 @@ export const statementOfFact = (contentArea) => {
         const time = row.querySelector("td:nth-child(3) input").value; // Tredje kolumnen (time input)
         let remarks = "";
         if (key === "first-line-ashore") {
-          console.log("HEJ");
           // Hämta värden från Fwd och Aft Draft-fälten
           const fwdDraft = row.querySelector('input[data-type="fwd"]').value;
           const aftDraft = row.querySelector('input[data-type="aft"]').value;
 
           // Bygg remarks-strängen
+          remarks =
+            fwdDraft && aftDraft ? `F = ${fwdDraft}m A = ${aftDraft}m` : "";
+        } else if (key === "all-fast") {
+          const lng = row.querySelector('input[data-type="lng"]').value;
+          const go = row.querySelector('input[data-type="go"]').value;
 
+          // Bygg remarks-strängen
+          remarks = lng && go ? `F = ${lng}mt A = ${go}mt` : "";
+        } else if (key === "changed-pilot") {
+          const lng = row.querySelector('input[data-type="lng"]').value;
+          const go = row.querySelector('input[data-type="go"]').value;
+
+          // Bygg remarks-strängen
+          remarks = lng && go ? `F = ${lng}mt A = ${go}mt` : "";
+        } else if (key === "pilot-disembarked") {
+          // Hämta värden från Fwd och Aft Draft-fälten
+          const fwdDraft = row.querySelector('input[data-type="fwd"]').value;
+          const aftDraft = row.querySelector('input[data-type="aft"]').value;
+
+          // Bygg remarks-strängen
           remarks =
             fwdDraft && aftDraft ? `F = ${fwdDraft}m A = ${aftDraft}m` : "";
         } else {
@@ -222,7 +393,6 @@ export const statementOfFact = (contentArea) => {
         // Switch to Edit mode after Save
         localStorage.setItem("SoF", JSON.stringify(sof));
 
-        console.log(sof);
         event.target.style.display = "none";
         const editButton = row.querySelector(".editBtn");
         editButton.style.display = "inline-block";
@@ -247,6 +417,15 @@ export const statementOfFact = (contentArea) => {
       });
     });
 
+    const printSoFButton = document.getElementById("printSoF");
+    printSoFButton.addEventListener("click", () => {
+      if (confirm("Are you sure you want to print the SoF?")) {
+        //localStorage.removeItem("SoF");
+        alert("SoF has been printed!");
+        //statementOfFact(contentArea); // Reload the content
+      }
+    });
+
     // Delete SoF button functionality
     const deleteVoyageButton = document.getElementById("deleteVoyageButton");
     deleteVoyageButton.addEventListener("click", () => {
@@ -266,7 +445,6 @@ export const statementOfFact = (contentArea) => {
   const initializeActivities = () => {
     // Hämta SoF-objektet från localStorage
     const sofData = JSON.parse(localStorage.getItem("SoF")) || {};
-    console.log("Data från localStorage:", sofData);
 
     // Gå igenom varje rad i tabellen
     document.querySelectorAll(".activity-log-body tr").forEach((row) => {
@@ -278,7 +456,6 @@ export const statementOfFact = (contentArea) => {
       // Om det finns data för denna aktivitet i SoF
       if (sofData[dataIndex]) {
         const { date, time, remarks } = sofData[dataIndex];
-        console.log(`Förifyller för ${dataIndex}:`, { date, time, remarks });
 
         // Fyll i input-fälten med data
         const dateInput = row.querySelector(
