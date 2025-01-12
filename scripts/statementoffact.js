@@ -1,7 +1,22 @@
+const tempSoF = {
+  vessel: "M/T Fure Viten",
+  date: "2025-01-30",
+  pni: "2332",
+  loadport: "Gothenburg",
+  terminal: "Röda Sten",
+  customerNumber: "23hej23",
+  documentsCreated: true,
+};
+
 export const statementOfFact = (contentArea) => {
-  const sof = JSON.parse(localStorage.getItem("SoF"));
-  console.log(sof);
+  let sof = JSON.parse(localStorage.getItem("SoF"));
+  console.log(JSON.stringify(sof));
   const activities = JSON.parse(localStorage.getItem("activities")) || [];
+
+  //Temporär data under testfasen
+  if (!sof) {
+    sof = tempSoF;
+  }
 
   if (sof) {
     contentArea.innerHTML = `
