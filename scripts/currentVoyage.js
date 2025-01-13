@@ -18,7 +18,7 @@ export const currentVoyagePage = (contentArea) => {
       <form id="voyageForm">
         <div class="form-group">
           <label for="port">Vessel:</label>
-          <input type="text" id="port" name="port" required value="M/T Fure Viten" />
+          <input type="text" id="port" name="vessel" required value="M/T Fure Viten" />
         </div>
         <div class="form-group">
           <label for="port">Port:</label>
@@ -154,9 +154,11 @@ export const currentVoyagePage = (contentArea) => {
           (cargo, index) => `
             <div class="key-value-pair">
               <span class="key">Cargo ${index + 1}:</span> 
-              <span class="key">${cargo.quantity} </span> 
+               <span class="key">${cargo.cargo}&ensp; </span> 
 
-              <span class="value">${cargo.unit || "N/A"}</span>
+              <span class="value">${cargo.quantity} ${
+            cargo.unit || "N/A"
+          }</span> 
             </div>
           `
         )
@@ -282,7 +284,7 @@ export const currentVoyagePage = (contentArea) => {
           (i) => `
         <div class="form-group cargo-row">
           <label for="cargo${i}">Cargo ${i}:</label>
-          <input type="text" id="cargo${i}" name="cargo${i}" class="cargo-name" value="${
+          <input type="text" id="cargo${i}" name="cargo${i}Type" class="cargo-name" value="${
             voyage.cargos[i - 1]?.cargo || ""
           }" placeholder="Cargo" class="cargo-name" />
 
@@ -338,7 +340,8 @@ export const currentVoyagePage = (contentArea) => {
             to: e.target.to.value,
             supplierReceiver: e.target.supplierReceiver.value,
             cargos: [1, 2, 3, 4, 5].map((i) => ({
-              quantity: e.target[`cargo${i}`].value,
+              cargo: e.target[`cargo${i}Type`].value,
+              quantity: e.target[`cargo${i}Quantity`].value,
               unit: e.target[`cargo${i}Unit`].value,
             })),
             crew: {
@@ -346,7 +349,6 @@ export const currentVoyagePage = (contentArea) => {
               masterName: e.target.masterName.value,
             },
           };
-          console.log(updatedVoyage);
           const voyages =
             JSON.parse(localStorage.getItem("currentVoyage")) || [];
           voyages[index] = updatedVoyage;
@@ -359,8 +361,6 @@ export const currentVoyagePage = (contentArea) => {
         currentVoyagePage(contentArea);
       });
     };
-
-    console.log(voyages);
 
     renderVoyage(voyages[voyageSelect.value], 0);
 
