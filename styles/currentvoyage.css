@@ -111,3 +111,7 @@
   max-width: 120px; /* Maxbredd för enhetsfältet */
 align-self: center;}
 
+.submitvoyagebtn{
+  background-color: var(--primary-color);
+}
+

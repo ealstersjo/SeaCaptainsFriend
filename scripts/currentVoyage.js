@@ -142,6 +142,9 @@ export const currentVoyagePage = (contentArea) => {
       <div id="voyageDetails"></div>
       <button id="deleteVoyages" type="deleteButton" class="deleteButton">Delete Voyages</button>
       <button id="startVoyage" class="start-btn">Add New Voyage</button>
+      <div>
+        <button id="submitVoyage" class="submitvoyagebtn">End Voyage</button>
+      </div>
     `;
 
     const voyageDetails = document.getElementById("voyageDetails");
@@ -318,6 +321,7 @@ export const currentVoyagePage = (contentArea) => {
 
       <button type="submit" id="saveChanges">Save Changes</button>
       <button type="button" id="cancelEdit">Cancel</button>
+      
     </form>
       `;
 
@@ -375,6 +379,37 @@ export const currentVoyagePage = (contentArea) => {
 
     document.getElementById("startVoyage").addEventListener("click", () => {
       renderNewVoyageForm();
+    });
+    document.getElementById("submitVoyage").addEventListener("click", () => {
+      // Visa en confirm-dialog för att bekräfta om användaren vill avsluta resan
+      const userConfirmed = confirm(
+        "Are you sure you want to end the voyage and add it to the history?"
+      );
+
+      if (userConfirmed) {
+        // Hämta den nuvarande resan (currentVoyage) från localStorage
+        const currentVoyage =
+          JSON.parse(localStorage.getItem("currentVoyage")) || [];
+
+        // Hämta den gamla listan av resor (voyageHistory) från localStorage, eller skapa en tom array om den inte finns
+        const voyageHistory =
+          JSON.parse(localStorage.getItem("voyageHistory")) || [];
+
+        // Lägg till currentVoyage till voyageHistory
+        voyageHistory.push(...currentVoyage);
+
+        // Uppdatera localStorage med den nya listan av gamla resor
+        localStorage.setItem("voyageHistory", JSON.stringify(voyageHistory));
+
+        // Ta bort currentVoyage från localStorage
+        localStorage.removeItem("currentVoyage");
+
+        // Uppdatera sidan eller visa en bekräftelse att resan har slutat
+        alert("Voyage ended and added to history!");
+
+        // Om du vill, kan du återgå till sidan som visar gamla resor
+        currentVoyagePage(contentArea); // Uppdatera sidan efter att resan har avslutats
+      }
     });
   } else {
     // Om inga voyages finns, visa start-knapp

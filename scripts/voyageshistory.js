@@ -9,6 +9,8 @@ const tempHistory = () =>
     });
 
 export const voyageshistory = async (contentArea) => {
+  const localHistory = JSON.parse(localStorage.getItem("voyageHistory"));
+  console.log(localHistory);
   const history = await tempHistory();
   if (history) {
     const voyageList = history.voyageHistory
