@@ -6,6 +6,10 @@ export const currentVoyagePage = (contentArea) => {
 
   // Rendera formulär för att skapa ett nytt voyage
   const renderNewVoyageForm = () => {
+    const unitOptions = `
+        <option value="mt"}>mt</option>
+        <option value="cbm">cbm</option>
+      `;
     contentArea.innerHTML = `
       <h1>Start New Voyage</h1>
       <form id="voyageForm">
