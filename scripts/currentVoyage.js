@@ -17,11 +17,8 @@ export const currentVoyagePage = (contentArea) => {
       <h1>Start New Voyage</h1>
       <form id="voyageForm">
         <div class="form-group">
-          <label for="vessel">Vessel:</label>
-          <select id="vessel" name="vessel" required>
-            <option value="" disabled selected>Select a vessel</option>
-            ${shipOptions}
-          </select>
+          <label for="port">Vessel:</label>
+          <input type="text" id="port" name="port" required value="M/T Fure Viten" />
         </div>
         <div class="form-group">
           <label for="port">Port:</label>

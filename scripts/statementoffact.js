@@ -412,15 +412,15 @@ export const statementOfFact = (contentArea) => {
       // Kontrollera att båda värdena är giltiga
       if (!isNaN(completedLoadValue) && !isNaN(ullageSamplingValue)) {
         const difference = completedLoadValue - ullageSamplingValue;
-        let percentage;
 
-        if (difference > 0) {
-          percentage = completedLoadValue / ullageSamplingValue;
-        } else if (difference < 0) {
-          percentage = ullageSamplingValue / completedLoadValue;
-        } else {
-          percentage = 0;
-        }
+        // Välj ett basvärde att relatera till för procentuell skillnad
+        const baseValue = completedLoadValue !== 0 ? completedLoadValue : 1; // Undvik division med 0
+
+        // Beräkna procentuell skillnad
+        let percentage = (difference / baseValue) * 100;
+
+        // Runda av till lämplig precision
+        percentage = Math.round(percentage * 100) / 100; // Till två decimaler
 
         // Fyll i värden i "Calculations Done"
         const calculationsDate = document.querySelector(
@@ -721,12 +721,10 @@ export const statementOfFact = (contentArea) => {
           } else if (dataIndex === "calculations-done") {
             console.log("Fortsätt med calculations init");
             // För fält med ett enda nummerfält
-            const numberInput = row.querySelector(
-              'td:nth-child(4) input[type="number"]'
-            );
-            if (numberInput && remarks) {
-              const value = remarks.ullage;
-              if (!isNaN(value)) numberInput.value = value;
+            const remarkValue = `Differnce: ${remarks.calculations.difference} = ${remarks.calculations.percentage}%`;
+            const remarksInput = row.querySelector("td:nth-child(4) textarea");
+            if (remarksInput && remarkValue) {
+              remarksInput.value = remarkValue;
             }
           } else {
             // Standardhantering för textarea
