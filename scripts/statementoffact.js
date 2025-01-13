@@ -1,26 +1,6 @@
-const tempSoF = {
-  vessel: "M/T Fure Viten",
-  date: "2025-01-30",
-  pni: "2332",
-  loadport: "Gothenburg",
-  terminal: "Röda Sten",
-  customerNumber: "23hej23",
-  documentsCreated: true,
-  master: "Markus Niklasson",
-};
-
 export const statementOfFact = (contentArea) => {
   const voyages = JSON.parse(localStorage.getItem("currentVoyage")) || [];
-  //console.log("current:" + JSON.stringify(voyages));
-  let sof = JSON.parse(localStorage.getItem("SoF"));
 
-  // Temporär data under testfasen
-  if (!sof) {
-    sof = tempSoF;
-  }
-
-  // Hämta det valda voyagesnummer från localStorage (om finns)
-  //localStorage.removeItem("selectedVoyageIndex");
   let selectedVoyageIndex = localStorage.getItem("selectedVoyageIndex");
 
   // Skapa voyageSelect varje gång baserat på selectedVoyageIndex
@@ -64,8 +44,8 @@ export const statementOfFact = (contentArea) => {
             <td>${selectedVoyage.date}</td>
           </tr>
           <tr>
-            <td class="sof-info-label">Terminal</td>
-            <td>${sof.terminal}</td>
+            <td class="sof-info-label">Jetty</td>
+            <td>${selectedVoyage.jetty}</td>
             <td class="sof-info-label">Voyage</td>
             <td>${selectedVoyage.voyNo}</td>
           </tr>
@@ -73,7 +53,7 @@ export const statementOfFact = (contentArea) => {
             <td class="sof-info-label">Load Port</td>
             <td>${selectedVoyage.port}</td>
             <td class="sof-info-label">Customer Number</td>
-            <td>${sof.customerNumber}</td>
+            <td>0</td>
           </tr>
         </table>
       </div>
@@ -617,7 +597,6 @@ export const statementOfFact = (contentArea) => {
     const printSoFButton = document.getElementById("printSoF");
     printSoFButton.addEventListener("click", () => {
       if (confirm("Are you sure you want to print the SoF?")) {
-        //localStorage.removeItem("SoF");
         alert("SoF has been printed!");
         //statementOfFact(contentArea); // Reload the content
       }
@@ -640,7 +619,6 @@ export const statementOfFact = (contentArea) => {
     //console.log("current: " + JSON.stringify(voyages));
     //console.log("Choosen: " + JSON.stringify(voyages[selectedVoyageIndex]));
     let sofData = voyages[selectedVoyageIndex].sof;
-    //sofData = JSON.parse(localStorage.getItem("SoF"));
     if (sofData) {
       // Gå igenom varje rad i tabellen
       document.querySelectorAll(".activity-log-body tr").forEach((row) => {
@@ -758,7 +736,7 @@ export const statementOfFact = (contentArea) => {
     }
   };
 
-  if (sof && selectedVoyage) {
+  if (selectedVoyage) {
     renderSoFForm();
   } else {
     contentArea.innerHTML = `
@@ -777,7 +755,6 @@ export const statementOfFact = (contentArea) => {
       selectedVoyage = voyages[selectedVoyageIndex]; // Hämta den valda resan baserat på index
 
       if (selectedVoyage) {
-        // Spara det valda indexet i localStorage
         localStorage.setItem("selectedVoyageIndex", selectedVoyageIndex);
 
         renderSoFForm(); // Rendera om formuläret med den nya valda resan

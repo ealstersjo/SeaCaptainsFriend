@@ -10,6 +10,7 @@ import { loadingLog } from "./loadinglog.js";
 import { dischargeLog } from "./dischargelog.js";
 import { showShipPage } from "./showShips.js";
 import { protests } from "./protests.js";
+import { settings } from "./settings.js";
 
 /* // Kontrollera om användaren är inloggad
 if (localStorage.getItem("loggedIn") !== "true") {
@@ -31,6 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const handleDischargeLog = document.getElementById("dischargeLog");
   const handleShowShip = document.getElementById("shipInfo");
   const handleProtests = document.getElementById("protests");
+  const handleSettings = document.getElementById("settings");
 
   // Hämta referens till innehållsområdet
   const contentArea = document.querySelector(".content");
@@ -80,12 +82,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const loadProtests = () => {
     protests(contentArea);
   };
+  const loadSettings = () => {
+    settings(contentArea);
+  };
 
   // När användaren klickar på respektive menyalternativ
   currentVoyageLink.addEventListener("click", loadCurrentVoyage);
   statementOfFactLink.addEventListener("click", loadStatementOfFact);
   handleAccount.addEventListener("click", loadAccount);
   handleChecklists.addEventListener("click", loadChecklists);
+  handleSettings.addEventListener("click", loadSettings);
 
   /*  handleVoyageLink.addEventListener("click", loadHandleVoyage);
   handleCalculations.addEventListener("click", loadCalculations);

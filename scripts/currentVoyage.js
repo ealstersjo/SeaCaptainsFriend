@@ -1,24 +1,19 @@
 export const currentVoyagePage = (contentArea) => {
   const voyages = JSON.parse(localStorage.getItem("currentVoyage")) || [];
-  const shipList = JSON.parse(localStorage.getItem("shipList")) || [];
+  const shipSettings = JSON.parse(localStorage.getItem("shipSettings")) || {
+    shipName: "",
+  };
 
   // Rendera formulär för att skapa ett nytt voyage
   const renderNewVoyageForm = () => {
-    const shipOptions = shipList
-      .map((ship) => `<option value="${ship.name}">${ship.name}</option>`)
-      .join("");
-
-    const unitOptions = `
-      <option value="mt">mt</option>
-      <option value="cbm">cbm</option>
-    `;
-
     contentArea.innerHTML = `
       <h1>Start New Voyage</h1>
       <form id="voyageForm">
         <div class="form-group">
           <label for="port">Vessel:</label>
-          <input type="text" id="port" name="vessel" required value="M/T Fure Viten" />
+          <input type="text" id="port" name="vessel" required value="${
+            shipSettings.shipName
+          }" />
         </div>
         <div class="form-group">
           <label for="port">Port:</label>
@@ -384,21 +379,17 @@ export const currentVoyagePage = (contentArea) => {
       );
 
       if (userConfirmed) {
-        // Hämta den nuvarande resan (currentVoyage) från localStorage
         const currentVoyage =
           JSON.parse(localStorage.getItem("currentVoyage")) || [];
 
-        // Hämta den gamla listan av resor (voyageHistory) från localStorage, eller skapa en tom array om den inte finns
         const voyageHistory =
           JSON.parse(localStorage.getItem("voyageHistory")) || [];
 
         // Lägg till currentVoyage till voyageHistory
         voyageHistory.push(...currentVoyage);
 
-        // Uppdatera localStorage med den nya listan av gamla resor
         localStorage.setItem("voyageHistory", JSON.stringify(voyageHistory));
 
-        // Ta bort currentVoyage från localStorage
         localStorage.removeItem("currentVoyage");
 
         // Uppdatera sidan eller visa en bekräftelse att resan har slutat
