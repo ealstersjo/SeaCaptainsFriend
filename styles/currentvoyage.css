@@ -14,7 +14,7 @@
 }
 
 .voyage-section, .voyage-item {
-  width: 45%; /* Justera bredden för varje sektion så att de får plats på samma rad */
+  width: 75%; /* Justera bredden för varje sektion så att de får plats på samma rad */
   box-sizing: border-box; /* Se till att padding och border inte påverkar bredden */
 }
 
@@ -62,7 +62,7 @@
 .key {
   font-weight: bold;
   color: #333;
-  width: 20%; /* Anpassa bredden så att de får bra avstånd */
+  width: 25%; /* Anpassa bredden så att de får bra avstånd */
 }
 
 .value {
@@ -81,3 +81,33 @@
 .voyage-item br {
   line-height: 1.5;
 }
+
+.cargo-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: start;
+  gap: 10px; /* Avstånd mellan fälten */
+  margin-bottom: 10px; /* Avstånd mellan rader */
+}
+
+.cargo-name,
+.cargo-quantity,
+.cargo-unit {
+  flex: 1; /* Gör att fälten tar upp lika mycket utrymme */
+  min-width: 100px; /* Minsta bredd för varje fält */
+  max-width: 30%;
+  height: 40px; /* Säkerställ konsekvent höjd för alla fält */
+  display: flex; /* Gör att innehåll i fältet kan centrereras */
+  align-items: center; /* Vertikal centrering av innehåll */
+}
+
+.cargo-quantity {
+  max-width: 150px; /* Maxbredd för mängdfältet */
+  text-align: right;
+}
+
+.cargo-unit {
+  max-width: 120px; /* Maxbredd för enhetsfältet */
+align-self: center;}
+

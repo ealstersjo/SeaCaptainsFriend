@@ -95,5 +95,5 @@ document.addEventListener("DOMContentLoaded", () => {
   handleShowShip.addEventListener("click", loadShipInfo);
   handleProtests.addEventListener("click", loadProtests);
 
-  loadStatementOfFact();
+  loadCurrentVoyage();
 });
