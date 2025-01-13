@@ -84,16 +84,17 @@ document.addEventListener("DOMContentLoaded", () => {
   // När användaren klickar på respektive menyalternativ
   currentVoyageLink.addEventListener("click", loadCurrentVoyage);
   statementOfFactLink.addEventListener("click", loadStatementOfFact);
-  handleVoyageLink.addEventListener("click", loadHandleVoyage);
-  handleCalculations.addEventListener("click", loadCalculations);
+  handleAccount.addEventListener("click", loadAccount);
   handleChecklists.addEventListener("click", loadChecklists);
+
+  /*  handleVoyageLink.addEventListener("click", loadHandleVoyage);
+  handleCalculations.addEventListener("click", loadCalculations);
   handleFileUpload.addEventListener("click", loadFileUpload);
   handleVoyagesHistory.addEventListener("click", loadVoyagesHistory);
-  handleAccount.addEventListener("click", loadAccount);
   handleLoadingLog.addEventListener("click", loadLoadingLog);
   handleDischargeLog.addEventListener("click", loadDischargeLog);
   handleShowShip.addEventListener("click", loadShipInfo);
-  handleProtests.addEventListener("click", loadProtests);
+  handleProtests.addEventListener("click", loadProtests); */
 
-  loadCurrentVoyage();
+  loadStatementOfFact();
 });

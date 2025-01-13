@@ -10,35 +10,68 @@ const tempSoF = {
 };
 
 export const statementOfFact = (contentArea) => {
+  const voyages = JSON.parse(localStorage.getItem("currentVoyage")) || [];
+  //console.log("current:" + JSON.stringify(voyages));
   let sof = JSON.parse(localStorage.getItem("SoF"));
-  const activities = JSON.parse(localStorage.getItem("activities")) || [];
 
-  //Temporär data under testfasen
+  // Temporär data under testfasen
   if (!sof) {
     sof = tempSoF;
   }
 
-  if (sof) {
+  // Hämta det valda voyagesnummer från localStorage (om finns)
+  //localStorage.removeItem("selectedVoyageIndex");
+  let selectedVoyageIndex = localStorage.getItem("selectedVoyageIndex");
+
+  // Skapa voyageSelect varje gång baserat på selectedVoyageIndex
+  const generateVoyageSelect = () => {
+    return `
+    <select id="voyageSelect">
+      <option value="" selected disabled>Select trip</option>
+      ${voyages
+        .map(
+          (voyage, index) => `
+        <option value="${index}" ${
+            index == selectedVoyageIndex ? "selected" : ""
+          }>${voyage.vessel} från ${voyage.from} till ${voyage.to}</option>
+      `
+        )
+        .join("")}
+    </select>
+  `;
+  };
+
+  let selectedVoyage;
+
+  if (selectedVoyageIndex) {
+    console.log(voyages[selectedVoyageIndex]);
+    selectedVoyage = voyages[selectedVoyageIndex];
+  }
+
+  const renderSoFForm = () => {
     contentArea.innerHTML = `
       <h1>Statement of Fact</h1>
       <small>This data is temporary and will be fetched from elsewhere</small>
+            <div class="select-container">
+      ${generateVoyageSelect()}
+      </div>
       <div class="sof-info-container">
         <table class="sof-info-table">
           <tr>
             <td class="sof-info-label">Vessel</td>
-            <td>${sof.vessel}</td>
+            <td>${selectedVoyage.vessel}</td>
             <td class="sof-info-label">Date</td>
-            <td>${sof.date}</td>
+            <td>${selectedVoyage.date}</td>
           </tr>
           <tr>
             <td class="sof-info-label">Terminal</td>
             <td>${sof.terminal}</td>
-            <td class="sof-info-label">PNI</td>
-            <td>${sof.pni}</td>
+            <td class="sof-info-label">Voyage</td>
+            <td>${selectedVoyage.voyNo}</td>
           </tr>
           <tr>
             <td class="sof-info-label">Load Port</td>
-            <td>${sof.loadport}</td>
+            <td>${selectedVoyage.port}</td>
             <td class="sof-info-label">Customer Number</td>
             <td>${sof.customerNumber}</td>
           </tr>
@@ -217,7 +250,7 @@ export const statementOfFact = (contentArea) => {
     <td><input type="time" class="editable" data-index="calculations-done" disabled /></td>
     <td><textarea class="editable" data-index="calculations-done" disabled></textarea></td>
     <td>
-        <button class="saveBtn" data-index="calculations-done" style="display:none;">Save</button>
+        <button class="saveBtn" data-index="calculations-done">Calculate</button>
         <button class="editBtn" data-index="calculations-done" style="display:none;">Edit</button>
     </td>
 </tr>
@@ -335,14 +368,32 @@ export const statementOfFact = (contentArea) => {
 
       <button id="deleteVoyageButton" type="deleteButton">Delete SoF</button>
     `;
+    initializeActivities();
+
+    // Bind event listener till VoyageSelect varje gång efter rendering
+    const voyageSelectElement = document.getElementById("voyageSelect");
+    if (voyageSelectElement) {
+      voyageSelectElement.addEventListener("change", function () {
+        selectedVoyageIndex = this.value; // Uppdatera index när användaren väljer en resa
+        selectedVoyage = voyages[selectedVoyageIndex]; // Hämta den valda resan baserat på index
+
+        if (selectedVoyage) {
+          // Spara det valda indexet i localStorage
+          localStorage.setItem("selectedVoyageIndex", selectedVoyageIndex);
+
+          renderSoFForm(); // Rendera om formuläret med den nya valda resan
+        }
+      });
+    }
+
     const calculateVolumeDifference = () => {
       // Hämta sparade data från SoF (om de finns)
-      const sofData = JSON.parse(localStorage.getItem("SoF")) || {};
-
+      const sofData = selectedVoyage.sof;
+      //console.log(sofData);
       // Kontrollera om värden finns sparade i SoF-data
       const completedLoadValue =
-        sofData["completed-load"] && sofData["completed-load"].remarks
-          ? parseFloat(sofData["completed-load"].remarks)
+        sofData["completed-load"] && sofData["completed-load"].remarks.shipLoad
+          ? parseFloat(sofData["completed-load"].remarks.shipLoad)
           : parseFloat(
               document.querySelector(
                 'input[data-index="completed-load"][type="number"]'
@@ -350,8 +401,8 @@ export const statementOfFact = (contentArea) => {
             );
 
       const ullageSamplingValue =
-        sofData["ullage-sampling"] && sofData["ullage-sampling"].remarks
-          ? parseFloat(sofData["ullage-sampling"].remarks)
+        sofData["ullage-sampling"] && sofData["ullage-sampling"].remarks.ullage
+          ? parseFloat(sofData["ullage-sampling"].remarks.ullage)
           : parseFloat(
               document.querySelector(
                 'input[data-index="ullage-sampling"][type="number"]'
@@ -393,15 +444,10 @@ export const statementOfFact = (contentArea) => {
           2
         )}mt = ${percentage.toFixed(2)}%`;
 
-        // Uppdatera SoF-objektet
-        sof["calculations-done"] = {
-          date: currentDate,
-          time: currentTime,
-          remarks: `Difference: ${difference.toFixed(
-            2
-          )}mt = ${percentage.toFixed(2)}%`,
+        return {
+          percentage: percentage,
+          difference: difference,
         };
-        localStorage.setItem("SoF", JSON.stringify(sof));
       } else {
         /*  alert(
           "Both 'Completed Load' and 'Ullage/Sampling' must have valid numeric values."
@@ -433,59 +479,107 @@ export const statementOfFact = (contentArea) => {
         const key = row
           .querySelector("td:nth-child(2) input")
           .getAttribute("data-index"); // Andra kolumnen (date input)
-        console.log(key);
         // Hämta värden från input- och textarea-fälten i kolumner 2, 3 och 4
         const date = row.querySelector("td:nth-child(2) input").value; // Andra kolumnen (date input)
         const time = row.querySelector("td:nth-child(3) input").value; // Tredje kolumnen (time input)
-        let remarks = "";
+        let remarks = {};
         if (key === "first-line-ashore") {
           // Hämta värden från Fwd och Aft Draft-fälten
           const fwdDraft = row.querySelector('input[data-type="fwd"]').value;
           const aftDraft = row.querySelector('input[data-type="aft"]').value;
 
-          // Bygg remarks-strängen
-          remarks =
-            fwdDraft && aftDraft ? `F = ${fwdDraft}m A = ${aftDraft}m` : "";
+          // Bygg remarks-objektet
+          remarks = {
+            fwdDraft: fwdDraft || null,
+            aftDraft: aftDraft || null,
+          };
         } else if (key === "all-fast") {
           const lng = row.querySelector('input[data-type="lng"]').value;
           const go = row.querySelector('input[data-type="go"]').value;
 
-          // Bygg remarks-strängen
-          remarks = lng && go ? `LNG = ${lng}mt GO = ${go}mt` : "";
+          // Bygg remarks-objektet
+          remarks = {
+            lng: lng || null,
+            go: go || null,
+          };
         } else if (key === "changed-pilot") {
           const lng = row.querySelector('input[data-type="lng"]').value;
           const go = row.querySelector('input[data-type="go"]').value;
 
-          // Bygg remarks-strängen
-          remarks = lng && go ? `LNG = ${lng}mt GO = ${go}mt` : "";
+          // Bygg remarks-objektet
+          remarks = {
+            lng: lng || null,
+            go: go || null,
+          };
         } else if (key === "pilot-disembarked") {
           // Hämta värden från Fwd och Aft Draft-fälten
           const fwdDraft = row.querySelector('input[data-type="fwd"]').value;
           const aftDraft = row.querySelector('input[data-type="aft"]').value;
 
-          // Bygg remarks-strängen
-          remarks =
-            fwdDraft && aftDraft ? `F = ${fwdDraft}m A = ${aftDraft}m` : "";
+          // Bygg remarks-objektet
+          remarks = {
+            fwdDraft: fwdDraft || null,
+            aftDraft: aftDraft || null,
+          };
         } else if (key === "completed-load") {
-          // Hämta värden från Fwd och Aft Draft-fälten
           const shipLoad = row.querySelector("td:nth-child(4) input").value;
 
-          // Bygg remarks-strängen
-          remarks = shipLoad ? `${shipLoad}` : "";
+          // Bygg remarks-objektet
+          remarks = {
+            shipLoad: shipLoad || null,
+          };
         } else if (key === "ullage-sampling") {
-          // Hämta värden från Fwd och Aft Draft-fälten
           const blValue = row.querySelector("td:nth-child(4) input").value;
 
-          // Bygg remarks-strängen
-          remarks = blValue ? `${blValue}` : "";
+          // Bygg remarks-objektet
+          remarks = {
+            ullage: blValue || null,
+          };
+        } else if (key === "calculations-done") {
+          const blValue = calculateVolumeDifference();
+          console.log(blValue);
+          // Bygg remarks-objektet
+          remarks = {
+            calculations: blValue || null,
+          };
         } else {
-          remarks = row.querySelector("td:nth-child(4) textarea").value; // Fjärde kolumnen (textarea)
+          const generalRemarks = row.querySelector(
+            "td:nth-child(4) textarea"
+          ).value;
+
+          // Bygg remarks-objektet
+          remarks = {
+            general: generalRemarks || null,
+          };
         }
 
-        sof[key] = { date: date, time: time, remarks: remarks };
-        //alert(`${key}{date: ${date}, time: ${time}, remarks: ${remarks}}`);
-        // Switch to Edit mode after Save
-        localStorage.setItem("SoF", JSON.stringify(sof));
+        // Kontrollera om selectedVoyage har en sof och om inte, skapa den
+        if (selectedVoyage) {
+          if (!selectedVoyage.sof) {
+            selectedVoyage.sof = {}; // Skapa ett tomt objekt för sof om det inte finns
+          }
+
+          // Uppdatera selectedVoyage.sof med den nya informationen
+          selectedVoyage.sof[key] = {
+            date: date || null,
+            time: time || null,
+            remarks: remarks, // Spara hela remarks-objektet
+          };
+
+          // Hitta indexet för den valda resan i currentVoyage
+          const voyageIndex = voyages.findIndex(
+            (voyage) => voyage === selectedVoyage
+          );
+
+          // Uppdatera currentVoyage med den uppdaterade selectedVoyage
+          if (voyageIndex !== -1) {
+            voyages[voyageIndex] = selectedVoyage;
+            // Spara hela currentVoyage i localStorage
+            localStorage.setItem("currentVoyage", JSON.stringify(voyages));
+          }
+        } else {
+          console.error("selectedVoyage är inte definierad");
+        }
 
         event.target.style.display = "none";
         const editButton = row.querySelector(".editBtn");
@@ -538,138 +632,165 @@ export const statementOfFact = (contentArea) => {
         statementOfFact(contentArea); // Reload the content
       }
     });
-  } else {
-    contentArea.innerHTML = `
-      <h1>Statement of Fact</h1>
-      <p>No current voyage available to display Statement of Fact.</p>
-    `;
-  }
+  };
 
   const initializeActivities = () => {
     // Hämta SoF-objektet från localStorage
-    const sofData = JSON.parse(localStorage.getItem("SoF")) || {};
-    console.log(sofData);
-    // Gå igenom varje rad i tabellen
-    document.querySelectorAll(".activity-log-body tr").forEach((row) => {
-      // Hämta data-index från valfri input i raden
-      const dataIndex = row
-        .querySelector("input, textarea")
-        .getAttribute("data-index");
+    const voyages = JSON.parse(localStorage.getItem("currentVoyage"));
+    //console.log("current: " + JSON.stringify(voyages));
+    //console.log("Choosen: " + JSON.stringify(voyages[selectedVoyageIndex]));
+    let sofData = voyages[selectedVoyageIndex].sof;
+    //sofData = JSON.parse(localStorage.getItem("SoF"));
+    if (sofData) {
+      // Gå igenom varje rad i tabellen
+      document.querySelectorAll(".activity-log-body tr").forEach((row) => {
+        // Hämta data-index från valfri input i raden
+        const dataIndex = row
+          .querySelector("input, textarea")
+          .getAttribute("data-index");
 
-      // Om det finns data för denna aktivitet i SoF
-      if (sofData[dataIndex]) {
-        const { date, time, remarks } = sofData[dataIndex];
+        // Om det finns data för denna aktivitet i SoF
+        if (sofData[dataIndex]) {
+          const { date, time, remarks } = sofData[dataIndex];
 
-        // Fyll i input-fälten med data
-        const dateInput = row.querySelector(
-          'td:nth-child(2) input[type="date"]'
-        );
-        const timeInput = row.querySelector(
-          'td:nth-child(3) input[type="time"]'
-        );
-        const remarksInput = row.querySelector("td:nth-child(4) textarea");
-
-        if (dateInput && date) dateInput.value = date;
-        if (timeInput && time) timeInput.value = time;
-        if (dataIndex === "first-line-ashore") {
-          // För "First Line Ashore" dela upp remarks i två inputfält
-          const draftInputs = row.querySelectorAll(
-            'td:nth-child(4) input[type="number"]'
+          // Fyll i input-fälten med data
+          const dateInput = row.querySelector(
+            'td:nth-child(2) input[type="date"]'
           );
-          if (draftInputs.length === 2 && remarks) {
-            const [fwd, aft] =
-              remarks.match(/F\s*=\s*([\d.]+).*A\s*=\s*([\d.]+)/)?.slice(1) ||
-              [];
-            if (fwd) draftInputs[0].value = fwd;
-            if (aft) draftInputs[1].value = aft;
-          }
-        } else if (dataIndex === "all-fast") {
-          // För "First Line Ashore" dela upp remarks i två inputfält
-          const draftInputs = row.querySelectorAll(
-            'td:nth-child(4) input[type="number"]'
+          const timeInput = row.querySelector(
+            'td:nth-child(3) input[type="time"]'
           );
-          if (draftInputs.length === 2 && remarks) {
-            const [lng, go] =
-              remarks
-                .match(/LNG\s*=\s*([\d.]+).*GO\s*=\s*([\d.]+)/)
-                ?.slice(1) || [];
-
-            if (lng) draftInputs[0].value = lng;
-            if (go) draftInputs[1].value = go;
-          }
-        } else if (dataIndex === "changed-pilot") {
-          // För "First Line Ashore" dela upp remarks i två inputfält
-          const draftInputs = row.querySelectorAll(
-            'td:nth-child(4) input[type="number"]'
-          );
-          if (draftInputs.length === 2 && remarks) {
-            const [lng, go] =
-              remarks
-                .match(/LNG\s*=\s*([\d.]+).*GO\s*=\s*([\d.]+)/)
-                ?.slice(1) || [];
-
-            if (lng) draftInputs[0].value = lng;
-            if (go) draftInputs[1].value = go;
-          }
-        } else if (dataIndex === "pilot-disembarked") {
-          // För "First Line Ashore" dela upp remarks i två inputfält
-          const draftInputs = row.querySelectorAll(
-            'td:nth-child(4) input[type="number"]'
-          );
-          if (draftInputs.length === 2 && remarks) {
-            const [fwd, aft] =
-              remarks.match(/F\s*=\s*([\d.]+).*A\s*=\s*([\d.]+)/)?.slice(1) ||
-              [];
-            if (fwd) draftInputs[0].value = fwd;
-            if (aft) draftInputs[1].value = aft;
-          }
-        } else if (
-          dataIndex === "completed-load" ||
-          dataIndex === "ullage-sampling"
-        ) {
-          // För fält med ett enda nummerfält
-          const numberInput = row.querySelector(
-            'td:nth-child(4) input[type="number"]'
-          );
-          if (numberInput && remarks) {
-            const value = parseFloat(remarks.match(/[\d.]+/)?.[0]);
-            if (!isNaN(value)) numberInput.value = value;
-          }
-        } else {
-          // Standardhantering för textarea
           const remarksInput = row.querySelector("td:nth-child(4) textarea");
-          if (remarksInput && remarks) {
-            remarksInput.value = remarks;
+
+          if (dateInput && date) dateInput.value = date;
+          if (timeInput && time) timeInput.value = time;
+          if (dataIndex === "first-line-ashore") {
+            // För "First Line Ashore" dela upp remarks i två inputfält
+            const draftInputs = row.querySelectorAll(
+              'td:nth-child(4) input[type="number"]'
+            );
+            if (draftInputs.length === 2 && remarks) {
+              draftInputs[0].value = remarks.fwdDraft || "";
+              draftInputs[1].value = remarks.aftDraft || "";
+            }
+          } else if (dataIndex === "all-fast") {
+            // För "First Line Ashore" dela upp remarks i två inputfält
+            const draftInputs = row.querySelectorAll(
+              'td:nth-child(4) input[type="number"]'
+            );
+            if (draftInputs.length === 2 && remarks) {
+              draftInputs[0].value = remarks.lng || "";
+              draftInputs[1].value = remarks.go || "";
+            }
+          } else if (dataIndex === "changed-pilot") {
+            // För "First Line Ashore" dela upp remarks i två inputfält
+            const draftInputs = row.querySelectorAll(
+              'td:nth-child(4) input[type="number"]'
+            );
+            if (draftInputs.length === 2 && remarks) {
+              draftInputs[0].value = remarks.lng || "";
+              draftInputs[1].value = remarks.go || "";
+            }
+          } else if (dataIndex === "pilot-disembarked") {
+            // För "First Line Ashore" dela upp remarks i två inputfält
+            const draftInputs = row.querySelectorAll(
+              'td:nth-child(4) input[type="number"]'
+            );
+            if (draftInputs.length === 2 && remarks) {
+              draftInputs[0].value = remarks.fwdDraft || "";
+              draftInputs[1].value = remarks.aftDraft || "";
+            }
+          } else if (dataIndex === "completed-load") {
+            // För fält med ett enda nummerfält
+            const numberInput = row.querySelector(
+              'td:nth-child(4) input[type="number"]'
+            );
+            if (numberInput && remarks) {
+              const value = remarks.shipLoad;
+              if (!isNaN(value)) numberInput.value = value;
+            }
+          } else if (dataIndex === "ullage-sampling") {
+            // För fält med ett enda nummerfält
+            const numberInput = row.querySelector(
+              'td:nth-child(4) input[type="number"]'
+            );
+            if (numberInput && remarks) {
+              const value = remarks.ullage;
+              if (!isNaN(value)) numberInput.value = value;
+            }
+          } else if (dataIndex === "calculations-done") {
+            console.log("Fortsätt med calculations init");
+            // För fält med ett enda nummerfält
+            const numberInput = row.querySelector(
+              'td:nth-child(4) input[type="number"]'
+            );
+            if (numberInput && remarks) {
+              const value = remarks.ullage;
+              if (!isNaN(value)) numberInput.value = value;
+            }
+          } else {
+            // Standardhantering för textarea
+            const remarksInput = row.querySelector("td:nth-child(4) textarea");
+            if (remarksInput && remarks) {
+              remarksInput.value = remarks;
+            }
           }
-        }
-        // Lås alla inputfält
-        row.querySelectorAll(".editable").forEach((input) => {
-          input.disabled = true;
-        });
-
-        // Hantera fall där det finns två inputfält i en specifik kolumn
-        const draftInputs = row.querySelectorAll(
-          'td:nth-child(4) input[type="number"]'
-        );
-        if (draftInputs.length === 2) {
-          draftInputs.forEach((input) => {
-            input.disabled = true; // Lås varje inputfält
+          // Lås alla inputfält
+          row.querySelectorAll(".editable").forEach((input) => {
+            input.disabled = true;
           });
-        }
-        // Visa Edit-knappen och dölj Save-knappen
-        const saveButton = row.querySelector(".saveBtn");
-        const editButton = row.querySelector(".editBtn");
 
-        if (saveButton) saveButton.style.display = "none";
-        if (editButton) editButton.style.display = "inline-block";
-      }
-    });
+          // Hantera fall där det finns två inputfält i en specifik kolumn
+          const draftInputs = row.querySelectorAll(
+            'td:nth-child(4) input[type="number"]'
+          );
+          if (draftInputs.length === 2) {
+            draftInputs.forEach((input) => {
+              input.disabled = true; // Lås varje inputfält
+            });
+          }
+          // Visa Edit-knappen och dölj Save-knappen
+          const saveButton = row.querySelector(".saveBtn");
+          const editButton = row.querySelector(".editBtn");
+
+          if (saveButton) saveButton.style.display = "none";
+          if (editButton) editButton.style.display = "inline-block";
+        }
+      });
+    }
   };
 
-  // Kontrollera om DOM är redo eller kör koden direkt
+  if (sof && selectedVoyage) {
+    renderSoFForm();
+  } else {
+    contentArea.innerHTML = `
+      <h1>Statement of Fact</h1>
+      <div class="select-container">
+      ${generateVoyageSelect()}
+      </div>
+    `;
+  }
+
+  // Hantera event för att välja rutt
+  const voyageSelectElement = document.getElementById("voyageSelect");
+  if (voyageSelectElement) {
+    voyageSelectElement.addEventListener("change", function () {
+      selectedVoyageIndex = this.value; // Uppdatera index när användaren väljer en resa
+      selectedVoyage = voyages[selectedVoyageIndex]; // Hämta den valda resan baserat på index
+
+      if (selectedVoyage) {
+        // Spara det valda indexet i localStorage
+        localStorage.setItem("selectedVoyageIndex", selectedVoyageIndex);
+
+        renderSoFForm(); // Rendera om formuläret med den nya valda resan
+      }
+    });
+  }
+
+  /*   // Kontrollera om DOM är redo eller kör koden direkt
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", initializeActivities);
   } else {
     initializeActivities();
-  }
+  }*/
 };
