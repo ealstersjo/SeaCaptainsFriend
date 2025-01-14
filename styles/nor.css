@@ -1,0 +1,107 @@
+/* Allmänt för sidan */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+  }
+  
+  /* Rubrik */
+  h1 {
+    text-align: center;
+    margin-top: 20px;
+    color: #2c3e50;
+  }
+  
+  /* Informationstabell */
+  .nor-info-table {
+    width: 90%;
+    max-width: 800px;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .nor-info-table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  .nor-info-table .nor-info-label {
+    font-weight: bold;
+    background-color: #f8f9fa;
+    color: #34495e;
+  }
+  
+  /* Dropdown för resor */
+  .select-container {
+    width: 90%;
+    max-width: 800px;
+    margin: 10px auto 20px auto;
+    text-align: center;
+  }
+  
+  .select-container select {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .select-container select:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 3px #3498db;
+  }
+  
+  /* Utskriftsknapp */
+  #printNOR {
+    display: block;
+    width: 90%;
+    max-width: 300px;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: var(--primary-color);
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease;
+  }
+  
+  #printNOR:hover {
+    background-color: var(--secondary-color);
+  }
+  
+  #printNOR:active {
+    background-color: #1f6f97;
+  }
+  
+  /* Responsiv design */
+  @media (max-width: 768px) {
+    .nor-info-table td {
+      padding: 10px;
+      font-size: 14px;
+    }
+  
+    #printNOR {
+      font-size: 14px;
+      padding: 8px;
+    }
+  
+    .select-container select {
+      font-size: 14px;
+    }
+  }
+  
