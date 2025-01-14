@@ -3,7 +3,6 @@ export const settings = (contentArea) => {
   const shipSettings = JSON.parse(localStorage.getItem("shipSettings")) || {
     shipName: "",
   };
-
   contentArea.innerHTML = `
       <h1 class="settings-title">Settings</h1>
       <div class="settings-container">
@@ -18,6 +17,16 @@ export const settings = (contentArea) => {
               placeholder="Enter ship name"
             />
           </div>
+          <div class="settings-form-row">
+            <label for="shipCallSign" class="settings-label">Call sign:</label>
+            <input 
+              type="text" 
+              id="shipCallSign" 
+              class="settings-input" 
+              value="${shipSettings.callsign || ""}" 
+              placeholder="Enter ship call sign"
+            />
+          </div>
           <button type="submit" class="settings-button">Save</button>
         </form>
       </div>
@@ -27,9 +36,10 @@ export const settings = (contentArea) => {
   document.getElementById("settingsForm").addEventListener("submit", (e) => {
     e.preventDefault();
     const shipName = document.getElementById("shipName").value;
+    const callsign = document.getElementById("shipCallSign").value;
 
     // Spara uppdaterade inställningar i localStorage
-    const updatedSettings = { shipName };
+    const updatedSettings = { shipName, callsign };
     localStorage.setItem("shipSettings", JSON.stringify(updatedSettings));
 
     alert(`Settings saved! Ship Name: ${shipName}`);

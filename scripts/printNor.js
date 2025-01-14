@@ -1,5 +1,9 @@
 export const noticeOfReadiness = (contentArea) => {
   const voyages = JSON.parse(localStorage.getItem("currentVoyage")) || [];
+  const shipSettings = JSON.parse(localStorage.getItem("shipSettings")) || {
+    shipName: "",
+  };
+  console.log(shipSettings);
 
   let selectedVoyageIndex = localStorage.getItem("selectedVoyageIndex");
 
@@ -80,14 +84,39 @@ export const noticeOfReadiness = (contentArea) => {
     // Hantera print-knappen
     document.getElementById("printNOR").addEventListener("click", () => {
       const printContent = `
-          <h1>Notice of Readiness</h1>
-          <p>Vessel: ${selectedVoyage.vessel}</p>
-          <p>Voy No: ${selectedVoyage.voyNo}</p>
-          <p>To: ${selectedVoyage.to}</p>
-          <p>Port: ${selectedVoyage.port}</p>
-          <p>Date: ${selectedVoyage.date}</p>
-          <p>Cargo: ${selectedVoyage.cargos[0]?.cargo} (${selectedVoyage.cargos[0]?.quantity} ${selectedVoyage.cargos[0]?.unit})</p>
-          <p>Master: ${selectedVoyage.crew.masterName}</p>
+                 <h1>${shipSettings.shipName}</h1>
+
+           <h1>Notice of Readiness</h1>
+       
+        <div class="nor-info-container">
+          <table class="nor-info-table">
+          <tr>
+              <td class="nor-info-label">To</td>
+              <td>${selectedVoyage.to}</td>
+              <td class="nor-info-label">Port</td>
+              <td>${selectedVoyage.port}</td>
+            </tr>
+            <tr>
+              
+              <td class="nor-info-label">Voy No</td>
+              <td>${selectedVoyage.voyNo}</td>
+              <td class="nor-info-label">Date</td>
+              <td>${selectedVoyage.date}</td>
+            </tr>
+            
+            <tr>
+            </table>
+            <p>I the undersigned herby tender the: ${shipSettings.shipName}  ${shipSettings.callsign}</p>
+
+              
+              <td class="nor-info-label">Cargo</td>
+              <td>${selectedVoyage.cargos[0]?.cargo} (${selectedVoyage.cargos[0]?.quantity} ${selectedVoyage.cargos[0]?.unit})</td>
+            </tr>
+            <tr>
+              <td class="nor-info-label">Master</td>
+              <td>${selectedVoyage.crew.masterName}</td>
+            </tr>
+        </div>
         `;
 
       const printWindow = window.open("", "_blank");
