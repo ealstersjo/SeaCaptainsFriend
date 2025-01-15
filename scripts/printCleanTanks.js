@@ -1,0 +1,181 @@
+export const cleanlinessTankCertificate = (contentArea) => {
+  const voyages = JSON.parse(localStorage.getItem("currentVoyage")) || [];
+  const shipSettings = JSON.parse(localStorage.getItem("shipSettings")) || {
+    shipName: "",
+  };
+
+  let selectedVoyageIndex = localStorage.getItem("selectedVoyageIndex");
+
+  // Funktion för att generera dropdown för resor
+  const generateVoyageSelect = () => {
+    return `
+        <select id="voyageSelect">
+          <option value="" selected disabled>Select voyage</option>
+          ${voyages
+            .map(
+              (voyage, index) => `
+            <option value="${index}">${voyage.vessel} - ${
+                voyage.voyNo || "N/A"
+              } [${voyage.from} - ${voyage.to}]
+              </option>
+          `
+            )
+            .join("")}
+        </select>
+      `;
+  };
+
+  // Hämta vald resa
+  let selectedVoyage;
+
+  if (selectedVoyageIndex) {
+    selectedVoyage = voyages[selectedVoyageIndex];
+  }
+
+  // Funktion för att rendera Cleanliness Tank Certificate
+  const renderCleanlinessCertificateForm = () => {
+    if (!selectedVoyage) {
+      contentArea.innerHTML = `
+            <h1>Cleanliness Tank Certificate Before Loading</h1>
+            <small>Select a voyage to proceed</small>
+            <div class="select-container">${generateVoyageSelect()}</div>
+          `;
+      return;
+    }
+    console.log(selectedVoyage);
+
+    contentArea.innerHTML = `
+          <h1>Cleanliness Tank Certificate Before Loading</h1>
+          <div class="select-container">
+            ${generateVoyageSelect()}
+          </div>
+          <div class="certificate-info-container">
+            <table class="certificate-info-table">
+              <tr>
+                <td class="certificate-info-label">Voy</td>
+                <td>${selectedVoyage.voyNo}</td>
+                <td class="certificate-info-label">From</td>
+                <td>${selectedVoyage.from}</td>
+                <td class="certificate-info-label">To</td>
+                <td>${selectedVoyage.to}</td>
+              </tr>
+              <tr>
+                <td class="certificate-info-label">Cargo</td>
+                <td>${selectedVoyage.cargos[0]?.cargo}</td>
+                <td class="certificate-info-label">Cargo Tanks No</td>
+                <td>CT 1, 2, 3, 4, 5, 6 p/s</td>
+                <td class="certificate-info-label">Port</td>
+                <td>${selectedVoyage.port}</td>
+              </tr>
+              <tr>
+                <td class="certificate-info-label">Date</td>
+                <td>${selectedVoyage.sof?.["tank-inspection"]?.date}</td>
+                <td class="certificate-info-label">Time</td>
+                <td>${selectedVoyage.sof?.["tank-inspection"]?.time}</td>
+              </tr>
+            </table>
+            <button id="printCertificate">Print Cleanliness Tank Certificate</button>
+          </div>
+        `;
+
+    // Hantera print-knappen
+    document
+      .getElementById("printCertificate")
+      .addEventListener("click", () => {
+        // Öppna utskriftssidan
+        const printWindow = window.open(
+          "../pages/printcleantanks.html",
+          "_blank"
+        );
+
+        // Vänta tills utskriftsmallen är laddad
+        printWindow.onload = () => {
+          // Fyll i header-sektionen
+          const headerSection =
+            printWindow.document.querySelector(".header-title");
+          headerSection.innerHTML = `
+              <h1>${shipSettings.shipName}</h1>
+              <h1>CLEANLINESS TANK CERTIFICATE BEFORE LOADING</h1>
+            `;
+
+          // Fyll i content-sektionen
+          const contentSection = printWindow.document.querySelector(".content");
+          contentSection.innerHTML = `
+              <div class="certificate-info-section">
+    <div class="certificate-info-section">
+  <table class="voyage-info-table">
+    <tr>
+      <td><strong>Voy:</strong></td>
+      <td>${selectedVoyage.voyNo}</td>
+      <td><strong>From:</strong></td>
+      <td>${selectedVoyage.from}</td>
+      <td><strong>To:</strong></td>
+      <td>${selectedVoyage.to}</td>
+    </tr>
+  </table>
+</div>
+
+    <div class="inspection-info">
+        <p class="cleaned-tanks-text">This is to certify that the following cargo tanks/lines has been inspected before loading and are clean and dry and suitable for loading:</p>
+    </div>
+    <div class="cargo-info">
+        <p><strong>Cargo:</strong> ${selectedVoyage.cargos[0]?.cargo}</p>
+    </div>
+    <div class="cargo-tanks-info">
+        <p><strong>Cargo Tanks No:</strong> CT 1, 2, 3, 4, 5, 6 p/s</p>
+    </div>
+    <div class="port-info">
+<table class="port-info-table">
+  <tr>
+    <td><strong>Port:</strong></td>
+    <td>${selectedVoyage.port}</td>
+    <td><strong>Date:</strong></td>
+    <td>${selectedVoyage.sof?.["tank-inspection"]?.date}</td>
+    <td><strong>Time:</strong></td>
+    <td>${selectedVoyage.sof?.["tank-inspection"]?.time}</td>
+  </tr>
+</table>
+    </div>
+</div>
+
+
+
+            `;
+
+          // Fyll i footer-sektionen
+          const footerSection = printWindow.document.querySelector(".footer");
+          footerSection.innerHTML = `
+              <div class="certificate-signature-section">
+                <div class="certificate-signature">
+                  <div class="certificate-line"></div>
+                  <span>Shore representative / Surveyor</span>
+                   <div class="certificate-line"></div>
+                  <span>Name in block letters</span>
+                </div>
+                <div class="certificate-signature">
+                  <div class="certificate-line"></div>
+                  <span>Ship's representative.</span>
+                  <p><span>Chief Officer: ${selectedVoyage.crew.chiefOfficer}</span></p>
+                </div>
+              </div>
+            `;
+
+          // Starta utskriften
+          printWindow.print();
+        };
+      });
+  };
+
+  // Rendera formulär vid start
+  renderCleanlinessCertificateForm();
+
+  // Hantera ändring av vald resa
+  contentArea.addEventListener("change", (e) => {
+    if (e.target.id === "voyageSelect") {
+      selectedVoyageIndex = e.target.value;
+      localStorage.setItem("selectedVoyageIndex", selectedVoyageIndex);
+      selectedVoyage = voyages[selectedVoyageIndex];
+      renderCleanlinessCertificateForm();
+    }
+  });
+};

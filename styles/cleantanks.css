@@ -1,0 +1,122 @@
+/* Allmänt för sidan */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+/* Rubrik */
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    color: #2c3e50;
+}
+
+/* Informationstabel */
+.certificate-info-table {
+    width: 90%;
+    max-width: 800px;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.certificate-info-table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.certificate-info-table .certificate-info-label {
+    font-weight: bold;
+    background-color: #f8f9fa;
+    color: #34495e;
+}
+
+/* Informationstext */
+.certificate-info-section {
+    width: 90%;
+    max-width: 800px;
+    margin: 20px auto;
+    font-size: 16px;
+    color: #333;
+}
+
+.certificate-info-section p {
+    margin-bottom: 12px;
+}
+
+.certificate-info-section strong {
+    color: #2c3e50;
+}
+
+/* Signatursektion */
+.certificate-signature-section {
+    width: 90%;
+    max-width: 800px;
+    margin: 40px auto;
+    font-size: 16px;
+}
+
+.certificate-signature-section p {
+    margin-bottom: 12px;
+}
+
+.certificate-signature {
+    display: inline-block;
+    width: 45%;
+    text-align: center;
+}
+
+.certificate-signature .certificate-line {
+    width: 80%;
+    border-bottom: 1px solid #333;
+    margin-bottom: 5px;
+}
+
+.certificate-signature span {
+    font-weight: bold;
+    display: block;
+}
+
+/* Utskriftsknapp */
+#printCertificate {
+    display: block;
+    width: 90%;
+    max-width: 300px;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #3498db;
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+#printCertificate:hover {
+    background-color: #2980b9;
+}
+
+#printCertificate:active {
+    background-color: #1f6f97;
+}
+
+/* Responsiv design */
+@media (max-width: 768px) {
+    .certificate-info-table td {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    #printCertificate {
+        font-size: 14px;
+        padding: 8px;
+    }
+}

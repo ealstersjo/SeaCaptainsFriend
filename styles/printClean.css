@@ -1,0 +1,171 @@
+/* Grundläggande layout som gäller för både webbläsare och utskrift */
+body {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  .header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .header-info {
+    display: flex; /* Använd flexbox för att placera element horisontellt */
+    align-items: center; /* Justera vertikalt innehåll så att de ligger på samma linje */
+    gap: 20px; /* Mellanrum mellan logotypen och innehållet */
+    margin-bottom: 20px;
+  }
+  .header-logo {
+    max-width: 150px; /* Justera storlek på loggan */
+    margin-bottom: 10px;
+  }
+  .header-title {
+    display: grid;
+    grid-template-columns:  repeat(1, 1fr);
+    gap: 10px; /* Mellanrum mellan rader och kolumner */
+    justify-content: start; /* Centrerar innehållet horisontellt */
+    max-width: 800px; /* Sätter maxbredd för att hålla layouten kompakt */
+    margin: 0 auto; /* Centrerar layouten på sidan */
+  }
+  .header-title h1{
+    margin-top: -20px;
+    font-size: large;
+  }
+  
+  .content {
+    margin: 20px auto;
+    max-width: 800px;
+  }
+  
+  .certificate-info-section p {
+    margin: 10px 0;
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .voyage-info-table {
+    width: 70%;
+    border-collapse: collapse; /* Tar bort mellanrum mellan celler */
+    margin: 0 auto 15px auto; /* Centrerar tabellen horisontellt */
+  }
+  
+  
+  .voyage-info-table td {
+    padding: 8px 12px;
+    text-align: left;
+    vertical-align: middle; /* Justerar vertikalt innehåll så att det blir i linje */
+  }
+  
+  .voyage-info-table td:first-child,
+  .voyage-info-table td:nth-child(3),
+  .voyage-info-table td:nth-child(5) {
+    font-weight: bold; /* Fetstil för de första cellerna (etiketterna) */
+  }
+  
+  .voyage-info-table td:nth-child(odd) {
+    width: 20%; /* Etikettkolumnerna får mindre utrymme */
+  }
+  
+  .voyage-info-table td:nth-child(even) {
+    width: 30%; /* Värdena får mer utrymme */
+  }
+
+  .cleaned-tanks-text{
+    font-weight: bold;
+  }
+  
+  .certificate-info-section p strong {
+    font-weight: bold;
+  }
+  
+  .inspection-info, .cargo-info, .cargo-tanks-info, .port-info {
+    margin-bottom: 15px;
+  }
+  
+  .inspection-info p, .cargo-info p, .cargo-tanks-info p, .port-info p {
+    font-size: 16px;
+    text-align: left;
+  }
+  
+  .cargo-info p strong, .cargo-tanks-info p strong, .port-info p strong {
+    font-weight: bold;
+  }
+  .port-info-table {
+    width: 70%;
+    border-collapse: collapse; /* Tar bort mellanrum mellan celler */
+    margin: 0 auto 15px auto; /* Centrerar tabellen horisontellt */
+  }
+  
+  .port-info-table td {
+    padding: 8px;
+    font-size: 16px;
+    text-align: left;
+  }
+  
+  .port-info-table td strong {
+    font-weight: bold;
+  }
+  
+
+  
+  /* Footer */
+.footer {
+    margin-top: 30px;
+    width: 90%; /* Gör fotern något smalare för att hålla innehållet inom sidan */
+    max-width: 800px;
+    margin: 0 auto; /* Centrerar fotern horisontellt */
+  }
+  
+  .certificate-received,
+  .certificate-date {
+    margin: 15px 0;
+    font-size: 16px;
+  }
+  
+  .certificate-signature-section {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+    width: 100%;
+  }
+  
+  .certificate-signature {
+    text-align: center;
+    width: 40%;
+  }
+  
+  .certificate-line {
+    border-bottom: 1px solid #000;
+    margin-bottom: 5px;
+    margin-top: 75px;
+  }
+  
+  .certificate-signature span {
+    font-weight: bold;
+    font-size: 16px;
+  }
+  
+  .certificate-signature p {
+    font-size: 14px;
+  }
+  
+  
+  /* Specifikt för utskrift */
+  @media print {
+    @page {
+      margin-left: 1cm;
+      margin-right: 1cm;
+      margin-top: 0.8cm;
+      margin-bottom: 0.8cm;
+    }
+  
+    /* Dölj titel och datum från utskrift */
+    header, footer {
+      display: none;
+    }
+  
+    
+  }
+  
