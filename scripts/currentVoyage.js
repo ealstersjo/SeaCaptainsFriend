@@ -15,10 +15,21 @@ export const currentVoyagePage = (contentArea) => {
       <form id="voyageForm">
         <div class="form-group">
           <label for="port">Vessel:</label>
-          <input type="text" id="port" name="vessel" required value="${
+          <input type="text" id="vessel" name="vessel" required value="${
             shipSettings.shipName
           }" />
         </div>
+        <label for="operationType">Operation Type:</label>
+  <div class="operation-type">
+    <label>
+      <input type="radio" id="loading" name="operationType" value="Loading" required />
+      Loading
+    </label>
+    <label>
+      <input type="radio" id="discharging" name="operationType" value="Discharging" />
+      Discharging
+    </label>
+  </div>
         <div class="form-group">
           <label for="port">Port:</label>
           <input type="text" id="port" name="port" required />
@@ -86,9 +97,11 @@ export const currentVoyagePage = (contentArea) => {
 
     document.getElementById("voyageForm").addEventListener("submit", (e) => {
       e.preventDefault();
+      const operationType = e.target.operationType.value;
 
       const newVoyage = {
         vessel: e.target.vessel.value,
+        operation: operationType,
         port: e.target.port.value,
         jetty: e.target.jetty.value,
         date: e.target.date.value,
@@ -179,6 +192,8 @@ export const currentVoyagePage = (contentArea) => {
       voyageDetails.innerHTML = `
         <div class="voyage-item">
           <div class="key-value-pair"><span class="key">Vessel:</span> <span class="value">${voyage.vessel}</span></div>
+                    <div class="key-value-pair"><span class="key">Operation:</span> <span class="value">${voyage.operation}</span></div>
+
           <div class="key-value-pair"><span class="key">Port:</span> <span class="value">${voyage.port}</span></div>
           <div class="key-value-pair"><span class="key">Jetty:</span> <span class="value">${voyage.jetty}</span></div>
           <div class="key-value-pair"><span class="key">Date:</span> <span class="value">${voyage.date}</span></div>
@@ -205,15 +220,6 @@ export const currentVoyagePage = (contentArea) => {
     };
 
     const renderEditVoyageForm = (voyage, index) => {
-      const shipOptions = shipList
-        .map(
-          (ship) =>
-            `<option value="${ship.name}" ${
-              ship.name === voyage.vessel ? "selected" : ""
-            }>${ship.name}</option>`
-        )
-        .join("");
-
       const unitOptions = `
         <option value="mt" ${"mt" === voyage.unit ? "selected" : ""}>mt</option>
         <option value="cbm" ${
@@ -225,12 +231,25 @@ export const currentVoyagePage = (contentArea) => {
         <h1>Edit Voyage</h1>
     <form id="editVoyageForm">
       <div class="form-group">
-        <label for="vessel">Vessel:</label>
-        <select id="vessel" name="vessel" required>
-          <option value="" disabled>Select a vessel</option>
-          ${shipOptions}
-        </select>
+        <label for="port">Vessel:</label>
+          <input type="text" id="vessel" name="vessel" required value="${
+            shipSettings.shipName
+          }" />
       </div>
+      <div class="form-group">
+  <label for="operationType">Operation Type:</label>
+  <label>
+    <input type="radio" id="loading" name="operationType" value="Loading" ${
+      voyage.operation === "Loading" ? "checked" : ""
+    } /> Loading
+  </label>
+  <label>
+    <input type="radio" id="discharging" name="operationType" value="Discharging" ${
+      voyage.operation === "Discharging" ? "checked" : ""
+    } /> Discharging
+  </label>
+</div>
+
       <div class="form-group">
         <label for="port">Port:</label>
         <input type="text" id="port" name="port" value="${
@@ -327,9 +346,11 @@ export const currentVoyagePage = (contentArea) => {
         .getElementById("editVoyageForm")
         .addEventListener("submit", (e) => {
           e.preventDefault();
+          const operationType = e.target.operationType.value;
 
           const updatedVoyage = {
             vessel: e.target.vessel.value,
+            operation: operationType,
             port: e.target.port.value,
             jetty: e.target.jetty.value,
             date: e.target.date.value,
@@ -348,6 +369,7 @@ export const currentVoyagePage = (contentArea) => {
               masterName: e.target.masterName.value,
             },
           };
+          console.log(updatedVoyage);
           const voyages =
             JSON.parse(localStorage.getItem("currentVoyage")) || [];
           voyages[index] = updatedVoyage;

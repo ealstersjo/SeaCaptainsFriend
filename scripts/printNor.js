@@ -102,7 +102,9 @@ export const noticeOfReadiness = (contentArea) => {
               <table class="nor-print-info-table">
                 <tr>
                   <td class="nor-print-info-label">To</td>
-                  <td class="nor-print-info-value">${selectedVoyage.to}</td>
+                  <td class="nor-print-info-value">${
+                    selectedVoyage.supplierReceiver
+                  }</td>
                   <td class="nor-print-info-label">Port</td>
                   <td class="nor-print-info-value">${selectedVoyage.port}</td>
                 </tr>
@@ -126,7 +128,11 @@ export const noticeOfReadiness = (contentArea) => {
               <p>
                 to be in all respects ready to 
                 <span class="nor-print-loading-status">${
-                  shipSettings.loadingStatus || "Loading"
+                  selectedVoyage.operation === "Loading"
+                    ? "Load"
+                    : selectedVoyage.operation === "Discharging"
+                    ? "Discharge"
+                    : "Load"
                 }</span>
                 her cargo of:
               </p>
