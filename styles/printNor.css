@@ -1,0 +1,172 @@
+/* Grundläggande layout som gäller för både webbläsare och utskrift */
+body {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.header-info {
+  display: flex; /* Använd flexbox för att placera element horisontellt */
+  align-items: center; /* Justera vertikalt innehåll så att de ligger på samma linje */
+  gap: 20px; /* Mellanrum mellan logotypen och innehållet */
+  margin-bottom: 20px;
+}
+.header-logo {
+  max-width: 150px; /* Justera storlek på loggan */
+  margin-bottom: 10px;
+}
+.header-title {
+  display: grid;
+  grid-template-columns:  repeat(1, 1fr);
+  gap: 10px; /* Mellanrum mellan rader och kolumner */
+  justify-content: start; /* Centrerar innehållet horisontellt */
+  max-width: 600px; /* Sätter maxbredd för att hålla layouten kompakt */
+  margin: 0 auto; /* Centrerar layouten på sidan */
+}
+.header-title h1{
+  margin-top: -20px;
+}
+
+.nor-print-container {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  background: #f9f9f9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.nor-print-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+
+
+/* Info Section */
+.nor-print-info-section {
+  margin: 0 auto; /* Centrerar sektionen horisontellt */
+  width: 50%; /* Bredd på sektionen */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centrerar innehållet horisontellt */
+  justify-content: center; /* Valfritt: Centrerar innehållet vertikalt */
+  min-height: 100px; /* Lägg till en höjd för att ge lite utrymme */
+}
+
+.nor-print-info-table {
+  width: 100%; /* Låter tabellen ta upp hela bredden av sektionen */
+  margin: 0 auto; /* Säkerställer att tabellen är centrerad */
+  border-collapse: collapse; /* Tar bort extra mellanrum */
+  
+}
+
+.nor-print-info-label {
+  font-weight: bold;
+  text-align: left; /* Justering för etiketter */
+  padding: 3px 5px; /* Mindre padding för en kompaktare layout */
+  font-size: large;
+
+}
+
+.nor-print-info-value {
+  text-align: left; /* Justering för värden */
+  padding: 3px 5px; /* Matchar padding med etiketter */
+  font-size: large;
+
+}
+/* Body */
+.nor-print-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centrerar hela sektionen horisontellt */
+  justify-content: flex-start; /* Justerar sektionen till toppen av container */
+  width: 90%;
+  margin-left: 2cm;
+}
+
+.nor-print-body p {
+  margin: 10px 0;
+  text-align: left; /* Håller texten vänsterjusterad */
+  width: 100%; /* Gör så att texten tar upp hela bredden av container */
+  font-size: large;
+  margin-right: 2cm;
+}
+
+.nor-print-ship-name-inline,
+.nor-print-callsign,
+.nor-print-loading-status,
+.nor-print-cargo,
+.nor-print-quantity,
+.nor-print-unit,
+.nor-print-tendered-date,
+.nor-print-tendered-time {
+  font-weight: bold;
+  font-size:larger;
+}
+
+.cp{
+  font-size: medium;
+}
+.nor-print-cp-date{
+  font-weight: bold;
+}
+
+/* Footer */
+.nor-print-footer {
+  margin-top: 30px;
+  width: 90%;
+  margin-left: 2cm;
+}
+
+.nor-print-received,
+.nor-print-rec-date {
+  margin: 15px 0;
+  width: 90%;
+  margin-left: 2cm;
+  margin-top: 40px;
+}
+
+.nor-print-signature-section {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 70px;
+  width: 90%;
+}
+
+.nor-print-signature {
+  text-align: center;
+  width: 40%;
+  margin-left: 1.5cm;
+}
+
+.nor-print-line {
+  border-bottom: 1px solid #000;
+  margin-bottom: 5px;
+}
+
+/* Specifikt för utskrift */
+@media print {
+  @page {
+    margin-left: 1cm;
+    margin-right: 1cm;
+    margin-top: 0.8cm;
+    margin-bottom: 0.8cm;
+}
+
+
+
+
+/* Dölj titel och datum från utskrift */
+header, footer {
+  display: none;
+}
+
+  
+}

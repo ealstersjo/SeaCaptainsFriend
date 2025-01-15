@@ -3,7 +3,7 @@ export const noticeOfReadiness = (contentArea) => {
   const shipSettings = JSON.parse(localStorage.getItem("shipSettings")) || {
     shipName: "",
   };
-  console.log(shipSettings);
+  //console.log(shipSettings);
 
   let selectedVoyageIndex = localStorage.getItem("selectedVoyageIndex");
 
@@ -15,11 +15,10 @@ export const noticeOfReadiness = (contentArea) => {
         ${voyages
           .map(
             (voyage, index) => `
-          <option value="${index}" ${
-              index == selectedVoyageIndex ? "selected" : ""
-            }>
-            ${voyage.vessel} - ${voyage.voyNo} 
-          </option>
+          <option value="${index}">${voyage.vessel} - ${
+              voyage.voyNo || "N/A"
+            } [${voyage.from} - ${voyage.to}]
+            </option>
         `
           )
           .join("")}
@@ -80,49 +79,113 @@ export const noticeOfReadiness = (contentArea) => {
           <button id="printNOR">Print Notice of Readiness</button>
         </div>
       `;
-
+    console.log(selectedVoyage);
     // Hantera print-knappen
     document.getElementById("printNOR").addEventListener("click", () => {
-      const printContent = `
-                 <h1>${shipSettings.shipName}</h1>
+      // Öppna utskriftssidan
+      const printWindow = window.open("../pages/printNOR.html", "_blank");
 
-           <h1>Notice of Readiness</h1>
-       
-        <div class="nor-info-container">
-          <table class="nor-info-table">
-          <tr>
-              <td class="nor-info-label">To</td>
-              <td>${selectedVoyage.to}</td>
-              <td class="nor-info-label">Port</td>
-              <td>${selectedVoyage.port}</td>
-            </tr>
-            <tr>
-              
-              <td class="nor-info-label">Voy No</td>
-              <td>${selectedVoyage.voyNo}</td>
-              <td class="nor-info-label">Date</td>
-              <td>${selectedVoyage.date}</td>
-            </tr>
-            
-            <tr>
-            </table>
-            <p>I the undersigned herby tender the: ${shipSettings.shipName}  ${shipSettings.callsign}</p>
+      // Vänta tills utskriftsmallen är laddad
+      printWindow.onload = () => {
+        // Fyll i header-sektionen
+        const headerSection =
+          printWindow.document.querySelector(".header-title");
+        headerSection.innerHTML = `
+            <h1>${shipSettings.shipName}</h1>
+            <h1>Notice of Readiness</h1>
+          `;
 
-              
-              <td class="nor-info-label">Cargo</td>
-              <td>${selectedVoyage.cargos[0]?.cargo} (${selectedVoyage.cargos[0]?.quantity} ${selectedVoyage.cargos[0]?.unit})</td>
-            </tr>
-            <tr>
-              <td class="nor-info-label">Master</td>
-              <td>${selectedVoyage.crew.masterName}</td>
-            </tr>
-        </div>
-        `;
+        // Fyll i content-sektionen
+        const contentSection = printWindow.document.querySelector(".content");
+        contentSection.innerHTML = `
+            <div class="nor-print-info-section">
+              <table class="nor-print-info-table">
+                <tr>
+                  <td class="nor-print-info-label">To</td>
+                  <td class="nor-print-info-value">${selectedVoyage.to}</td>
+                  <td class="nor-print-info-label">Port</td>
+                  <td class="nor-print-info-value">${selectedVoyage.port}</td>
+                </tr>
+                <tr>
+                  <td class="nor-print-info-label">Voy No</td>
+                  <td class="nor-print-info-value">${selectedVoyage.voyNo}</td>
+                  <td class="nor-print-info-label">Date</td>
+                  <td class="nor-print-info-value">${selectedVoyage.date}</td>
+                </tr>
+              </table>
+            </div>
+      
+            <div class="nor-print-body">
+              <p>
+                I the undersigned herby tender the: 
+                <span class="nor-print-ship-name-inline">${
+                  shipSettings.shipName
+                }</span>
+                <span class="nor-print-callsign">${shipSettings.callsign}</span>
+              </p>
+              <p>
+                to be in all respects ready to 
+                <span class="nor-print-loading-status">${
+                  shipSettings.loadingStatus || "Loading"
+                }</span>
+                her cargo of:
+              </p>
+              <p>
+                <span class="nor-print-cargo">${
+                  selectedVoyage.cargos[0]?.cargo
+                }</span>
+                (<span class="nor-print-quantity">${
+                  selectedVoyage.cargos[0]?.quantity
+                }</span>
+                <span class="nor-print-unit">${
+                  selectedVoyage.cargos[0]?.unit
+                }</span>)
+              </p>
+              <p>
+                as from date:
+                <span class="nor-print-tendered-date">${
+                  selectedVoyage.sof?.["nor-tendered"]?.date
+                }</span>
+                Hrs:
+                <span class="nor-print-tendered-time">${
+                  selectedVoyage.sof?.["nor-tendered"]?.time
+                }</span>
+              </p>
+              <p class="cp">
+               Lay time to count, and all other terms to be in accordance with the existing C/P dated:						
+                <span class="nor-print-cp-date">${selectedVoyage.cpDated}</span>
+                
+              </p>
+            </div>
+          `;
 
-      const printWindow = window.open("", "_blank");
-      printWindow.document.write(printContent);
-      printWindow.document.close();
-      printWindow.print();
+        // Fyll i footer-sektionen
+        const footerSection = printWindow.document.querySelector(".footer");
+        footerSection.innerHTML = `
+            <div class="nor-print-received">
+              <span>Received:</span> _________________________
+            </div>
+            <div class="nor-print-rec-date">
+              <span>Date:</span> ____________________ 
+              &ensp; 
+              <span>Time:</span> ____________________
+            </div>
+            <div class="nor-print-signature-section">
+              <div class="nor-print-signature">
+                <div class="nor-print-line"></div>
+                <span>Signature of representative</span>
+              </div>
+              <div class="nor-print-signature">
+                <div class="nor-print-line"></div>
+                <span>Master (stamp)</span>
+                <p><span>${selectedVoyage.crew.masterName}</span></p>
+              </div>
+            </div>
+          `;
+
+        // Starta utskriften
+        printWindow.print();
+      };
     });
   };
 
