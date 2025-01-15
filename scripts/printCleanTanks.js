@@ -6,23 +6,21 @@ export const cleanlinessTankCertificate = (contentArea) => {
 
   let selectedVoyageIndex = localStorage.getItem("selectedVoyageIndex");
 
-  // Funktion för att generera dropdown för resor
   const generateVoyageSelect = () => {
     return `
-        <select id="voyageSelect">
-          <option value="" selected disabled>Select voyage</option>
-          ${voyages
-            .map(
-              (voyage, index) => `
-            <option value="${index}">${voyage.vessel} - ${
-                voyage.voyNo || "N/A"
-              } [${voyage.from} - ${voyage.to}]
-              </option>
-          `
-            )
-            .join("")}
-        </select>
-      `;
+    <select id="voyageSelect">
+      <option value="" selected disabled>Select trip</option>
+      ${voyages
+        .map(
+          (voyage, index) => `
+        <option value="${index}" ${
+            index == selectedVoyageIndex ? "selected" : ""
+          }>${voyage.vessel} från ${voyage.from} till ${voyage.to}</option>
+      `
+        )
+        .join("")}
+    </select>
+  `;
   };
 
   // Hämta vald resa
@@ -42,7 +40,6 @@ export const cleanlinessTankCertificate = (contentArea) => {
           `;
       return;
     }
-    console.log(selectedVoyage);
 
     contentArea.innerHTML = `
           <h1>Cleanliness Tank Certificate Before Loading</h1>
@@ -87,13 +84,23 @@ export const cleanlinessTankCertificate = (contentArea) => {
     document
       .getElementById("printCertificate")
       .addEventListener("click", () => {
+        const cargotanks = document.getElementById("cargotank").value;
+
+        // Kontrollera om en resa är vald och om cargo tanks är ifyllt
+        if (!selectedVoyageIndex) {
+          alert("Please select a voyage before printing.");
+          return; // Stopp utskrift om ingen resa är vald
+        }
+
+        if (!cargotanks) {
+          alert("Please fill in the Cargo Tanks before printing.");
+          return; // Stopp utskrift om cargo tanks inte är ifyllt
+        }
         // Öppna utskriftssidan
         const printWindow = window.open(
           "../pages/printcleantanks.html",
           "_blank"
         );
-        const cargotanks = document.getElementById("cargotank").value;
-
         // Vänta tills utskriftsmallen är laddad
         printWindow.onload = () => {
           // Fyll i header-sektionen

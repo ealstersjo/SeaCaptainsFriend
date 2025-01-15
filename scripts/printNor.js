@@ -82,6 +82,11 @@ export const noticeOfReadiness = (contentArea) => {
     console.log(selectedVoyage);
     // Hantera print-knappen
     document.getElementById("printNOR").addEventListener("click", () => {
+      // Kontrollera om en resa är vald och om cargo tanks är ifyllt
+      if (!selectedVoyageIndex) {
+        alert("Please select a voyage before printing.");
+        return; // Stopp utskrift om ingen resa är vald
+      }
       // Öppna utskriftssidan
       const printWindow = window.open("../pages/printNOR.html", "_blank");
 

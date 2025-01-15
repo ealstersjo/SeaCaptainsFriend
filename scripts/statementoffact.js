@@ -29,6 +29,7 @@ export const statementOfFact = (contentArea) => {
   }
 
   const renderSoFForm = () => {
+    console.log(window.location.pathname);
     contentArea.innerHTML = `
       <h1>Statement of Fact</h1>
       <small>This data is temporary and will be fetched from elsewhere</small>

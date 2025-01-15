@@ -14,106 +14,60 @@ import { settings } from "./settings.js";
 import { noticeOfReadiness } from "./printNor.js";
 import { cleanlinessTankCertificate } from "./printCleanTanks.js";
 
-/* // Kontrollera om användaren är inloggad
-if (localStorage.getItem("loggedIn") !== "true") {
-  // Redirecta tillbaka till inloggningssidan om användaren inte är inloggad
-  window.location.href = "index.html";
-} */
+// Funktion för att visa en sektion och dölja de andra
+const showSection = (sectionId) => {
+  // Dölj alla sektioner genom att sätta display: none
+  const sections = document.querySelectorAll(".content > div");
+  sections.forEach((section) => {
+    section.style.display = "none"; // Döljer alla sektioner
+    section.innerHTML = ""; // Tömmer alla sektioners innehåll (kan anpassas om du vill bevara tillstånd)
+  });
 
+  // Visa den valda sektionen och rendera nytt innehåll
+  const selectedSection = document.getElementById(sectionId);
+  if (selectedSection) {
+    selectedSection.style.display = "block"; // Gör sektionen synlig
+    // Rendera nytt innehåll beroende på sektion (om så behövs)
+    if (sectionId === "sofdiv") {
+      statementOfFact(selectedSection); // Exempel på funktion för att rendera Statement of Fact
+    } else if (sectionId === "currentvoyagediv") {
+      currentVoyagePage(selectedSection); // Rendera aktuell resa
+    } else if (sectionId === "checklistdiv") {
+      checklists(selectedSection); // Rendera checklistor
+    } else if (sectionId === "accountdiv") {
+      account(selectedSection); // Rendera konto
+    } else if (sectionId === "settingsdiv") {
+      settings(selectedSection); // Rendera inställningar
+    } else if (sectionId === "nordiv") {
+      noticeOfReadiness(selectedSection); // Rendera NOR
+    } else if (sectionId === "cleandiv") {
+      cleanlinessTankCertificate(selectedSection); // Rendera Cleanliness Tank
+    }
+    // Lägg till renderingslogik för andra sektioner om så behövs
+  }
+};
+
+// När användaren klickar på respektive menyalternativ
 document.addEventListener("DOMContentLoaded", () => {
-  // Hämta referenser till menylänkarna
   const currentVoyageLink = document.getElementById("currentvoyage");
   const statementOfFactLink = document.getElementById("statementoffact");
-  const handleVoyageLink = document.getElementById("handlevoyage");
-  const handleCalculations = document.getElementById("handlecalculations");
-  const handleFileUpload = document.getElementById("fileupload");
-  const handleChecklists = document.getElementById("checklists");
-  const handleVoyagesHistory = document.getElementById("voyageshistory");
   const handleAccount = document.getElementById("accountMenu");
-  const handleLoadingLog = document.getElementById("loadingLog");
-  const handleDischargeLog = document.getElementById("dischargeLog");
-  const handleShowShip = document.getElementById("shipInfo");
-  const handleProtests = document.getElementById("protests");
+  const handleChecklists = document.getElementById("checklists");
   const handleSettings = document.getElementById("settings");
   const handleNOR = document.getElementById("printNoR");
   const handleClean = document.getElementById("printclean");
 
-  // Hämta referens till innehållsområdet
-  const contentArea = document.querySelector(".content");
+  // Klickhändelser för att visa respektive sektion
+  currentVoyageLink.addEventListener("click", () =>
+    showSection("currentvoyagediv")
+  );
+  statementOfFactLink.addEventListener("click", () => showSection("sofdiv"));
+  handleAccount.addEventListener("click", () => showSection("accountdiv"));
+  handleChecklists.addEventListener("click", () => showSection("checklistdiv"));
+  handleSettings.addEventListener("click", () => showSection("settingsdiv"));
+  handleNOR.addEventListener("click", () => showSection("nordiv"));
+  handleClean.addEventListener("click", () => showSection("cleandiv"));
 
-  const loadVoyagesHistory = async () => {
-    voyageshistory(contentArea);
-  };
-  const loadCalculations = async () => {
-    calculations(contentArea);
-  };
-
-  const loadFileUpload = async () => {
-    fileupload(contentArea);
-  };
-
-  const loadChecklists = () => {
-    checklists(contentArea);
-  };
-
-  // Funktion för att ladda aktuell resa
-  const loadCurrentVoyage = () => {
-    currentVoyagePage(contentArea);
-  };
-
-  // Funktion för att ladda Statement of Fact (kan anpassas för dynamiska data)
-  const loadStatementOfFact = () => {
-    statementOfFact(contentArea);
-  };
-
-  const loadHandleVoyage = () => {
-    handleVoyage(contentArea);
-  };
-
-  const loadAccount = () => {
-    account(contentArea);
-  };
-
-  const loadLoadingLog = () => {
-    loadingLog(contentArea);
-  };
-  const loadDischargeLog = () => {
-    dischargeLog(contentArea);
-  };
-  const loadShipInfo = () => {
-    showShipPage(contentArea);
-  };
-  const loadProtests = () => {
-    protests(contentArea);
-  };
-  const loadSettings = () => {
-    settings(contentArea);
-  };
-
-  const loadNOR = () => {
-    noticeOfReadiness(contentArea);
-  };
-
-  const loadClean = () => {
-    cleanlinessTankCertificate(contentArea);
-  };
-
-  // När användaren klickar på respektive menyalternativ
-  currentVoyageLink.addEventListener("click", loadCurrentVoyage);
-  statementOfFactLink.addEventListener("click", loadStatementOfFact);
-  handleAccount.addEventListener("click", loadAccount);
-  handleChecklists.addEventListener("click", loadChecklists);
-  handleSettings.addEventListener("click", loadSettings);
-  handleNOR.addEventListener("click", loadNOR);
-  handleClean.addEventListener("click", loadClean);
-  /*  handleVoyageLink.addEventListener("click", loadHandleVoyage);
-  handleCalculations.addEventListener("click", loadCalculations);
-  handleFileUpload.addEventListener("click", loadFileUpload);
-  handleVoyagesHistory.addEventListener("click", loadVoyagesHistory);
-  handleLoadingLog.addEventListener("click", loadLoadingLog);
-  handleDischargeLog.addEventListener("click", loadDischargeLog);
-  handleShowShip.addEventListener("click", loadShipInfo);
-  handleProtests.addEventListener("click", loadProtests); */
-
-  loadClean();
+  // Ladda en sektion direkt vid start (om du vill ha en default)
+  showSection("sofdiv"); // Här visas till exempel Statement of Fact vid start
 });
