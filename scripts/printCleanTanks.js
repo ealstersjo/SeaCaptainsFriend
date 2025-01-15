@@ -67,7 +67,7 @@ export const cleanlinessTankCertificate = (contentArea) => {
                 <td>${selectedVoyage.cargos[0]?.cargo}</td>
                  <td class="certificate-info-label">Port</td>
                 <td>${selectedVoyage.port}</td>
-                <td class="certificate-info-label">Port</td>
+                <td class="certificate-info-label">Berth</td>
                 <td>${selectedVoyage.jetty}</td>
               </tr>
               

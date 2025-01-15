@@ -13,6 +13,7 @@ import { protests } from "./protests.js";
 import { settings } from "./settings.js";
 import { noticeOfReadiness } from "./printNor.js";
 import { cleanlinessTankCertificate } from "./printCleanTanks.js";
+import { slop } from "./slop.js";
 
 // Funktion för att visa en sektion och dölja de andra
 const showSection = (sectionId) => {
@@ -42,6 +43,8 @@ const showSection = (sectionId) => {
       noticeOfReadiness(selectedSection); // Rendera NOR
     } else if (sectionId === "cleandiv") {
       cleanlinessTankCertificate(selectedSection); // Rendera Cleanliness Tank
+    } else if (sectionId === "slopdiv") {
+      slop(selectedSection);
     }
     // Lägg till renderingslogik för andra sektioner om så behövs
   }
@@ -56,6 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const handleSettings = document.getElementById("settings");
   const handleNOR = document.getElementById("printNoR");
   const handleClean = document.getElementById("printclean");
+  const handleSlop = document.getElementById("slop");
 
   // Klickhändelser för att visa respektive sektion
   currentVoyageLink.addEventListener("click", () =>
@@ -67,7 +71,10 @@ document.addEventListener("DOMContentLoaded", () => {
   handleSettings.addEventListener("click", () => showSection("settingsdiv"));
   handleNOR.addEventListener("click", () => showSection("nordiv"));
   handleClean.addEventListener("click", () => showSection("cleandiv"));
+  handleSlop.addEventListener("click", () => {
+    showSection("slopdiv");
+  });
 
   // Ladda en sektion direkt vid start (om du vill ha en default)
-  showSection("currentvoyagediv"); // Här visas till exempel Statement of Fact vid start
+  showSection("slopdiv"); // Här visas till exempel Statement of Fact vid start
 });

@@ -1,0 +1,38 @@
+.certificate-info-container h3 {
+    text-align: center;
+}
+.slop-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 16px;
+    text-align: left;
+}
+
+.slop-header {
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.slop-row-space {
+    height: 40px; /* Höjd på mellanrummet */
+    border: none;
+}
+
+
+.slop-cell {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.slop-input {
+    width: 100%;
+    border: none;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.slop-input:focus {
+    outline: 2px solid #009688;
+}
