@@ -60,19 +60,24 @@ export const cleanlinessTankCertificate = (contentArea) => {
                 <td>${selectedVoyage.to}</td>
               </tr>
               <tr>
-                <td class="certificate-info-label">Cargo</td>
-                <td>${selectedVoyage.cargos[0]?.cargo}</td>
-                <td class="certificate-info-label">Cargo Tanks No</td>
-                <td>CT 1, 2, 3, 4, 5, 6 p/s</td>
-                <td class="certificate-info-label">Port</td>
-                <td>${selectedVoyage.port}</td>
-              </tr>
-              <tr>
                 <td class="certificate-info-label">Date</td>
                 <td>${selectedVoyage.sof?.["tank-inspection"]?.date}</td>
                 <td class="certificate-info-label">Time</td>
                 <td>${selectedVoyage.sof?.["tank-inspection"]?.time}</td>
               </tr>
+              <tr>
+                <td class="certificate-info-label">Cargo</td>
+                <td>${selectedVoyage.cargos[0]?.cargo}</td>
+                 <td class="certificate-info-label">Port</td>
+                <td>${selectedVoyage.port}</td>
+                <td class="certificate-info-label">Port</td>
+                <td>${selectedVoyage.jetty}</td>
+              </tr>
+              
+              <tr>
+              <td class="certificate-info-label">Cargo Tanks No</td>
+                <td colspan="5">      <input type="text" id="cargotank" required /></td>
+                </tr>
             </table>
             <button id="printCertificate">Print Cleanliness Tank Certificate</button>
           </div>
@@ -87,6 +92,7 @@ export const cleanlinessTankCertificate = (contentArea) => {
           "../pages/printcleantanks.html",
           "_blank"
         );
+        const cargotanks = document.getElementById("cargotank").value;
 
         // Vänta tills utskriftsmallen är laddad
         printWindow.onload = () => {
@@ -94,7 +100,7 @@ export const cleanlinessTankCertificate = (contentArea) => {
           const headerSection =
             printWindow.document.querySelector(".header-title");
           headerSection.innerHTML = `
-              <h1>${shipSettings.shipName}</h1>
+              <h1>${shipSettings.shipName} ${cargotanks}</h1>
               <h1>CLEANLINESS TANK CERTIFICATE BEFORE LOADING</h1>
             `;
 
@@ -122,7 +128,7 @@ export const cleanlinessTankCertificate = (contentArea) => {
         <p><strong>Cargo:</strong> ${selectedVoyage.cargos[0]?.cargo}</p>
     </div>
     <div class="cargo-tanks-info">
-        <p><strong>Cargo Tanks No:</strong> CT 1, 2, 3, 4, 5, 6 p/s</p>
+        <p><strong>Cargo Tanks No:</strong> ${cargotanks}</p>
     </div>
     <div class="port-info">
 <table class="port-info-table">
