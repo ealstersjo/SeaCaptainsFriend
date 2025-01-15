@@ -28,10 +28,10 @@ const showSection = (sectionId) => {
   if (selectedSection) {
     selectedSection.style.display = "block"; // Gör sektionen synlig
     // Rendera nytt innehåll beroende på sektion (om så behövs)
-    if (sectionId === "sofdiv") {
-      statementOfFact(selectedSection); // Exempel på funktion för att rendera Statement of Fact
-    } else if (sectionId === "currentvoyagediv") {
+    if (sectionId === "currentvoyagediv") {
       currentVoyagePage(selectedSection); // Rendera aktuell resa
+    } else if (sectionId === "sofdiv") {
+      statementOfFact(selectedSection); // Exempel på funktion för att rendera Statement of Fact
     } else if (sectionId === "checklistdiv") {
       checklists(selectedSection); // Rendera checklistor
     } else if (sectionId === "accountdiv") {
@@ -69,5 +69,5 @@ document.addEventListener("DOMContentLoaded", () => {
   handleClean.addEventListener("click", () => showSection("cleandiv"));
 
   // Ladda en sektion direkt vid start (om du vill ha en default)
-  showSection("sofdiv"); // Här visas till exempel Statement of Fact vid start
+  showSection("currentvoyagediv"); // Här visas till exempel Statement of Fact vid start
 });

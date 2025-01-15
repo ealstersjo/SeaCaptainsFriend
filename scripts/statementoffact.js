@@ -24,12 +24,10 @@ export const statementOfFact = (contentArea) => {
   let selectedVoyage;
 
   if (selectedVoyageIndex) {
-    console.log(voyages[selectedVoyageIndex]);
     selectedVoyage = voyages[selectedVoyageIndex];
   }
 
   const renderSoFForm = () => {
-    console.log(window.location.pathname);
     contentArea.innerHTML = `
       <h1>Statement of Fact</h1>
       <small>This data is temporary and will be fetched from elsewhere</small>
