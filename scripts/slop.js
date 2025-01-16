@@ -372,22 +372,168 @@ export const slop = (contentArea) => {
   document
     .getElementById("printSlopAfter")
     .addEventListener("click", function () {
-      // Hämta data från "After Loading"-tabellen
-      const afterLoadingData = getAfterLoadingData();
+      printSlopReport(false);
 
-      alert("You have printed Slop After Report");
+      //alert("You have printed Slop After Report");
       // Här kan du skriva kod för att generera och skriva ut rapporten
       //generateAndPrintReport(afterLoadingData);
     });
   document
     .getElementById("printSlopBefore")
     .addEventListener("click", function () {
-      // Hämta data från "After Loading"-tabellen
-      const beforeLoadingData = getBeforeLoadingData();
-
-      alert("You have printed Slop Before Report");
-
-      // Här kan du skriva kod för att generera och skriva ut rapporten
-      //generateAndPrintReport(afterLoadingData);
+      printSlopReport(true);
     });
+  const printSlopReport = (before) => {
+    // Kontrollera om en resa är vald och om cargo tanks är ifyllt
+    if (!selectedVoyageIndex) {
+      alert("Please select a voyage before printing.");
+      return; // Avbryt utskrift om ingen resa är vald
+    }
+
+    // Öppna utskriftssidan
+    const printWindow = window.open("../pages/printSlop.html", "_blank");
+
+    // Vänta tills utskriftsmallen är laddad
+    printWindow.onload = () => {
+      let loadingdata;
+      let fwdDraft;
+      let aftDraft;
+      let condition;
+      if (before) {
+        loadingdata = getBeforeLoadingData();
+        fwdDraft = selectedVoyage.sof?.["first-line-ashore"]?.remarks.fwdDraft;
+        aftDraft = selectedVoyage.sof?.["first-line-ashore"]?.remarks.aftDraft;
+        condition = "Before loading";
+      } else {
+        loadingdata = getAfterLoadingData();
+        fwdDraft = selectedVoyage.sof?.["pilot-disembarked"]?.remarks.fwdDraft;
+        aftDraft = selectedVoyage.sof?.["pilot-disembarked"]?.remarks.aftDraft;
+        condition = "After loading";
+      }
+
+      // Fyll i header-sektionen
+      const headerSection = printWindow.document.querySelector(".header-title");
+      headerSection.innerHTML = `
+              <h1>${shipSettings.shipName}</h1>
+              <h2>SlopTank(s) Report/Certificate</h2>
+          `;
+
+      // Fyll i content-sektionen
+      const contentSection = printWindow.document.querySelector(".content");
+      contentSection.innerHTML = `
+              <div class="certificate-info-section">
+                  <table class="certificate-info-table">
+                      <tr>
+                          <td><strong>Voy:</strong></td>
+                          <td>${selectedVoyage.voyNo}</td>
+                         
+                          <td><strong>Date:</strong></td>
+                          <td>${selectedVoyage.date || "N/A"}</td>
+                      </tr>
+                      <tr>
+                       <td><strong>Port:</strong></td>
+                          <td>${selectedVoyage.port}</td>
+                          <td><strong>Berth:</strong></td>
+                          <td>${selectedVoyage.jetty || "N/A"}</td>
+                          
+                      </tr>
+                      <tr>
+                      <tr>
+                         <td><strong>Condition:</strong></td>
+                          <td>${condition}</td>
+                      </tr>
+                         <td><strong>Draft:</strong></td>
+                          <td><strong>FWD </strong> ${
+                            fwdDraft || "N/A"
+                          } m &emsp;&emsp;&emsp;
+
+                          <strong>Aft</strong> ${
+                            aftDraft || "N/A"
+                          } m &emsp;&emsp;&emsp;
+                          <strong>Trim</strong> ${
+                            aftDraft - fwdDraft || "N/A"
+                          } m</td>
+                      </tr>
+                  </table>
+              </div>
+              <div class="slop-info-section">
+                  <table class="slop-table">
+                    <colgroup>
+    <col style="width: 20%;"> <!-- Första kolumnen -->
+    <col style="width: 15%;"> <!-- Andra kolumnen -->
+    <col style="width: 15%;"> <!-- Tredje kolumnen -->
+    <col style="width: 15%;"> <!-- Fjärde kolumnen -->
+    <col style="width: 35%;"> <!-- Femte kolumnen -->
+  </colgroup>
+                      <thead>
+                          <tr>
+                              <th>Measurements</th>
+                              <th>Deck Drain<br> Tank P</th>
+                              <th>Deck Drain<br> Tank S</th>
+                              <th>Cargo<br> (Slop-tank) 1S</th>
+                              <th>Remarks</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          ${generateSlopTableRows(loadingdata)}
+                      </tbody>
+                  </table>
+                  <div class="overallremarks"><span>Remarks:</span> <p>${
+                    loadingdata.overallRemarks
+                  }</p></div>
+              </div>
+          `;
+
+      // Fyll i footer-sektionen
+      const footerSection = printWindow.document.querySelector(".footer");
+      footerSection.innerHTML = `
+              <div class="certificate-signature-section">
+              <div class="certificate-signature">
+                      <div class="certificate-line"></div>
+                      <span>Ship's representative.</span>
+                      <p><span>Chief Officer: ${
+                        selectedVoyage.crew?.chiefOfficer || "N/A"
+                      }</span></p>
+                  </div>
+                  <div class="certificate-signature">
+                      <div class="certificate-line"></div>
+                      <span>Surveyor / Load Master</span>
+                      <div class="certificate-line"></div>
+                      <span>Name in block letters</span>
+                  </div>
+                  
+              </div>
+          `;
+
+      // Starta utskriften
+      printWindow.print();
+    };
+  };
+
+  // Funktion för att generera rader i slop-tabellen
+  const generateSlopTableRows = (data) => {
+    const rows = [
+      { label: "UTI Ullage", key: "utiUllage" },
+      { label: "Corr Ullage", key: "corrUllage" },
+      { label: "GOV (cbm)", key: "gov" },
+      { label: "Last Cargo", key: "lastCargo" },
+      { label: "UTI Interface", key: "utiInterface" },
+      { label: "Corr Interface", key: "corrInterface" },
+      { label: "Water GOV", key: "waterGov" },
+    ];
+
+    return rows
+      .map(
+        (row) => `
+              <tr>
+                  <td>${row.label}</td>
+                  <td>${data[row.key]?.p || ""}</td>
+                  <td>${data[row.key]?.s || ""}</td>
+                  <td>${data[row.key]?.cargo || ""}</td>
+                  <td>${data[row.key]?.remarks || ""}</td>
+              </tr>
+          `
+      )
+      .join("");
+  };
 };

@@ -1,0 +1,127 @@
+/* Allmänt */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+  }
+  
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.header-info {
+  display: flex; /* Använd flexbox för att placera element horisontellt */
+  align-items: center; /* Justera vertikalt innehåll så att de ligger på samma linje */
+  gap: 20px; /* Mellanrum mellan logotypen och innehållet */
+  margin-bottom: 20px;
+}
+.header-logo {
+  max-width: 150px; /* Justera storlek på loggan */
+  margin-bottom: 10px;
+}
+.header-title {
+  display: grid;
+  grid-template-columns:  repeat(1, 1fr);
+  gap: 10px; /* Mellanrum mellan rader och kolumner */
+  justify-content: start; /* Centrerar innehållet horisontellt */
+  max-width: 600px; /* Sätter maxbredd för att hålla layouten kompakt */
+  margin: 0 auto; /* Centrerar layouten på sidan */
+}
+.header-title h1{
+  margin-top: -20px;
+}
+  .container {
+    width: 90%;
+    margin: 0 auto;
+  }
+/* Tabeller */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 14px;
+  }
+  
+  table th, table td {
+    padding: 8px;
+    text-align: left;
+  }
+  
+  table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+  }
+  
+  .certificate-info-table td:nth-child(odd) {
+    font-weight: bold;
+    width: 15%;
+  }
+
+  .slop-table col:nth-child(1) {
+    width: 125%; /* Bredare kolumn för Measurements */
+  }
+  
+  .slop-table col:nth-child(5) {
+    width: 30%; /* Bredare kolumn för Remarks */
+  }
+  
+  .slop-table col:nth-child(2),
+  .slop-table col:nth-child(3),
+  .slop-table col:nth-child(4) {
+    width: 15%; /* Smalare kolumner för övriga */
+  }
+  
+  .slop-table th {
+    text-align: center;
+    border: 1px solid #ccc;
+
+  }
+  .slop-table td {
+    border: 1px solid #ccc;
+
+  }  
+  
+  /* Övergripande kommentarer */
+  .overallremarks {
+    margin-top: 20px;
+    font-size: 14px;
+  }
+  
+  .overallremarks span {
+    font-weight: bold;
+  }
+  
+  .overallremarks p {
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 4px;
+  }
+  
+
+.certificate-signature-section {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+    width: 100%;
+  }
+  
+  .certificate-signature {
+    text-align: center;
+    width: 40%;
+  }
+  
+  .certificate-line {
+    border-bottom: 1px solid #000;
+    margin-bottom: 5px;
+    margin-top: 75px;
+  }
+  
+  .certificate-signature span {
+    font-weight: bold;
+    font-size: 16px;
+  }
+  
+  .certificate-signature p {
+    font-size: 14px;
+  }
