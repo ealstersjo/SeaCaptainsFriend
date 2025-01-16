@@ -26,6 +26,7 @@ export const statementOfFact = (contentArea) => {
   if (selectedVoyageIndex) {
     selectedVoyage = voyages[selectedVoyageIndex];
   }
+  console.log(selectedVoyage);
 
   const renderSoFForm = () => {
     contentArea.innerHTML = `

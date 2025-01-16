@@ -1,287 +1,7 @@
 // Testdata (kommer senare att hämtas från localStorage)
-let loadingLogData = {
-  ship: "M/T Fure Viten",
-  voy: "FVI2025002",
-  cargo: "Reformate",
-  date: "2025-01-10",
-  port: "Gothenburg",
-  berth: "Kaj 521",
-  manifolds: "4",
-  connectionSize: "1x8 + VPR",
-  avgRate: 0,
-  lastAvgRate: 0,
-  etcAvg: "Not started",
-  etcCurrent: "Not started",
-  toLoad: 15000,
-};
+let loadingLogData = {};
 
-const tempLoadingLog = [
-  {
-    bm: "86",
-    isEditable: false,
-    manifPress: "0",
-    obq: "0",
-    rate: "0",
-    remarks: "Start Loading",
-    sf: "60",
-    tanksNo: "4P",
-    time: "2025-01-10 00:30",
-  },
-  {
-    bm: "84",
-    isEditable: false,
-    manifPress: "0",
-    obq: "210",
-    rate: "210",
-    remarks: "",
-    sf: "60",
-    tanksNo: "3, P/S",
-    time: "2025-01-10 01:00",
-  },
-  {
-    bm: "76",
-    isEditable: false,
-    manifPress: "0",
-    obq: "1,239",
-    rate: "1,029",
-    remarks: "",
-    sf: "54",
-    tanksNo: "2,4,6 P/S",
-    time: "2025-01-10 02:00",
-  },
-  {
-    bm: "67",
-    isEditable: false,
-    manifPress: "0",
-    obq: "2,265",
-    rate: "1,026",
-    remarks: "",
-    sf: "47",
-    tanksNo: "2,4,6 P/S",
-    time: "2025-01-10 03:00",
-  },
-  {
-    bm: "58",
-    isEditable: false,
-    manifPress: "0",
-    obq: "3,322",
-    rate: "1,057",
-    remarks: "",
-    sf: "43",
-    tanksNo: "2,4,6 P/S",
-    time: "2025-01-10 04:00",
-  },
-  {
-    bm: "53",
-    isEditable: false,
-    manifPress: "0",
-    obq: "4,367",
-    rate: "1,045",
-    remarks: "",
-    sf: "39",
-    tanksNo: "2,4,6 P/S",
-    time: "2025-01-10 05:00",
-  },
-  {
-    bm: "47",
-    isEditable: false,
-    manifPress: "0",
-    obq: "5,417",
-    rate: "1,050",
-    remarks: "",
-    sf: "35",
-    tanksNo: "2,4,6 P/S",
-    time: "2025-01-10 06:00",
-  },
-  {
-    bm: "48",
-    isEditable: false,
-    manifPress: "0",
-    obq: "6,408",
-    rate: "991",
-    remarks: "",
-    sf: "37",
-    tanksNo: "2,4,6 P/S",
-    time: "2025-01-10 07:00",
-  },
-  {
-    bm: "49",
-    isEditable: false,
-    manifPress: "0",
-    obq: "7,472",
-    rate: "1,064",
-    remarks: "",
-    sf: "37",
-    tanksNo: "1,3,5 P/S",
-    time: "2025-01-10 08:00",
-  },
-  {
-    bm: "46",
-    isEditable: false,
-    manifPress: "0",
-    obq: "8,502",
-    rate: "1,030",
-    remarks: "",
-    sf: "33",
-    tanksNo: "1,3,5 P/S",
-    time: "2025-01-10 09:00",
-  },
-  {
-    bm: "46",
-    isEditable: false,
-    manifPress: "0",
-    obq: "8,953",
-    rate: "451",
-    remarks: "Shore stop",
-    sf: "33",
-    tanksNo: "1,3,5 P/S",
-    time: "2025-01-10 09:30",
-  },
-  {
-    bm: "46",
-    isEditable: false,
-    manifPress: "0",
-    obq: "8,953",
-    rate: "0",
-    remarks: "Resume loading",
-    sf: "33",
-    tanksNo: "1,3,5 P/S",
-    time: "2025-01-10 09:40",
-  },
-  {
-    bm: "46",
-    isEditable: false,
-    manifPress: "0",
-    obq: "9,119",
-    rate: "166",
-    remarks: "",
-    sf: "33",
-    tanksNo: "1,3,5 P/S",
-    time: "2025-01-10 10:00",
-  },
-  {
-    bm: "44",
-    isEditable: false,
-    manifPress: "0",
-    obq: "10,151",
-    rate: "1,032",
-    remarks: "",
-    sf: "30",
-    tanksNo: "1,3,5 P/S",
-    time: "2025-01-10 11:00",
-  },
-  {
-    bm: "41",
-    isEditable: false,
-    manifPress: "0",
-    obq: "11,230",
-    rate: "1,079",
-    remarks: "",
-    sf: "28",
-    tanksNo: "1,3,5 P/S",
-    time: "2025-01-10 12:00",
-  },
-  {
-    bm: "40",
-    isEditable: false,
-    manifPress: "0",
-    obq: "12,249",
-    rate: "1,019",
-    remarks: "",
-    sf: "26",
-    tanksNo: "1,3,5 P/S",
-    time: "2025-01-10 13:00",
-  },
-  {
-    bm: "42",
-    isEditable: false,
-    manifPress: "0",
-    obq: "13,294",
-    rate: "1,045",
-    remarks: "",
-    sf: "30",
-    tanksNo: "1,3,5 P/S",
-    time: "2025-01-10 14:00",
-  },
-  {
-    bm: "32",
-    isEditable: false,
-    manifPress: "0",
-    obq: "14,339",
-    rate: "1,045",
-    remarks: "",
-    sf: "26",
-    tanksNo: "4,5,6 P/S",
-    time: "2025-01-10 15:00",
-  },
-  {
-    bm: "26",
-    isEditable: false,
-    manifPress: "0",
-    obq: "15,386",
-    rate: "1,047",
-    remarks: "",
-    sf: "23",
-    tanksNo: "2,4,5 P/S",
-    time: "2025-01-10 16:00",
-  },
-  {
-    bm: "26",
-    isEditable: false,
-    manifPress: "0",
-    obq: "16,434",
-    rate: "1,048",
-    remarks: "",
-    sf: "-17",
-    tanksNo: "2,4,6 P/S",
-    time: "2025-01-10 17:00",
-  },
-  {
-    bm: "24",
-    isEditable: false,
-    manifPress: "0",
-    obq: "17,527",
-    rate: "1,093",
-    remarks: "",
-    sf: "16",
-    tanksNo: "2,4,6 P/S",
-    time: "2025-01-10 18:00",
-  },
-  {
-    bm: "22",
-    isEditable: false,
-    manifPress: "0",
-    obq: "18,150",
-    rate: "623",
-    remarks: "Shore stop",
-    sf: "-11",
-    tanksNo: "2,4,6 P/S",
-    time: "2025-01-10 18:40",
-  },
-  {
-    bm: "21",
-    isEditable: false,
-    manifPress: "0",
-    obq: "18,150",
-    rate: "0",
-    remarks: "Resume loading",
-    sf: "-11",
-    tanksNo: "2,4,6 P/S",
-    time: "2025-01-10 18:55",
-  },
-  {
-    bm: "21",
-    isEditable: false,
-    manifPress: "0",
-    obq: "18,210",
-    rate: "60",
-    remarks: "Avg Rate: 988cbm/h",
-    sf: "-10",
-    tanksNo: "2,4,6 P/S",
-    time: "2025-01-10 19:00",
-  },
-];
-let logEntries = tempLoadingLog; // Array för att lagra loggdata
+let logEntries = []; // Array för att lagra loggdata
 
 // Funktion för att skapa en loggrad
 const createLogRow = (entry = {}, index = null) => {
@@ -368,6 +88,7 @@ const createLogRow = (entry = {}, index = null) => {
   actionButton.addEventListener("click", () => {
     if (actionButton.textContent === "Save") {
       // Spara data från inmatningsfält
+      console.trace("Save");
       const inputs = row.querySelectorAll(".log-input");
       inputs.forEach((input) => {
         entry[input.dataset.key] = input.value;
@@ -388,6 +109,7 @@ const createLogRow = (entry = {}, index = null) => {
         const previousObq = parseFloat(logEntries[index - 1].obq) || 0;
 
         if (currentObq < previousObq) {
+          console.log("HEJ");
           const confirmation = confirm(
             `O.B.Q. cannot be lower than earlier value (last entered O.B.Q.: ${previousObq}). If you want to edit please press "Cancel"`
           );
@@ -403,6 +125,20 @@ const createLogRow = (entry = {}, index = null) => {
       entry.rate = rate;
       entry.isEditable = false;
       updateAvgRates();
+
+      // Save to localStorage
+      const voyages = JSON.parse(localStorage.getItem("currentVoyage")) || [];
+      const selectedVoyageIndex = localStorage.getItem("selectedVoyageIndex");
+
+      // Initialize loadingLog if it doesn't exist
+      if (!voyages[selectedVoyageIndex].loadingLog) {
+        voyages[selectedVoyageIndex].loadingLog = {};
+      }
+
+      // Save the entire logEntries array
+      voyages[selectedVoyageIndex].loadingLog.entries = logEntries;
+      localStorage.setItem("currentVoyage", JSON.stringify(voyages));
+
       renderLogTable(); // Uppdatera tabellen
     } else {
       // Växla till redigerbart läge
@@ -439,6 +175,7 @@ const calculateRate = (entry, index, input) => {
 
 // Funktion för att uppdatera rate vid ändring i obq
 const updateRate = (row, entry, index, input) => {
+  console.log("UpdateRate");
   const rateCell = row.querySelector("td:nth-child(3)"); // Anta att rate är den tredje cellen
   const rate = calculateRate(entry, index, input);
 
@@ -474,22 +211,26 @@ const printLog = () => {
   <img src="../assets/furetank.png" alt="Logo" class="header-logo" />
   <div class="header-title">
     
-    <h1>${loadingLogData.ship}</h1>
+    <h1>${loadingLogData.vessel}</h1>
     <h1>Loading Log</h1>
   </div>
   </div>
   <div class="header-content1">
-    <div><strong>Voyage:</strong> ${loadingLogData.voy}</div>
-    <div><strong>Cargo(es):</strong> ${loadingLogData.cargo}</div>
+    <div><strong>Voyage:</strong> ${loadingLogData.voyNo}</div>
+    <div><strong>Cargo(es):</strong> ${loadingLogData.cargos[0].cargo}</div>
     </div>
     <div class="header-content2">
     <div><strong>Date:</strong> ${loadingLogData.date}</div>
     <div><strong>Port:</strong> ${loadingLogData.port}</div>
-    <div><strong>Berth:</strong> ${loadingLogData.berth}</div>
+    <div><strong>Berth:</strong> ${loadingLogData.jetty}</div>
     </div>
     <div class="header-content3">
-    <div><strong>Manifold(s) No:</strong> ${loadingLogData.manifolds}</div>
-    <div><strong>Connection Size:</strong> ${loadingLogData.connectionSize}</div>
+    <div><strong>Manifold(s) No:</strong> ${
+      loadingLogData.manifolds || "N/A"
+    }</div>
+    <div><strong>Connection Size:</strong> ${
+      loadingLogData.connectionSize || "N/A"
+    }</div>
   </div>
     `;
 
@@ -528,6 +269,7 @@ const updateAvgRates = () => {
       const rate = parseFloat(entry.rate) || 0;
       return sum + rate;
     }, 0);
+    console.log(totalRate);
     loadingLogData.avgRate = parseInt(totalRate / logEntries.length);
 
     // Hämta lastAvgRate
@@ -580,17 +322,22 @@ const updateAvgRates = () => {
     loadingLogData.etcAvg = "-";
     loadingLogData.etcCurrent = "-";
   }
+
   renderBasicData(); // Uppdatera grundläggande data i UI
 };
 
 const renderBasicData = () => {
+  console.log("Average Rate:", loadingLogData.avgRate, "cbm/h");
+  console.log("Last Average Rate:", loadingLogData.lastAvgRate, "cbm/h");
+  console.log("ETC (Current):", loadingLogData.etcCurrent);
+  console.log("ETC (Average):", loadingLogData.etcAvg);
   const table = document.querySelector(".loading-log-basic-info-table");
   table.innerHTML = `
       <tr>
         <td><strong>Voy:</strong></td>
-        <td>${loadingLogData.voy}</td>
+        <td>${loadingLogData.voyNo}</td>
         <td><strong>Cargo(es):</strong></td>
-        <td>${loadingLogData.cargo}</td>
+        <td>${loadingLogData.cargos[0].cargo}</td>
       </tr>
       <tr>
         <td><strong>Date:</strong></td>
@@ -600,25 +347,36 @@ const renderBasicData = () => {
       </tr>
       <tr>
         <td><strong>Berth:</strong></td>
-        <td>${loadingLogData.berth}</td>
+        <td>${loadingLogData.jetty}</td>
       </tr>
       <tr>
         <td><strong>Avg. Rate (cbm/h):</strong></td>
-        <td>${loadingLogData.avgRate}</td>
+        <td>${loadingLogData.avgRate || "N/A"}</td>
         <td><strong>Last Avg. Rate (cbm/h):</strong></td>
-        <td>${loadingLogData.lastAvgRate}</td>
+        <td>${loadingLogData.lastAvgRate || "N/A"}</td>
       </tr>
       <tr>
         <td><strong>ETC avg:</strong></td>
-        <td>${loadingLogData.etcAvg}</td>
+        <td>${loadingLogData.etcAvg || "N/A"}</td>
         <td><strong>ETC current:</strong></td>
-        <td>${loadingLogData.etcCurrent}</td>
+        <td>${loadingLogData.etcCurrent || "N/A"}</td>
       </tr>
     `;
 };
 
 // Funktion för att generera loading log-sidan
 export const loadingLog = (contentArea) => {
+  const voyages = JSON.parse(localStorage.getItem("currentVoyage")) || [];
+  const shipSettings = JSON.parse(localStorage.getItem("shipSettings")) || {
+    shipName: "",
+  };
+
+  let selectedVoyageIndex = localStorage.getItem("selectedVoyageIndex");
+  loadingLogData = voyages[selectedVoyageIndex];
+
+  logEntries = loadingLogData.loadingLog.entries || [];
+  console.log(loadingLogData);
+
   contentArea.innerHTML = `
     <div class="loading-log-header-container">
       <h1 class="loading-log-title">Loading Log</h1>
@@ -638,7 +396,7 @@ export const loadingLog = (contentArea) => {
       type="text" 
       id="manifolds" 
       class="loading-log-input" 
-      value="${loadingLogData.manifolds}" 
+      value="${loadingLogData.manifolds || ""}" 
       placeholder="Enter manifold(s) no." 
     />
   </div>
@@ -648,7 +406,7 @@ export const loadingLog = (contentArea) => {
       type="text" 
       id="connectionSize" 
       class="loading-log-input" 
-      value="${loadingLogData.connectionSize}" 
+      value="${loadingLogData.connectionSize || ""}" 
       placeholder="Enter connection size" 
     />
   </div>

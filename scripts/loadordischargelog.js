@@ -53,7 +53,6 @@ export const loadOrDischargeLog = (contentArea) => {
       selectedVoyageIndex = e.target.value;
       localStorage.setItem("selectedVoyageIndex", selectedVoyageIndex);
       selectedVoyage = voyages[selectedVoyageIndex];
-
       // Clear and update the log container
       logContainer.innerHTML = "";
       if (selectedVoyage.operation) {
