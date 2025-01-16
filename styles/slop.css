@@ -36,3 +36,10 @@
 .slop-input:focus {
     outline: 2px solid #009688;
 }
+
+.print{
+    background-color: var(--primary-color);
+}
+.print:hover{
+    background-color: var(--secondary-color);
+}

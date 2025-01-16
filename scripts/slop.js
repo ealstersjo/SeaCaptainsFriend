@@ -149,7 +149,9 @@ export const slop = (contentArea) => {
 
               <label for"remarksbefore">Remarks</label>
               <textarea type="textarea" id="remarksbefore"></textarea>
-              <button id="printSlopBefore">Print Slop Report Before Loading</button>
+              <button id="printSlopBefore" class="print">Print Slop Report Before Loading</button>              
+              <button id="saveSlopBefore" class="save">Save before loading report</button>
+
             </div>
 
 
@@ -257,7 +259,9 @@ export const slop = (contentArea) => {
 </table>
 <label for"remarksafter">Remarks</label>
               <textarea type="textarea" id="remarksafter"></textarea>
-              <button id="printSlopAfter">Print after loading report</button>
+              <button id="printSlopAfter" class="print">Print after loading report</button>
+              <button id="saveSlopAfter" class="save">Save after loading report</button>
+
             </div>
           `;
   };
@@ -382,6 +386,19 @@ export const slop = (contentArea) => {
     .getElementById("printSlopBefore")
     .addEventListener("click", function () {
       printSlopReport(true);
+    });
+
+  document
+    .getElementById("saveSlopBefore")
+    .addEventListener("click", function () {
+      const loadingData = getBeforeLoadingData();
+      currentVoyage[selectedVoyageIndex].slopBefore = loadingData;
+    });
+  document
+    .getElementById("saveSlopAfter")
+    .addEventListener("click", function () {
+      const loadingData = getAfterLoadingData();
+      currentVoyage[selectedVoyageIndex].slopAfter = loadingData;
     });
   const printSlopReport = (before) => {
     // Kontrollera om en resa är vald och om cargo tanks är ifyllt
