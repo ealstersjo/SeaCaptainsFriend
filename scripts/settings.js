@@ -1,5 +1,6 @@
 export const settings = (contentArea) => {
   // Hämta inställningar från localStorage eller sätt standardvärde
+  const currentVoyage = JSON.parse(localStorage.getItem("currentVoyage"));
   const shipSettings = JSON.parse(localStorage.getItem("shipSettings")) || {
     shipName: "",
   };
@@ -29,6 +30,7 @@ export const settings = (contentArea) => {
           </div>
           <button type="submit" class="settings-button">Save</button>
         </form>
+        <pre>${JSON.stringify(currentVoyage, null, 2)}</pre>
       </div>
     `;
 
