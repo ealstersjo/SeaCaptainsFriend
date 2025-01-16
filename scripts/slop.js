@@ -32,14 +32,15 @@ export const slop = (contentArea) => {
 
   // Funktion för att rendera Cleanliness Tank Certificate
   const renderSlopForm = () => {
-    console.log(selectedVoyage);
     if (!selectedVoyage) {
-      contentArea.innerHTML = `
+      if (voyages.length > 0) {
+        contentArea.innerHTML = `
               <h1>Slop reports</h1>
               <small>Select a voyage to proceed</small>
               <div class="select-container">${generateVoyageSelect()}</div>
             `;
-      return;
+        return;
+      }
     }
 
     contentArea.innerHTML = `
@@ -67,11 +68,11 @@ export const slop = (contentArea) => {
                   <td class="certificate-info-label">Draft</td>
                   <td>FWD ${
                     selectedVoyage.sof?.["first-line-ashore"]?.remarks
-                      .fwdDraft ?? "N/A"
+                      .fwdDraft ?? "Update value in SoF"
                   } m</td>
                   <td>Aft ${
                     selectedVoyage.sof?.["first-line-ashore"]?.remarks
-                      .aftDraft ?? "N/A"
+                      .aftDraft ?? "Update value in SoF"
                   } m</td>
                   <td>Trim ${
                     selectedVoyage.sof?.["first-line-ashore"]?.remarks
@@ -148,7 +149,7 @@ export const slop = (contentArea) => {
 
               <label for"remarksbefore">Remarks</label>
               <textarea type="textarea" id="remarksbefore"></textarea>
-              <button id="printCertificate">Print Slop Report Before Loading</button>
+              <button id="printSlopBefore">Print Slop Report Before Loading</button>
             </div>
 
 
@@ -256,10 +257,105 @@ export const slop = (contentArea) => {
 </table>
 <label for"remarksafter">Remarks</label>
               <textarea type="textarea" id="remarksafter"></textarea>
-              <button id="printCertificate">Print after loading report</button>
+              <button id="printSlopAfter">Print after loading report</button>
             </div>
           `;
   };
+  function getBeforeLoadingData() {
+    const slopBefore = {
+      utiUllage: {
+        p: document.getElementById("uti-ullage-p-before").value,
+        s: document.getElementById("uti-ullage-s-before").value,
+        cargo: document.getElementById("uti-ullage-cargo-before").value,
+        remarks: document.getElementById("uti-ullage-remarks-before").value,
+      },
+      corrUllage: {
+        p: document.getElementById("corr-ullage-p-before").value,
+        s: document.getElementById("corr-ullage-s-before").value,
+        cargo: document.getElementById("corr-ullage-cargo-before").value,
+        remarks: document.getElementById("corr-ullage-remarks-before").value,
+      },
+      gov: {
+        p: document.getElementById("gov-p-before").value,
+        s: document.getElementById("gov-s-before").value,
+        cargo: document.getElementById("gov-cargo-before").value,
+        remarks: document.getElementById("gov-remarks-before").value,
+      },
+      lastCargo: {
+        p: document.getElementById("last-cargo-p-before").value,
+        s: document.getElementById("last-cargo-s-before").value,
+        cargo: document.getElementById("last-cargo-cargo-before").value,
+        remarks: document.getElementById("last-cargo-remarks-before").value,
+      },
+      utiInterface: {
+        p: document.getElementById("uti-interface-p-before").value,
+        s: document.getElementById("uti-interface-s-before").value,
+        cargo: document.getElementById("uti-interface-cargo-before").value,
+        remarks: document.getElementById("uti-interface-remarks-before").value,
+      },
+      corrInterface: {
+        p: document.getElementById("corr-interface-p-before").value,
+        s: document.getElementById("corr-interface-s-before").value,
+        cargo: document.getElementById("corr-interface-cargo-before").value,
+        remarks: document.getElementById("corr-interface-remarks-before").value,
+      },
+      waterGov: {
+        p: document.getElementById("water-gov-p-before").value,
+        s: document.getElementById("water-gov-s-before").value,
+        cargo: document.getElementById("water-gov-cargo-before").value,
+        remarks: document.getElementById("water-gov-remarks-before").value,
+      },
+      overallRemarks: document.getElementById("remarksbefore").value,
+    };
+    return slopBefore;
+  }
+  function getAfterLoadingData() {
+    const slopAfter = {
+      utiUllage: {
+        p: document.getElementById("uti-ullage-p-after").value,
+        s: document.getElementById("uti-ullage-s-after").value,
+        cargo: document.getElementById("uti-ullage-cargo-after").value,
+        remarks: document.getElementById("uti-ullage-remarks-after").value,
+      },
+      corrUllage: {
+        p: document.getElementById("corr-ullage-p-after").value,
+        s: document.getElementById("corr-ullage-s-after").value,
+        cargo: document.getElementById("corr-ullage-cargo-after").value,
+        remarks: document.getElementById("corr-ullage-remarks-after").value,
+      },
+      gov: {
+        p: document.getElementById("gov-p-after").value,
+        s: document.getElementById("gov-s-after").value,
+        cargo: document.getElementById("gov-cargo-after").value,
+        remarks: document.getElementById("gov-remarks-after").value,
+      },
+      lastCargo: {
+        p: document.getElementById("last-cargo-p-after").value,
+        s: document.getElementById("last-cargo-s-after").value,
+        cargo: document.getElementById("last-cargo-cargo-after").value,
+        remarks: document.getElementById("last-cargo-remarks-after").value,
+      },
+      utiInterface: {
+        p: document.getElementById("uti-interface-p-after").value,
+        s: document.getElementById("uti-interface-s-after").value,
+        cargo: document.getElementById("uti-interface-cargo-after").value,
+        remarks: document.getElementById("uti-interface-remarks-after").value,
+      },
+      corrInterface: {
+        p: document.getElementById("corr-interface-p-after").value,
+        s: document.getElementById("corr-interface-s-after").value,
+        cargo: document.getElementById("corr-interface-cargo-after").value,
+        remarks: document.getElementById("corr-interface-remarks-after").value,
+      },
+      waterGov: {
+        p: document.getElementById("water-gov-p-after").value,
+        s: document.getElementById("water-gov-s-after").value,
+        cargo: document.getElementById("water-gov-cargo-after").value,
+        remarks: document.getElementById("water-gov-remarks-after").value,
+      },
+    };
+    return slopAfter;
+  }
 
   // Rendera formulär vid start
   renderSlopForm();
@@ -273,4 +369,25 @@ export const slop = (contentArea) => {
       renderSlopForm();
     }
   });
+  document
+    .getElementById("printSlopAfter")
+    .addEventListener("click", function () {
+      // Hämta data från "After Loading"-tabellen
+      const afterLoadingData = getAfterLoadingData();
+
+      alert("You have printed Slop After Report");
+      // Här kan du skriva kod för att generera och skriva ut rapporten
+      //generateAndPrintReport(afterLoadingData);
+    });
+  document
+    .getElementById("printSlopBefore")
+    .addEventListener("click", function () {
+      // Hämta data från "After Loading"-tabellen
+      const beforeLoadingData = getBeforeLoadingData();
+
+      alert("You have printed Slop Before Report");
+
+      // Här kan du skriva kod för att generera och skriva ut rapporten
+      //generateAndPrintReport(afterLoadingData);
+    });
 };
