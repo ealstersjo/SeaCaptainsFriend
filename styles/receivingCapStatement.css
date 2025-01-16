@@ -1,0 +1,7 @@
+.printButton {
+    background-color: var(--primary-color);
+}
+
+.printButton:hover{
+    background-color: var(--secondary-color);
+}

@@ -14,6 +14,7 @@ import { settings } from "./settings.js";
 import { noticeOfReadiness } from "./printNor.js";
 import { cleanlinessTankCertificate } from "./printCleanTanks.js";
 import { slop } from "./slop.js";
+import { receivingCapacity } from "./reccap.js";
 
 // Funktion för att visa en sektion och dölja de andra
 const showSection = (sectionId) => {
@@ -45,6 +46,8 @@ const showSection = (sectionId) => {
       cleanlinessTankCertificate(selectedSection); // Rendera Cleanliness Tank
     } else if (sectionId === "slopdiv") {
       slop(selectedSection);
+    } else if (sectionId === "reccapdiv") {
+      receivingCapacity(selectedSection);
     }
     // Lägg till renderingslogik för andra sektioner om så behövs
   }
@@ -60,6 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const handleNOR = document.getElementById("printNoR");
   const handleClean = document.getElementById("printclean");
   const handleSlop = document.getElementById("slop");
+  const handleRecCap = document.getElementById("recCapStatement");
 
   // Klickhändelser för att visa respektive sektion
   currentVoyageLink.addEventListener("click", () =>
@@ -74,7 +78,10 @@ document.addEventListener("DOMContentLoaded", () => {
   handleSlop.addEventListener("click", () => {
     showSection("slopdiv");
   });
+  handleRecCap.addEventListener("click", () => {
+    showSection("reccapdiv");
+  });
 
   // Ladda en sektion direkt vid start (om du vill ha en default)
-  showSection("slopdiv"); // Här visas till exempel Statement of Fact vid start
+  showSection("currentvoyagediv"); // Här visas till exempel Statement of Fact vid start
 });
