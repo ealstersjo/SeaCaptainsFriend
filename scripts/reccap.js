@@ -16,7 +16,7 @@ export const receivingCapacity = (contentArea) => {
           (voyage, index) => `
         <option value="${index}" ${
             index == selectedVoyageIndex ? "selected" : ""
-          }>${voyage.vessel} från ${voyage.from} till ${voyage.to}</option>
+          }>${voyage.vessel} from ${voyage.from} to ${voyage.to}</option>
       `
         )
         .join("")}

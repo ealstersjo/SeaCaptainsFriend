@@ -15,6 +15,7 @@ import { noticeOfReadiness } from "./printNor.js";
 import { cleanlinessTankCertificate } from "./printCleanTanks.js";
 import { slop } from "./slop.js";
 import { receivingCapacity } from "./reccap.js";
+import { loadOrDischargeLog } from "./loadordischargelog.js";
 
 // Funktion för att visa en sektion och dölja de andra
 const showSection = (sectionId) => {
@@ -48,8 +49,8 @@ const showSection = (sectionId) => {
       slop(selectedSection);
     } else if (sectionId === "reccapdiv") {
       receivingCapacity(selectedSection);
-    } else if (sectionId === "loadinglogdiv") {
-      loadingLog(selectedSection);
+    } else if (sectionId === "logdiv") {
+      loadOrDischargeLog(selectedSection);
     }
     // Lägg till renderingslogik för andra sektioner om så behövs
   }
@@ -85,9 +86,9 @@ document.addEventListener("DOMContentLoaded", () => {
     showSection("reccapdiv");
   });
   handleLoadingLog.addEventListener("click", () => {
-    showSection("loadinglogdiv");
+    showSection("logdiv");
   });
 
   // Ladda en sektion direkt vid start (om du vill ha en default)
-  showSection("currentvoyagediv"); // Här visas till exempel Statement of Fact vid start
+  showSection("logdiv"); // Här visas till exempel Statement of Fact vid start
 });
