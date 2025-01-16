@@ -48,6 +48,8 @@ const showSection = (sectionId) => {
       slop(selectedSection);
     } else if (sectionId === "reccapdiv") {
       receivingCapacity(selectedSection);
+    } else if (sectionId === "loadinglogdiv") {
+      loadingLog(selectedSection);
     }
     // Lägg till renderingslogik för andra sektioner om så behövs
   }
@@ -64,6 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const handleClean = document.getElementById("printclean");
   const handleSlop = document.getElementById("slop");
   const handleRecCap = document.getElementById("recCapStatement");
+  const handleLoadingLog = document.getElementById("loadingLog");
 
   // Klickhändelser för att visa respektive sektion
   currentVoyageLink.addEventListener("click", () =>
@@ -80,6 +83,9 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   handleRecCap.addEventListener("click", () => {
     showSection("reccapdiv");
+  });
+  handleLoadingLog.addEventListener("click", () => {
+    showSection("loadinglogdiv");
   });
 
   // Ladda en sektion direkt vid start (om du vill ha en default)
