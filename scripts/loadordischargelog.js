@@ -1,5 +1,6 @@
 import { loadingLog } from "./loadinglog.js";
 import { dischargeLog } from "./dischargelog.js";
+import { loadlog } from "./loadlog.js";
 
 export const loadOrDischargeLog = (contentArea) => {
   const voyages = JSON.parse(localStorage.getItem("currentVoyage")) || [];
@@ -42,7 +43,7 @@ export const loadOrDischargeLog = (contentArea) => {
   // Initial render of appropriate log
   if (selectedVoyage && selectedVoyage.operation) {
     if (selectedVoyage.operation.toLowerCase() === "loading") {
-      loadingLog(logContainer);
+      loadlog(logContainer, selectedVoyage, 0);
     } else if (selectedVoyage.operation.toLowerCase() === "discharging") {
       dischargeLog(logContainer);
     }
@@ -57,7 +58,7 @@ export const loadOrDischargeLog = (contentArea) => {
       logContainer.innerHTML = "";
       if (selectedVoyage.operation) {
         if (selectedVoyage.operation.toLowerCase() === "loading") {
-          loadingLog(logContainer);
+          loadlog(logContainer, selectedVoyage, 0);
         } else if (selectedVoyage.operation.toLowerCase() === "discharging") {
           dischargeLog(logContainer);
         }

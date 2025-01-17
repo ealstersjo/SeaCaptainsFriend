@@ -6,6 +6,10 @@ let etcCurrent;
 let etcAvg;
 let avgRate;
 let lastAvgRate;
+let cargoSelectIndex = 0;
+let cargo;
+let cargoQuant;
+let cargoUnit;
 // Funktion för att skapa en loggrad
 const createLogRow = (entry = {}, index = null) => {
   const now = new Date();
@@ -205,6 +209,7 @@ const printLog = () => {
 
     const tableSection = printWindow.document.querySelector(".table-container");
     const footer = printWindow.document.querySelector(".footer");
+    const signature = printWindow.document.querySelector(".signatures");
 
     // Fyll i header-datan (loadingLogData)
     headerSection.innerHTML = `
@@ -227,10 +232,10 @@ const printLog = () => {
     </div>
     <div class="header-content3">
     <div><strong>Manifold(s) No:</strong> ${
-      loadingLogData.manifolds || "N/A"
+      loadingLogData.loadingLog?.manifolds || "N/A"
     }</div>
     <div><strong>Connection Size:</strong> ${
-      loadingLogData.connectionSize || "N/A"
+      loadingLogData.loadingLog?.connectionSize || "N/A"
     }</div>
   </div>
     `;
@@ -257,6 +262,18 @@ const printLog = () => {
     // Fyll i tabellen med loggdata
     tableSection.querySelector("tbody").innerHTML = tableRows;
     footer.append(`Generated on: ${new Date().toLocaleString()}`);
+    signature.innerHTML = ` <div class="signature-section-horizontal">
+        <div class="signature-item">
+          <div class="line"></div>
+          <span>Chief Officer:</span>
+          <span>${loadingLogData.crew.chiefOfficer}</span>
+        </div>
+        <div class="signature-item">
+          <div class="line"></div>
+          <span>Surveyor / Load Master:</span>
+          
+        </div>
+      </div>`;
 
     // När sidan är laddad, kalla på utskriftsdialogen
     printWindow.print();
@@ -351,9 +368,7 @@ const renderBasicData = () => {
         <td><strong>Voy:</strong></td>
         <td>${loadingLogData.voyNo}</td>
         <td><strong>Cargo(es):</strong></td>
-        <td>${loadingLogData.cargos[0].cargo} (${
-    loadingLogData.cargos[0].quantity
-  }${loadingLogData.cargos[0].unit})</td>
+        <td>${cargo} (${cargoQuant}${cargoUnit})</td>
       </tr>
       <tr>
         <td><strong>Date:</strong></td>
@@ -396,12 +411,47 @@ export const loadingLog = (contentArea) => {
   etcAvg = loadingLogData.loadingLog?.rates?.etcAvg || "-";
   avgRate = loadingLogData.loadingLog?.rates?.avgRate || 0;
   lastAvgRate = loadingLogData.loadingLog?.rates?.lastAvgRate || 0;
+  cargo = loadingLogData.cargos[cargoSelectIndex].cargo;
+  cargoQuant = loadingLogData.cargos[cargoSelectIndex].quantity;
+  cargoUnit = loadingLogData.cargos[cargoSelectIndex].unit;
+
+  const generateCargoSelect = () => {
+    return `
+    <p>Select a cargo to log</p>
+    <select id="cargoSelect">
+      <option value="" selected disabled>Select cargo</option>
+      ${loadingLogData.cargos
+        .filter((cargo) => cargo.cargo && cargo.cargo !== "")
+        .map(
+          (cargo, index) => `
+        <option value="${index}" ${
+            index == cargoSelectIndex ? "selected" : ""
+          }>${cargo.cargo}  (${cargo.quantity} ${cargo.unit})</option>
+      `
+        )
+        .join("")}
+    </select>
+  `;
+  };
+  // Add event listener to cargo select
+  contentArea.addEventListener("change", (e) => {
+    if (e.target.id === "cargoSelect") {
+      cargoSelectIndex = parseInt(e.target.value);
+      cargo = loadingLogData.cargos[cargoSelectIndex].cargo;
+      cargoQuant = loadingLogData.cargos[cargoSelectIndex].quantity;
+      cargoUnit = loadingLogData.cargos[cargoSelectIndex].unit;
+    }
+  });
 
   contentArea.innerHTML = `
     <div class="loading-log-header-container">
       <h1 class="loading-log-title">Loading Log</h1>
+      <div>
+    ${generateCargoSelect()}
+    </div>
       <button id="printLogButton" class="loading-log-button">Print Log</button>
-    </div>      <div class="loading-log-container">
+      
+      </div>      <div class="loading-log-container">
         <!-- Grundläggande data -->
 <table class="loading-log-basic-info-table">
   

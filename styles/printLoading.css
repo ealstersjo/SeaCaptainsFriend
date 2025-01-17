@@ -109,31 +109,22 @@
 
   .signature-section-horizontal {
     display: flex;
-    justify-content: space-between; /* Fördela utrymme jämnt mellan linjerna */
-    align-items: center;
-    margin-top: 60px; /* Avstånd från footern */
-    margin-bottom: 60px;
-    padding: 0 10%; /* Lämnar lite utrymme från sidorna */
+    gap: 2rem;
+    margin-top: 80px;
+    text-align: center;
+    font-weight: bold;
   }
   
   .signature-item {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
-    width: 45%; /* Fördelar lika mycket utrymme åt varje signaturrad */
   }
   
-  .signature-item .line {
-    border-bottom: 1px solid #000;
-    width: 100%; /* Gör linjen lika bred som behållaren */
-    margin-bottom: 5px; /* Mellanrum mellan linje och etikett */
-  }
   
-  .signature-item span {
-    font-size: 1em;
-    font-weight: bold;
-    margin-top: 5px;
+  .line {
+    border-top: 1px solid black;
+    width: 100%;
   }
     
 

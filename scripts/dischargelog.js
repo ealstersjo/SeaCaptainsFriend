@@ -1,25 +1,24 @@
 // Testdata (kommer senare att hämtas från localStorage)
-let loadingLogData = {
-  voy: "FVI2025002",
-  cargo: "Reformate",
-  date: "2025-01-08",
-  port: "Rotterdam",
-  berth: "Redlight District",
-  manifolds: "",
-  connectionSize: "",
-  avgRate: 0,
-  lastAvgRate: 0,
-};
+let loadingLogData = {};
 
 let logEntries = []; // Array för att lagra loggdata
-
+let etcCurrent;
+let etcAvg;
+let avgRate;
+let lastAvgRate;
 // Funktion för att skapa en loggrad
 const createLogRow = (entry = {}, index = null) => {
+  const now = new Date();
+
   const {
-    time = new Date().toLocaleTimeString([], {
+    time = `${now.toLocaleDateString("sv-SE", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    })} ${now.toLocaleTimeString([], {
       hour: "2-digit",
       minute: "2-digit",
-    }), // Förifyll med aktuell tid
+    })}`, // Förifyll med aktuell tid
     obq = "",
     rate = "",
 
@@ -101,7 +100,7 @@ const createLogRow = (entry = {}, index = null) => {
       let rate = "";
       if (index !== null && index > 0) {
         const previousObq = parseFloat(logEntries[index - 1].obq) || 0;
-        rate = (obq - previousObq).toFixed(2);
+        rate = (obq + previousObq).toFixed(2);
       } else {
         rate = obq || 0;
       }
@@ -111,9 +110,9 @@ const createLogRow = (entry = {}, index = null) => {
         const currentObq = parseFloat(entry.obq) || 0;
         const previousObq = parseFloat(logEntries[index - 1].obq) || 0;
 
-        if (currentObq < previousObq) {
+        if (currentObq > previousObq) {
           const confirmation = confirm(
-            `O.B.Q. cannot be lower than earlier value (last entered O.B.Q.: ${previousObq}). If you want to edit please press "Cancel"`
+            `O.B.Q. cannot be higher than earlier value (last entered O.B.Q.: ${previousObq}). If you want to edit please press "Cancel"`
           );
 
           if (!confirmation) {
@@ -127,6 +126,19 @@ const createLogRow = (entry = {}, index = null) => {
       entry.rate = rate;
       entry.isEditable = false;
       updateAvgRates();
+      // Save to localStorage
+      const voyages = JSON.parse(localStorage.getItem("currentVoyage")) || [];
+      const selectedVoyageIndex = localStorage.getItem("selectedVoyageIndex");
+
+      // Initialize loadingLog if it doesn't exist
+      if (!voyages[selectedVoyageIndex].dischargingLog) {
+        voyages[selectedVoyageIndex].dischargingLog = {};
+      }
+
+      // Save the entire logEntries array
+      voyages[selectedVoyageIndex].dischargingLog.entries = logEntries;
+      localStorage.setItem("currentVoyage", JSON.stringify(voyages));
+
       renderLogTable(); // Uppdatera tabellen
     } else {
       // Växla till redigerbart läge
@@ -153,7 +165,7 @@ const calculateRate = (entry, index, input) => {
   const obq = input || 0;
   if (index !== null && index > 0) {
     const previousObq = parseFloat(logEntries[index - 1].obq) || 0;
-    rate = (obq - previousObq).toFixed(2);
+    rate = (obq + previousObq).toFixed(2);
   } else {
     rate = obq || 0;
   }
@@ -186,15 +198,14 @@ const updateAvgRates = () => {
       const rate = parseInt(entry.rate) || 0;
       return sum + rate;
     }, 0);
-    loadingLogData.avgRate = parseInt(totalRate / logEntries.length);
+    avgRate = parseInt(totalRate / logEntries.length);
 
     // Hämta lastAvgRate
-    loadingLogData.lastAvgRate =
-      parseInt(logEntries[logEntries.length - 1].rate) || 0;
+    lastAvgRate = parseInt(logEntries[logEntries.length - 1].rate) || 0;
   } else {
     // Inga logEntries, nollställ värden
-    loadingLogData.avgRate = 0;
-    loadingLogData.lastAvgRate = 0;
+    avgRate = 0;
+    lastAvgRate = 0;
   }
   console.log(loadingLogData.avgRate);
   // Uppdatera grundläggande data i UI
@@ -206,9 +217,9 @@ const renderBasicData = () => {
   table.innerHTML = `
         <tr>
           <td><strong>Voy:</strong></td>
-          <td>${loadingLogData.voy}</td>
+          <td>${loadingLogData.voyNo}</td>
           <td><strong>Cargo(es):</strong></td>
-          <td>${loadingLogData.cargo}</td>
+          <td>${loadingLogData.cargos[0].cargo} (${loadingLogData.cargos[0].quantity}${loadingLogData.cargos[0].unit})</td>
         </tr>
         <tr>
           <td><strong>Date:</strong></td>
@@ -218,20 +229,34 @@ const renderBasicData = () => {
         </tr>
         <tr>
           <td><strong>Berth:</strong></td>
-          <td>${loadingLogData.berth}</td>
+          <td>${loadingLogData.jetty}</td>
           
         </tr>
         <tr>
         <td><strong>Avg. Rate (cbm/h):</strong></td>
-          <td>${loadingLogData.avgRate}</td>
+          <td>${avgRate}</td>
           <td><strong>Last Avg. Rate (cbm/h):</strong></td>
-          <td>${loadingLogData.lastAvgRate}</td>
+          <td>${lastAvgRate}</td>
         </tr>
       `;
 };
 
 // Funktion för att generera loading log-sidan
 export const dischargeLog = (contentArea) => {
+  const voyages = JSON.parse(localStorage.getItem("currentVoyage")) || [];
+  const shipSettings = JSON.parse(localStorage.getItem("shipSettings")) || {
+    shipName: "",
+  };
+
+  let selectedVoyageIndex = localStorage.getItem("selectedVoyageIndex");
+  loadingLogData = voyages[selectedVoyageIndex];
+
+  logEntries = loadingLogData.dischargingLog?.entries || [];
+
+  etcCurrent = loadingLogData.discharging?.rates?.etcCurrent || "-";
+  etcAvg = loadingLogData.discharging?.rates?.etcAvg || "-";
+  avgRate = loadingLogData.discharging?.rates?.avgRate || 0;
+  lastAvgRate = loadingLogData.discharging?.rates?.lastAvgRate || 0;
   contentArea.innerHTML = `
         <h1 class="loading-log-title">Discharge Log</h1>
         <div class="loading-log-container">
@@ -249,7 +274,7 @@ export const dischargeLog = (contentArea) => {
         type="text" 
         id="manifolds" 
         class="loading-log-input" 
-        value="${loadingLogData.manifolds}" 
+        value="${loadingLogData.discharging?.manifolds || ""}" 
         placeholder="Enter manifold(s) no." 
       />
     </div>
@@ -259,7 +284,7 @@ export const dischargeLog = (contentArea) => {
         type="text" 
         id="connectionSize" 
         class="loading-log-input" 
-        value="${loadingLogData.connectionSize}" 
+        value="${loadingLogData.discharging?.connectionSize || ""}" 
         placeholder="Enter connection size" 
       />
     </div>
