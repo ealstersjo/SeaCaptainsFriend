@@ -125,6 +125,22 @@
   .loading-log-body tr:nth-child(even) {
     background-color: #f2f2f2;
   }
+  .checkbox-container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* 6 kolumner */
+    gap: 10px;
+  }
+  
+  .checkbox-wrapper {
+    display: flex;
+    align-items: center;
+  }
+  
+  .checkbox-wrapper label {
+    margin-left: 5px;
+    font-size: 0.9rem;
+  }
+  
 
 /* Container för rubrik och knapp */
 .loading-log-header-container {

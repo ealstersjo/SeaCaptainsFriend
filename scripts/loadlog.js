@@ -318,10 +318,54 @@ export const loadlog = (contentArea, voyage, inputCargoIndex) => {
 
     const row = document.createElement("tr");
 
-    // Helper: Skapa en cell med antingen input eller text
     const createCell = (key, value, required = false, editable = true) => {
       const cell = document.createElement("td");
-      if (editable && isEditable) {
+
+      if (key === "tanksNo" && editable && isEditable) {
+        // Skapa en container för kryssrutorna
+        const checkboxContainer = document.createElement("div");
+        checkboxContainer.classList.add("checkbox-container");
+
+        // Namnge tankarna som C1P-C6P och C1S-C6S
+        const tankNames = [
+          "C1P",
+          "C2P",
+          "C3P",
+          "C4P",
+          "C5P",
+          "C6P",
+          "C1S",
+          "C2S",
+          "C3S",
+          "C4S",
+          "C5S",
+          "C6S",
+        ];
+
+        // Generera kryssrutor med anpassade tanknamn
+        tankNames.forEach((tankName) => {
+          const checkboxWrapper = document.createElement("div");
+          checkboxWrapper.classList.add("checkbox-wrapper");
+
+          const checkbox = document.createElement("input");
+          checkbox.type = "checkbox";
+          checkbox.value = tankName;
+          checkbox.id = `tank-${tankName}`;
+          checkbox.checked = value?.split(",").includes(tankName); // Markera om värdet finns
+          checkbox.dataset.key = key;
+
+          const label = document.createElement("label");
+          label.htmlFor = `tank-${tankName}`;
+          label.textContent = tankName;
+
+          checkboxWrapper.appendChild(checkbox);
+          checkboxWrapper.appendChild(label);
+          checkboxContainer.appendChild(checkboxWrapper);
+        });
+
+        cell.appendChild(checkboxContainer);
+      } else if (editable && isEditable) {
+        // Standardinput för andra keys
         const input = document.createElement("input");
         input.type = "text";
         input.value = value;
@@ -336,8 +380,10 @@ export const loadlog = (contentArea, voyage, inputCargoIndex) => {
           });
         }
       } else {
+        // Visa text om inte redigerbart
         cell.textContent = value || "-";
       }
+
       return cell;
     };
 
@@ -381,6 +427,17 @@ export const loadlog = (contentArea, voyage, inputCargoIndex) => {
         inputs.forEach((input) => {
           entry[input.dataset.key] = input.value;
         });
+        // Hantera kryssrutorna för tanksNo
+        if (row.querySelector(".checkbox-container")) {
+          const checkboxes = row.querySelectorAll(
+            ".checkbox-container input[type='checkbox']"
+          );
+          const selectedTanks = Array.from(checkboxes)
+            .filter((checkbox) => checkbox.checked) // Filtrera ut endast markerade kryssrutor
+            .map((checkbox) => checkbox.value); // Extrahera värdena från kryssrutorna
+          console.log(selectedTanks);
+          //entry.tanksNo = selectedTanks.join(","); // Spara som en kommaseparerad sträng
+        }
         // Beräkna och spara rate
         const obq = parseFloat(entry.obq) || 0;
         let rate = "";
