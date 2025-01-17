@@ -2,7 +2,10 @@
 let loadingLogData = {};
 
 let logEntries = []; // Array för att lagra loggdata
-
+let etcCurrent;
+let etcAvg;
+let avgRate;
+let lastAvgRate;
 // Funktion för att skapa en loggrad
 const createLogRow = (entry = {}, index = null) => {
   const now = new Date();
@@ -88,7 +91,6 @@ const createLogRow = (entry = {}, index = null) => {
   actionButton.addEventListener("click", () => {
     if (actionButton.textContent === "Save") {
       // Spara data från inmatningsfält
-      console.trace("Save");
       const inputs = row.querySelectorAll(".log-input");
       inputs.forEach((input) => {
         entry[input.dataset.key] = input.value;
@@ -175,7 +177,6 @@ const calculateRate = (entry, index, input) => {
 
 // Funktion för att uppdatera rate vid ändring i obq
 const updateRate = (row, entry, index, input) => {
-  console.log("UpdateRate");
   const rateCell = row.querySelector("td:nth-child(3)"); // Anta att rate är den tredje cellen
   const rate = calculateRate(entry, index, input);
 
@@ -269,21 +270,23 @@ const updateAvgRates = () => {
       const rate = parseFloat(entry.rate) || 0;
       return sum + rate;
     }, 0);
-    console.log(totalRate);
-    loadingLogData.avgRate = parseInt(totalRate / logEntries.length);
+    avgRate = parseInt(totalRate / logEntries.length);
 
     // Hämta lastAvgRate
-    loadingLogData.lastAvgRate =
-      parseFloat(logEntries[logEntries.length - 1].rate) || 0;
+
+    lastAvgRate = parseFloat(logEntries[logEntries.length - 1].rate) || 0;
 
     // Beräkna ETC avg
-    const firstTime = new Date(Date.parse(logEntries[0].time));
-    if (loadingLogData.avgRate > 0) {
-      const avgDurationHours = loadingLogData.toLoad / loadingLogData.avgRate;
+    const rawTime = logEntries[0].time; // Format: "YYYY-MM-DD hh:mm"
+    const isoTime = rawTime.replace(" ", "T"); // Konvertera till "YYYY-MM-DDThh:mm"
+    const firstTime = new Date(isoTime);
+
+    if (avgRate > 0) {
+      const avgDurationHours = loadingLogData.cargos[0].quantity / avgRate;
       const etcAvgTime = new Date(
         firstTime.getTime() + avgDurationHours * 3600000
       );
-      loadingLogData.etcAvg = etcAvgTime.toLocaleString("sv-SE", {
+      etcAvg = etcAvgTime.toLocaleString("sv-SE", {
         year: "numeric",
         month: "2-digit",
         day: "2-digit",
@@ -291,7 +294,7 @@ const updateAvgRates = () => {
         minute: "2-digit",
       });
     } else {
-      loadingLogData.etcAvg = "-";
+      etcAvg = "-";
     }
 
     // Beräkna ETC current
@@ -299,13 +302,13 @@ const updateAvgRates = () => {
       Date.parse(logEntries[logEntries.length - 1].time)
     );
 
-    if (loadingLogData.lastAvgRate > 0) {
+    if (lastAvgRate > 0) {
       const currentDurationHours =
-        loadingLogData.toLoad / loadingLogData.lastAvgRate;
+        loadingLogData.cargos[0].quantity / lastAvgRate;
       const etcCurrentTime = new Date(
         lastTime.getTime() + currentDurationHours * 3600000
       );
-      loadingLogData.etcCurrent = etcCurrentTime.toLocaleString("sv-SE", {
+      etcCurrent = etcCurrentTime.toLocaleString("sv-SE", {
         year: "numeric",
         month: "2-digit",
         day: "2-digit",
@@ -313,31 +316,44 @@ const updateAvgRates = () => {
         minute: "2-digit",
       });
     } else {
-      loadingLogData.etcCurrent = "-";
+      etcCurrent = "-";
     }
   } else {
     // Nollställ värden om inga logEntries
-    loadingLogData.avgRate = 0;
-    loadingLogData.lastAvgRate = 0;
-    loadingLogData.etcAvg = "-";
-    loadingLogData.etcCurrent = "-";
+    avgRate = 0;
+    lastAvgRate = 0;
+    etcAvg = "-";
+    etcCurrent = "-";
   }
+
+  let rates = { avgRate, lastAvgRate, etcAvg, etcCurrent };
+
+  // Save to localStorage
+  const voyages = JSON.parse(localStorage.getItem("currentVoyage")) || [];
+  const selectedVoyageIndex = localStorage.getItem("selectedVoyageIndex");
+
+  // Initialize loadingLog if it doesn't exist
+  if (!voyages[selectedVoyageIndex].loadingLog) {
+    voyages[selectedVoyageIndex].loadingLog = {};
+  }
+
+  // Save the entire logEntries array
+  voyages[selectedVoyageIndex].loadingLog.rates = rates;
+  localStorage.setItem("currentVoyage", JSON.stringify(voyages));
 
   renderBasicData(); // Uppdatera grundläggande data i UI
 };
 
 const renderBasicData = () => {
-  console.log("Average Rate:", loadingLogData.avgRate, "cbm/h");
-  console.log("Last Average Rate:", loadingLogData.lastAvgRate, "cbm/h");
-  console.log("ETC (Current):", loadingLogData.etcCurrent);
-  console.log("ETC (Average):", loadingLogData.etcAvg);
   const table = document.querySelector(".loading-log-basic-info-table");
   table.innerHTML = `
       <tr>
         <td><strong>Voy:</strong></td>
         <td>${loadingLogData.voyNo}</td>
         <td><strong>Cargo(es):</strong></td>
-        <td>${loadingLogData.cargos[0].cargo}</td>
+        <td>${loadingLogData.cargos[0].cargo} (${
+    loadingLogData.cargos[0].quantity
+  }${loadingLogData.cargos[0].unit})</td>
       </tr>
       <tr>
         <td><strong>Date:</strong></td>
@@ -351,15 +367,15 @@ const renderBasicData = () => {
       </tr>
       <tr>
         <td><strong>Avg. Rate (cbm/h):</strong></td>
-        <td>${loadingLogData.avgRate || "N/A"}</td>
+        <td>${avgRate || "N/A"}</td>
         <td><strong>Last Avg. Rate (cbm/h):</strong></td>
-        <td>${loadingLogData.lastAvgRate || "N/A"}</td>
+        <td>${lastAvgRate || "N/A"}</td>
       </tr>
       <tr>
         <td><strong>ETC avg:</strong></td>
-        <td>${loadingLogData.etcAvg || "N/A"}</td>
+        <td>${etcAvg || "N/A"}</td>
         <td><strong>ETC current:</strong></td>
-        <td>${loadingLogData.etcCurrent || "N/A"}</td>
+        <td>${etcCurrent || "N/A"}</td>
       </tr>
     `;
 };
@@ -374,8 +390,12 @@ export const loadingLog = (contentArea) => {
   let selectedVoyageIndex = localStorage.getItem("selectedVoyageIndex");
   loadingLogData = voyages[selectedVoyageIndex];
 
-  logEntries = loadingLogData.loadingLog.entries || [];
-  console.log(loadingLogData);
+  logEntries = loadingLogData.loadingLog?.entries || [];
+
+  etcCurrent = loadingLogData.loadingLog?.rates?.etcCurrent || "-";
+  etcAvg = loadingLogData.loadingLog?.rates?.etcAvg || "-";
+  avgRate = loadingLogData.loadingLog?.rates?.avgRate || 0;
+  lastAvgRate = loadingLogData.loadingLog?.rates?.lastAvgRate || 0;
 
   contentArea.innerHTML = `
     <div class="loading-log-header-container">
@@ -396,7 +416,7 @@ export const loadingLog = (contentArea) => {
       type="text" 
       id="manifolds" 
       class="loading-log-input" 
-      value="${loadingLogData.manifolds || ""}" 
+      value="${loadingLogData.loadingLog?.manifolds || ""}" 
       placeholder="Enter manifold(s) no." 
     />
   </div>
@@ -406,7 +426,7 @@ export const loadingLog = (contentArea) => {
       type="text" 
       id="connectionSize" 
       class="loading-log-input" 
-      value="${loadingLogData.connectionSize || ""}" 
+      value="${loadingLogData.loadingLog?.connectionSize || ""}" 
       placeholder="Enter connection size" 
     />
   </div>
@@ -444,10 +464,22 @@ export const loadingLog = (contentArea) => {
     const manifoldsInput = document.getElementById("manifolds").value;
     const connectionSizeInput = document.getElementById("connectionSize").value;
 
-    loadingLogData.manifolds = manifoldsInput;
-    loadingLogData.connectionSize = connectionSizeInput;
+    // Save to localStorage
+    const voyages = JSON.parse(localStorage.getItem("currentVoyage")) || [];
+    const selectedVoyageIndex = localStorage.getItem("selectedVoyageIndex");
 
-    localStorage.setItem("loadingLogData", JSON.stringify(loadingLogData));
+    // Initialize loadingLog if it doesn't exist
+    if (!voyages[selectedVoyageIndex].loadingLog) {
+      voyages[selectedVoyageIndex].loadingLog = {};
+    }
+
+    // Save the entire logEntries array
+    voyages[selectedVoyageIndex].loadingLog.manifolds = manifoldsInput;
+    voyages[selectedVoyageIndex].loadingLog.connectionSize =
+      connectionSizeInput;
+
+    localStorage.setItem("currentVoyage", JSON.stringify(voyages));
+
     alert("Loading log updated successfully!");
     loadingLog(contentArea); // Uppdatera sidan
   });

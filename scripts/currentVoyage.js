@@ -372,7 +372,10 @@ export const currentVoyagePage = (contentArea) => {
           console.log(updatedVoyage);
           const voyages =
             JSON.parse(localStorage.getItem("currentVoyage")) || [];
-          voyages[index] = updatedVoyage;
+          voyages[index] = {
+            ...voyages[index], // Keep existing data
+            ...updatedVoyage, // Update with new values
+          };
           localStorage.setItem("currentVoyage", JSON.stringify(voyages));
 
           currentVoyagePage(contentArea);
