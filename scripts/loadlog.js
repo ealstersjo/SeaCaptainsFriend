@@ -12,6 +12,17 @@ export const loadlog = (contentArea, voyage, inputCargoIndex) => {
   logEntries = voyage.loadingLog?.entries[cargoIndex] || [];
   manifolds = voyage.loadingLog.manifolds || "";
   connectionSize = voyage.loadingLog.connectionSize || "";
+  // Destrukturera värden från rates, med säker fallback om rates inte finns
+  const {
+    avgRate: tempAvgRate = 0,
+    lastAvgRate: tempLastAvgRate = 0,
+    etcAvg: tempEtcAvg = 0,
+    etcCurrent: tempEtcCurrent = 0,
+  } = voyage.loadingLog?.rates || {};
+  avgRate = tempAvgRate;
+  lastAvgRate = tempLastAvgRate;
+  etcAvg = tempEtcAvg;
+  etcCurrent = tempEtcCurrent;
   const renderBasicData = () => {
     renderManifoldForm();
     renderLogEventTable();
@@ -436,7 +447,7 @@ export const loadlog = (contentArea, voyage, inputCargoIndex) => {
             .filter((checkbox) => checkbox.checked) // Filtrera ut endast markerade kryssrutor
             .map((checkbox) => checkbox.value); // Extrahera värdena från kryssrutorna
           console.log(selectedTanks);
-          //entry.tanksNo = selectedTanks.join(","); // Spara som en kommaseparerad sträng
+          entry.tanksNo = selectedTanks.join(","); // Spara som en kommaseparerad sträng
         }
         // Beräkna och spara rate
         const obq = parseFloat(entry.obq) || 0;
@@ -537,7 +548,7 @@ export const loadlog = (contentArea, voyage, inputCargoIndex) => {
   // Skapa innehållet för att välja cargo
   contentArea.innerHTML = `
       <h1>Loading log</h1>
-      <small>Select a cargo to proceed</small>
+      <small>Select a cargo from the list</small>
       <div class="select-container">
         ${generateCargoSelect()}
       </div>
