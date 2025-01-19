@@ -10,8 +10,8 @@ let connectionSize = "";
 export const loadlog = (contentArea, voyage, inputCargoIndex) => {
   cargoIndex = inputCargoIndex;
   logEntries = voyage.loadingLog?.entries[cargoIndex] || [];
-  manifolds = voyage.loadingLog.manifolds || "";
-  connectionSize = voyage.loadingLog.connectionSize || "";
+  manifolds = voyage.loadingLog?.manifolds || "";
+  connectionSize = voyage.loadingLog?.connectionSize || "";
   // Destrukturera värden från rates, med säker fallback om rates inte finns
   const {
     avgRate: tempAvgRate = 0,
