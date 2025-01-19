@@ -1,8 +1,6 @@
 const printChecklist = (checklist) => {
   const printWindow = window.open("../pages/printChecklist.html", "_blank");
 
-  console.log(checklist);
-
   // Vänta tills utskriftsmallen är laddad
   printWindow.onload = () => {
     // Hitta elementet i utskriftsmallen där vi ska fylla i data
@@ -106,7 +104,6 @@ export const checklists = (contentArea) => {
 
       // Lägg till renderChecklist-anropet på print-knappen
       printButton.onclick = () => {
-        console.log(checklist);
         printChecklist(checklist);
       };
 

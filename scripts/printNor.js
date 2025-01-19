@@ -3,7 +3,6 @@ export const noticeOfReadiness = (contentArea) => {
   const shipSettings = JSON.parse(localStorage.getItem("shipSettings")) || {
     shipName: "",
   };
-  //console.log(shipSettings);
 
   let selectedVoyageIndex = localStorage.getItem("selectedVoyageIndex");
 
@@ -79,7 +78,6 @@ export const noticeOfReadiness = (contentArea) => {
           <button id="printNOR">Print Notice of Readiness</button>
         </div>
       `;
-    console.log(selectedVoyage);
     // Hantera print-knappen
     document.getElementById("printNOR").addEventListener("click", () => {
       // Kontrollera om en resa är vald och om cargo tanks är ifyllt

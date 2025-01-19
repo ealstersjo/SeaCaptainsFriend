@@ -369,7 +369,6 @@ export const currentVoyagePage = (contentArea) => {
               masterName: e.target.masterName.value,
             },
           };
-          console.log(updatedVoyage);
           const voyages =
             JSON.parse(localStorage.getItem("currentVoyage")) || [];
           voyages[index] = {
