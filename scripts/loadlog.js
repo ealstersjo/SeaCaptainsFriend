@@ -446,7 +446,7 @@ export const loadlog = (contentArea, voyage, inputCargoIndex) => {
           const selectedTanks = Array.from(checkboxes)
             .filter((checkbox) => checkbox.checked) // Filtrera ut endast markerade kryssrutor
             .map((checkbox) => checkbox.value); // Extrahera värdena från kryssrutorna
-          console.log(selectedTanks);
+
           entry.tanksNo = selectedTanks.join(","); // Spara som en kommaseparerad sträng
         }
         // Beräkna och spara rate
