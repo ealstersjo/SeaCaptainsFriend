@@ -1,6 +1,36 @@
 export const protests = (contentArea) => {
+  const voyages = JSON.parse(localStorage.getItem("currentVoyage")) || [];
+  const shipSettings = JSON.parse(localStorage.getItem("shipSettings")) || {
+    shipName: "",
+  };
+  //console.log(shipSettings);
+
+  let selectedVoyageIndex = localStorage.getItem("selectedVoyageIndex");
+
+  const generateVoyageSelect = () => {
+    return `
+      <select id="voyageSelect">
+        <option value="" selected disabled>Select trip</option>
+        ${voyages
+          .map(
+            (voyage, index) => `
+          <option value="${index}" ${
+              index == selectedVoyageIndex ? "selected" : ""
+            }>${voyage.vessel} from ${voyage.from} to ${voyage.to}</option>
+        `
+          )
+          .join("")}
+      </select>
+    `;
+  };
+
+  // Hämta vald resa
+  let selectedVoyage;
+
+  if (selectedVoyageIndex) {
+    selectedVoyage = voyages[selectedVoyageIndex];
+  }
   // En lista över dokument och de fält som behöver fyllas i
-  const ship = "M/T FURE VITEN"; //Skall hämtas från globalt givetvis
   const documents = [
     {
       title: "Delay protest",
@@ -63,6 +93,8 @@ export const protests = (contentArea) => {
   const renderDocumentList = () => {
     contentArea.innerHTML = `
         <h1>Protests</h1>
+         <small>Select a voyage to proceed</small>
+              <div class="select-container">${generateVoyageSelect()}</div>
         <ul class="document-list">
           ${documents
             .map(
@@ -78,6 +110,15 @@ export const protests = (contentArea) => {
         </ul>
       `;
 
+    // Hantera ändring av vald resa
+    contentArea.addEventListener("change", (e) => {
+      if (e.target.id === "voyageSelect") {
+        selectedVoyageIndex = e.target.value;
+        localStorage.setItem("selectedVoyageIndex", selectedVoyageIndex);
+        selectedVoyage = voyages[selectedVoyageIndex];
+        renderCleanlinessCertificateForm();
+      }
+    });
     // Lägg till eventlyssnare för knapparna
     document.querySelectorAll(".document-button").forEach((button) => {
       button.addEventListener("click", (event) => {
@@ -89,35 +130,75 @@ export const protests = (contentArea) => {
 
   // Visa formuläret för att fylla i ett dokument
   const renderDocumentForm = (document) => {
+    // Funktion för att hämta förifyllt värde baserat på label
+    const getPrefillValue = (label) => {
+      switch (label) {
+        case "Voy":
+          return selectedVoyage.voyNo;
+        case "To":
+          return selectedVoyage.supplierReceiver;
+        case "Port":
+          return selectedVoyage.port;
+        case "Date":
+          return selectedVoyage.date || "";
+        case "C/P Date":
+          return selectedVoyage.cpDated || ""; // Om kontraktsdatum finns
+        case "Vessel arrived":
+          return (
+            selectedVoyage.sof?.eosp?.date +
+              " " +
+              selectedVoyage.sof?.eosp?.time ||
+            "" ||
+            ""
+          );
+        case "Notice of Readiness tendered":
+          return (
+            selectedVoyage.sof?.["nor-tendered"]?.date +
+              " " +
+              selectedVoyage.sof?.["nor-tendered"]?.time || ""
+          );
+        case "Loading commenced":
+          return (
+            selectedVoyage.sof?.["commenced-load"]?.date +
+              " " +
+              selectedVoyage.sof?.["commenced-load"]?.time || ""
+          );
+        default:
+          return ""; // Tomt för andra fält
+      }
+    };
     // Rendera formuläret i contentArea
     contentArea.innerHTML = `
-      <h1>${document.title}</h1>
-      <form id="document-form" class="document-form">
-        ${document.fields
-          .map((field) => {
-            if (field.type === "textarea") {
-              return `
-                <div class="form-group">
-                  <label>${field.label}</label>
-                  <textarea placeholder="${field.placeholder || ""}"></textarea>
-                </div>
-              `;
-            } else {
-              return `
-                <div class="form-group">
-                  <label>${field.label}</label>
-                  <input type="${field.type}" placeholder="${
-                field.placeholder || ""
-              }" />
-                </div>
-              `;
-            }
-          })
-          .join("")}
-        <button type="submit" class="submit-button">Print Document</button>
-        <button type="button" class="back-button">Back to List</button>
-      </form>
-    `;
+  <h1>${document.title}</h1>
+  <form id="document-form" class="document-form">
+    ${document.fields
+      .map((field) => {
+        const prefillValue = getPrefillValue(field.label); // Funktion för att hämta förifyllt värde
+        if (field.type === "textarea") {
+          return `
+            <div class="form-group">
+              <label>${field.label}</label>
+              <textarea placeholder="${field.placeholder || ""}">${
+            prefillValue || ""
+          }</textarea>
+            </div>
+          `;
+        } else {
+          return `
+            <div class="form-group">
+              <label>${field.label}</label>
+              <input type="${field.type}" placeholder="${
+            field.placeholder || ""
+          }" value="${prefillValue || ""}" />
+            </div>
+          `;
+        }
+      })
+      .join("")}
+    <button type="submit" class="submit-button">Print Document</button>
+    <button type="button" class="back-button">Back to List</button>
+  </form>
+`;
 
     // Hämta formulärelementet
     const loadingForm = contentArea.querySelector("#document-form");
@@ -135,7 +216,7 @@ export const protests = (contentArea) => {
         {}
       );
 
-      formData["Ship"] = ship;
+      formData["Ship"] = shipSettings.shipName;
 
       // Öppna rätt HTML-sida för utskrift
       const printWindow = window.open(
@@ -146,11 +227,25 @@ export const protests = (contentArea) => {
       printWindow.onload = () => {
         // Fyll i data på rätt ställen
         for (const [key, value] of Object.entries(formData)) {
+          let formattedValue = value;
+
+          // RegEx för att matcha datetime-local format
+          const dateTimeRegex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/;
+          if (dateTimeRegex.test(value)) {
+            // Ersätt "T" med mellanslag
+            formattedValue = value.replace("T", "    ");
+          }
           const placeholder = printWindow.document.getElementById(
-            key.toLowerCase().replace(/ /g, "-")
+            key
+              .toLowerCase()
+              .replace(/\s+/g, "-")
+              .replace(/[^\w-]/g, "")
           );
+
+          console.log("nyckel: " + key + " -- value: " + formattedValue);
+
           if (placeholder) {
-            placeholder.textContent = value;
+            placeholder.textContent = formattedValue;
           }
         }
 
