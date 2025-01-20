@@ -48,9 +48,8 @@ body {
   }
   
   
-  
   /* Info Section */
-  .rcs-print-info-section {
+.pps-print-info-section {
     margin: 0 auto; /* Centrerar sektionen horisontellt */
     width: 80%; /* Bredd på sektionen */
     display: flex;
@@ -58,31 +57,31 @@ body {
     align-items: center; /* Centrerar innehållet horisontellt */
     justify-content: center; /* Valfritt: Centrerar innehållet vertikalt */
     min-height: 100px; /* Lägg till en höjd för att ge lite utrymme */
+    margin-bottom: 30px;
+
   }
   
-  .rcs-print-info-table {
+  .pps-print-info-table {
     width: 100%; /* Låter tabellen ta upp hela bredden av sektionen */
     margin: 0 auto; /* Säkerställer att tabellen är centrerad */
     border-collapse: collapse; /* Tar bort extra mellanrum */
-    
   }
   
-  .rcs-print-info-label {
+  .pps-print-info-label {
     font-weight: bold;
     text-align: left; /* Justering för etiketter */
     padding: 3px 5px; /* Mindre padding för en kompaktare layout */
     font-size: large;
-  
   }
   
-  .rcs-print-info-value {
+  .pps-print-info-value {
     text-align: left; /* Justering för värden */
     padding: 3px 5px; /* Matchar padding med etiketter */
     font-size: large;
-  
   }
+  
   /* Body */
-  .rcs-print-body {
+  .pps-print-body {
     display: flex;
     flex-direction: column;
     align-items: center; /* Centrerar hela sektionen horisontellt */
@@ -91,7 +90,7 @@ body {
     margin-left: 2cm;
   }
   
-  .rcs-print-body p {
+  .pps-print-body p {
     margin: 10px 0;
     text-align: left; /* Håller texten vänsterjusterad */
     width: 100%; /* Gör så att texten tar upp hela bredden av container */
@@ -99,72 +98,81 @@ body {
     margin-right: 2cm;
   }
   
-  .rcs-print-ship-name-inline,
-  .rcs-print-callsign,
-  .rcs-print-loading-status,
-  .rcs-print-cargo,
-  .rcs-print-quantity,
-  .rcs-print-unit,
-  .rcs-print-tendered-date,
-  .rcs-print-tendered-time {
+  .pps-print-value-inline,
+  .pps-print-callsign,
+  .pps-print-loading-status,
+  .pps-print-cargo,
+  .pps-print-quantity,
+  .pps-print-unit,
+  .pps-print-tendered-date,
+  .pps-print-tendered-time {
     font-weight: bold;
-    font-size:larger;
+    font-size: larger;
   }
   
-  .cp{
+  .pps-print-cp {
     font-size: medium;
   }
-  .rcs-print-cp-date{
+  
+  .pps-print-cp-date {
     font-weight: bold;
   }
   
   /* Footer */
-  .rcs-print-footer {
+  .pps-print-footer {
     margin-top: 30px;
     width: 90%;
     margin-left: 2cm;
   }
   
-  .rcs-print-received,
-  .rcs-print-rec-date {
+  .pps-print-footer-received,
+  .pps-print-footer-rec-date {
     margin: 15px 0;
     width: 90%;
-    margin-left: 16cm;
     margin-top: 40px;
   }
-  .rcs-protest{
-    text-align: center;
-    margin-top: 80px;
+  .pps-print-footer-received p {
+    margin-left: 12cm;
   }
-  .rcs-protest p{
+
+  
+  .pps-print-actual {
+    text-align: start;
+    margin-top: 30px;
+  }
+  
+  .pps-print-actual p {
     margin-top: 50px;
   }
-  .rcs-protest-received{
-    margin-top: 70px;
-    margin-left: 2cm;
-  }
-  .rcs-protest-received strong{
-    margin-left: 16cm;
+  
+  .pps-print-signature-received {
+    margin-top: 50px;
+    
   }
   
+  .pps-print-signature-received strong {
+    margin-left: 12cm;
+  }
   
-  .rcs-print-signature-section {
+  .pps-print-signature-section {
     display: flex;
     justify-content: space-between;
     margin-top: 70px;
     width: 90%;
   }
   
-  .rcs-print-signature {
+  .pps-print-footer-signature {
     text-align: center;
     width: 40%;
-    margin-left: 1.5cm;
+    margin-top: 25px;
+    margin-left: 12cm;
   }
   
-  .rcs-print-line {
+  .pps-print-line {
     border-bottom: 1px solid #000;
     margin-bottom: 5px;
   }
+  
   
   /* Specifikt för utskrift */
   @media print {

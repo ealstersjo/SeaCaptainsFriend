@@ -16,6 +16,7 @@ import { cleanlinessTankCertificate } from "./printCleanTanks.js";
 import { slop } from "./slop.js";
 import { receivingCapacity } from "./reccap.js";
 import { loadOrDischargeLog } from "./loadordischargelog.js";
+import { pumppressure } from "./pumppressurestatement.js";
 
 // Funktion för att visa en sektion och dölja de andra
 const showSection = (sectionId) => {
@@ -51,6 +52,8 @@ const showSection = (sectionId) => {
       receivingCapacity(selectedSection);
     } else if (sectionId === "logdiv") {
       loadOrDischargeLog(selectedSection);
+    } else if (sectionId === "ppsdiv") {
+      pumppressure(selectedSection);
     }
     // Lägg till renderingslogik för andra sektioner om så behövs
   }
@@ -68,6 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const handleSlop = document.getElementById("slop");
   const handleRecCap = document.getElementById("recCapStatement");
   const handleLoadingLog = document.getElementById("loadingLog");
+  const handlePumpStatement = document.getElementById("pumpstatement");
 
   // Klickhändelser för att visa respektive sektion
   currentVoyageLink.addEventListener("click", () =>
@@ -88,7 +92,10 @@ document.addEventListener("DOMContentLoaded", () => {
   handleLoadingLog.addEventListener("click", () => {
     showSection("logdiv");
   });
+  handlePumpStatement.addEventListener("click", () => {
+    showSection("ppsdiv");
+  });
 
   // Ladda en sektion direkt vid start (om du vill ha en default)
-  showSection("logdiv"); // Här visas till exempel Statement of Fact vid start
+  showSection("ppsdiv"); // Här visas till exempel Statement of Fact vid start
 });
