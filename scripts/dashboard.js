@@ -54,6 +54,8 @@ const showSection = (sectionId) => {
       loadOrDischargeLog(selectedSection);
     } else if (sectionId === "ppsdiv") {
       pumppressure(selectedSection);
+    } else if (sectionId === "protestdiv") {
+      protests(selectedSection);
     }
     // Lägg till renderingslogik för andra sektioner om så behövs
   }
@@ -72,6 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const handleRecCap = document.getElementById("recCapStatement");
   const handleLoadingLog = document.getElementById("loadingLog");
   const handlePumpStatement = document.getElementById("pumpstatement");
+  const handleProtests = document.getElementById("protests");
 
   // Klickhändelser för att visa respektive sektion
   currentVoyageLink.addEventListener("click", () =>
@@ -95,7 +98,8 @@ document.addEventListener("DOMContentLoaded", () => {
   handlePumpStatement.addEventListener("click", () => {
     showSection("ppsdiv");
   });
+  handleProtests.addEventListener("click", () => showSection("protestdiv"));
 
   // Ladda en sektion direkt vid start (om du vill ha en default)
-  showSection("ppsdiv"); // Här visas till exempel Statement of Fact vid start
+  showSection("protestdiv"); // Här visas till exempel Statement of Fact vid start
 });
