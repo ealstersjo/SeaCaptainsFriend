@@ -30,6 +30,7 @@ body {
   }
   .header-title h5{
     margin-top: -20px;
+    font-size: larger;
   }
   table {
     width: 100%;
@@ -46,14 +47,37 @@ body {
   .spacer {
     width: 50px; /* Justerar mellanrummet mellan kolumner */
   }
+  .master-protest{
+    text-align: start;
+  }
+  .delay-protest{
+    text-align: start;
+  }
 
+  .grade-potest{
+    text-align: start;
+  }
+  .grade-potest strong{
+    margin-right: 20px;
+  }
+  .grade-potest em{
+    margin-right: 50px;
+  }
+  .grade-potest p{
+font-size: smaller;  }
+  .long-text-desc {
+    text-align: start;
+  }
+  .long-text-desc p{
+    font-size: smaller;
+  }
 
   .signature-section-horizontal {
     display: flex;
     justify-content: space-between; /* Fördela utrymme jämnt mellan linjerna */
     align-items: center;
-    margin-top: 60px; /* Avstånd från footern */
-    margin-bottom: 60px;
+    margin-top: 40px; /* Avstånd från footern */
+    margin-bottom: 50px;
     padding: 0 10%; /* Lämnar lite utrymme från sidorna */
   }
   
@@ -80,13 +104,12 @@ body {
     display: flex;
     align-items: center;
     text-align: start;
-    margin-top: 30px;
+    margin-top: 15px;
     width: 80%; /* Fördelar lika mycket utrymme åt varje signaturrad */
   }
   .signature-please span {
     font-size: 1em;
     font-style: italic;
-    margin-top: 5px;
   }
 
   .signature-regard {
@@ -94,7 +117,7 @@ body {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    margin-top: -30px;
+    margin-top: -20px;
     width: 45%; /* Fördelar lika mycket utrymme åt varje signaturrad */
   }
   

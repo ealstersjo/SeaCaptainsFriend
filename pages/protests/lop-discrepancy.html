@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Awaiting Document Protest</title>
+  <title>Protest for discrepancy B/L - Ship figures</title>
   <link rel="stylesheet" href="../../styles/lop-delay-and-documents.css">
 
 </head>
@@ -15,7 +15,7 @@
         
         <h1 id="ship"></h1>
         <h1>Letter of Protest</h1>
-        <h5>for delays</h5>
+        <h5>Protest for discrepancy B/L - Ship figures</h5>
       </div>
       </div>
     <table>
@@ -36,30 +36,28 @@
       <tr>
         <td class="label">C/P Date:</td>
         <td id="cp-date"></td>
-        <td colspan="3"></td>
-      </tr>
+        <td class="spacer"></td>
+        <td class="label">Discharge port:</td>
+        <td id="discharge-port"></td>      
+    </tr>
+    
     </table>
-    <div class="master-protest">
-      <p>I, the Master of the <em id="ship-protest"></em> do hereby protest against that </p>
-      <p>the vessel was kept waiting for cargo although the loading had been completed.</p>
-</div>
-    <table>
-      <tr>
-        <td class="label">Hose/Arms disconnected</td>
-        <td id="hosearms-disconnected"></td>
-      </tr>
-      <tr>
-        <td class="label">Documents onboard:</td>
-        <td id="documents-onboard"></td>
-      </tr>
-      <tr>
-        <td class="label">Documents duly signed:</td>
-        <td id="documents-duly-signed"></td>
-      </tr>
-    </table>
-    <div class="delay-protest">
-      On behalf of the Owners and Charterers I repudiate all liability for losses and claims hereby arisen and I reserve the right to take all actions, which may be considered necessary to protect the interests of my principal. The delays will be regarded as basis for lay-time consumed or time on demurrage or detention as the case may be.
-</div>
+    <div class="grade-potest">
+        <strong>B/L date:</strong>
+        <p><smaller>showing Shipper's gross quantity or weight and grade as follows:</smaller></p>
+        <strong>Grade:</strong><em id="grade"></em>  <strong>B/L Metric tons:</strong><em id="bl-figure"></em>  
+        <p><smaller> has been signed by me under protest as the ships measurements are substantially different and are as below:</smaller></p>
+        <strong>Grade:</strong><em id="grade-ship"></em>  <strong>Ship's Metric tons:</strong><em id="ship-figure"></em>  
+
+    </div>
+    <div class="long-text-desc">
+      <p>Accordingly this letter of protest is lodged in lieu of endorsing the Bill of Lading with the ship's figures and the Bill of Lading must be taken only to acknowledge the shipment of the weight or quantity given in the vessel's measurements on completion of loading, and to have been issued  without prejudice to the right of the owners or Charterers to relay on the ship's measurements aforesaid as the evidence of the quantity actually shipped.</p>
+      <p>I hereby give you notice that you will be hold liable to indemnify the Owners or Charterers or both  to any loss they may suffer by reason of your failure to notify the transferee and subsequent holder  of the Bill of Lading of the contents of this letter of protest.</p>
+      <p>On behalf of the Owners and Charterers I further reserve the right to take such further action as  may be necessary to protect the interest of these parties.</p>
+
+    </div>
+    
+    
 <div class="signature-please">
     <span>Please acknowledge the receipt of this letter of protest.</span>
   </div>
@@ -75,7 +73,7 @@
   <div class="signature-section-horizontal">
     <div class="signature-item">
       <div class="line"></div>
-      <span>Chief Officer:</span>
+      <span>Master:</span>
     </div>
     <div class="signature-item">
       <div class="line"></div>
@@ -84,7 +82,7 @@
   </div>
   <div class="signature-section-horizontal">
     <div class="signature-item">
-      <span id="chief-officer"></span>
+    <span id="master"></span>
       <div class="line"></div>
       <span>Name in block letters</span>
     </div>

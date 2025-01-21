@@ -84,6 +84,43 @@ export const protests = (contentArea) => {
           label: "Documents duly signed",
           type: "datetime-local",
         },
+        {
+          label: "Chief Officer",
+          type: "text",
+        },
+      ],
+    },
+    {
+      title: "Protest for discrepancy B/L - Ship figures",
+      id: "lop-discrepancy",
+      fields: [
+        {
+          label: "To",
+          type: "text",
+          placeholder: "Enter receiver of protest",
+        },
+        {
+          label: "Port",
+          type: "text",
+          placeholder: "Enter port",
+        },
+        {
+          label: "Voy",
+          type: "text",
+          placeholder: "Enter voyage number",
+        },
+        { label: "Date", type: "date" },
+        { label: "C/P Date", type: "date" },
+        { label: "Discharge port", type: "text" },
+        { label: "Grade", type: "text" },
+        { label: "B/L Figure", type: "number" },
+
+        { label: "Ship Figure", type: "number", step: 0.01 },
+
+        {
+          label: "Master",
+          type: "text",
+        },
       ],
     },
   ];
@@ -180,6 +217,20 @@ export const protests = (contentArea) => {
               " " +
               selectedVoyage.sof?.["documents-signed"]?.time || ""
           );
+        case "Grade":
+          return selectedVoyage.cargos[0]?.cargo || "";
+        case "B/L Figure":
+          return selectedVoyage.sof?.["ullage-sampling"]?.remarks?.ullage || "";
+        case "Ship Figure":
+          return (
+            selectedVoyage.sof?.["completed-load"]?.remarks?.shipLoad || ""
+          );
+        case "Discharge port":
+          return selectedVoyage.to || "";
+        case "Master":
+          return selectedVoyage.crew?.masterName || "";
+        case "Chief Officer":
+          return selectedVoyage.crew?.chiefOfficer || "";
         default:
           return ""; // Tomt för andra fält
       }
@@ -234,7 +285,7 @@ export const protests = (contentArea) => {
       );
 
       formData["Ship"] = shipSettings.shipName;
-
+      console.log(document.id);
       // Öppna rätt HTML-sida för utskrift
       const printWindow = window.open(
         `../pages/protests/${document.id}.html`,
@@ -270,11 +321,21 @@ export const protests = (contentArea) => {
         if (shipPlaceholder) {
           shipPlaceholder.textContent = shipSettings.shipName;
         }
-        // Fyll i fartygets namn även i master-protest-delen
-        const shipProtestPlaceholder =
-          printWindow.document.getElementById("ship-protest");
-        if (shipProtestPlaceholder) {
-          shipProtestPlaceholder.textContent = ship;
+        const gradePlaceholder =
+          printWindow.document.getElementById("grade-ship");
+        if (gradePlaceholder) {
+          gradePlaceholder.textContent = selectedVoyage.cargos[0].cargo;
+        }
+
+        const chiefOfficerPlaceholder =
+          printWindow.document.getElementById("chief-officer");
+        if (chiefOfficerPlaceholder) {
+          chiefOfficerPlaceholder.textContent =
+            selectedVoyage.crew.chiefOfficer;
+        }
+        const masterPlaceholder = printWindow.document.getElementById("master");
+        if (masterPlaceholder) {
+          masterPlaceholder.textContent = selectedVoyage.crew.masterName;
         }
 
         // Skriv ut sidan
