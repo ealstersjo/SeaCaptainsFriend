@@ -111,7 +111,10 @@ export const protests = (contentArea) => {
         },
         { label: "Date", type: "date" },
         { label: "C/P Date", type: "date" },
+
         { label: "Discharge port", type: "text" },
+        { label: "B/L Date", type: "date" },
+
         { label: "Grade", type: "text" },
         { label: "B/L Figure", type: "number" },
 
@@ -221,6 +224,8 @@ export const protests = (contentArea) => {
           return selectedVoyage.cargos[0]?.cargo || "";
         case "B/L Figure":
           return selectedVoyage.sof?.["ullage-sampling"]?.remarks?.ullage || "";
+        case "B/L Date":
+          return selectedVoyage.sof?.["ullage-sampling"]?.date || "";
         case "Ship Figure":
           return (
             selectedVoyage.sof?.["completed-load"]?.remarks?.shipLoad || ""
