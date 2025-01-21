@@ -3,7 +3,6 @@ export const protests = (contentArea) => {
   const shipSettings = JSON.parse(localStorage.getItem("shipSettings")) || {
     shipName: "",
   };
-  //console.log(shipSettings);
 
   let selectedVoyageIndex = localStorage.getItem("selectedVoyageIndex");
 
@@ -82,7 +81,7 @@ export const protests = (contentArea) => {
         { label: "Hose/Arms disconnected", type: "datetime-local" },
         { label: "Documents onboard", type: "datetime-local" },
         {
-          label: "Loading commencedDocuments duly signed",
+          label: "Documents duly signed",
           type: "datetime-local",
         },
       ],
@@ -162,6 +161,24 @@ export const protests = (contentArea) => {
             selectedVoyage.sof?.["commenced-load"]?.date +
               " " +
               selectedVoyage.sof?.["commenced-load"]?.time || ""
+          );
+        case "Hose/Arms disconnected":
+          return (
+            selectedVoyage.sof?.["disconnected"]?.date +
+              " " +
+              selectedVoyage.sof?.["disconnected"]?.time || ""
+          );
+        case "Documents onboard":
+          return (
+            selectedVoyage.sof?.["documents-onboard"]?.date +
+              " " +
+              selectedVoyage.sof?.["documents-onboard"]?.time || ""
+          );
+        case "Documents duly signed":
+          return (
+            selectedVoyage.sof?.["documents-signed"]?.date +
+              " " +
+              selectedVoyage.sof?.["documents-signed"]?.time || ""
           );
         default:
           return ""; // Tomt för andra fält
@@ -251,7 +268,7 @@ export const protests = (contentArea) => {
 
         const shipPlaceholder = printWindow.document.getElementById("ship");
         if (shipPlaceholder) {
-          shipPlaceholder.textContent = ship;
+          shipPlaceholder.textContent = shipSettings.shipName;
         }
         // Fyll i fartygets namn även i master-protest-delen
         const shipProtestPlaceholder =
