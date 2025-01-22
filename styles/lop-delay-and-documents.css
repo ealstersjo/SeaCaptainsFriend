@@ -52,6 +52,7 @@ body {
   }
   .delay-protest{
     text-align: start;
+    margin-top: 25px;
   }
 
   .grade-potest{
@@ -73,11 +74,29 @@ font-size: smaller;  }
   }
 
   .loading-rates {
-    width: 75%;
+    width: 75%; /* Säkerställ att tabellen tar upp hela containerbredden */
+    border-collapse: collapse; /* Ta bort mellanrum mellan celler */
+    margin: 0 auto; /* Centrerar elementet horisontellt */
+
   }
-  .loading-rates td{
-    width: 30%;
+  
+  .loading-rates td {
+    width: 33%; /* Anpassa bredden för jämn fördelning */
+    padding: 5px; /* Lägg till lite avstånd inuti celler */
   }
+  
+  .discharging-label {
+    width: 100%; /* Justera bredden för att texten ska synas korrekt */
+    text-align: left;
+    font-size: 0.9rem; /* Ändra till mindre textstorlek */
+  }
+
+  .label-input {
+    font-weight: bold;
+    text-align: center;
+    width: 20%;
+  }
+  
 
   .signature-section-horizontal {
     display: flex;

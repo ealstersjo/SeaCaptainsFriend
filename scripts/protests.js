@@ -1,3 +1,5 @@
+import { loadingLog } from "./loadinglog";
+
 export const protests = (contentArea) => {
   const voyages = JSON.parse(localStorage.getItem("currentVoyage")) || [];
   const shipSettings = JSON.parse(localStorage.getItem("shipSettings")) || {
@@ -157,6 +159,38 @@ export const protests = (contentArea) => {
         },
       ],
     },
+    {
+      title: "Restricted Discharging Capacity",
+      id: "lop-restricted-discharging",
+      fields: [
+        {
+          label: "To",
+          type: "text",
+          placeholder: "Enter receiver of protest",
+        },
+        {
+          label: "Port",
+          type: "text",
+          placeholder: "Enter port",
+        },
+        {
+          label: "Voy",
+          type: "text",
+          placeholder: "Enter voyage number",
+        },
+        { label: "Date", type: "date" },
+        { label: "C/P Date", type: "date" },
+        { label: "Manifolds", type: "text" },
+        { label: "Pump capacity", type: "text" },
+        { label: "Cargo hose", type: "text" },
+        { label: "Restricted pump capacity", type: "text" },
+
+        {
+          label: "Master",
+          type: "text",
+        },
+      ],
+    },
   ];
 
   // Visa en lista över alla dokument
@@ -269,7 +303,10 @@ export const protests = (contentArea) => {
           return selectedVoyage.loadingLog?.rates?.avgRate
             ? selectedVoyage.loadingLog.rates.avgRate + " m3/h"
             : "";
-
+        case "Pump capacity":
+          return shipSettings?.pumpCapacity || "";
+        case "Manifolds":
+          return selectedVoyage?.loadingLog?.manifolds || "";
         case "Discharge port":
           return selectedVoyage.to || "";
         case "Master":
