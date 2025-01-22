@@ -90,6 +90,7 @@ export const protests = (contentArea) => {
         },
       ],
     },
+
     {
       title: "Protest for discrepancy B/L - Ship figures",
       id: "lop-discrepancy",
@@ -119,6 +120,36 @@ export const protests = (contentArea) => {
         { label: "B/L Figure", type: "number" },
 
         { label: "Ship Figure", type: "number", step: 0.01 },
+
+        {
+          label: "Master",
+          type: "text",
+        },
+      ],
+    },
+    {
+      title: "Slow loading rate",
+      id: "lop-slow-loading",
+      fields: [
+        {
+          label: "To",
+          type: "text",
+          placeholder: "Enter receiver of protest",
+        },
+        {
+          label: "Port",
+          type: "text",
+          placeholder: "Enter port",
+        },
+        {
+          label: "Voy",
+          type: "text",
+          placeholder: "Enter voyage number",
+        },
+        { label: "Date", type: "date" },
+        { label: "C/P Date", type: "date" },
+        { label: "Ship loading", type: "number" },
+        { label: "Avg loading", type: "text" },
 
         {
           label: "Master",
@@ -230,6 +261,13 @@ export const protests = (contentArea) => {
           return (
             selectedVoyage.sof?.["completed-load"]?.remarks?.shipLoad || ""
           );
+        case "Ship Loading":
+          return selectedVoyage.sof?.["ship-load"]?.remarks?.shipLoad || "";
+        case "Avg loading":
+          return selectedVoyage.loadingLog?.rates?.avgRate
+            ? selectedVoyage.loadingLog.rates.avgRate + " m3/h"
+            : "";
+
         case "Discharge port":
           return selectedVoyage.to || "";
         case "Master":
@@ -325,6 +363,11 @@ export const protests = (contentArea) => {
         const shipPlaceholder = printWindow.document.getElementById("ship");
         if (shipPlaceholder) {
           shipPlaceholder.textContent = shipSettings.shipName;
+        }
+        const shipProtestPlaceholder =
+          printWindow.document.getElementById("ship-protest");
+        if (shipProtestPlaceholder) {
+          shipProtestPlaceholder.textContent = shipSettings.shipName;
         }
         const gradePlaceholder =
           printWindow.document.getElementById("grade-ship");

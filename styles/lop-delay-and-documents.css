@@ -72,6 +72,13 @@ font-size: smaller;  }
     font-size: smaller;
   }
 
+  .loading-rates {
+    width: 75%;
+  }
+  .loading-rates td{
+    width: 30%;
+  }
+
   .signature-section-horizontal {
     display: flex;
     justify-content: space-between; /* Fördela utrymme jämnt mellan linjerna */
