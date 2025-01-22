@@ -28,6 +28,16 @@ export const settings = (contentArea) => {
               placeholder="Enter ship call sign"
             />
           </div>
+          <div class="settings-form-row">
+            <label for="shipPumpCapacity" class="settings-label">Maximum pump capacity: (m3/h)</label>
+            <input 
+              type="text" 
+              id="shipPumpCapacity" 
+              class="settings-input" 
+              value="${shipSettings.pumpCapacity || ""}" 
+              placeholder="Enter ships maximum pump capacity"
+            />
+          </div>
           <button type="submit" class="settings-button">Save</button>
         </form>
         <pre>${JSON.stringify(currentVoyage, null, 2)}</pre>
@@ -39,9 +49,10 @@ export const settings = (contentArea) => {
     e.preventDefault();
     const shipName = document.getElementById("shipName").value;
     const callsign = document.getElementById("shipCallSign").value;
+    const pumpCapacity = document.getElementById("shipPumpCapacity").value;
 
     // Spara uppdaterade inställningar i localStorage
-    const updatedSettings = { shipName, callsign };
+    const updatedSettings = { shipName, callsign, pumpCapacity };
     localStorage.setItem("shipSettings", JSON.stringify(updatedSettings));
 
     alert(`Settings saved! Ship Name: ${shipName}`);

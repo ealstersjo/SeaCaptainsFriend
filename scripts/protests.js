@@ -261,8 +261,10 @@ export const protests = (contentArea) => {
           return (
             selectedVoyage.sof?.["completed-load"]?.remarks?.shipLoad || ""
           );
-        case "Ship Loading":
-          return selectedVoyage.sof?.["ship-load"]?.remarks?.shipLoad || "";
+        case "Ship loading":
+          return shipSettings.pumpCapacity
+            ? shipSettings.pumpCapacity + " m3/h"
+            : "";
         case "Avg loading":
           return selectedVoyage.loadingLog?.rates?.avgRate
             ? selectedVoyage.loadingLog.rates.avgRate + " m3/h"
