@@ -148,7 +148,7 @@ export const protests = (contentArea) => {
         },
         { label: "Date", type: "date" },
         { label: "C/P Date", type: "date" },
-        { label: "Ship loading", type: "number" },
+        { label: "Ship loading", type: "text" },
         { label: "Avg loading", type: "text" },
 
         {
@@ -289,7 +289,7 @@ export const protests = (contentArea) => {
           return `
             <div class="form-group">
               <label>${field.label}</label>
-              <textarea placeholder="${field.placeholder || ""}">${
+              <textarea  placeholder="${field.placeholder || ""}">${
             prefillValue || ""
           }</textarea>
             </div>
@@ -297,10 +297,11 @@ export const protests = (contentArea) => {
         } else {
           return `
             <div class="form-group">
-              <label>${field.label}</label>
+             <label>${field.label} ${field.suffix || ""}</label>
               <input type="${field.type}" placeholder="${
             field.placeholder || ""
-          }" value="${prefillValue || ""}" />
+          }" value="${prefillValue || ""}"/>
+          
             </div>
           `;
         }
