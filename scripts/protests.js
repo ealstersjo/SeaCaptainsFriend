@@ -207,6 +207,7 @@ export const protests = (contentArea) => {
               <button class="document-button" data-index="${index}">
                 ${doc.title}
               </button>
+               
             </li>
           `
             )
