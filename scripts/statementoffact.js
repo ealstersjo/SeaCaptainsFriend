@@ -147,9 +147,9 @@ export const statementOfFact = (contentArea) => {
     <td>
         <div>
             <label>Fwd Draft: (m)</label>
-            <input type="number" step="0.01" class="draft-input" data-type="fwd" data-index="first-line-ashore" placeholder="(m)" />
+            <input type="number" step="0.01" class="draft-input editable" data-type="fwd" data-index="first-line-ashore" placeholder="(m)" />
             <label>Aft Draft: (m)</label>
-            <input type="number" step="0.01" class="draft-input" data-type="aft" data-index="first-line-ashore" placeholder="(m)" />
+            <input type="number" step="0.01" class="draft-input editable" data-type="aft" data-index="first-line-ashore" placeholder="(m)" />
         </div>
     </td>    
     <td><button class="saveBtn" data-index="first-line-ashore">Save</button><button class="editBtn" data-index="first-line-ashore" style="display:none;">Edit</button></td>
@@ -161,9 +161,9 @@ export const statementOfFact = (contentArea) => {
     <td>
         <div>
             <label>LNG: (mt)</label>
-            <input type="number" step="0.1" class="draft-input" data-type="lng" data-index="all-fast" placeholder="(mt)" />
+            <input type="number" step="0.1" class="draft-input editable" data-type="lng" data-index="all-fast" placeholder="(mt)" />
             <label>GO: (mt)</label>
-            <input type="number" step="0.1" class="draft-input" data-type="go" data-index="all-fast" placeholder="(tm)" />
+            <input type="number" step="0.1" class="draft-input editable" data-type="go" data-index="all-fast" placeholder="(tm)" />
         </div>
     </td>
     <td><button class="saveBtn" data-index="all-fast">Save</button><button class="editBtn" data-index="all-fast" style="display:none;">Edit</button></td>
@@ -291,9 +291,9 @@ export const statementOfFact = (contentArea) => {
     <td>
         <div>
             <label>LNG: (mt)</label>
-            <input type="number" step="0.1" class="draft-input" data-type="lng" data-index="changed-pilot" placeholder="(mt)" />
+            <input type="number" step="0.1" class="draft-input editable" data-type="lng" data-index="changed-pilot" placeholder="(mt)" />
             <label>GO: (mt)</label>
-            <input type="number" step="0.1" class="draft-input" data-type="go" data-index="changed-pilot" placeholder="(tm)" />
+            <input type="number" step="0.1" class="draft-input editable" data-type="go" data-index="changed-pilot" placeholder="(mt)" />
         </div>
     </td>
     <td>
@@ -308,9 +308,9 @@ export const statementOfFact = (contentArea) => {
 <td>
         <div>
             <label>Fwd Draft: (m)</label>
-            <input type="number" step="0.01" class="draft-input" data-type="fwd" data-index="pilot-disembarked" placeholder="(m)" />
+            <input type="number" step="0.01" class="draft-input editable" data-type="fwd" data-index="pilot-disembarked" placeholder="(m)" />
             <label>Aft Draft: (m)</label>
-            <input type="number" step="0.01" class="draft-input" data-type="aft" data-index="pilot-disembarked" placeholder="(m)" />
+            <input type="number" step="0.01" class="draft-input editable" data-type="aft" data-index="pilot-disembarked" placeholder="(m)" />
         </div>
     </td>
     <td>
@@ -526,11 +526,8 @@ export const statementOfFact = (contentArea) => {
           const generalRemarks = row.querySelector(
             "td:nth-child(4) textarea"
           ).value;
-
           // Bygg remarks-objektet
-          remarks = {
-            general: generalRemarks || null,
-          };
+          remarks = generalRemarks || null; // Sätter remarks till generalRemarks om det finns, annars null
         }
 
         // Kontrollera om selectedVoyage har en sof och om inte, skapa den
@@ -543,7 +540,7 @@ export const statementOfFact = (contentArea) => {
           selectedVoyage.sof[key] = {
             date: date || null,
             time: time || null,
-            remarks: remarks, // Spara hela remarks-objektet
+            remarks: remarks || "", // Spara hela remarks-objektet
           };
 
           // Hitta indexet för den valda resan i currentVoyage
@@ -583,7 +580,7 @@ export const statementOfFact = (contentArea) => {
         );
         if (draftInputs.length === 2) {
           draftInputs.forEach((input) => {
-            input.disabled = true; // Lås varje inputfält
+            input.disabled = false; // Lås varje inputfält
           });
         }
 

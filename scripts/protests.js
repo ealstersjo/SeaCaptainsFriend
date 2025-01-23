@@ -239,13 +239,16 @@ export const protests = (contentArea) => {
         { label: "Date", type: "date" },
         { label: "C/P Date", type: "date" },
 
-        { label: "Discharge port", type: "text" },
-        { label: "B/L Date", type: "date" },
-
         { label: "Grade", type: "text" },
+        { label: "Required quantity", type: "date" },
         { label: "B/L Figure", type: "number" },
+        { label: "Ship Figure", type: "number" },
+        { label: "Bunkers", type: "number" },
+        { label: "FW", type: "number" },
 
-        { label: "Ship Figure", type: "number", step: 0.01 },
+        { label: "Stores", type: "number" },
+
+        { label: "Cargo Capacity", type: "number" },
 
         {
           label: "Master",
@@ -358,6 +361,13 @@ export const protests = (contentArea) => {
           return (
             selectedVoyage.sof?.["completed-load"]?.remarks?.shipLoad || ""
           );
+        case "Bunkers":
+          return (
+            (parseFloat(selectedVoyage.sof?.["changed-pilot"]?.remarks?.lng) ||
+              0) +
+              (parseFloat(selectedVoyage.sof?.["changed-pilot"]?.remarks?.go) ||
+                0) || "BLÄ"
+          );
         case "Ship loading":
           return shipSettings.pumpCapacity
             ? shipSettings.pumpCapacity + " m3/h"
@@ -367,6 +377,8 @@ export const protests = (contentArea) => {
             ? selectedVoyage.loadingLog.rates.avgRate + " m3/h"
             : "";
         case "Pump capacity":
+          return shipSettings?.deadweight || "";
+        case "Deadweight":
           return shipSettings?.pumpCapacity || "";
         case "Manifolds":
           return selectedVoyage?.loadingLog?.manifolds || "";
