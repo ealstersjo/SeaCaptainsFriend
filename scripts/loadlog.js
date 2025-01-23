@@ -375,6 +375,30 @@ export const loadlog = (contentArea, voyage, inputCargoIndex) => {
         });
 
         cell.appendChild(checkboxContainer);
+      } else if (key === "remarks" && editable && isEditable) {
+        // Skapa en dropdown för remarks
+        const select = document.createElement("select");
+        select.dataset.key = key;
+
+        // Alternativen för dropdown
+        const options = [
+          "Start Loading",
+          "Shore Stop",
+          "Ship Stop",
+          "Resumed Loading",
+          "Loading Completed",
+        ];
+
+        // Generera options för dropdown
+        options.forEach((optionValue) => {
+          const option = document.createElement("option");
+          option.value = optionValue;
+          option.textContent = optionValue;
+          if (value === optionValue) option.selected = true; // Markera om värdet matchar
+          select.appendChild(option);
+        });
+
+        cell.appendChild(select);
       } else if (editable && isEditable) {
         // Standardinput för andra keys
         const input = document.createElement("input");
@@ -438,6 +462,10 @@ export const loadlog = (contentArea, voyage, inputCargoIndex) => {
         inputs.forEach((input) => {
           entry[input.dataset.key] = input.value;
         });
+        const remarksDropdown = row.querySelector("select[data-key='remarks']");
+        if (remarksDropdown) {
+          entry.remarks = remarksDropdown.value; // Spara valt värde
+        }
         // Hantera kryssrutorna för tanksNo
         if (row.querySelector(".checkbox-container")) {
           const checkboxes = row.querySelectorAll(
