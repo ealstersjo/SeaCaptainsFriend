@@ -1,4 +1,3 @@
-import { loadingLog } from "./loadinglog.js";
 import { dischargeLog } from "./dischargelog.js";
 import { loadlog } from "./loadlog.js";
 

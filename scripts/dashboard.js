@@ -1,14 +1,7 @@
 import { currentVoyagePage } from "./currentVoyage.js";
 import { checklists } from "./checklists.js";
 import { statementOfFact } from "./statementoffact.js";
-import { handleVoyage } from "./handleVoyage.js";
-import { fileupload } from "./fileupload.js";
-import { calculations } from "./calculations.js";
-import { voyageshistory } from "./voyageshistory.js";
 import { account } from "./account.js";
-import { loadingLog } from "./loadinglog.js";
-import { dischargeLog } from "./dischargelog.js";
-import { showShipPage } from "./showShips.js";
 import { protests } from "./protests.js";
 import { settings } from "./settings.js";
 import { noticeOfReadiness } from "./printNor.js";
