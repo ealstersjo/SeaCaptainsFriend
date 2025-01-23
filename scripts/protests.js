@@ -1,5 +1,3 @@
-import { loadingLog } from "./loadinglog";
-
 export const protests = (contentArea) => {
   const voyages = JSON.parse(localStorage.getItem("currentVoyage")) || [];
   const shipSettings = JSON.parse(localStorage.getItem("shipSettings")) || {
