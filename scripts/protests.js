@@ -27,6 +27,7 @@ export const protests = (contentArea) => {
 
   // Hämta vald resa
   let selectedVoyage;
+  let shoreStops = [];
 
   if (selectedVoyageIndex) {
     selectedVoyage = voyages[selectedVoyageIndex];
@@ -191,6 +192,34 @@ export const protests = (contentArea) => {
         },
       ],
     },
+    {
+      title: "Shore stops",
+      id: "lop-terminal-stops",
+      fields: [
+        {
+          label: "To",
+          type: "text",
+          placeholder: "Enter receiver of protest",
+        },
+        {
+          label: "Port",
+          type: "text",
+          placeholder: "Enter port",
+        },
+        {
+          label: "Voy",
+          type: "text",
+          placeholder: "Enter voyage number",
+        },
+        { label: "Date", type: "date" },
+        { label: "C/P Date", type: "date" },
+        { label: "Shore stops", type: "shorestop" },
+        {
+          label: "Master",
+          type: "text",
+        },
+      ],
+    },
   ];
 
   // Visa en lista över alla dokument
@@ -221,7 +250,7 @@ export const protests = (contentArea) => {
         selectedVoyageIndex = e.target.value;
         localStorage.setItem("selectedVoyageIndex", selectedVoyageIndex);
         selectedVoyage = voyages[selectedVoyageIndex];
-        renderCleanlinessCertificateForm();
+        //protests();
       }
     });
     // Lägg till eventlyssnare för knapparna
@@ -310,6 +339,8 @@ export const protests = (contentArea) => {
           return selectedVoyage?.loadingLog?.manifolds || "";
         case "Discharge port":
           return selectedVoyage.to || "";
+        case "Shore stops":
+          return selectedVoyage.loadingLog?.entries[0].rate || "";
         case "Master":
           return selectedVoyage.crew?.masterName || "";
         case "Chief Officer":
@@ -334,6 +365,60 @@ export const protests = (contentArea) => {
           }</textarea>
             </div>
           `;
+        } else if (field.type === "shorestop") {
+          const possibleShoreStops =
+            selectedVoyage.loadingLog?.entries[0] || null;
+          let counter = 1;
+          if (possibleShoreStops) {
+            possibleShoreStops.forEach((entry, index) => {
+              //console.log(`Rate: ${entry.rate}, Remarks: ${entry.remarks}`);
+              //rate bör ha ett tröskelvärde
+              const remarks = entry.remarks.toLowerCase();
+              if (remarks.includes("shore") && remarks.includes("stop")) {
+                if (index + 1 < possibleShoreStops.length) {
+                  const concatStop = {
+                    index: counter,
+                    startTime: entry.time,
+                    stopTime: possibleShoreStops[index + 1].time,
+                    reason: entry.remarks,
+                  };
+                  counter += 1;
+                  shoreStops.push(concatStop);
+                } else {
+                  const concatStop = {
+                    index: counter,
+                    startTime: entry.time,
+                    stopTime: "N/A",
+                    reason: entry.remarks,
+                  };
+                  counter += 1;
+
+                  shoreStops.push(concatStop);
+                }
+              }
+            });
+          }
+          // Generera HTML-strukturen
+          const shoreStopsHtml = shoreStops
+            .map((stop) => {
+              return `
+      <div class="form-group">
+        <label>Shore stop ${stop.index}</label>
+        From: <input type="datetime-local" value="${
+          stop.startTime || ""
+        }" placeholder="Start Time" />
+        To: <input type="datetime-local" value="${
+          stop.stopTime || ""
+        }" placeholder="Stop Time" />
+        Reason: <input type="text" value="${
+          stop.reason || ""
+        }" placeholder="Reason" />
+      </div>
+    `;
+            })
+            .join("");
+
+          return shoreStopsHtml;
         } else {
           return `
             <div class="form-group">
@@ -399,6 +484,37 @@ export const protests = (contentArea) => {
           if (placeholder) {
             placeholder.textContent = formattedValue;
           }
+        }
+
+        const shoreStopsTable = `
+          <table class="shore-stops-table">
+            <thead>
+              <tr>
+                <th>From</th>
+                <th>To</th>
+                <th>Reason</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${shoreStops
+                .map(
+                  (stop) => `
+                <tr>
+                  <td>${stop.startTime || ""}</td>
+                  <td>${stop.stopTime || ""}</td>
+                  <td>${stop.reason || ""}</td>
+                </tr>
+              `
+                )
+                .join("")}
+            </tbody>
+          </table>
+        `;
+        const shoreStopPlaceholder =
+          printWindow.document.getElementById("shore-stops");
+        console.log(shoreStopPlaceholder);
+        if (shoreStopPlaceholder) {
+          shoreStopPlaceholder.innerHTML = shoreStopsTable; // Använd innerHTML för att sätta in tabellen
         }
 
         const shipPlaceholder = printWindow.document.getElementById("ship");

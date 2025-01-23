@@ -54,6 +54,13 @@ body {
     text-align: start;
     margin-top: 25px;
   }
+  .shore-stops-table td:nth-child(1),
+  .shore-stops-table td:nth-child(2) {
+    font-weight: bold;
+  }
+.shore-stops-table th{
+  font-weight: normal;
+}
 
   .grade-potest{
     text-align: start;
