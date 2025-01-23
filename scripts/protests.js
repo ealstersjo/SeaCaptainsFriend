@@ -91,7 +91,6 @@ export const protests = (contentArea) => {
         },
       ],
     },
-
     {
       title: "Protest for discrepancy B/L - Ship figures",
       id: "lop-discrepancy",
@@ -212,6 +211,42 @@ export const protests = (contentArea) => {
         { label: "Date", type: "date" },
         { label: "C/P Date", type: "date" },
         { label: "Shore stops", type: "shorestop" },
+        {
+          label: "Master",
+          type: "text",
+        },
+      ],
+    },
+    {
+      title: "Short Loading",
+      id: "lop-short-loading",
+      fields: [
+        {
+          label: "To",
+          type: "text",
+          placeholder: "Enter receiver of protest",
+        },
+        {
+          label: "Port",
+          type: "text",
+          placeholder: "Enter port",
+        },
+        {
+          label: "Voy",
+          type: "text",
+          placeholder: "Enter voyage number",
+        },
+        { label: "Date", type: "date" },
+        { label: "C/P Date", type: "date" },
+
+        { label: "Discharge port", type: "text" },
+        { label: "B/L Date", type: "date" },
+
+        { label: "Grade", type: "text" },
+        { label: "B/L Figure", type: "number" },
+
+        { label: "Ship Figure", type: "number", step: 0.01 },
+
         {
           label: "Master",
           type: "text",

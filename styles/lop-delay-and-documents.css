@@ -61,6 +61,65 @@ body {
 .shore-stops-table th{
   font-weight: normal;
 }
+.cargo-figures {
+  width: 70%; /* Gör tabellen lika bred som container */
+  border-collapse: collapse; /* Ta bort mellanrum mellan celler */
+  margin: 20px auto; /* Ge tabellen lite luft uppåt och nedåt */
+}
+
+.cargo-figures td {
+  padding: 8px; /* Lägg till lite utrymme runt cellerna */
+  font-size: 12px; /* Standardstorlek för texten */
+  text-align: left; /* Justera text till vänster */
+}
+
+.cargo-figures td:nth-child(2) {
+  font-weight: bold; /* Gör texten fetare */
+  font-size: 14px; /* Gör texten något större */
+  text-align: center; /* Centrera texten i mittenkolumnen */
+  width: 25%;
+}
+
+.cargo-figures td:nth-child(3) {
+  text-align: right; /* Justera texten till höger för sista kolumnen */
+  width: 15%;
+}
+.deadfreight-container {
+  display: flex; /* Gör att rubrik och tabell placeras bredvid varandra */
+  align-items: center; /* Centrerar rubrikens text vertikalt i förhållande till tabellen */
+  margin: 20px auto;
+  width: 80%; /* Bredd på hela containern */
+}
+
+.deadfreight-title {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-right: 5px; /* Skapar avstånd mellan rubrik och tabell */
+  text-align: center; /* Centrerar texten i sin egen box */
+  width: 20%; /* Bredd för rubrikdelen */
+}
+
+.deadfreight-statement {
+  width: 80%; /* Bredd för tabellen */
+  border-collapse: collapse;
+  font-size: 12px; /* Standardstorlek för texten */
+
+
+}
+
+.deadfreight-statement td {
+  padding: 10px;
+  text-align: left;
+}
+.deadfreight-statement td:nth-child(1){
+text-align: left;  }
+.deadfreight-statement td:nth-child(2){
+font-weight: bold;
+}
+.deadfreight-statement td:nth-child(3) {
+  text-align: left;
+}
+
 
   .grade-potest{
     text-align: start;
