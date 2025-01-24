@@ -9,20 +9,19 @@ export const noticeOfReadiness = (contentArea) => {
   // Funktion för att generera dropdown för resor
   const generateVoyageSelect = () => {
     return `
-      <select id="voyageSelect">
-        <option value="" selected disabled>Select voyage</option>
-        ${voyages
-          .map(
-            (voyage, index) => `
-          <option value="${index}">${voyage.vessel} - ${
-              voyage.voyNo || "N/A"
-            } [${voyage.from} - ${voyage.to}]
-            </option>
-        `
-          )
-          .join("")}
-      </select>
-    `;
+    <select id="voyageSelect">
+      <option value="" selected disabled>Select trip</option>
+      ${voyages
+        .map(
+          (voyage, index) => `
+        <option value="${index}" ${
+            index == selectedVoyageIndex ? "selected" : ""
+          }>${voyage.vessel} från ${voyage.from} till ${voyage.to}</option>
+      `
+        )
+        .join("")}
+    </select>
+  `;
   };
 
   // Hämta vald resa
