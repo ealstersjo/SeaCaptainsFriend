@@ -66,6 +66,7 @@ body {
     display: block; /* Se till att det är blockelement för att kunna växa */
     overflow-y: auto; /* Scroll om innehållet är för stort */
     min-height: 100%; /* Fyll höjden om den är större än sidan */
+    margin-left: 150px;
 }
 .checklist-header {
     background-color: var(--secondary-color);

@@ -4,8 +4,9 @@ body {
   margin: 0;
   padding: 0;
   display: flex; /* För att arrangera menyn och innehållet horisontellt */
-  height: 110vh; /* Fyll hela höjden av fönstret */
+  height: 100%; /* Fyll hela höjden av fönstret */
   background-color: var(--background-color);
+  
 }
 /* Container för att hålla menyn och innehållet på samma nivå */
 .container {
@@ -14,6 +15,7 @@ body {
   width: 100%;
   height: 90%;
 } 
+
  /* Rubrik */
 .content h1 {
   text-align: center;

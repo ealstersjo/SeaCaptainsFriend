@@ -5,16 +5,21 @@
     padding: 15px;
     width: 150px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    height: 130%;
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     
+    position: fixed; /* Gör menyn fast */
+    top: 0; /* Fäst den högst upp på skärmen */
+    left: 0; /* Fäst den till vänster */
+    height: 100vh; /* Gör så att menyn sträcker sig hela höjden av skärmen */
+    z-index: 1000; /* Se till att menyn ligger över annat innehåll */
 }
 
 .menu h2 {
     margin-top: 0;
+    margin-bottom: 0px;
 }
 
 .menu ul {
@@ -33,6 +38,7 @@
     color: white;
     padding: 8px 8px;
     text-decoration: none;
+    font-size: 13px;
 }
 
 .menu a:hover {
