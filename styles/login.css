@@ -1,5 +1,4 @@
 body {
-    font-family: Arial, sans-serif;
     background-color: var(--background-color); /* Använd CSS-variabel */
     margin: 0;
     padding: 0;

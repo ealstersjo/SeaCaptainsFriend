@@ -1,6 +1,5 @@
 /* Grundläggande layout som gäller för både webbläsare och utskrift */
 body {
-  font-family: Arial, sans-serif;
   font-size: 14px;
   line-height: 1.6;
   margin: 0;

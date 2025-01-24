@@ -1,6 +1,5 @@
 /* Grundläggande stilar för sidan */
 .ship-info {
-    font-family: Arial, sans-serif;
     margin: 20px;
   }
   
@@ -78,7 +77,6 @@
   border-collapse: collapse;
   margin: 20px 0;
   font-size: 14px;
-  font-family: Arial, sans-serif;
   color: #333;
 }
 

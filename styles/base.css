@@ -1,6 +1,6 @@
 /* Grundstil */
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Open Sans', sans-serif;
   margin: 0;
   padding: 0;
   display: flex; /* För att arrangera menyn och innehållet horisontellt */
@@ -71,7 +71,6 @@ button:hover {
   .custom-checkbox {
     display: flex;
     align-items: center;
-    font-family: Arial, sans-serif;
     font-size: 16px;
     color: #333;
     cursor: pointer;

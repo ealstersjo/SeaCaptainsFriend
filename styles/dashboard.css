@@ -1,6 +1,5 @@
 /* Grundstil */
 body {
-    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     display: flex; /* För att arrangera menyn och innehållet horisontellt */
@@ -64,7 +63,6 @@ body {
     background-color: #f9f9f9;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    font-family: Arial, sans-serif;
     display: block; /* Se till att det är blockelement för att kunna växa */
     overflow-y: auto; /* Scroll om innehållet är för stort */
     min-height: 100%; /* Fyll höjden om den är större än sidan */
@@ -573,7 +571,6 @@ form div:last-child {
   .custom-checkbox {
     display: flex;
     align-items: center;
-    font-family: Arial, sans-serif;
     font-size: 16px;
     color: #333;
     cursor: pointer;
@@ -736,7 +733,6 @@ form div:last-child {
   border-collapse: collapse;
   margin: 20px 0;
   font-size: 14px;
-  font-family: Arial, sans-serif;
   color: #333;
 }
 
@@ -951,7 +947,6 @@ margin-top: 15px;
 
   /* Grundläggande stilar för sidan */
 .ship-info {
-  font-family: Arial, sans-serif;
   margin: 20px;
 }
 
