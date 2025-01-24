@@ -164,11 +164,11 @@ export const currentVoyagePage = (contentArea) => {
       const cargosHTML = voyage.cargos
         .map(
           (cargo, index) => `
-            <div class="key-value-pair">
-              <span class="key">Cargo ${index + 1}:</span> 
-               <span class="key">${cargo.cargo}&ensp; </span> 
+            <div class="cargo-table">
+              <span class="cargo-label">Cargo ${index + 1}:</span> 
+               <span class="cargo-spec">${cargo.cargo}&ensp; </span> 
 
-              <span class="value">${cargo.quantity} ${
+              <span class="cargo-unit">${cargo.quantity} ${
             cargo.unit || "N/A"
           }</span> 
             </div>
@@ -177,23 +177,21 @@ export const currentVoyagePage = (contentArea) => {
         .join("");
 
       const crewHTML = `
-        <div class="key-value-pair">
-          <span class="key">Ch. Off Name:</span> <span class="value">${
-            voyage.crew.chiefOfficer || "N/A"
-          }</span>
+       <div class="crew-table">
+          <span class="crew-label">Master Name:</span> 
+          <span class="crew-name">${voyage.crew.masterName || "N/A"}</span>
         </div>
-        <div class="key-value-pair">
-          <span class="key">Master Name:</span> <span class="value">${
-            voyage.crew.masterName || "N/A"
-          }</span>
+        <div class="crew-table">
+          <span class="crew-label">Ch. Off Name:</span> 
+          <span class="crew-name">${voyage.crew.chiefOfficer || "N/A"}</span>
         </div>
+       
       `;
 
       voyageDetails.innerHTML = `
         <div class="voyage-item">
           <div class="key-value-pair"><span class="key">Vessel:</span> <span class="value">${voyage.vessel}</span></div>
-                    <div class="key-value-pair"><span class="key">Operation:</span> <span class="value">${voyage.operation}</span></div>
-
+          <div class="key-value-pair"><span class="key">Operation:</span> <span class="value">${voyage.operation}</span></div>
           <div class="key-value-pair"><span class="key">Port:</span> <span class="value">${voyage.port}</span></div>
           <div class="key-value-pair"><span class="key">Jetty:</span> <span class="value">${voyage.jetty}</span></div>
           <div class="key-value-pair"><span class="key">Date:</span> <span class="value">${voyage.date}</span></div>

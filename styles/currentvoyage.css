@@ -22,8 +22,8 @@
 .voyage-section {
   font-size: 1em;
   color: #555;
-  padding: 10px;
-  margin: 20px 0;
+  padding: 15px;
+  margin: 15px 0;
   background-color: var(--light-grey);
   border-left: 4px solid var(--green-color); /* Tydlig avgränsning */
   border-radius: 5px; /* Rundade hörn */
@@ -42,6 +42,7 @@
   width: 100%;
 }
 
+
 .voyage-crew {
   font-size: 1em;
   color: #555;
@@ -50,7 +51,7 @@
   background-color: #f7f7f7e4;
   border-left: 4px solid var(--primary-color); 
   border-radius: 5px; /* Rundade hörn */
-  width: 90%;
+  width: 97%;
 }
 
 /* Key-Value par */
@@ -60,19 +61,68 @@
   align-items: center;
   margin: 5px 0;
 }
+.key-value-pair:hover{
+  background-color: #dbf5ff;
+}
 
 .key {
   font-weight: bold;
-  color: #333;
-  width: 25%; /* Anpassa bredden så att de får bra avstånd */
+  color: #000;
+  width: 160px /* Anpassa bredden så att de får bra avstånd */
 }
 
 .value {
-  color: #555;
+  color: #000;
   text-align: left;
   width: 80%; /* Gör värdet bredare om så behövs */
 }
 
+.cargo-table{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 5px 0;
+}
+.cargo-label{
+  font-weight: bold;
+  color: #7a7a7a;
+  width: 90px; /* Anpassa bredden så att de får bra avstånd */
+}
+.cargo-spec{
+  font-weight: bold;
+  color: #000;
+  width: 150px; /* Anpassa bredden så att de får bra avstånd */
+}
+.cargo-unit{
+  color: #000;
+  text-align: left;
+  width: 80%; /* Gör värdet bredare om så behövs */
+}
+
+.cargo-table:hover{
+  background-color: #d0d0d0;
+}
+
+.crew-table{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 5px 0;
+}
+.crew-label{
+  font-weight: bold;
+  color: #000;
+  width: 120px; /* Anpassa bredden så att de får bra avstånd */
+}
+.crew-name{
+  color: #000;
+  text-align: left;
+  width: 80%; /* Gör värdet bredare om så behövs */
+}
+
+.crew-table:hover{
+  background-color: #e0e0e0;
+}
 
 /* Anpassa avstånd och storlek */
 .voyage-section, .voyage-item {
@@ -106,7 +156,7 @@
 
 .cargo-quantity {
   max-width: 150px; /* Maxbredd för mängdfältet */
-  text-align: right;
+  text-align: left;
 }
 
 .cargo-unit {
