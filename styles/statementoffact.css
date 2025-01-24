@@ -120,19 +120,7 @@
   background-color: #f2f2f2;
 }
 
-/* Stil för knappen */
-.activity-log-table .editBtn {
-  background-color: #e74c3c;
-  color: #fff;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  cursor: pointer;
-}
 
-.activity-log-table .editBtn:hover {
-  background-color: #c0392b;
-}
 
   /* Celler i kroppen */
   .activity-log-body td {

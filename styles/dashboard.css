@@ -1,1039 +1,153 @@
-/* Grundstil */
-body {
-    margin: 0;
-    padding: 0;
-    display: flex; /* För att arrangera menyn och innehållet horisontellt */
-    height: 110vh; /* Fyll hela höjden av fönstret */
-    background-color: var(--background-color);
-}
-/* Container för att hålla menyn och innehållet på samma nivå */
-.container {
-    display: flex;
-    flex-grow: 1; /* Låt container växa för att ta upp utrymmet */
-    width: 100%;
-    height: 90%;
-}
-/* Meny */
-.menu {
-    background-color: var(--secondary-color); /* Använd CSS-variabel */
-    color: white;
-    padding: 20px;
-    width: 150px; /* Fast bredd på menyn */
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    height: 110%; /* Fyll höjden av sidan */
-    flex-shrink: 0; /* Hindra menyn från att krympa */
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-
-
+.print-btn {
+  display: inline-flex; /* Placera text och ikon sida vid sida */
+  align-items: center; /* Vertikal centrering */
+  gap: 8px; /* Mellanrum mellan ikon och text */
+  background-color: var(--primary-color, #007BFF); /* Primärfärg */
+  color: white; /* Textfärg */
+  border: none; /* Ta bort kantlinjer */
+  border-radius: 5px; /* Rundade hörn */
+  padding: 10px 20px; /* Inre marginaler */
+  font-size: 1rem; /* Textstorlek */
+  font-weight: bold; /* Tydligare text */
+  cursor: pointer; /* Visar pekare vid hover */
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Subtil skugga */
+  transition: all 0.3s ease; /* Smidig hover-effekt */
 }
 
-
-.menu h2 {
-    margin-top: 0;
+.print-btn:hover {
+  background-color: var(--secondary-color); /* Mörkare blå vid hover */
+  box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.3); /* Förstärkt skugga vid hover */
 }
 
-.menu ul {
-    list-style: none;
-    padding: 0;
+.print-btn:active {
+  transform: scale(0.98); /* Tryck-effekt */
 }
 
-.menu li {
-    margin: 10px 0;
-}
-
-.menu a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.menu a:hover {
-    text-decoration: underline;
-}
-
-/* Innehåll */
-.content {
-    flex-grow: 1; /* Låt content växa för att ta upp det återstående utrymmet */
-    max-width: 90%;
-    min-width: 500px;
-    margin: 20px;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    display: block; /* Se till att det är blockelement för att kunna växa */
-    overflow-y: auto; /* Scroll om innehållet är för stort */
-    min-height: 100%; /* Fyll höjden om den är större än sidan */
-    margin-left: 150px;
-}
-.checklist-header {
-    background-color: var(--secondary-color);
-    color: white;
-    cursor: pointer;
-    padding: 10px;
-    width: 100%;
-    text-align: left;
-    border: none;
-    outline: none;
-    font-size: 15px;
-  }
-  
-  .checklist-header:hover {
-    background-color: var(--highlight-color);
-  }
-  
-  .checklist-content {
-    padding: 0 25px;
-    display: none;
-    overflow: hidden;
-    background-color: var(--highlight-color);
-    border-radius: 10px;
-  }
-  
-  .checklist-content li {
-    padding: 8px 0;
-  }
-
-  .print-button {
-    background-color: var(--primary-color);
-  }
-  
-
-/* Rubrik */
-.content h1 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 20px;
-}
-
-/* Formuläret */
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-/* Fält och etiketter */
-form div {
-    display: flex;
-    flex-direction: column;
-}
-
-label {
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-/* Stil för dropdown */
-select {
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 100%;
-    margin-top: 10px;
-}
-
-/* Stil för när dropdownen är fokuserad */
-select:focus {
-    outline: none;
-    border-color: #4CAF50;
-}
-
-/* Rubrik - stil */
-.ullage-header {
-    font-size: 1.8em;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 10px;
-    text-align: center;
-  }
-  
-  /* Sektion med header-information */
-  .ullageHeader {
-    font-size: 1em;
-    color: #555;
-    padding: 10px;
-    margin: 20px 0;
-    background-color: #f9f9f9;
-    border-left: 4px solid #4CAF50; /* Tydlig avgränsning */
-    border-radius: 5px; /* Rundade hörn */
-
-  }
-  
-  .ullageHeader strong {
-    color: #000; /* Färg på rubriker */
-  }
-  
-  /* Sektion med trim-information */
-  .trimValues {
-    font-size: 1em;
-    color: #555;
-    padding: 10px;
-    margin: 10px 0;
-    background-color: #f1f1f1;
-    border-left: 4px solid #2196F3; /* Tydlig avgränsning */
-    border-radius: 5px; /* Rundade hörn */
-
-  }
-  
-  .trimValues strong {
-    color: #000; /* Färg på rubriker */
-  }
-  
-  /* Lägg till en liten distans mellan olika block */
-  .ullageHeader, .trimValues {
-    margin-bottom: 15px;
-  }
-  
-  /* Gör så att br-linjerna är mindre aggressiva */
-  .ullageHeader br, .trimValues br {
-    line-height: 1.5;
-  }
-/* Sektion för produktinformation */
-.productInfo {
-    font-size: 1em;
-    color: #555;
-    padding: 15px;
-    margin: 15px 0;
-    background-color: #f7f7f7;
-    border-left: 4px solid #FF9800; /* Tydlig avgränsning med orange kant */
-    border-radius: 5px; /* Rundade hörn */
-  }
-  
-  .productInfo strong {
-    color: #000; /* Färg på rubriker */
-  }
-  
-  /* Gör så att br-linjerna får lite mellanrum */
-  .productInfo br {
-    line-height: 1.5;
-  }
-  
-  /* Om du vill ha en liten distans mellan blocken */
-  .productInfo {
-    margin-bottom: 20px;
-  }
-
-.quantBefore {
-    font-size: 1em;
-    color: #555;
-    padding: 15px;
-    margin: 15px 0;
-    background-color: #f7f7f7;
-    border-left: 4px solid #002aff; /* Tydlig avgränsning med orange kant */
-    border-radius: 5px; /* Rundade hörn */
-  }
-  
-  .quantBefore strong {
-    color: #000; /* Färg på rubriker */
-  }
-  
-  /* Gör så att br-linjerna får lite mellanrum */
-  .quantBefore br {
-    line-height: 1.5;
-  }
-  
-  /* Om du vill ha en liten distans mellan blocken */
-  .quantBefore {
-    margin-bottom: 20px;
-  }
-
-  .quantAfter {
-    font-size: 1em;
-    color: #555;
-    padding: 15px;
-    margin: 15px 0;
-    background-color: #f7f7f7;
-    border-left: 4px solid #8ca71e; /* Tydlig avgränsning med orange kant */
-    border-radius: 5px; /* Rundade hörn */
-  }
-  
-  .quantAfter strong {
-    color: #000; /* Färg på rubriker */
-  }
-  
-  /* Gör så att br-linjerna får lite mellanrum */
-  .quantAfter br {
-    line-height: 1.5;
-  }
-  
-  /* Om du vill ha en liten distans mellan blocken */
-  .quantAfter {
-    margin-bottom: 20px;
-  }
-
-  .quantLoaded {
-    font-size: 1em;
-    color: #555;
-    padding: 15px;
-    margin: 15px 0;
-    background-color: #f7f7f7;
-    border-left: 4px solid #04c700; /* Tydlig avgränsning med orange kant */
-    border-radius: 5px; /* Rundade hörn */
-  }
-  
-  .quantLoaded strong {
-    color: #000; /* Färg på rubriker */
-  }
-  
-  /* Gör så att br-linjerna får lite mellanrum */
-  .quantLoaded br {
-    line-height: 1.5;
-  }
-  
-  /* Om du vill ha en liten distans mellan blocken */
-  .quantLoaded {
-    margin-bottom: 20px;
-  }
-
-  .billOfLading {
-    font-size: 1em;
-    color: #555;
-    padding: 15px;
-    margin: 15px 0;
-    background-color: #f7f7f7;
-    border-left: 4px solid #c70000; /* Tydlig avgränsning med orange kant */
-    border-radius: 5px; /* Rundade hörn */
-  }
-  
-  .billOfLading strong {
-    color: #000; /* Färg på rubriker */
-  }
-  
-  /* Gör så att br-linjerna får lite mellanrum */
-  .billOfLading br {
-    line-height: 1.5;
-  }
-  
-  /* Om du vill ha en liten distans mellan blocken */
-  .billOfLading {
-    margin-bottom: 20px;
-  }
-    /* Styling för tabellen */
-.tank-data-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-bottom: 20px;
-  }
-  
-  .tank-data-table th, .tank-data-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
-  }
-  
-  .tank-data-table th {
-    background-color: #f2f2f2;
-    font-weight: bold;
-  }
-  
-  .tank-data-table td {
-    background-color: #fff;
-  }
-  
-  .tank-data-table tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-  
-  .tank-data-table tr:hover {
-    background-color: #f1f1f1;
-  }
-  
-  /* Styling för tomma värden i tabellen */
-  .tank-data-table td:empty {
-    background-color: #e0e0e0;
-  }
-
-  /* Account-specific styles */
-.account-container {
-  max-width: 500px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-}
-
-.account-title {
-  text-align: center;
-  color: #333;
-  margin-bottom: 20px;
-}
-
-.account-subtitle {
-  margin-bottom: 10px;
-  color: #555;
-}
-
-.account-form-row {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 15px;
-}
-
-.account-label {
-  margin-bottom: 5px;
-  font-weight: bold;
-}
-
-.account-input {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.account-button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-top: 10px;
-}
-
-.account-button:hover {
-  background-color: #0056b3;
-}
-
-.account-logout-button {
-  margin-top: 20px;
-  background-color: #dc3545;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.account-logout-button:hover {
-  background-color: #b02a37;
-}
-
-
-input[type="text"],
-input[type="date"],
-input[type="number"],
-
-textarea {
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-textarea {
-    resize: vertical;
-    min-height: 80px;
-}
-
-/* Knappar */
-button {
-    padding: 10px 15px;
-    font-size: 14px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-button[type="submit"] {
-    background-color: #4caf50;
-    color: white;
-}
-
-button[type="commence"] {
-    background-color: var(--primary-color);
-    color: white;
-}
-
-button[type="button"] {
-    background-color: var(--primary-color);
-    color: white;
-}
-
-button[type="deleteButton"] {
-    background-color: #f44336;
-    color: white;
-}
-
-
-
-button:hover {
-    opacity: 0.9;
-}
-
-/* Avstånd mellan knappar */
-form div:last-child {
-    display: flex;
-    gap: 5px;
-    justify-content: space-between;
-}
-
-.voyage-info {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    margin-top: 50px;
-  }
-  
-  .row {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
-  
-  .voyage-item {
-    width: 45%;
-    margin-bottom: 10px;
-  }
-  
-  .voyage-item p {
-    margin: 5px 0;
-  }
-  
-  h1 {
-    text-align: center;
-  }
-  /* Styling för Voyage History */
-
-  
-  /* Styling för varje voyage title */
-  .voyage-title {
-    background-color: var(--primary-color);
-    color: white;
-    padding: 15px;
-    margin: 10px 0;
-    cursor: pointer;
-    font-size: 1.25em;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-  }
-  
-  /* Hover-effekt på titeln */
-  .voyage-title:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Styling för detaljerna som visas när användaren klickar på titeln */
-  .voyage-details {
-    background-color: #f8f9fa;
-    padding: 15px;
-    margin: 10px 0;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-    font-size: 1em;
-  }
-  
-  /* Styling för listor i detaljer */
-  .voyage-details ul {
-    list-style-type: none;
-    padding-left: 0;
-  }
-  
-  .voyage-details li {
-    padding: 5px 0;
-  }
-  
-  /* Styling för varje detalj-etikett för att göra dem lite fetare */
-  .voyage-details strong {
-    font-weight: bold;
-  }
-  
-  /* Används för att ge en aning om att användaren kan expandera listan */
-  .voyage-title:after {
-    content: "+";
-    float: right;
-    font-size: 1.5em;
-    font-weight: bold;
-  }
-  
-  /* När detaljerna visas, ändra ikonen */
-  .voyage-details.show:before {
-    content: "-";
-    float: right;
-    font-size: 1.5em;
-    font-weight: bold;
-  }
-  
-  /* Döljer standard-checkboxen */
-.custom-checkbox input[type="checkbox"] {
-    display: none;
-  }
-  
-  /* Stilen för etiketten */
-  .custom-checkbox {
-    display: flex;
-    align-items: center;
-    font-size: 16px;
-    color: #333;
-    cursor: pointer;
-    user-select: none;
-  }
-  
-  /* Stilen för själva checkmark-boxen */
-  .custom-checkbox .checkmark {
-    width: 24px;
-    height: 24px;
-    background-color: #f0f0f0;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    margin-right: 10px;
-    position: relative;
-    transition: all 0.3s ease;
-  }
-  
-  /* När checkboxen är markerad */
-  .custom-checkbox input[type="checkbox"]:checked + .checkmark {
-    background-color: #4caf50;
-    border-color: #4caf50;
-  }
-  
-  /* Skapar en "check"-ikon */
-  .custom-checkbox .checkmark::after {
-    content: "";
-    position: absolute;
-    width: 8px;
-    height: 14px;
-    border: solid white;
-    border-width: 0 2px 2px 0;
-    top: 4px;
-    left: 8px;
-    opacity: 0;
-    transform: rotate(45deg) scale(0);
-    transition: all 0.3s ease;
-  }
-  
-  /* Visar "check"-ikonen när markerad */
-  .custom-checkbox input[type="checkbox"]:checked + .checkmark::after {
-    opacity: 1;
-    transform: rotate(45deg) scale(1);
-  }
-
-  
-  .tank-checkbox-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Två kolumner */
-    grid-auto-rows: auto; /* Dynamisk höjd för varje rad */
-    gap: 10px; /* Avstånd mellan rader och kolumner */
-  }
-
-  .tank-checkbox {
-    display: flex;
-    align-items: center;
-  }
-
-  .tank-checkbox input {
-    margin-right: 8px; /* Avstånd mellan checkbox och text */
-  }
-
-  .sof-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    margin-bottom: 20px;
-  }
-  
-  .sof-item {
-    background-color: #f9f9f9;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-  }
-  
-  .sof-item h3 {
-    margin: 0;
-    font-size: 1.2em;
-    color: #333;
-  }
-  
-  .sof-item p {
-    margin: 10px 0 0;
-    color: #555;
-  }
-  #activityForm {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-  }
-  
-  .form-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-  
-  .form-item {
-    flex: 1;
-    min-width: 200px;
-    margin-bottom: 10px;
-  }
-  
-  .form-item label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
-  
-  .form-item input,
-  .form-item textarea {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
-  }
-  
-  .form-item textarea {
-    min-height: 80px;
-  }
-
-
-
-  
-  button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-top: 10px;
-  }
-  
-  button:hover {
-    background-color: #45a049;
-  }
-  
-  
-  #activityTable {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  #activityTable th, #activityTable td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-  }
-  
-  #activityTable th {
-    background-color: #f4f4f4;
-  }  
-
-  /* Tabellstil för grundläggande data */
-.loading-log-basic-info-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 20px 0;
-  font-size: 14px;
-  color: #333;
-}
-
-.loading-log-basic-info-table tr {
-  border-bottom: 1px solid #ddd;
-}
-
-.loading-log-basic-info-table td {
-  padding: 10px;
-}
-
-.loading-log-basic-info-table .loading-log-label {
-  font-weight: bold;
-  text-align: right;
-  color: #555;
-  white-space: nowrap;
-}
-
-.loading-log-basic-info-table td:nth-child(odd) {
-  background-color: #f9f9f9;
-}
-
-.loading-log-basic-info-table td:nth-child(even) {
-  text-align: left;
-}
-
-.loading-log-basic-info-table tr:hover {
-  background-color: #f1f1f1;
-}
-
-.loading-log-basic-info-table td:first-child {
-  border-left: 4px solid #4caf50; /* En liten grön detalj */
-}
-
-
-  /* Gör formuläret horisontellt */
-.loading-log-form {
-  display: flex;
+.edit-btn {
+  display: inline-flex; /* Placera text och ikon sida vid sida */
   align-items: center;
-  flex-direction: row;
-margin-top: 15px;
-  gap: 20px;
-  margin-bottom: 20px;
-  min-width: 80%;
+  gap: 8px; /* Mellanrum mellan ikon och text */
+  background-color: var(--primary-color); /* Primärfärg */
+  color: white; /* Textfärg */
+  border: none; /* Ta bort kantlinjer */
+  border-radius: 5px; /* Rundade hörn */
+  padding: 10px 15px; /* Inre marginaler */
+  font-size: 1rem; /* Textstorlek */
+  cursor: pointer; /* Visar pekare vid hover */
+  transition: all 0.3s ease; /* Smidig hover-effekt */
 }
 
-.loading-log-form-row {
-  display: flex;
-  width: 80%;
-  flex-direction: column;
+.edit-btn i {
+  font-size: 1.2rem; /* Storlek på ikonen */
 }
 
-.loading-log-label {
-  margin-bottom: 5px;
-  font-weight: bold;
+.edit-btn:hover {
+  background-color: #0056b3; /* Mörkare nyans vid hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Liten skugga */
 }
 
-.loading-log-input {
-  width: 200px; /* Anpassa bredden för inmatningsfältet */
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+.edit-btn:active {
+  transform: scale(0.95); /* Tryck-effekt */
 }
 
-.loading-log-button {
-  background-color: #4caf50;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-  font-size: 16px;
+.start-btn {
+  display: inline-flex; /* Placera text och ikon sida vid sida */
+  align-items: center;
+  gap: 8px; /* Mellanrum mellan ikon och text */
+  background-color: #28a745; /* Primärfärg */
+  color: white; /* Textfärg */
+  border: none; /* Ta bort kantlinjer */
+  border-radius: 5px; /* Rundade hörn */
+  padding: 10px 15px; /* Inre marginaler */
+  font-size: 1rem; /* Textstorlek */
+  cursor: pointer; /* Visar pekare vid hover */
+  transition: all 0.3s ease; /* Smidig hover-effekt */
 }
 
-.loading-log-button:hover {
-  background-color: #45a049;
+.start-btn i {
+  font-size: 1.2rem; /* Storlek på ikonen */
 }
 
-/* Rubrik för loggen */
-.loading-log-entries-title {
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
-  color: #4a4a4a;
-  text-align: center;
-  font-weight: bold;
+.start-btn:hover {
+  background-color: #218838; /* Mörkare grön vid hover */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Förstärkt skugga */
 }
 
-/* Tabellstil */
-.loading-log-entries-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 1rem 0;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+.start-btn:active {
+  transform: scale(0.95); /* Tryck-effekt */
+}
+.delete-btn {
+  display: inline-flex; /* Placera text och ikon sida vid sida */
+  align-items: center;
+  gap: 8px; /* Mellanrum mellan ikon och text */
+  background-color: #dc3545; /* Primärfärg */
+  color: white; /* Textfärg */
+  border: none; /* Ta bort kantlinjer */
+  border-radius: 5px; /* Rundade hörn */
+  padding: 10px 15px; /* Inre marginaler */
+  font-size: 1rem; /* Textstorlek */
+  cursor: pointer; /* Visar pekare vid hover */
+  transition: all 0.3s ease; /* Smidig hover-effekt */
 }
 
-/* Huvud för tabellen */
-.loading-log-header {
-  background-color: var(--secondary-color);
-  color: #fff;
-  text-align: left;
-  padding: 0.75rem;
-  font-size: 1rem;
-  text-transform: uppercase;
+.delete-btn i {
+  font-size: 1.2rem; /* Storlek på ikonen */
 }
 
-/* Celler i kroppen */
-.loading-log-body td {
-  padding: 0.75rem;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-  font-size: 0.9rem;
+.delete-btn:hover {
+  background-color: #c82333; /* Mörkare röd vid hover */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Förstärkt skugga */
 }
 
-/* Rader med alternativ färg */
-.loading-log-body tr:nth-child(even) {
-  background-color: #f2f2f2;
+.delete-btn:active {
+  transform: scale(0.95); /* Tryck-effekt */
 }
 
-/* Inputfält i cellerna */
-.log-input {
-  width: 100%;
-  padding: 0.5rem;
-  font-size: 0.9rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
+.save-btn {
+  display: inline-flex; /* Placera text och ikon sida vid sida */
+  align-items: center;
+  gap: 8px; /* Mellanrum mellan ikon och text */
+  background-color: #28a745; /* Primärfärg */
+  color: white; /* Textfärg */
+  border: none; /* Ta bort kantlinjer */
+  border-radius: 5px; /* Rundade hörn */
+  padding: 10px 15px; /* Inre marginaler */
+  font-size: 1rem; /* Textstorlek */
+  cursor: pointer; /* Visar pekare vid hover */
+  transition: all 0.3s ease; /* Smidig hover-effekt */
 }
 
-/* Knappar */
-.loading-log-add-button,
-.log-button {
-  display: inline-block;
-  padding: 0.6rem 1.2rem;
-  font-size: 1rem;
-  color: #fff;
-  background-color: var(--primary-color);
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-top: 1rem;
-}
-.log-delete-button {
-  display: inline-block;
-  padding: 0.6rem 1.2rem;
-  font-size: 1rem;
-  color: #fff;
-  background-color: red;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-top: 1rem;
+.save-btn i {
+  font-size: 1.2rem; /* Storlek på ikonen */
 }
 
-.loading-log-add-button:hover,
-.log-button:hover {
-  background-color: var(--secondary-color);
+.save-btn:hover {
+  background-color: #218838; /* Mörkare grön vid hover */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Förstärkt skugga */
 }
 
-/* När tabellen inte har några data */
-.loading-log-body td:empty::after {
-  content: "-";
-  color: #ccc;
+.save-btn:active {
+  transform: scale(0.95); /* Tryck-effekt */
 }
 
-/* Specifika breddinställningar för varje kolumn */
-.loading-log-entries-table th:nth-child(1), .loading-log-entries-table td:nth-child(1) {
-  width: 15%; /* Första kolumnen - Local time */
+/* Föräldraelementet som omsluter selecten */
+.select-container {
+  display: flex;  /* Använd flexbox för centrering */
+  justify-content: center;  /* Horisontell centrering */
+  align-items: center;  /* Vertikal centrering */
 }
 
-.loading-log-entries-table th:nth-child(2), .loading-log-entries-table td:nth-child(2) {
-  width: 10%; /* Andra kolumnen - O.B.Q. m3 */
+#voyageSelect {
+  width: 100%;  /* Gör select-elementet brett så att det fyller tillgänglig plats */
+  max-width: 600px;  /* Maximal bredd för att förhindra att selecten blir för bred */
+  padding: 10px;  /* Lite inre marginal för bättre utseende */
+  font-size: 16px;  /* Större textstorlek för bättre läsbarhet */
+  box-sizing: border-box;  /* Säkerställer att padding inte påverkar bredden */
 }
 
-.loading-log-entries-table th:nth-child(3), .loading-log-entries-table td:nth-child(3) {
-  width: 10%; /* Tredje kolumnen - Rate m3/h */
-}
-
-.loading-log-entries-table th:nth-child(4), .loading-log-entries-table td:nth-child(4) {
-  width: 25%; /* Fjärde kolumnen - Tanks No. */
-}
-
-.loading-log-entries-table th:nth-child(5), .loading-log-entries-table td:nth-child(5) {
-  width: 10%; /* Femte kolumnen - Manif Press. */
-}
-
-.loading-log-entries-table th:nth-child(6), .loading-log-entries-table td:nth-child(6) {
-  width: 8%; /* Sjätte kolumnen - BM */
-}
-
-.loading-log-entries-table th:nth-child(7), .loading-log-entries-table td:nth-child(7) {
-  width: 8%; /* Sjunde kolumnen - SF */
-}
-
-.loading-log-entries-table th:nth-child(8), .loading-log-entries-table td:nth-child(8) {
-  width: 20%; /* Åttonde kolumnen - Remarks */
-}
-
-.loading-log-entries-table th:nth-child(9), .loading-log-entries-table td:nth-child(9) {
-  width: 20%; /* Nionde kolumnen - Action */
-}
-
-/* Minsta bredd för alla kolumner */
-.loading-log-entries-table th, .loading-log-entries-table td {
-  min-width: 50px;
-}
-
-
-  /* Grundläggande stilar för sidan */
-.ship-info {
-  margin: 20px;
-}
-
-.ship-title {
-  color: #333;
-  font-size: 2em;
-  margin-bottom: 15px;
-}
-
-.ship-row {
-  display: flex;
-  margin-bottom: 10px;
-  justify-content: space-between;
-}
-
-.ship-item {
-  flex: 1;
-  padding: 10px;
-  border: 1px solid #ddd;
-  margin-right: 10px;
-  background-color: #f9f9f9;
-  border-radius: 4px;
-}
-
-.ship-item:last-child {
-  margin-right: 0;
-}
-
-.load-line-title {
-  margin-top: 20px;
-  font-size: 1.5em;
-  color: #2c3e50;
-}
-
-.load-line-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 10px;
-}
-
-.load-line-table th, .load-line-table td {
-  padding: 8px;
-  text-align: center;
-  border: 1px solid #ddd;
-}
-
-.load-line-table th {
-  background-color: #34495e;
-  color: white;
-}
-
-.ship-navigation {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-}
-
-.navigation-button {
-  padding: 10px 20px;
-  background-color: #3498db;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1.1em;
-}
-
-.navigation-button:hover {
-  background-color: #2980b9;
-}
-
-  
-
-
-/* Responsiv design */
-@media (max-width: 480px) {
-    .content {
-        padding: 15px;
-    }
-
-    form div:last-child {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    button {
-        width: 100%;
-    }
+#voyageSelect option {
+  white-space: nowrap;  /* Förhindrar att texten bryts på flera rader */
+  text-overflow: ellipsis;  /* Lägg till "..." om texten är för lång för att visas */
+  padding: 10px;  /* Padding för att göra varje option mer läsbar */
+  font-size: 14px;  /* Justera textstorlek för bättre utseende */
 }

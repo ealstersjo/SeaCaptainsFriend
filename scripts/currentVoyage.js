@@ -147,7 +147,9 @@ export const currentVoyagePage = (contentArea) => {
 
     contentArea.innerHTML = `
       <h1>Current Voyage</h1>
+      <div class="select-container">
       <select id="voyageSelect">${voyageOptions}</select>
+      </div>
       <div id="voyageDetails"></div>
       
     `;

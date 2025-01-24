@@ -6,6 +6,8 @@ export const statementOfFact = (contentArea) => {
   // Skapa voyageSelect varje gång baserat på selectedVoyageIndex
   const generateVoyageSelect = () => {
     return `
+    <div class="select-container">
+
     <select id="voyageSelect">
       <option value="" selected disabled>Select trip</option>
       ${voyages
@@ -18,6 +20,7 @@ export const statementOfFact = (contentArea) => {
         )
         .join("")}
     </select>
+    </div>
   `;
   };
 
@@ -30,9 +33,9 @@ export const statementOfFact = (contentArea) => {
   const renderSoFForm = () => {
     contentArea.innerHTML = `
       <h1>Statement of Fact</h1>
-            <div class="select-container">
+           
       ${generateVoyageSelect()}
-      </div>
+      
       <div class="sof-info-container">
         <table class="sof-info-table">
           <tr>
@@ -68,283 +71,138 @@ export const statementOfFact = (contentArea) => {
           </tr>
         </thead>
         <tbody class="activity-log-body">
-        <tr>
-    <td>EOSP</td>
-    <td><input type="date" class="editable" data-index="eosp" /></td>
-    <td><input type="time" class="editable" data-index="eosp" id="timeInput" /></td>
-    <td><textarea class="editable" data-index="eosp"></textarea></td>
-    <td><button class="saveBtn" data-index="eosp">Save</button><button class="editBtn" data-index="eosp" style="display:none;">Edit</button></td>
-</tr>
-<tr>
-    <td>NOR Tendered</td>
-    <td><input type="date" class="editable" data-index="nor-tendered" /></td>
-    <td><input type="time" class="editable" data-index="nor-tendered" /></td>
-    <td><textarea class="editable" data-index="nor-tendered" placeholder="Reason for delay:"></textarea></td>
-    <td><button class="saveBtn" data-index="nor-tendered">Save</button><button class="editBtn" data-index="nor-tendered" style="display:none;">Edit</button></td>
-</tr>
-  <tr>
-    <td>Free Pratique</td>
-    <td><input type="date" class="editable" data-index="free-pratique" /></td>
-    <td><input type="time" class="editable" data-index="free-pratique" /></td>
-    <td><textarea class="editable" data-index="free-pratique"></textarea></td>
-    <td><button class="saveBtn" data-index="free-pratique">Save</button><button class="editBtn" data-index="free-pratique" style="display:none;">Edit</button></td>
-  </tr>
-  <tr>
-    <td>Pilot onboard</td>
-    <td><input type="date" class="editable" data-index="pilot-onboard" /></td>
-    <td><input type="time" class="editable" data-index="pilot-onboard" /></td>
-    <td><textarea class="editable" data-index="pilot-onboard"></textarea></td>
-    <td><button class="saveBtn" data-index="pilot-onboard">Save</button><button class="editBtn" data-index="pilot-onboard" style="display:none;">Edit</button></td>
-  </tr>
-  <tr>
-    <td>Anchored</td>
-    <td><input type="date" class="editable" data-index="anchored" /></td>
-    <td><input type="time" class="editable" data-index="anchored" /></td>
-    <td><textarea class="editable" data-index="anchored" placeholder="Reason for delay:"></textarea></td>
-    <td><button class="saveBtn" data-index="anchored">Save</button><button class="editBtn" data-index="anchored" style="display:none;">Edit</button></td>
-  </tr>
-  <tr>
-    <td>Anchor aweigh</td>
-    <td><input type="date" class="editable" data-index="anchor-aweigh" /></td>
-    <td><input type="time" class="editable" data-index="anchor-aweigh" /></td>
-    <td><textarea class="editable" data-index="anchor-aweigh"></textarea></td>
-    <td><button class="saveBtn" data-index="anchor-aweigh">Save</button><button class="editBtn" data-index="anchor-aweigh" style="display:none;">Edit</button></td>
-  </tr>
-  <tr>
-    <td>(2nd Pilot Onboard)</td>
-    <td><input type="date" class="editable" data-index="second-pilot-onboard" /></td>
-    <td><input type="time" class="editable" data-index="second-pilot-onboard" /></td>
-    <td><textarea class="editable" data-index="second-pilot-onboard"></textarea></td>
-    <td><button class="saveBtn" data-index="second-pilot-onboard">Save</button><button class="editBtn" data-index="second-pilot-onboard" style="display:none;">Edit</button></td>
-</tr>
-<tr>
-    <td>Changed Pilot I</td>
-    <td><input type="date" class="editable" data-index="changed-pilot-i" /></td>
-    <td><input type="time" class="editable" data-index="changed-pilot-i" /></td>
-    <td><textarea class="editable" data-index="changed-pilot-i"></textarea></td>
-    <td><button class="saveBtn" data-index="changed-pilot-i">Save</button><button class="editBtn" data-index="changed-pilot-i" style="display:none;">Edit</button></td>
-</tr>
-<tr>
-    <td>Changed Pilot II</td>
-    <td><input type="date" class="editable" data-index="changed-pilot-ii" /></td>
-    <td><input type="time" class="editable" data-index="changed-pilot-ii" /></td>
-    <td><textarea class="editable" data-index="changed-pilot-ii"></textarea></td>
-    <td><button class="saveBtn" data-index="changed-pilot-ii">Save</button><button class="editBtn" data-index="changed-pilot-ii" style="display:none;">Edit</button></td>
-</tr>
-<tr>
-    <td>Lock, In - Out</td>
-    <td><input type="date" class="editable" data-index="lock-in-out" /></td>
-    <td><input type="time" class="editable" data-index="lock-in-out" /></td>
-    <td><textarea class="editable" data-index="lock-in-out"></textarea></td>
-    <td><button class="saveBtn" data-index="lock-in-out">Save</button><button class="editBtn" data-index="lock-in-out" style="display:none;">Edit</button></td>
-</tr>
-<tr>
-    <td>First Line Ashore</td>
-    <td><input type="date" class="editable" data-index="first-line-ashore" /></td>
-    <td><input type="time" class="editable" data-index="first-line-ashore" /></td>
-    <td>
-        <div>
-            <label>Fwd Draft: (m)</label>
-            <input type="number" step="0.01" class="draft-input editable" data-type="fwd" data-index="first-line-ashore" placeholder="(m)" />
-            <label>Aft Draft: (m)</label>
-            <input type="number" step="0.01" class="draft-input editable" data-type="aft" data-index="first-line-ashore" placeholder="(m)" />
-        </div>
-    </td>    
-    <td><button class="saveBtn" data-index="first-line-ashore">Save</button><button class="editBtn" data-index="first-line-ashore" style="display:none;">Edit</button></td>
-</tr>
-<tr>
-    <td>All Fast</td>
-    <td><input type="date" class="editable" data-index="all-fast" /></td>
-    <td><input type="time" class="editable" data-index="all-fast" /></td>
-    <td>
-        <div>
-            <label>LNG: (mt)</label>
-            <input type="number" step="0.1" class="draft-input editable" data-type="lng" data-index="all-fast" placeholder="(mt)" />
-            <label>GO: (mt)</label>
-            <input type="number" step="0.1" class="draft-input editable" data-type="go" data-index="all-fast" placeholder="(tm)" />
-        </div>
-    </td>
-    <td><button class="saveBtn" data-index="all-fast">Save</button><button class="editBtn" data-index="all-fast" style="display:none;">Edit</button></td>
-</tr>
-<tr>
-    <td>NOR Received</td>
-    <td><input type="date" class="editable" data-index="nor-received" /></td>
-    <td><input type="time" class="editable" data-index="nor-received" /></td>
-    <td><textarea class="editable" data-index="nor-received"  placeholder="Reason for delay:"></textarea></td>
-    <td><button class="saveBtn" data-index="nor-received">Save</button><button class="editBtn" data-index="nor-received" style="display:none;">Edit</button></td>
-</tr>
-<tr>
-    <td>Tank Inspection</td>
-    <td><input type="date" class="editable" data-index="tank-inspection" /></td>
-    <td><input type="time" class="editable" data-index="tank-inspection" /></td>
-    <td><textarea class="editable" data-index="tank-inspection"></textarea></td>
-    <td><button class="saveBtn" data-index="tank-inspection">Save</button><button class="editBtn" data-index="tank-inspection" style="display:none;">Edit</button></td>
-</tr>
-<tr>
-    <td>Key Meeting Done</td>
-    <td><input type="date" class="editable" data-index="key-meeting-done" /></td>
-    <td><input type="time" class="editable" data-index="key-meeting-done" /></td>
-    <td><textarea class="editable" data-index="key-meeting-done" placeholder="Number & size(s):"></textarea></td>
-    <td><button class="saveBtn" data-index="key-meeting-done">Save</button><button class="editBtn" data-index="key-meeting-done" style="display:none;">Edit</button></td>
-</tr>
-<tr>
-    <td>Connected</td>
-    <td><input type="date" class="editable" data-index="connected" /></td>
-    <td><input type="time" class="editable" data-index="connected" /></td>
-    <td><textarea class="editable" data-index="connected"></textarea></td>
-    <td><button class="saveBtn" data-index="connected">Save</button><button class="editBtn" data-index="connected" style="display:none;">Edit</button></td>
-</tr>
-<tr>
-    <td>Commenced Load</td>
-    <td><input type="date" class="editable" data-index="commenced-load" /></td>
-    <td><input type="time" class="editable" data-index="commenced-load" /></td>
-    <td><textarea class="editable" data-index="commenced-load"></textarea></td>
-    <td><button class="saveBtn" data-index="commenced-load">Save</button><button class="editBtn" data-index="commenced-load" style="display:none;">Edit</button></td>
-</tr>
-<tr>
-    <td>Completed Load</td>
-    <td><input type="date" class="editable" data-index="completed-load" /></td>
-    <td><input type="time" class="editable" data-index="completed-load" /></td>
-    <td><input type="number" step="0.01" class="editable" data-index="completed-load" placeholder="Ship fig.:"/></td>
-    <td>
-        <button class="saveBtn" data-index="completed-load">Save</button>
-        <button class="editBtn" data-index="completed-load" style="display:none;">Edit</button>
-    </td>
-</tr>
-
-<tr>
-    <td>Ullage / Sampling</td>
-    <td><input type="date" class="editable" data-index="ullage-sampling" /></td>
-    <td><input type="time" class="editable" data-index="ullage-sampling" /></td>
-    <td><input type="number" step="0.01" class="editable" data-index="ullage-sampling" placeholder="B/L fig:"/></td>
-    <td>
-        <button class="saveBtn" data-index="ullage-sampling">Save</button>
-        <button class="editBtn" data-index="ullage-sampling" style="display:none;">Edit</button>
-    </td>
-</tr>
-<tr>
-    <td>Calculations Done</td>
-    <td><input type="date" class="editable" data-index="calculations-done" disabled /></td>
-    <td><input type="time" class="editable" data-index="calculations-done" disabled /></td>
-    <td><textarea class="editable" data-index="calculations-done" disabled></textarea></td>
-    <td>
-        <button class="saveBtn" data-index="calculations-done">Calculate</button>
-        <button class="editBtn" data-index="calculations-done" style="display:none;">Edit</button>
-    </td>
-</tr>
-<tr>
-    <td>Disconnected</td>
-    <td><input type="date" class="editable" data-index="disconnected" /></td>
-    <td><input type="time" class="editable" data-index="disconnected" /></td>
-    <td><textarea class="editable" data-index="disconnected" placeholder="Reason for delay:"></textarea></td>
-    <td>
-        <button class="saveBtn" data-index="disconnected">Save</button>
-        <button class="editBtn" data-index="disconnected" style="display:none;">Edit</button>
-    </td>
-</tr>
-<tr>
-    <td>Documents Onboard</td>
-    <td><input type="date" class="editable" data-index="documents-onboard" /></td>
-    <td><input type="time" class="editable" data-index="documents-onboard" /></td>
-    <td><textarea class="editable" data-index="documents-onboard"></textarea></td>
-    <td>
-        <button class="saveBtn" data-index="documents-onboard">Save</button>
-        <button class="editBtn" data-index="documents-onboard" style="display:none;">Edit</button>
-    </td>
-</tr>
-<tr>
-    <td>Documents Signed</td>
-    <td><input type="date" class="editable" data-index="documents-signed" /></td>
-    <td><input type="time" class="editable" data-index="documents-signed" /></td>
-    <td><textarea class="editable" data-index="documents-signed" placeholder="Reason for delay:"></textarea></td>
-    <td>
-        <button class="saveBtn" data-index="documents-signed">Save</button>
-        <button class="editBtn" data-index="documents-signed" style="display:none;">Edit</button>
-    </td>
-</tr>
-<tr>
-    <td>Pilot Onboard</td>
-    <td><input type="date" class="editable" data-index="pilot-onboard" /></td>
-    <td><input type="time" class="editable" data-index="pilot-onboard" /></td>
-    <td><textarea class="editable" data-index="pilot-onboard"></textarea></td>
-    <td>
-        <button class="saveBtn" data-index="pilot-onboard">Save</button>
-        <button class="editBtn" data-index="pilot-onboard" style="display:none;">Edit</button>
-    </td>
-</tr>
-<tr>
-    <td>Departure</td>
-    <td><input type="date" class="editable" data-index="departure" /></td>
-    <td><input type="time" class="editable" data-index="departure" /></td>
-    <td><textarea class="editable" data-index="departure"></textarea></td>
-    <td>
-        <button class="saveBtn" data-index="departure">Save</button>
-        <button class="editBtn" data-index="departure" style="display:none;">Edit</button>
-    </td>
-</tr>
-<tr>
-    <td>Changed Pilot</td>
-    <td><input type="date" class="editable" data-index="changed-pilot" /></td>
-    <td><input type="time" class="editable" data-index="changed-pilot" /></td>
-    <td>
-        <div>
-            <label>LNG: (mt)</label>
-            <input type="number" step="0.1" class="draft-input editable" data-type="lng" data-index="changed-pilot" placeholder="(mt)" />
-            <label>GO: (mt)</label>
-            <input type="number" step="0.1" class="draft-input editable" data-type="go" data-index="changed-pilot" placeholder="(mt)" />
-        </div>
-    </td>
-    <td>
-        <button class="saveBtn" data-index="changed-pilot">Save</button>
-        <button class="editBtn" data-index="changed-pilot" style="display:none;">Edit</button>
-    </td>
-</tr>
-<tr>
-    <td>Pilot Disembarked</td>
-    <td><input type="date" class="editable" data-index="pilot-disembarked" /></td>
-    <td><input type="time" class="editable" data-index="pilot-disembarked" /></td>
-<td>
-        <div>
-            <label>Fwd Draft: (m)</label>
-            <input type="number" step="0.01" class="draft-input editable" data-type="fwd" data-index="pilot-disembarked" placeholder="(m)" />
-            <label>Aft Draft: (m)</label>
-            <input type="number" step="0.01" class="draft-input editable" data-type="aft" data-index="pilot-disembarked" placeholder="(m)" />
-        </div>
-    </td>
-    <td>
-        <button class="saveBtn" data-index="pilot-disembarked">Save</button>
-        <button class="editBtn" data-index="pilot-disembarked" style="display:none;">Edit</button>
-    </td>
-</tr>
-<tr>
-    <td>S.O.S.P</td>
-    <td><input type="date" class="editable" data-index="sosp" /></td>
-    <td><input type="time" class="editable" data-index="sosp" /></td>
-    <td><textarea class="editable" data-index="sosp"></textarea></td>
-    <td>
-        <button class="saveBtn" data-index="sosp">Save</button>
-        <button class="editBtn" data-index="sosp" style="display:none;">Edit</button>
-    </td>
-</tr>
-<tr>
-    <td colspan="4">
-        <label for="remarks">Remarks:</label>
-        <textarea id="remarks" class="editable" data-index="sof-remarks" rows="4" style="width: 100%;"></textarea>
-    </td>
-    <td>
-        <button class="saveBtn" data-index="pilot-disembarked">Save</button>
-        <button class="editBtn" data-index="pilot-disembarked" style="display:none;">Edit</button>
-    </td>
-</tr>
-
-      <button id="printSoF" type="button">Print SoF</button>
-
-</tbody>
-
+          <tr>
+            <td>EOSP</td>
+            <td><input type="date" class="editable" data-index="eosp" /></td>
+            <td><input type="time" class="editable" data-index="eosp" id="timeInput" /></td>
+            <td><textarea class="editable" data-index="eosp"></textarea></td>
+            <td>
+                <button class="saveBtn save-btn" data-index="eosp">
+                    <i class="fa fa-save"></i> Save
+                </button>
+                <button class="editBtn edit-btn" data-index="eosp" style="display:none;">
+                    <i class="fa fa-edit"></i> Edit
+                </button>
+            </td>
+          </tr>
+          <tr>
+            <td>NOR Tendered</td>
+            <td><input type="date" class="editable" data-index="nor-tendered" /></td>
+            <td><input type="time" class="editable" data-index="nor-tendered" /></td>
+            <td><textarea class="editable" data-index="nor-tendered" placeholder="Reason for delay:"></textarea></td>
+            <td>
+                <button class="saveBtn save-btn" data-index="nor-tendered">
+                    <i class="fa fa-save"></i> Save
+                </button>
+                <button class="editBtn edit-btn" data-index="nor-tendered" style="display:none;">
+                    <i class="fa fa-edit"></i> Edit
+                </button>
+            </td>
+          </tr>
+          <tr>
+            <td>Free Pratique</td>
+            <td><input type="date" class="editable" data-index="free-pratique" /></td>
+            <td><input type="time" class="editable" data-index="free-pratique" /></td>
+            <td><textarea class="editable" data-index="free-pratique"></textarea></td>
+            <td>
+                <button class="saveBtn save-btn" data-index="free-pratique">
+                    <i class="fa fa-save"></i> Save
+                </button>
+                <button class="editBtn edit-btn" data-index="free-pratique" style="display:none;">
+                    <i class="fa fa-edit"></i> Edit
+                </button>
+            </td>
+          </tr>
+          <tr>
+            <td>Pilot onboard</td>
+            <td><input type="date" class="editable" data-index="pilot-onboard" /></td>
+            <td><input type="time" class="editable" data-index="pilot-onboard" /></td>
+            <td><textarea class="editable" data-index="pilot-onboard"></textarea></td>
+            <td>
+                <button class="saveBtn save-btn" data-index="pilot-onboard">
+                    <i class="fa fa-save"></i> Save
+                </button>
+                <button class="editBtn edit-btn" data-index="pilot-onboard" style="display:none;">
+                    <i class="fa fa-edit"></i> Edit
+                </button>
+            </td>
+          </tr>
+          <tr>
+            <td>Anchored</td>
+            <td><input type="date" class="editable" data-index="anchored" /></td>
+            <td><input type="time" class="editable" data-index="anchored" /></td>
+            <td><textarea class="editable" data-index="anchored" placeholder="Reason for delay:"></textarea></td>
+            <td>
+                <button class="saveBtn save-btn" data-index="anchored">
+                    <i class="fa fa-save"></i> Save
+                </button>
+                <button class="editBtn edit-btn" data-index="anchored" style="display:none;">
+                    <i class="fa fa-edit"></i> Edit
+                </button>
+            </td>
+          </tr>
+          <tr>
+            <td>Anchor aweigh</td>
+            <td><input type="date" class="editable" data-index="anchor-aweigh" /></td>
+            <td><input type="time" class="editable" data-index="anchor-aweigh" /></td>
+            <td><textarea class="editable" data-index="anchor-aweigh"></textarea></td>
+            <td>
+                <button class="saveBtn save-btn" data-index="anchor-aweigh">
+                    <i class="fa fa-save"></i> Save
+                </button>
+                <button class="editBtn edit-btn" data-index="anchor-aweigh" style="display:none;">
+                    <i class="fa fa-edit"></i> Edit
+                </button>
+            </td>
+          </tr>
+          <tr>
+            <td>(2nd Pilot Onboard)</td>
+            <td><input type="date" class="editable" data-index="second-pilot-onboard" /></td>
+            <td><input type="time" class="editable" data-index="second-pilot-onboard" /></td>
+            <td><textarea class="editable" data-index="second-pilot-onboard"></textarea></td>
+            <td>
+                <button class="saveBtn save-btn" data-index="second-pilot-onboard">
+                    <i class="fa fa-save"></i> Save
+                </button>
+                <button class="editBtn edit-btn" data-index="second-pilot-onboard" style="display:none;">
+                    <i class="fa fa-edit"></i> Edit
+                </button>
+            </td>
+          </tr>
+          <tr>
+            <td>Changed Pilot I</td>
+            <td><input type="date" class="editable" data-index="changed-pilot-i" /></td>
+            <td><input type="time" class="editable" data-index="changed-pilot-i" /></td>
+            <td><textarea class="editable" data-index="changed-pilot-i"></textarea></td>
+            <td>
+                <button class="saveBtn save-btn" data-index="changed-pilot-i">
+                    <i class="fa fa-save"></i> Save
+                </button>
+                <button class="editBtn edit-btn" data-index="changed-pilot-i" style="display:none;">
+                    <i class="fa fa-edit"></i> Edit
+                </button>
+            </td>
+          </tr>
+          <tr>
+            <td>Changed Pilot II</td>
+            <td><input type="date" class="editable" data-index="changed-pilot-ii" /></td>
+            <td><input type="time" class="editable" data-index="changed-pilot-ii" /></td>
+            <td><textarea class="editable" data-index="changed-pilot-ii"></textarea></td>
+            <td>
+                <button class="saveBtn save-btn" data-index="changed-pilot-ii">
+                    <i class="fa fa-save"></i> Save
+                </button>
+                <button class="editBtn edit-btn" data-index="changed-pilot-ii" style="display:none;">
+                    <i class="fa fa-edit"></i> Edit
+                </button>
+            </td>
+          </tr>
+        </tbody>
       </table>
 
 
-      <button id="deleteVoyageButton" type="deleteButton">Delete SoF</button>
+
+      <button id="deleteVoyageButton" class="delete-btn">Delete SoF</button>
     `;
     initializeActivities();
 
