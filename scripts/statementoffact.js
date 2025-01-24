@@ -58,6 +58,9 @@ export const statementOfFact = (contentArea) => {
           </tr>
         </table>
       </div>
+      <button class="print-btn" id="printSoF">
+                    <i class="fa fa-print"></i> Print SoF
+                </button>
 
       <!-- Fixed Activities (Examples) -->
       <table class="activity-log-table">
