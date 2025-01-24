@@ -91,7 +91,6 @@ const parseUllageFile = async (file) => {
       }
     }
 
-    //console.log(fullText);
     const extractProdAndDens = extractProductAndDensity(fullText);
     const exctractedTankData = extractTankData(fullText);
     const combinedData = {
@@ -99,7 +98,6 @@ const parseUllageFile = async (file) => {
       tankData: exctractedTankData,
     };
 
-    //console.log(combinedData);
     return combinedData;
   } catch (error) {
     console.error("Failed to parse PDF:", error);
@@ -170,7 +168,6 @@ const extractTankData = (text) => {
   const matchTable = text.match(tableRegex);
 
   if (!matchTable) {
-    console.log("Tabellen kunde inte hittas.");
     return [];
   }
   const tableData = JSON.stringify(matchTable[0]);
@@ -243,7 +240,6 @@ const extractTankData = (text) => {
       }
     }
   });
-  console.log(tanks);
   return tanks;
 };
 
@@ -265,7 +261,6 @@ const extractQuantities = (text) => {
     !matchAfterQuantities ||
     !matchLoadedQuantities
   ) {
-    console.log("En eller flera kvantiteter kunde inte hittas.");
     return null;
   }
 
@@ -276,7 +271,6 @@ const extractQuantities = (text) => {
     const numbers = quantitiesText.match(numberRegex);
 
     if (!numbers) {
-      console.log("Inga numeriska värden hittades.");
       return null;
     }
 
@@ -320,7 +314,6 @@ const extractBillOfLading = (text) => {
   const matchBill = text.match(billOfLadingRegex);
 
   if (!matchBill) {
-    console.log("Bill of lading kunde inte hittas.");
     return null;
   }
 
@@ -331,7 +324,6 @@ const extractBillOfLading = (text) => {
   const numbers = billOfLadingText.match(numberRegex);
 
   if (!numbers) {
-    console.log("Inga numeriska värden hittades.");
     return null;
   }
 

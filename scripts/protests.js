@@ -497,7 +497,6 @@ export const protests = (contentArea) => {
           let counter = 1;
           if (possibleShoreStops) {
             possibleShoreStops.forEach((entry, index) => {
-              //console.log(`Rate: ${entry.rate}, Remarks: ${entry.remarks}`);
               //rate bör ha ett tröskelvärde
               const remarks = entry.remarks.toLowerCase();
               if (remarks.includes("shore") && remarks.includes("stop")) {
@@ -580,7 +579,6 @@ export const protests = (contentArea) => {
       );
 
       formData["Ship"] = shipSettings.shipName;
-      console.log(document.id);
       // Öppna rätt HTML-sida för utskrift
       const printWindow = window.open(
         `../pages/protests/${document.id}.html`,
@@ -604,8 +602,6 @@ export const protests = (contentArea) => {
               .replace(/\s+/g, "-")
               .replace(/[^\w-]/g, "")
           );
-
-          console.log("nyckel: " + key + " -- value: " + formattedValue);
 
           if (placeholder) {
             placeholder.textContent = formattedValue;
@@ -638,7 +634,6 @@ export const protests = (contentArea) => {
         `;
         const shoreStopPlaceholder =
           printWindow.document.getElementById("shore-stops");
-        console.log(shoreStopPlaceholder);
         if (shoreStopPlaceholder) {
           shoreStopPlaceholder.innerHTML = shoreStopsTable; // Använd innerHTML för att sätta in tabellen
         }

@@ -207,7 +207,6 @@ const updateAvgRates = () => {
     avgRate = 0;
     lastAvgRate = 0;
   }
-  console.log(loadingLogData.avgRate);
   // Uppdatera grundläggande data i UI
   renderBasicData();
 };

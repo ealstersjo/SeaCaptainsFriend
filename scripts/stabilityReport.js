@@ -101,14 +101,7 @@ const parseStabilityFile = async (pdfFile) => {
     }
   }
 
-  if (foundTable) {
-    //console.log("Extracted Table:", foundTable);
-  } else {
-    console.log("No table with 'Item' and 'Total' found.");
-  }
-
   const parsedTable = parseStabilityTableToJSON(foundTable);
-  //console.log("Parsed: " + JSON.stringify(parsedTable, null, 2)); // Konverterar till JSON-sträng
   return parsedTable;
 };
 

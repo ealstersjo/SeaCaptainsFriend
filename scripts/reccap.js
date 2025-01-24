@@ -3,7 +3,6 @@ export const receivingCapacity = (contentArea) => {
   const shipSettings = JSON.parse(localStorage.getItem("shipSettings")) || {
     shipName: "",
   };
-  //console.log(shipSettings);
 
   let selectedVoyageIndex = localStorage.getItem("selectedVoyageIndex");
 
@@ -74,7 +73,6 @@ export const receivingCapacity = (contentArea) => {
             <button class="printButton" id="printRCS">Print Receiving Capacity Statement</button>
           </div>
         `;
-    console.log(selectedVoyage);
     // Hantera print-knappen
     document.getElementById("printRCS").addEventListener("click", () => {
       // Kontrollera om en resa är vald och om cargo tanks är ifyllt

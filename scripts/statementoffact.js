@@ -26,7 +26,6 @@ export const statementOfFact = (contentArea) => {
   if (selectedVoyageIndex) {
     selectedVoyage = voyages[selectedVoyageIndex];
   }
-  console.log(selectedVoyage);
 
   const renderSoFForm = () => {
     contentArea.innerHTML = `
@@ -368,7 +367,6 @@ export const statementOfFact = (contentArea) => {
     const calculateVolumeDifference = () => {
       // Hämta sparade data från SoF (om de finns)
       const sofData = selectedVoyage.sof;
-      //console.log(sofData);
       // Kontrollera om värden finns sparade i SoF-data
       const completedLoadValue =
         sofData["completed-load"] && sofData["completed-load"].remarks.shipLoad
@@ -516,7 +514,6 @@ export const statementOfFact = (contentArea) => {
           };
         } else if (key === "calculations-done") {
           const blValue = calculateVolumeDifference();
-          console.log(blValue);
           // Bygg remarks-objektet
           remarks = {
             calculations: blValue || null,
@@ -612,8 +609,7 @@ export const statementOfFact = (contentArea) => {
   const initializeActivities = () => {
     // Hämta SoF-objektet från localStorage
     const voyages = JSON.parse(localStorage.getItem("currentVoyage"));
-    //console.log("current: " + JSON.stringify(voyages));
-    //console.log("Choosen: " + JSON.stringify(voyages[selectedVoyageIndex]));
+
     let sofData = voyages[selectedVoyageIndex].sof;
     if (sofData) {
       // Gå igenom varje rad i tabellen
@@ -693,7 +689,6 @@ export const statementOfFact = (contentArea) => {
               if (!isNaN(value)) numberInput.value = value;
             }
           } else if (dataIndex === "calculations-done") {
-            console.log("Fortsätt med calculations init");
             // För fält med ett enda nummerfält
             const remarkValue = `Differnce: ${remarks.calculations.difference} = ${remarks.calculations.percentage}%`;
             const remarksInput = row.querySelector("td:nth-child(4) textarea");

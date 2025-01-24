@@ -95,7 +95,6 @@ export const handleVoyage = (contentArea) => {
     });
   } else if (voyageStart.currentStep === "Nomination") {
     // Om voyageStart finns, visa användarens framsteg och aktuellt steg
-    console.log(voyageStart.nomination);
     contentArea.innerHTML = `
       <h1>Nomination</h1>
       <h3>Current Voyage Progress</h3>

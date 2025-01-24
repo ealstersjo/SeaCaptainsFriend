@@ -115,7 +115,6 @@ const createLogRow = (entry = {}, index = null) => {
         const previousObq = parseFloat(logEntries[index - 1].obq) || 0;
 
         if (currentObq < previousObq) {
-          console.log("HEJ");
           const confirmation = confirm(
             `O.B.Q. cannot be lower than earlier value (last entered O.B.Q.: ${previousObq}). If you want to edit please press "Cancel"`
           );

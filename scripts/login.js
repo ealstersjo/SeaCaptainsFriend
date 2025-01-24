@@ -1,7 +1,6 @@
 // Kontrollera om enheten är online
 if (navigator.onLine) {
   // Hämta checklists.json från /data
-  console.log("ONLINE");
   fetch("./data/checklists.json")
     .then((response) => {
       if (!response.ok) {
@@ -12,7 +11,6 @@ if (navigator.onLine) {
     .then((data) => {
       // Spara data i localStorage
       localStorage.setItem("checklistsFromServer", JSON.stringify(data));
-      console.log("Checklists sparade i localStorage:", data);
     })
     .catch((error) => {
       console.error("Fel vid hämtning av checklists.json:", error);
@@ -29,7 +27,6 @@ if (navigator.onLine) {
     .then((data) => {
       // Spara data i localStorage
       localStorage.setItem("shipList", JSON.stringify(data));
-      console.log("ship sparade i localStorage:", data);
     })
     .catch((error) => {
       console.error("Fel vid hämtning av ship.json:", error);
@@ -46,7 +43,6 @@ document
   .addEventListener("click", function () {
     // Rensa hela localStorage
     localStorage.clear();
-    console.log("LocalStorage rensat");
 
     // Valfritt: Ge användaren ett meddelande eller uppdatera sidan
     alert("LocalStorage har rensats!");
