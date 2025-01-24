@@ -31,7 +31,6 @@ export const statementOfFact = (contentArea) => {
   const renderSoFForm = () => {
     contentArea.innerHTML = `
       <h1>Statement of Fact</h1>
-      <small>This data is temporary and will be fetched from elsewhere</small>
             <div class="select-container">
       ${generateVoyageSelect()}
       </div>
