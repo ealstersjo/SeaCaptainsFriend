@@ -74,7 +74,8 @@ export const noticeOfReadiness = (contentArea) => {
               <td>${selectedVoyage.crew.masterName}</td>
             </tr>
           </table>
-          <button id="printNOR">Print Notice of Readiness</button>
+  
+          <button id="printNOR" class="print-btn"> <i class="fa fa-print"></i> Print Notice of Readiness</button>
         </div>
       `;
     // Hantera print-knappen
