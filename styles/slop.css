@@ -1,41 +1,75 @@
 .certificate-info-container h3 {
     text-align: center;
 }
+/* Tabellstil för Slop */
 .slop-table {
     width: 100%;
     border-collapse: collapse;
-    margin: 20px 0;
-    font-size: 16px;
+    margin: 1rem 0;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Huvud för tabellen */
+  .slop-table th {
+    background-color: var(--secondary-color);
+    color: #fff;
     text-align: left;
-}
-
-.slop-header {
-    background-color: #f4f4f4;
-    border: 1px solid #ddd;
-    padding: 8px;
-}
-
-.slop-row-space {
-    height: 40px; /* Höjd på mellanrummet */
-    border: none;
-}
-
-
-.slop-cell {
-    border: 1px solid #ddd;
-    padding: 8px;
-}
-
-.slop-input {
+    padding: 0.75rem;
+    font-size: 1rem;
+    text-transform: uppercase;
+    border: 1px solid #ccc;
+  }
+  
+  /* Celler i kroppen */
+  .slop-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 0.9rem;
+  }
+  
+  /* Rader med alternativ färg */
+  .slop-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  /* Rader i kroppen */
+  .slop-table tr {
+    background-color: #fff;
+  }
+  
+  /* Celler i kroppen, gör första kolumnen fetstil */
+  .slop-table td:first-child {
+    font-weight: bold;
+  }
+  
+  /* Stil för input-fält */
+  .slop-table .slop-input {
     width: 100%;
-    border: none;
-    padding: 5px;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
     box-sizing: border-box;
-}
-
-.slop-input:focus {
-    outline: 2px solid #009688;
-}
+  }
+  
+  /* Stil för knappar (Om du har några) */
+  .slop-table .editBtn {
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .slop-table .editBtn:hover {
+    background-color: #c0392b;
+  }
+  
 
 .print{
     background-color: var(--primary-color);
