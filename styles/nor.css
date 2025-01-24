@@ -62,30 +62,7 @@ body {
     box-shadow: 0 0 3px #3498db;
   }
   
-  /* Utskriftsknapp */
-  #printNOR {
-    display: block;
-    width: 90%;
-    max-width: 300px;
-    margin: 20px auto;
-    padding: 10px;
-    background-color: var(--primary-color);
-    color: #fff;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
-    transition: background-color 0.3s ease;
-  }
   
-  #printNOR:hover {
-    background-color: var(--secondary-color);
-  }
-  
-  #printNOR:active {
-    background-color: #1f6f97;
-  }
   
   /* Responsiv design */
   @media (max-width: 768px) {
@@ -94,10 +71,7 @@ body {
       font-size: 14px;
     }
   
-    #printNOR {
-      font-size: 14px;
-      padding: 8px;
-    }
+
   
     .select-container select {
       font-size: 14px;

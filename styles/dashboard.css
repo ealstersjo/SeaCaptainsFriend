@@ -12,6 +12,12 @@
   cursor: pointer; /* Visar pekare vid hover */
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Subtil skugga */
   transition: all 0.3s ease; /* Smidig hover-effekt */
+
+  /* Centrering av knappen */
+  position: relative; /* Använd absolute positionering */
+  top: 50%; /* Placera 50% från toppen */
+  left: 50%; /* Placera 50% från vänster */
+  transform: translate(-50%, -50%); /* Justera så att den är exakt centrerad */
 }
 
 .print-btn:hover {

@@ -77,7 +77,7 @@ export const cleanlinessTankCertificate = (contentArea) => {
 </td>
                 </tr>
             </table>
-            <button id="printCertificate">Print Cleanliness Tank Certificate</button>
+            <button class="print-btn" id="printCertificate"><i class="fa fa-print"></i> Print Cleanliness Tank Certificate</button>
           </div>
         `;
 
