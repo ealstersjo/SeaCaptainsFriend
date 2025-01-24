@@ -27,6 +27,7 @@
   background-color: var(--light-grey);
   border-left: 4px solid var(--green-color); /* Tydlig avgränsning */
   border-radius: 5px; /* Rundade hörn */
+  width: 100%;
 }
 
 /* Sektion för produktinformation */
@@ -38,6 +39,7 @@
   background-color: var(--light-blue);
   border-left: 4px solid var(--secondary-color); 
   border-radius: 5px; /* Rundade hörn */
+  width: 100%;
 }
 
 .voyage-crew {
@@ -45,7 +47,7 @@
   color: #555;
   padding: 15px;
   margin: 15px 0;
-  background-color: #f7f7f7;
+  background-color: #f7f7f7e4;
   border-left: 4px solid var(--primary-color); 
   border-radius: 5px; /* Rundade hörn */
   width: 90%;
