@@ -94,5 +94,5 @@ document.addEventListener("DOMContentLoaded", () => {
   handleProtests.addEventListener("click", () => showSection("protestdiv"));
 
   // Ladda en sektion direkt vid start (om du vill ha en default)
-  showSection("protestdiv"); // Här visas till exempel Statement of Fact vid start
+  showSection("currentvoyagediv"); // Här visas till exempel Statement of Fact vid start
 });
