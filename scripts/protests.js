@@ -218,6 +218,33 @@ export const protests = (contentArea) => {
       ],
     },
     {
+      title: "General",
+      id: "lop-general",
+      fields: [
+        {
+          label: "To",
+          type: "text",
+          placeholder: "Enter receiver of protest",
+        },
+        {
+          label: "Port",
+          type: "text",
+          placeholder: "Enter port",
+        },
+        {
+          label: "Voy",
+          type: "text",
+          placeholder: "Enter voyage number",
+        },
+        { label: "Date", type: "date" },
+        { label: "C/P Date", type: "date" },
+        {
+          label: "Master",
+          type: "text",
+        },
+      ],
+    },
+    {
       title: "Short Loading",
       id: "lop-short-loading",
       fields: [
@@ -250,6 +277,60 @@ export const protests = (contentArea) => {
 
         { label: "Cargo Capacity", type: "number" },
 
+        {
+          label: "Master",
+          type: "text",
+        },
+      ],
+    },
+    {
+      title: "Missing Quality Certification",
+      id: "lop-quality-cert",
+      fields: [
+        {
+          label: "To",
+          type: "text",
+          placeholder: "Enter receiver of protest",
+        },
+        {
+          label: "Port",
+          type: "text",
+          placeholder: "Enter port",
+        },
+        {
+          label: "Voy",
+          type: "text",
+          placeholder: "Enter voyage number",
+        },
+        { label: "Date", type: "date" },
+        { label: "C/P Date", type: "date" },
+        {
+          label: "Master",
+          type: "text",
+        },
+      ],
+    },
+    {
+      title: "No Samples for the Vessel's own use",
+      id: "lop-no-vessel-sample",
+      fields: [
+        {
+          label: "To",
+          type: "text",
+          placeholder: "Enter receiver of protest",
+        },
+        {
+          label: "Port",
+          type: "text",
+          placeholder: "Enter port",
+        },
+        {
+          label: "Voy",
+          type: "text",
+          placeholder: "Enter voyage number",
+        },
+        { label: "Date", type: "date" },
+        { label: "C/P Date", type: "date" },
         {
           label: "Master",
           type: "text",
