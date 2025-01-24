@@ -73,27 +73,80 @@ export const cleanlinessTankCertificate = (contentArea) => {
               
               <tr>
               <td class="certificate-info-label">Cargo Tanks No</td>
-                <td colspan="5">      <input type="text" id="cargotank" required /></td>
+                <td colspan="5">         <div class="checkbox-container" id="cargotank-container"></div>
+</td>
                 </tr>
             </table>
             <button id="printCertificate">Print Cleanliness Tank Certificate</button>
           </div>
         `;
 
+    const createCargoTankCheckboxes = (value) => {
+      const container = document.getElementById("cargotank-container");
+
+      // Tanknamn för kryssrutorna
+      const tankNames = [
+        "C1P",
+        "C2P",
+        "C3P",
+        "C4P",
+        "C5P",
+        "C6P",
+        "C1S",
+        "C2S",
+        "C3S",
+        "C4S",
+        "C5S",
+        "C6S",
+      ];
+
+      // Rensa container varje gång vi skapar kryssrutorna
+      container.innerHTML = "";
+
+      tankNames.forEach((tankName) => {
+        const checkboxWrapper = document.createElement("div");
+        checkboxWrapper.classList.add("checkbox-wrapper");
+
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.value = tankName;
+        checkbox.id = `tank-${tankName}`;
+
+        // Markera om värdet (kommaseparerad sträng) innehåller tanknamnet
+        checkbox.checked = value?.split(",").includes(tankName);
+        checkbox.dataset.key = "tanksNo";
+
+        const label = document.createElement("label");
+        label.htmlFor = `tank-${tankName}`;
+        label.textContent = tankName;
+
+        checkboxWrapper.appendChild(checkbox);
+        checkboxWrapper.appendChild(label);
+        container.appendChild(checkboxWrapper);
+      });
+    };
+    createCargoTankCheckboxes();
+
     // Hantera print-knappen
     document
       .getElementById("printCertificate")
       .addEventListener("click", () => {
-        const cargotanks = document.getElementById("cargotank").value;
-
         // Kontrollera om en resa är vald och om cargo tanks är ifyllt
         if (!selectedVoyageIndex) {
           alert("Please select a voyage before printing.");
           return; // Stopp utskrift om ingen resa är vald
         }
+        const checkboxes = document.querySelectorAll(
+          "#cargotank-container input[type='checkbox']"
+        );
+        const selectedTanks = Array.from(checkboxes)
+          .filter((checkbox) => checkbox.checked)
+          .map((checkbox) => checkbox.value);
+
+        const cargotanks = selectedTanks.join(", "); // Kommaseparerad sträng
 
         if (!cargotanks) {
-          alert("Please fill in the Cargo Tanks before printing.");
+          alert("Please select the Cargo Tanks before printing.");
           return; // Stopp utskrift om cargo tanks inte är ifyllt
         }
         // Öppna utskriftssidan
@@ -101,6 +154,7 @@ export const cleanlinessTankCertificate = (contentArea) => {
           "../pages/printcleantanks.html",
           "_blank"
         );
+
         // Vänta tills utskriftsmallen är laddad
         printWindow.onload = () => {
           // Fyll i header-sektionen
