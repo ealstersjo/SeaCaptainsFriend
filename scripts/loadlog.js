@@ -50,9 +50,9 @@ export const loadlog = (contentArea, voyage, inputCargoIndex) => {
           <td>${voyage.jetty}</td>
         </tr>
         <tr>
-          <td><strong>Avg. Rate (cbm/h):</strong></td>
+          <td><strong>Avg. Rate (m3/h):</strong></td>
           <td>${avgRate || "N/A"}</td>
-          <td><strong>Last Avg. Rate (cbm/h):</strong></td>
+          <td><strong>Last Avg. Rate (m3/h):</strong></td>
           <td>${lastAvgRate || "N/A"}</td>
         </tr>
         <tr>
@@ -287,8 +287,8 @@ export const loadlog = (contentArea, voyage, inputCargoIndex) => {
   <thead>
     <tr>
       <th class="loading-log-header">Local time</th>
-      <th class="loading-log-header">O.B.Q. cbm</th>
-      <th class="loading-log-header">Rate cbm/h</th>
+      <th class="loading-log-header">O.B.Q. m3</th>
+      <th class="loading-log-header">Rate m3/h</th>
       <th class="loading-log-header">Tanks No.</th>
       <th class="loading-log-header">Manif Press.</th>
       <th class="loading-log-header">SF</th>

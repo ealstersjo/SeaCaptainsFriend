@@ -8,7 +8,7 @@ export const currentVoyagePage = (contentArea) => {
   const renderNewVoyageForm = () => {
     const unitOptions = `
         <option value="mt"}>mt</option>
-        <option value="cbm">cbm</option>
+        <option value="m3">m3</option>
       `;
     contentArea.innerHTML = `
       <h1>Start New Voyage</h1>
@@ -222,9 +222,7 @@ export const currentVoyagePage = (contentArea) => {
     const renderEditVoyageForm = (voyage, index) => {
       const unitOptions = `
         <option value="mt" ${"mt" === voyage.unit ? "selected" : ""}>mt</option>
-        <option value="cbm" ${
-          "cbm" === voyage.unit ? "selected" : ""
-        }>cbm</option>
+        <option value="m3" ${"m3" === voyage.unit ? "selected" : ""}>m3</option>
       `;
 
       contentArea.innerHTML = `

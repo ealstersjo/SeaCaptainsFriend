@@ -108,7 +108,7 @@ export const slop = (contentArea) => {
         <td class="slop-cell"><input class="slop-input" id="corr-ullage-remarks-before" type="text"></td>
     </tr>
     <tr class="slop-row">
-        <td class="slop-cell">GOV (cbm)</td>
+        <td class="slop-cell">GOV (m3)</td>
         <td class="slop-cell"><input class="slop-input" id="gov-p-before" type="text" value=""></td>
         <td class="slop-cell"><input class="slop-input" id="gov-s-before" type="text"></td>
         <td class="slop-cell"><input class="slop-input" id="gov-cargo-before" type="text"></td>
@@ -218,7 +218,7 @@ export const slop = (contentArea) => {
         <td class="slop-cell"><input class="slop-input" id="corr-ullage-remarks-after" type="text"></td>
     </tr>
     <tr class="slop-row">
-        <td class="slop-cell">GOV (cbm)</td>
+        <td class="slop-cell">GOV (m3)</td>
         <td class="slop-cell"><input class="slop-input" id="gov-p-after" type="text" value=""></td>
         <td class="slop-cell"><input class="slop-input" id="gov-s-after" type="text"></td>
         <td class="slop-cell"><input class="slop-input" id="gov-cargo-after" type="text"></td>
@@ -532,7 +532,7 @@ export const slop = (contentArea) => {
     const rows = [
       { label: "UTI Ullage", key: "utiUllage" },
       { label: "Corr Ullage", key: "corrUllage" },
-      { label: "GOV (cbm)", key: "gov" },
+      { label: "GOV (m3)", key: "gov" },
       { label: "Last Cargo", key: "lastCargo" },
       { label: "UTI Interface", key: "utiInterface" },
       { label: "Corr Interface", key: "corrInterface" },

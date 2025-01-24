@@ -136,7 +136,7 @@ export const pumppressure = (contentArea) => {
     <p>
       <strong>Please note that the maximum pressure you are allowed to maintain on</strong><br/>								
       <strong>the manifold of your vessel's rail is:</strong> <span class="pps-print-value-inline">${pressureInput.value}</span> bar<br/>
-      <strong>and a maximum discharge rate of:</strong> <span class="pps-print-value-inline">${rateInput.value}</span> cubm/Hr<br/>
+      <strong>and a maximum discharge rate of:</strong> <span class="pps-print-value-inline">${rateInput.value}</span> m3/h<br/>
     </p>
   </div>
 

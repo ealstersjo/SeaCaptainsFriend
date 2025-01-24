@@ -68,7 +68,7 @@ export const receivingCapacity = (contentArea) => {
                 <td class="nor-info-label">Grade</td>
                 <td>${selectedVoyage.cargos[0]?.cargo}</td>
                 <td class="nor-info-label">Rate</td>
-                <td><input type="number" step="1" id="rateInput" class="form-control" placeholder="Enter rate (cbm/t)"></td>
+                <td><input type="number" step="1" id="rateInput" class="form-control" placeholder="Enter rate (m3/h)"></td>
               </tr>
             </table>
             <button class="printButton" id="printRCS">Print Receiving Capacity Statement</button>
@@ -131,7 +131,7 @@ export const receivingCapacity = (contentArea) => {
                 <p>
                   Please note that the ship's receiving capacity is as follows:<br/>								
                   <strong>Grade: </strong><span class="rcs-print-ship-name-inline">${selectedVoyage.cargos[0].cargo}</span>
-                  ${rateInput.value} cubm/Hr
+                  ${rateInput.value} m3/h
                 </p>
                 
                  
