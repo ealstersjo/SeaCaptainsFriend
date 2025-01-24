@@ -163,6 +163,150 @@
   max-width: 120px; /* Maxbredd för enhetsfältet */
 align-self: center;}
 
+.edit-btn {
+  display: inline-flex; /* Placera text och ikon sida vid sida */
+  align-items: center;
+  gap: 8px; /* Mellanrum mellan ikon och text */
+  background-color: var(--primary-color); /* Primärfärg */
+  color: white; /* Textfärg */
+  border: none; /* Ta bort kantlinjer */
+  border-radius: 5px; /* Rundade hörn */
+  padding: 10px 15px; /* Inre marginaler */
+  font-size: 1rem; /* Textstorlek */
+  cursor: pointer; /* Visar pekare vid hover */
+  transition: all 0.3s ease; /* Smidig hover-effekt */
+}
+
+.edit-btn i {
+  font-size: 1.2rem; /* Storlek på ikonen */
+}
+
+.edit-btn:hover {
+  background-color: #0056b3; /* Mörkare nyans vid hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Liten skugga */
+}
+
+.edit-btn:active {
+  transform: scale(0.95); /* Tryck-effekt */
+}
+
+.start-btn {
+  display: inline-flex; /* Placera text och ikon sida vid sida */
+  align-items: center;
+  gap: 8px; /* Mellanrum mellan ikon och text */
+  background-color: #28a745; /* Primärfärg */
+  color: white; /* Textfärg */
+  border: none; /* Ta bort kantlinjer */
+  border-radius: 5px; /* Rundade hörn */
+  padding: 10px 15px; /* Inre marginaler */
+  font-size: 1rem; /* Textstorlek */
+  cursor: pointer; /* Visar pekare vid hover */
+  transition: all 0.3s ease; /* Smidig hover-effekt */
+}
+
+.start-btn i {
+  font-size: 1.2rem; /* Storlek på ikonen */
+}
+
+.start-btn:hover {
+  background-color: #218838; /* Mörkare grön vid hover */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Förstärkt skugga */
+}
+
+.start-btn:active {
+  transform: scale(0.95); /* Tryck-effekt */
+}
+.delete-btn {
+  display: inline-flex; /* Placera text och ikon sida vid sida */
+  align-items: center;
+  gap: 8px; /* Mellanrum mellan ikon och text */
+  background-color: #dc3545; /* Primärfärg */
+  color: white; /* Textfärg */
+  border: none; /* Ta bort kantlinjer */
+  border-radius: 5px; /* Rundade hörn */
+  padding: 10px 15px; /* Inre marginaler */
+  font-size: 1rem; /* Textstorlek */
+  cursor: pointer; /* Visar pekare vid hover */
+  transition: all 0.3s ease; /* Smidig hover-effekt */
+}
+
+.delete-btn i {
+  font-size: 1.2rem; /* Storlek på ikonen */
+}
+
+.delete-btn:hover {
+  background-color: #c82333; /* Mörkare röd vid hover */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Förstärkt skugga */
+}
+
+.delete-btn:active {
+  transform: scale(0.95); /* Tryck-effekt */
+}
+
+
+.end-voyage-btn {
+  display: inline-flex; /* Placera text och ikon sida vid sida */
+  align-items: center;
+  gap: 8px;
+  background-color: var(--green-color);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  float: right; /* Flyttar knappen till höger */
+  margin-right: 10px; /* Avstånd från högra kanten */
+}
+
+.end-voyage-btn i {
+  font-size: 1.2rem; /* Storlek på ikonen */
+}
+
+.end-voyage-btn:hover {
+  background-color: #0056b3; /* Mörkare blå vid hover */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Förstärkt skugga */
+}
+
+.end-voyage-btn:active {
+  transform: scale(0.95); /* Tryck-effekt */
+}
+
+/* Container för knappar */
+.current-voyages-buttons {
+  display: flex; /* Flexbox-layout */
+  flex-wrap: wrap; /* Tillåter radbrytning om nödvändigt */
+  gap: 15px; /* Avstånd mellan knappar */
+  justify-content: center; /* Centrerar knappar horisontellt */
+  align-items: center; /* Justerar knappar vertikalt */
+  margin-top: 20px; /* Avstånd ovanför */
+  padding: 10px; /* Inre marginal */
+  background-color: var(--light-grey); /* Bakgrundsfärg */
+  border-radius: 10px; /* Rundade hörn på container */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Liten skugga */
+}
+
+/* Knappdesign */
+.current-voyages-buttons button {
+  flex: 1; /* Gör knapparna lika breda */
+  max-width: 200px; /* Begränsar bredden */
+  text-align: center; /* Centrerar texten */
+}
+
+
+/* Media query för små skärmar */
+@media (max-width: 600px) {
+  .current-voyages-buttons {
+    flex-direction: column; /* Ställer knappar i kolumn på små skärmar */
+    align-items: stretch; /* Sträcker knapparna i full bredd */
+  }
+
+  .current-voyages-buttons button {
+    max-width: none; /* Tar bort breddbegränsning */
+  }
+}
+
 .submitvoyagebtn{
   background-color: var(--primary-color);
 }

@@ -149,11 +149,7 @@ export const currentVoyagePage = (contentArea) => {
       <h1>Current Voyage</h1>
       <select id="voyageSelect">${voyageOptions}</select>
       <div id="voyageDetails"></div>
-      <button id="deleteVoyages" type="deleteButton" class="deleteButton">Delete Voyages</button>
-      <button id="startVoyage" class="start-btn">Add New Voyage</button>
-      <div>
-        <button id="submitVoyage" class="submitvoyagebtn">End Voyage</button>
-      </div>
+      
     `;
 
     const voyageDetails = document.getElementById("voyageDetails");
@@ -189,6 +185,21 @@ export const currentVoyagePage = (contentArea) => {
       `;
 
       voyageDetails.innerHTML = `
+      <div class="currentVoyagesButtons">
+          <button id="startVoyage" class="start-btn">
+            <i class="fa fa-plus"></i> Add New Voyage
+          </button>          
+          <button id="editVoyage" class="edit-btn">
+            <i class="fa fa-edit"></i> Edit Voyage
+          </button>        
+          <button id="deleteVoyages" class="delete-btn">
+            <i class="fa fa-trash"></i> Delete Voyages
+          </button>
+            <button id="submitVoyage" class="end-voyage-btn">
+            <i class="fa fa-flag-checkered"></i> End Voyage
+          </button>    
+    
+      </div>
         <div class="voyage-item">
           <div class="key-value-pair"><span class="key">Vessel:</span> <span class="value">${voyage.vessel}</span></div>
           <div class="key-value-pair"><span class="key">Operation:</span> <span class="value">${voyage.operation}</span></div>
@@ -209,7 +220,6 @@ export const currentVoyagePage = (contentArea) => {
           <h2>Crew Details</h2>
           ${crewHTML}
         </div>
-            <button id="editVoyage" class="edit-btn">Edit Voyage</button>
 
       `;
       document.getElementById("editVoyage").addEventListener("click", () => {
