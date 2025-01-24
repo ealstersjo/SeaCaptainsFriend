@@ -71,7 +71,7 @@ export const statementOfFact = (contentArea) => {
         <tr>
     <td>EOSP</td>
     <td><input type="date" class="editable" data-index="eosp" /></td>
-    <td><input type="time" class="editable" data-index="eosp" /></td>
+    <td><input type="time" class="editable" data-index="eosp" id="timeInput" /></td>
     <td><textarea class="editable" data-index="eosp"></textarea></td>
     <td><button class="saveBtn" data-index="eosp">Save</button><button class="editBtn" data-index="eosp" style="display:none;">Edit</button></td>
 </tr>
@@ -348,6 +348,18 @@ export const statementOfFact = (contentArea) => {
     `;
     initializeActivities();
 
+    const timeInput = document.getElementById("timeInput");
+
+    timeInput.addEventListener("change", function () {
+      // Här kan vi se till att alltid använda 24-timmarsformat
+      let timeValue = timeInput.value; // Tid som användaren matat in, t.ex. "14:30"
+      const isValid = /^([01]?[0-9]|2[0-3]):([0-5]?[0-9])$/.test(timeValue);
+
+      if (!isValid) {
+        // Om den inte är i 24h format, kan du visa ett felmeddelande eller korrigera det
+        alert("Vänligen skriv in tiden i 24-timmarsformat.");
+      }
+    });
     // Bind event listener till VoyageSelect varje gång efter rendering
     const voyageSelectElement = document.getElementById("voyageSelect");
     if (voyageSelectElement) {
@@ -752,11 +764,4 @@ export const statementOfFact = (contentArea) => {
       }
     });
   }
-
-  /*   // Kontrollera om DOM är redo eller kör koden direkt
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initializeActivities);
-  } else {
-    initializeActivities();
-  }*/
 };

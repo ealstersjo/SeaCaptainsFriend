@@ -15,11 +15,11 @@ const createLogRow = (entry = {}, index = null) => {
   const now = new Date();
 
   const {
-    time = `${now.toLocaleDateString("sv-SE", {
+    time = `${now.toLocaleDateString([], {
       year: "numeric",
       month: "2-digit",
       day: "2-digit",
-    })} ${now.toLocaleTimeString([], {
+    })} ${now.toLocaleTimeString([ß], {
       hour: "2-digit",
       minute: "2-digit",
     })}`, // Förifyll med aktuell tid
