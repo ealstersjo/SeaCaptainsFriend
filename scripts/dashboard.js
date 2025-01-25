@@ -10,6 +10,7 @@ import { slop } from "./slop.js";
 import { receivingCapacity } from "./reccap.js";
 import { loadOrDischargeLog } from "./loadordischargelog.js";
 import { pumppressure } from "./pumppressurestatement.js";
+
 //import { triive } from "./triive.js";
 
 // Funktion för att visa en sektion och dölja de andra
