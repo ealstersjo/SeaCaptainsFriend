@@ -10,7 +10,7 @@ import { slop } from "./slop.js";
 import { receivingCapacity } from "./reccap.js";
 import { loadOrDischargeLog } from "./loadordischargelog.js";
 import { pumppressure } from "./pumppressurestatement.js";
-import { triive } from "./triive.js";
+//import { triive } from "./triive.js";
 
 // Funktion för att visa en sektion och dölja de andra
 const showSection = (sectionId) => {
@@ -50,9 +50,10 @@ const showSection = (sectionId) => {
       pumppressure(selectedSection);
     } else if (sectionId === "protestdiv") {
       protests(selectedSection);
-    } else if (sectionId === "triivediv") {
-      triive(selectedSection);
     }
+    /* else if (sectionId === "triivediv") {
+      triive(selectedSection);
+    } */
     // Lägg till renderingslogik för andra sektioner om så behövs
   }
 };
@@ -99,8 +100,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // Ladda en sektion direkt vid start (om du vill ha en default)
   showSection("currentvoyagediv"); // Här visas till exempel Statement of Fact vid start
 
-  const triive = document.getElementById("triive");
+  /*   const triive = document.getElementById("triive");
   triive.addEventListener("click", () => {
     showSection("triivediv");
-  });
+  }); */
 });
